@@ -20,6 +20,11 @@ const srcDir = path.resolve(__dirname, 'src');
 const nodeModulesDir = path.resolve(__dirname, 'node_modules');
 const baseUrl = '/';
 
+// Custom Directories
+const componentsDir = path.resolve(srcDir, 'components');
+const pagesDir = path.resolve(srcDir, 'pages');
+const stylesDir = path.resolve(srcDir, 'resources/styles');
+
 const cssRules = [
   { loader: 'css-loader' },
 ];
@@ -30,7 +35,12 @@ module.exports = ({ production, server, extractCss, coverage, analyze, karma } =
     modules: [srcDir, 'node_modules'],
     // Enforce single aurelia-binding, to avoid v1/v2 duplication due to
     // out-of-date dependencies on 3rd party aurelia plugins
-    alias: { 'aurelia-binding': path.resolve(__dirname, 'node_modules/aurelia-binding') }
+    alias: {
+      'aurelia-binding': path.resolve(__dirname, 'node_modules/aurelia-binding'),
+      'components': componentsDir,
+      'pages': pagesDir,
+      'styles': stylesDir,
+    }
   },
   entry: {
     app: ['aurelia-bootstrapper']
