@@ -38,27 +38,23 @@ export default class ElementGenerator {
 
   generateJSSource(className, fileName) {
     return `import {bindable} from 'aurelia-framework';
-import './${fileName}.less'
+import './${fileName}.less';
 
 export class ${className} {
   @bindable value = '${className}';
-
 }
 `;
   }
 
   generateHTMLSource(fileName) {
     return `<template>
-  <require from='./${fileName}/${fileName}'></require>
-  <a role="button" class='btn btn-outline-secondary btn-sm' href="#/sandbox/${fileName}">${fileName}</a>
-
   <h1>\${value}</h1>
 </template>`;
   }
 
   generateCSSSource(fileName) {
     return `
-.${fileName} {
+${fileName} {
 
 }`;
   }
