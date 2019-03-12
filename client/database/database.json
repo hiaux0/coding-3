@@ -1,0 +1,86 @@
+[
+  // Boilerplate
+  // {
+  //   "title": "",
+  //   "artists": [],
+  //   "notes": "",
+  //   "lyrics": {
+  //     "text": "",
+  //     "source": "https: //genius.com/Loco-and-hwasa-mamamoo-dont-give-lyrics"
+  //   },
+  //   "video": {
+  //     "source": "https: //www.youtube.com/watch?v=IB6kViGA3rY",
+  //     "parts": []
+  //   },
+  //   "scores": {}
+  // },
+  {
+    "title": "술이 달다 (LOVEDRUNK) [Official MV]",
+    "artists": [
+      "epik high",
+      "crush"
+    ],
+    "notes": "Some notes will go and will leave",
+    "lyrics": {
+      "text": "",
+      "source": "https://alyricso.com/epik-high-lovedrunk-feat-crush/"
+    },
+    "video": {
+      "source": "https://www.youtube.com/watch?v=47Vz-ptyKbQ",
+      "parts": []
+    },
+    "scores": {}
+  },
+  {
+    "title": "Don't (Above Live) (ENG / CHN)",
+    "artists": [
+      "Loco",
+      "Hwasa"
+    ],
+    "notes": "Some notes will go and will leave",
+    "lyrics": {
+      "text": "",
+      "source": "https://genius.com/Loco-and-hwasa-mamamoo-dont-give-lyrics"
+    },
+    "video": {
+      "source": "https://www.youtube.com/watch?v=IB6kViGA3rY",
+      "parts": []
+    },
+    "scores": {}
+  },
+  {
+    "title": "Home is far away",
+    "artists": [
+      "epikhigh",
+      "oh hyuk"
+    ],
+    "notes": "This will be displayed as some note in the UI",
+    /* Expandable */
+    "lyrics": {
+      "text": "",
+      "source": "https://genius.com/Epik-high-home-is-far-away-lyrics"
+      // lyrics language learner ??
+    },
+    /* Expandable */
+    "video": {
+      "source": "https: //www.youtube.com/watch?v=pTD9Jysi3_g",
+      "parts": [
+        {
+          "label": "tablo rap",
+          "start": 38,
+          "end": 80
+        },
+        {
+          "label": "mithra rap",
+          "start": 112,
+          "end": 180
+        }
+      ]
+    },
+    /* Expandable */
+    "scores": {
+      "guitar": "",
+      "keyboard": ""
+    }
+  }
+]
