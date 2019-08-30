@@ -1,5 +1,5 @@
 import environment from './environment';
-import {PLATFORM} from 'aurelia-pal';
+import { PLATFORM } from 'aurelia-pal';
 import '@babel/polyfill';
 import * as Bluebird from 'bluebird';
 
@@ -19,7 +19,7 @@ export function configure(aurelia) {
   // aurelia.use.plugin(PLATFORM.moduleName('aurelia-html-import-template-loader'));
 
   if (environment.debug) {
-    aurelia.use.developmentLogging();
+    // aurelia.use.developmentLogging();
   }
 
   if (environment.testing) {
