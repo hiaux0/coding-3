@@ -1,15 +1,42 @@
+//@ts-check
+
+import { inject } from 'aurelia-framework';
+import { EventAggregator } from 'aurelia-event-aggregator';
 import { PLATFORM } from 'aurelia-pal';
 import './app.less';
+import { toggleJumpable } from './features/jumpable';
 
 
 /**
  * - Configure Router
  */
+@inject(EventAggregator)
 export class App {
-  constructor() {
+  subscriptions = [];
+
+  /**
+   * @param {EventAggregator} eventAggregator
+   */
+  constructor(eventAggregator) {
+    this.eventAggregator = eventAggregator;
     this.message = 'Hello World!';
   }
 
+  bind() {
+    this.attachEvents();
+  }
+
+  attached() {
+    toggleJumpable();
+  }
+
+  detached() {
+    this.subscriptions.forEach(sub => sub.dispose());
+  }
+
+  /**
+   * @param {object} router https://aurelia.io/docs/api/router/class/Router
+   */
   configureRouter(config, router) {
     config.map([
       {
@@ -40,8 +67,22 @@ export class App {
         moduleId: PLATFORM.moduleName('./pages/uilib/uilib'),
         nav: true,
         title: 'uilib'
-      },
+      }
     ]);
     this.router = router;
   }
+
+  attachEvents() {
+    this.subscriptions.push(
+      this.eventAggregator.subscribe('router:navigation:success', (ev) => {
+        /** 1. Toggle jumpable after each navigation */
+        toggleJumpable();
+      })
+    );
+  }
 }
+
+
+/**
+ * 1. I want to use jump marks after each navigation
+ */
