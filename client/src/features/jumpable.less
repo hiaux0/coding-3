@@ -1,0 +1,21 @@
+@import '~styles/colors.less';
+
+.jumpable {
+  &:before {
+    .jump-mark();
+  }
+}
+
+.jump-mark() {
+  content: attr(data-jump-mark-value);
+
+  background: @sec-sup-color;
+  border-radius: 3px;
+  border: 1px solid black;
+  color: @coal;
+  font: 18px Arial;
+
+  padding: 0 5px;
+  transform: translate(0%, 120%);
+  position: absolute;
+}
