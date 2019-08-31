@@ -6,25 +6,32 @@ import { PLATFORM } from 'aurelia-pal';
 import './app.less';
 // @ts-ignore
 import { refreshJumpable } from 'components/features/jumpable/jumpable.js';
+import { CommandCentral } from 'components/features/command-palett/command-palett';
 
 
 /**
  * - Configure Router
  */
-@inject(EventAggregator)
+@inject(CommandCentral, EventAggregator)
 export class App {
   subscriptions = [];
 
   /**
+   * @param {CommandCentral} commandCentral
    * @param {EventAggregator} eventAggregator
    */
-  constructor(eventAggregator) {
+  constructor(commandCentral, eventAggregator) {
+    this.commandCentral = commandCentral;
     this.eventAggregator = eventAggregator;
     this.message = 'Hello World!';
   }
 
   bind() {
     this.attachEvents();
+  }
+
+  attached() {
+    this.commandCentral.subscribeToCommandEvents({});
   }
 
 

@@ -62,3 +62,4 @@ export class CommandPalett {
   }
 }
 
+export * from './command-central.js';
