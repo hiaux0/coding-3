@@ -46,6 +46,9 @@ export class CommandPalett {
     keyBinding(COMMAND_PALETT, () => {
       this.showCommandPalett = !this.showCommandPalett;
 
+      if (!this.showCommandPalett) {
+        hotkeys.setScope(previousScope);
+      }
       // TODO a1ab98jhc : Check if hotkeys dont accumulate
     });
   }
