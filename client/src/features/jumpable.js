@@ -14,12 +14,19 @@ let isJumpable = false;
 const JUMP_CLASS = 'jumpable';
 const DATA_JUMP_MARK_VALUE = 'data-jump-mark-value';
 const ABC = [
-  'f', 'j', 'd', 'k', 's', 'l', 'a', 'g', 'h', // home row
-  'e', 'i', 'o', 'w', 'n', // upper
-  'v', 'c', 'm', 'q', 'p', // lower
+  't', 'n', 'h', 'e', 's', 'o', 'a', 'g', 'y', // home row
+  'r', 'u', 'p', 'd', 'p', // upper
+  'c', 'm', 'l', 'q', ';', // lower
   '1', '2', '3', '4', '5', '6', '7', '8', '9', '0' // numbers
   // "ff", "fj", "fd", "fk", "fs", "fl", "fa", "fg", "fh", // f + home row
 ];
+
+// const ABC_qwerty = [
+//   'f', 'j', 'd', 'k', 's', 'l', 'a', 'g', 'h', // home row
+//   'e', 'i', 'o', 'w', 'n', // upper
+//   'v', 'c', 'm', 'q', 'p', // lower
+//   '1', '2', '3', '4', '5', '6', '7', '8', '9', '0' // numbers
+// ];
 
 const ABC_JOINED = ABC.join(', ');
 
