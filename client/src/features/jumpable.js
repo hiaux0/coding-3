@@ -9,7 +9,7 @@ let keyBinding = hotkeys.noConflict();
 hotkeys.filter = function() { return true; }; // 2018-08-09 23:30:46 what does this do?
 
 let isPERSISTENT = window.DEBUG_MODE.persistJumpable;
-let isJumpable = false;
+let isJumpable = true;
 
 const JUMP_CLASS = 'jumpable';
 const DATA_JUMP_MARK_VALUE = 'data-jump-mark-value';
@@ -31,11 +31,17 @@ const ABC = [
 const ABC_JOINED = ABC.join(', ');
 
 /**
+ * Refresh by deleting old listener and attach new one
+ */
+export function refreshJumpable() {
+  const destroy = makeTagsJumpable();
+  jumpableKeyCodesListener(destroy);
+}
+
+/**
  * @param {CSSSelector:<String>} context - In order to restrict jumpy, defaults to body, ie. #hio-body
  */
 export const toggleJumpable = (context = '#hio-body') => {
-  isJumpable = !isJumpable;
-
   // let jumpContext = document.querySelectorAll(context);
   // for (let iterator of jumpContext) {
   //   let jumpLocations = iterator.getElementsByClassName(JUMP_CLASS);
@@ -108,7 +114,7 @@ const jumpableKeyCodesListener = (destroy) => {
 
 /**
  * When pressed key is equal to jump mark, perform a click on that element
- * @param {Function} cb - If given, perform after jumped
+ * @param {Function} cb - If given, perform after jumped (eg. destroy listener)
  * @param {String} activation - Specify how the jumppel should be activated
  * @returns {Function} action
  *  * @param {HTML.Collection} jumppelIterable
@@ -124,7 +130,6 @@ const activateElement = (cb, activation = 'click') => {
           jumppel.click();
           isJumpable = false;
         }
-        if (isPERSISTENT) return;
         destroyKeybinding(cb);
       }
     }

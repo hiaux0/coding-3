@@ -4,7 +4,7 @@ import { inject } from 'aurelia-framework';
 import { EventAggregator } from 'aurelia-event-aggregator';
 import { PLATFORM } from 'aurelia-pal';
 import './app.less';
-import { toggleJumpable } from './features/jumpable';
+import { refreshJumpable } from './features/jumpable';
 
 
 /**
@@ -26,9 +26,6 @@ export class App {
     this.attachEvents();
   }
 
-  attached() {
-    toggleJumpable();
-  }
 
   detached() {
     this.subscriptions.forEach(sub => sub.dispose());
@@ -74,9 +71,10 @@ export class App {
 
   attachEvents() {
     this.subscriptions.push(
+      // https://aurelia.io/docs/routing/configuration#router-events
       this.eventAggregator.subscribe('router:navigation:success', (ev) => {
-        /** 1. Toggle jumpable after each navigation */
-        toggleJumpable();
+        /** 1. Refresh jumpable after each navigation */
+        refreshJumpable();
       })
     );
   }
