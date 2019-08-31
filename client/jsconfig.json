@@ -4,6 +4,7 @@
     "lib": ["es2017", "dom"],
     "experimentalDecorators": true,
     "moduleResolution": "node",
+    "baseUrl": "src",
   },
   "exclude": [
     "node_modules",
