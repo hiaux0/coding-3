@@ -4,7 +4,8 @@ import { inject } from 'aurelia-framework';
 import { EventAggregator } from 'aurelia-event-aggregator';
 import { PLATFORM } from 'aurelia-pal';
 import './app.less';
-import { refreshJumpable } from './features/jumpable';
+// @ts-ignore
+import { refreshJumpable } from 'components/features/jumpable/jumpable.js';
 
 
 /**
