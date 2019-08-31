@@ -21,8 +21,10 @@ const nodeModulesDir = path.resolve(__dirname, 'node_modules');
 const baseUrl = '/';
 
 // Custom Directories
+const attributesDir = path.resolve(srcDir, 'resources/attributes');
 const componentsDir = path.resolve(srcDir, 'components');
 const pagesDir = path.resolve(srcDir, 'pages');
+const resourcesDir = path.resolve(srcDir, 'resources');
 const stylesDir = path.resolve(srcDir, 'resources/styles');
 
 const cssRules = [
@@ -37,8 +39,10 @@ module.exports = ({ production, server, extractCss, coverage, analyze, karma } =
     // out-of-date dependencies on 3rd party aurelia plugins
     alias: {
       'aurelia-binding': path.resolve(__dirname, 'node_modules/aurelia-binding'),
+      'attributes': attributesDir,
       'components': componentsDir,
       'pages': pagesDir,
+      'resources': resourcesDir,
       'styles': stylesDir,
     }
   },
@@ -62,7 +66,7 @@ module.exports = ({ production, server, extractCss, coverage, analyze, karma } =
     // https://webpack.js.org/plugins/split-chunks-plugin/
     splitChunks: {
       hidePathInfo: true, // prevents the path from being used in the filename when using maxSize
-      chunks: "initial",
+      chunks: 'initial',
       // sizes are compared against source before minification
       maxInitialRequests: Infinity, // Default is 3, make this unlimited if using HTTP/2
       maxAsyncRequests: Infinity, // Default is 5, make this unlimited if using HTTP/2
@@ -99,7 +103,7 @@ module.exports = ({ production, server, extractCss, coverage, analyze, karma } =
         },
         vendors: { // picks up everything else being used from node_modules that is less than minSize
           test: /[\\/]node_modules[\\/]/,
-          name: "vendors",
+          name: 'vendors',
           priority: 19,
           enforce: true // create chunk regardless of the size of the chunk
         },
@@ -165,7 +169,7 @@ module.exports = ({ production, server, extractCss, coverage, analyze, karma } =
         use: extractCss ? [{
           loader: MiniCssExtractPlugin.loader
         },
-          'css-loader'
+        'css-loader'
         ] : ['style-loader', ...cssRules]
       },
       {
@@ -205,7 +209,7 @@ module.exports = ({ production, server, extractCss, coverage, analyze, karma } =
     new AureliaPlugin(),
     new ProvidePlugin({
       'Promise': 'bluebird',
-  }),
+    }),
     new ModuleDependenciesPlugin({
       'aurelia-testing': ['./compile-spy', './view-spy']
     }),
