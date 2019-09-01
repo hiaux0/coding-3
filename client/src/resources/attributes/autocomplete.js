@@ -61,12 +61,32 @@ export class AutocompleteCustomAttribute {
   suggestedListChanged(newValue) {
   }
 
-  filterByUserInput(value) {
-    if (!this.preparedList) return;
 
-    let fileredList = this.preparedList.filter((listItem) => {
-      let ignoreCase = listItem.name.toLowerCase();
-      return ignoreCase.includes(value);
+  /**
+   * @param {string} input
+   *
+   * @example
+   * input // what i t
+   * padWithRegexWildCard(input) // w.*h.*a.*t.* .*i.* .*t.*
+   */
+  padWithRegexWildCard(input) {
+    /** TODO SUPPORT FOR ? */
+    // const edgeCaseList = ['?'];
+
+    const splitByChar = input.split('');
+    const withWildCard = splitByChar.join('.*');
+    return withWildCard + '.*';
+  }
+
+  /**
+   * @param {string} input
+   */
+  filterByUserInput(value) {
+    const wildCardValue = this.padWithRegexWildCard(value);
+    const fileredList = this.preparedList.filter(listItem => {
+      const ignoreCase = listItem.name.toLowerCase();
+      const searchRegex = new RegExp(`${wildCardValue}`);
+      return searchRegex.exec(ignoreCase);
     });
     return fileredList;
   }
