@@ -2,11 +2,20 @@
   "name": "coding-3-server",
   "version": "1.0.0",
   "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "ts-node prisma/leveling/prisma-server.ts"
+  },
   "license": "MIT",
   "dependencies": {
     "express": "^4.17.1",
     "express-graphql": "^0.9.0",
     "graphql": "^14.5.5",
-    "nodemon": "^1.19.2"
+    "nodemon": "^1.19.2",
+    "prisma-client-lib": "^1.34.8"
+  },
+  "devDependencies": {
+    "ts-node": "^8.3.0",
+    "typescript": "^3.6.3"
   }
 }
