@@ -3,3 +3,8 @@ datamodel: datamodel.prisma
 generate:
   - generator: typescript-client
     output: ./generated/prisma-client/
+
+# after `prisma deploy` was called
+# hooks:
+#   post-deploy:
+#     - prisma generate
