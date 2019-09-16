@@ -6,7 +6,7 @@ import hotkeys from 'hotkeys-js';
 import './jumpable.less';
 
 let keyBinding = hotkeys.noConflict();
-hotkeys.filter = function() { return true; }; // 2018-08-09 23:30:46 what does this do?
+hotkeys.filter = function () { return true; }; // 2018-08-09 23:30:46 what does this do?
 
 let isPERSISTENT = window.DEBUG_MODE.persistJumpable;
 let isJumpable = true;
@@ -68,7 +68,7 @@ export const toggleJumpable = (context = '#hio-body') => {
  * @param {[HTMLTag:<String>]} tagNames
  * @returns {Function | Function[]} destroy - Function to deactivate jumpable ability.
  */
-const makeTagsJumpable = (tagNames = ['a', 'button']) => {
+const makeTagsJumpable = (tagNames = ['a', 'button', 'input']) => {
   let uniqueJumpMark = getUniqueJumpMarkGenerator();
   let destroyCollector = [];
 
@@ -122,6 +122,11 @@ const jumpableKeyCodesListener = (destroy) => {
   hotkeys.setScope(JUMP_CLASS);
 };
 
+function checkActiveItemBlackList() {
+  console.log('checking');
+  return false;
+}
+
 /**
  * When pressed key is equal to jump mark, perform a click on that element
  * @param {Function} cb - If given, perform after jumped (eg. destroy listener)
@@ -134,13 +139,15 @@ const activateElement = (cb, activation = 'click') => {
   const action = (jumppelIterable, pressedKey) => {
     for (let jumppel of jumppelIterable) {
       let attr = jumppel.getAttribute(DATA_JUMP_MARK_VALUE);
+      if (checkActiveItemBlackList()) return;
       if (attr === pressedKey) {
         switch (activation) {
-        default:
-          jumppel.click();
-          isJumpable = false;
+          default:
+            jumppel.click();
+            isJumpable = false;
         }
-        destroyKeybinding(cb);
+        destroyKeybinding(cb); // FIXME: now, we just accumulate listeners
+        refreshJumpable();
       }
     }
   };
