@@ -21,6 +21,15 @@ const ABC = [
   // "ff", "fj", "fd", "fk", "fs", "fl", "fa", "fg", "fh", // f + home row
 ];
 
+const ABC_leftHandOnly = [
+  't', 'h', 's', 'a', 'g', // home row
+  'r', 'd', // upper
+  'c', 'm', 'q', // lower
+  '1', '2', '3', '4', '5', '6', '7', '8', '9', '0' // numbers
+  // "ff", "fj", "fd", "fk", "fs", "fl", "fa", "fg", "fh", // f + home row
+
+];
+
 // const ABC_qwerty = [
 //   'f', 'j', 'd', 'k', 's', 'l', 'a', 'g', 'h', // home row
 //   'e', 'i', 'o', 'w', 'n', // upper
@@ -28,7 +37,8 @@ const ABC = [
 //   '1', '2', '3', '4', '5', '6', '7', '8', '9', '0' // numbers
 // ];
 
-const ABC_JOINED = ABC.join(', ');
+const ABC_JOINED = ABC_leftHandOnly.join(', ');
+const ABC_GEN = ABC_leftHandOnly;
 
 /**
  * Refresh by deleting old listener and attach new one
@@ -56,7 +66,7 @@ export const toggleJumpable = (context = '#hio-body') => {
 /**
  * Iterate through list of tags and add `JUMP_CLASS` to these tags.
  * @param {[HTMLTag:<String>]} tagNames
- * @returns {Function} destroy - Function to deactivate jumpable ability.
+ * @returns {Function | Function[]} destroy - Function to deactivate jumpable ability.
  */
 const makeTagsJumpable = (tagNames = ['a', 'button']) => {
   let uniqueJumpMark = getUniqueJumpMarkGenerator();
@@ -89,7 +99,7 @@ const makeTagsJumpable = (tagNames = ['a', 'button']) => {
  * Return unique jump mark value to be displayed.
  */
 function* getUniqueJumpMarkGenerator() {
-  yield* ABC;
+  yield* ABC_GEN;
 }
 
 /**
