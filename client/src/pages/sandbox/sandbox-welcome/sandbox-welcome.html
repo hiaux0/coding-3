@@ -1,0 +1,19 @@
+<template>
+  <a href="#">Back to home</a>
+  <require from='../todo/todo'></require>
+
+  <h1>${value}</h1>
+
+  <a
+    role="button"
+    class="button"
+    href="#/sandbox/todo"
+  >Todo</a>
+
+  <div class="sandboxWelcome__compose">
+    <compose
+      if.bind="viewModel"
+      view-model.bind="viewModel"
+    ></compose>
+  </div>
+</template>

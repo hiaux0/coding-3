@@ -68,11 +68,14 @@ export class App {
         title: 'sandbox'
       },
       {
+        route: 'sandbox/*viewModel', moduleId: PLATFORM.moduleName('./pages/sandbox/sandbox-welcome/sandbox-welcome')
+      },
+      {
         route: 'uilib',
         moduleId: PLATFORM.moduleName('./pages/uilib/uilib'),
         nav: true,
         title: 'uilib'
-      }
+      },
     ]);
     this.router = router;
   }
