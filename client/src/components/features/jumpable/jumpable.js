@@ -6,7 +6,7 @@ import hotkeys from 'hotkeys-js';
 import './jumpable.less';
 
 let keyBinding = hotkeys.noConflict();
-hotkeys.filter = function () { return true; }; // 2018-08-09 23:30:46 what does this do?
+hotkeys.filter = function() { return true; }; // 2018-08-09 23:30:46 what does this do?
 
 let isPERSISTENT = window.DEBUG_MODE.persistJumpable;
 let isJumpable = true;
@@ -40,6 +40,10 @@ const ABC_leftHandOnly = [
 const ABC_JOINED = ABC_leftHandOnly.join(', ');
 const ABC_GEN = ABC_leftHandOnly;
 
+const blackList = [
+  'input'
+];
+
 /**
  * Refresh by deleting old listener and attach new one
  */
@@ -68,7 +72,7 @@ export const toggleJumpable = (context = '#hio-body') => {
  * @param {[HTMLTag:<String>]} tagNames
  * @returns {Function | Function[]} destroy - Function to deactivate jumpable ability.
  */
-const makeTagsJumpable = (tagNames = ['a', 'button', 'input']) => {
+const makeTagsJumpable = (tagNames = ['a', 'button', 'label']) => {
   let uniqueJumpMark = getUniqueJumpMarkGenerator();
   let destroyCollector = [];
 
@@ -123,8 +127,8 @@ const jumpableKeyCodesListener = (destroy) => {
 };
 
 function checkActiveItemBlackList() {
-  console.log('checking');
-  return false;
+  const activeTag = document.activeElement.tagName.toLocaleLowerCase();
+  return blackList.includes(activeTag);
 }
 
 /**
@@ -142,9 +146,9 @@ const activateElement = (cb, activation = 'click') => {
       if (checkActiveItemBlackList()) return;
       if (attr === pressedKey) {
         switch (activation) {
-          default:
-            jumppel.click();
-            isJumpable = false;
+        default:
+          jumppel.click();
+          isJumpable = false;
         }
         destroyKeybinding(cb); // FIXME: now, we just accumulate listeners
         refreshJumpable();
