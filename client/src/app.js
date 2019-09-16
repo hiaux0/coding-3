@@ -2,9 +2,9 @@
 
 import { inject } from 'aurelia-framework';
 import { EventAggregator } from 'aurelia-event-aggregator';
+import { RouterEvent } from 'aurelia-router';
 import { PLATFORM } from 'aurelia-pal';
 import './app.less';
-// @ts-ignore
 import { refreshJumpable } from 'components/features/jumpable/jumpable.js';
 import { CommandCentral } from 'components/features/command-palett/command-palett';
 
@@ -83,7 +83,7 @@ export class App {
   attachEvents() {
     this.subscriptions.push(
       // https://aurelia.io/docs/routing/configuration#router-events
-      this.eventAggregator.subscribe('router:navigation:success', (ev) => {
+      this.eventAggregator.subscribe(RouterEvent.Success, (ev) => {
         /** 1. Refresh jumpable after each navigation */
         window.setTimeout(() => {
           refreshJumpable();
