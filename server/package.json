@@ -4,7 +4,10 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "ts-node prisma/leveling/prisma-server.ts"
+    "start": "ts-node prisma/leveling/prisma-server.ts",
+    "server:deploy": "cd prisma/leveling && prisma deploy",
+    "docker:up": "docker-compose up -d",
+    "sdd": "cd prisma/leveling && prisma deploy && docker-compose up -d"
   },
   "license": "MIT",
   "dependencies": {
