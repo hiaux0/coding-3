@@ -1,7 +1,7 @@
 import { bindable, inject, observable } from 'aurelia-framework';
 import { EventAggregator } from 'aurelia-event-aggregator';
 import { commandList } from 'resources/commandStorage/command-storage';
-import { COMMAND_PALETT } from 'resources/keybindings/app.keys';
+import { COMMAND_PALETT, ESCAPE } from 'resources/keybindings/app.keys';
 import { toggleHotkeyScope } from 'components/features/jumpable/toggle-scope';
 import hotkeys from 'hotkeys-js';
 
@@ -40,7 +40,7 @@ export class CommandPalett {
   initKeyBinding() {
     // Init hotkeys
     let keyBinding = hotkeys.noConflict();
-    hotkeys.filter = function() { return true; }; // 2018-08-09 23:30:46 what does this do?
+    hotkeys.filter = function () { return true; }; // 2018-08-09 23:30:46 what does this do?
     let previousScope = hotkeys.getScope();
 
     keyBinding(COMMAND_PALETT, () => {
@@ -50,6 +50,12 @@ export class CommandPalett {
         hotkeys.setScope(previousScope);
       }
       // TODO a1ab98jhc : Check if hotkeys dont accumulate
+    });
+
+    keyBinding(ESCAPE, () => {
+      previousScope = hotkeys.getScope();
+      hotkeys.setScope(previousScope);
+      document.activeElement.blur();
     });
   }
 

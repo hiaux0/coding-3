@@ -10,3 +10,6 @@ export const INPUT_DROPDOWN_ENTER = 'enter, ctrl+n';
 
 // Jumpable
 export const JUMPABLE = 'ctrl+m';
+
+// App wide
+export const ESCAPE = 'escape';
