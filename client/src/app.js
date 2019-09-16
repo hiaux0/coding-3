@@ -85,7 +85,9 @@ export class App {
       // https://aurelia.io/docs/routing/configuration#router-events
       this.eventAggregator.subscribe('router:navigation:success', (ev) => {
         /** 1. Refresh jumpable after each navigation */
-        refreshJumpable();
+        window.setTimeout(() => {
+          refreshJumpable();
+        }, 0);
       })
     );
   }
