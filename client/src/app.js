@@ -68,7 +68,7 @@ export class App {
         title: 'sandbox'
       },
       {
-        route: 'sandbox/*viewModel', moduleId: PLATFORM.moduleName('./pages/sandbox/sandbox-welcome/sandbox-welcome')
+        route: 'sandbox/*viewModelName', moduleId: PLATFORM.moduleName('./pages/sandbox/sandbox-welcome/sandbox-welcome')
       },
       {
         route: 'uilib',
