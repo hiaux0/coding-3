@@ -7,6 +7,11 @@ import { PLATFORM } from 'aurelia-pal';
 import './app.less';
 import { refreshJumpable } from 'components/features/jumpable/jumpable.js';
 import { CommandCentral } from 'components/features/command-palett/command-palett';
+import {
+  linkColor,
+  secondaryColor,
+  primaryColor,
+} from 'resources/common/colors';
 
 
 /**
@@ -38,6 +43,12 @@ export class App {
   detached() {
     this.subscriptions.forEach(sub => sub.dispose());
   }
+
+  primaryColor = primaryColor;
+  secondaryColor = secondaryColor;
+  errorColor = 'red';
+  successColor = 'green';
+  linkColor = linkColor;
 
   /**
    * @param {object} router https://aurelia.io/docs/api/router/class/Router

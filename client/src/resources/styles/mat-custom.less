@@ -1,0 +1,18 @@
+@import (reference) '~styles/colors.less';
+
+.asht {
+ .customize-material();
+}
+
+.customize-material() {
+  .btn-flat {
+    color: @main-text-color;
+  }
+
+  .primary-text {
+    color: @main-text-color !important; // because materials styles also has important
+  }
+  .btn.disabled, .btn-floating.disabled, .btn-large.disabled, .btn-small.disabled, .btn-flat.disabled, .btn:disabled, .btn-floating:disabled, .btn-large:disabled, .btn-small:disabled, .btn-flat:disabled, .btn[disabled], .btn-floating[disabled], .btn-large[disabled], .btn-small[disabled], .btn-flat[disabled] {
+    color: @dark-text-color !important;
+  }
+}

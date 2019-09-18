@@ -2,6 +2,14 @@
   <require from="materialize-css/dist/css/materialize.css"></require>
   <require from='components/features/command-palett/command-palett'></require>
 
+  <md-colors
+    primary-color.bind="primaryColor"
+    secondary-color.bind="secondaryColor"
+    error-color.bind="errorColor"
+    success-color.bind="successColor"
+    link-color.bind="linkColor"
+  ></md-colors>
+
   <command-palett></command-palett>
   <router-view></router-view>
 
