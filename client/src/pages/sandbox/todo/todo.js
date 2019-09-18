@@ -26,4 +26,8 @@ export class Todo {
     const newTodoItem = await apiAddTodo(value);
     this.todoItems.push(newTodoItem);
   }
+
+  removeTodoItem(todoId) {
+    console.log('TCL: Todo -> removeTodoItem -> todoId', todoId);
+  }
 }

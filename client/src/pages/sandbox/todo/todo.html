@@ -2,13 +2,6 @@
   <div class="todo-list">
     <h1>Todo List</h1>
 
-    <!-- List -->
-    <ul>
-      <li repeat.for="todo of todoItems">
-        ${todo.text}
-      </li>
-    </ul>
-
     <!-- Input -->
     <div>
       <label>
@@ -24,6 +17,16 @@
         class="add-todo-button"
         click.delegate="addTodo(todoInputValue)"
       >Add todo</button>
+    <!-- List -->
+    <ul>
+      <li repeat.for="todo of todoItems" class="todo-item">
+        <div class="todo-item-text">
+          ${todo.text}
+        </div>
+        <div class="todo-item-remove" click.delegate="removeTodoItem(todo.id)">R</div>
+      </li>
+    </ul>
+
     </div>
   </div>
 

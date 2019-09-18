@@ -5,10 +5,6 @@
   margin: 150px auto;
   width: 70vw;
 
-  transform: scale(2);
-  // Othewise zoom will shift to the left
-  transform-origin: top left;
-
   .todo-input {
     &:focus {
       border-color: orange;
@@ -26,6 +22,15 @@
       padding: 0 5px;
       transform: translate(0%, 120%);
       position: absolute;
+    }
+  }
+
+  .todo-item {
+    display: flex;
+    justify-content: space-between;
+
+    &:hover {
+      // background: @
     }
   }
 }
