@@ -1,0 +1,30 @@
+<template>
+  <div class="todo-list">
+    <h1>Todo List</h1>
+
+    <!-- List -->
+    <ul>
+      <li repeat.for="todo of todoItems">
+        ${todo.text}
+      </li>
+    </ul>
+
+    <!-- Input -->
+    <div>
+      <label>
+        <input
+          type="text"
+          placeholder="What needs to be done?"
+          class="todo-input"
+          value.bind="todoInputValue"
+          ref="todoInputRef"
+        >
+      </label>
+      <button
+        class="add-todo-button"
+        click.delegate="addTodo(todoInputValue)"
+      >Add todo</button>
+    </div>
+  </div>
+
+</template>
