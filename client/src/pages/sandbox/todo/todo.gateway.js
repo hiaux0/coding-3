@@ -33,6 +33,7 @@ query {
   todoItems {
     id
     text
+    done
   }
 }
   `;

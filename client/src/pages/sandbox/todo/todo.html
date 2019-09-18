@@ -20,7 +20,10 @@
     <!-- List -->
     <ul>
       <li repeat.for="todo of todoItems" class="todo-item">
-        <div class="todo-item-text">
+        <div class="
+          todo-item-text
+          ${todo.done ? 'todo-item-done' : ''}
+        ">
           ${todo.text}
         </div>
         <button class="btn todo-item-remove" click.delegate="removeTodoItem(todo.id)">R</button>
