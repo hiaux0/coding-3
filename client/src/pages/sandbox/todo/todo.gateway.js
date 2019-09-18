@@ -60,3 +60,21 @@ mutation createTodoItem($text: String!){
   }).catch(console.error);
   return result.data.createTodoItem;
 }
+
+export async function apiDeleteTodoItem(id) {
+  let mutation = gql`
+mutation deleteTodoItem($id: ID){
+  deleteTodoItem(where: {id: $id}) {
+    id
+    text
+  }
+}
+  `;
+
+  await client.mutate({
+    mutation,
+    variables: {
+      id,
+    }
+  }).catch(console.error);
+}

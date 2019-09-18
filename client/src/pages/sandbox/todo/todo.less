@@ -2,7 +2,7 @@
 
 
 .todo-list {
-  margin: 150px auto;
+  margin: 80px auto;
   width: 70vw;
 
   .todo-input {
@@ -28,9 +28,14 @@
   .todo-item {
     display: flex;
     justify-content: space-between;
+    padding: 5px 10px;
 
     &:hover {
-      // background: @
+      background: @primary-color-hover;
+    }
+
+    .todo-item-text {
+      align-self: center;
     }
   }
 }
