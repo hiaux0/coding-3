@@ -2,6 +2,7 @@ import environment from './environment';
 import { PLATFORM } from 'aurelia-pal';
 import '@babel/polyfill';
 import * as Bluebird from 'bluebird';
+import 'materialize-css';
 
 // remove out if you don't want a Promise polyfill (remove also from webpack.config.js)
 Bluebird.config({ warnings: { wForgottenReturn: false } });
@@ -9,7 +10,8 @@ Bluebird.config({ warnings: { wForgottenReturn: false } });
 export function configure(aurelia) {
   aurelia.use
     .standardConfiguration()
-    .feature(PLATFORM.moduleName('resources/index'));
+    .feature(PLATFORM.moduleName('resources/index'))
+    .plugin(PLATFORM.moduleName('aurelia-materialize-bridge'), b => b.useAll());
 
   // Uncomment the line below to enable animation.
   // aurelia.use.plugin(PLATFORM.moduleName('aurelia-animator-css'));

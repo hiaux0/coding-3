@@ -5,6 +5,10 @@ export class SandboxWelcome {
   @bindable value = 'SandboxWelcome';
 
   activate(params) {
-    if (params.viewModel) this.viewModel = `../${params.viewModel}/${params.viewModel}`;
+    if (params.viewModelName) {
+      const { viewModelName } = params;
+      this.viewModelName = viewModelName;
+      this.viewModel = `../${viewModelName}/${viewModelName}`;
+    }
   }
 }
