@@ -4,17 +4,15 @@
 
     <!-- Input -->
     <div>
-      <label>
-        <input
+        <md-input
           type="text"
-          placeholder="What needs to be done?"
+          label="What needs to be done?"
           class="todo-input"
           value.bind="todoInputValue"
           ref="todoInputRef"
-        >
-      </label>
+        ></md-input>
       <button
-        class="add-todo-button"
+        class="btn add-todo-button"
         click.delegate="addTodo(todoInputValue)"
       >Add todo</button>
     <!-- List -->
