@@ -1,0 +1,31 @@
+@import (reference) '~styles/colors.less';
+
+
+.todo-list {
+  margin: 150px auto;
+  width: 70vw;
+
+  transform: scale(2);
+  // Othewise zoom will shift to the left
+  transform-origin: top left;
+
+  .todo-input {
+    &:focus {
+      border-color: orange;
+    }
+
+    &:before {
+      content: 'Hello';
+
+      background: @sec-sup-color;
+      border-radius: 3px;
+      border: 1px solid black;
+      color: @coal;
+      font: 18px Arial;
+
+      padding: 0 5px;
+      transform: translate(0%, 120%);
+      position: absolute;
+    }
+  }
+}

@@ -1,4 +1,6 @@
-import {bindable} from 'aurelia-framework';
+//@ts-check
+
+import { bindable } from 'aurelia-framework';
 import './apps.less';
 
 /**
