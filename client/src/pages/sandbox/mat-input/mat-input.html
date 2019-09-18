@@ -1,0 +1,40 @@
+<template class="hello">
+  <div>
+    <input
+      label="put some text here"
+      value.bind="textValue"
+      disabled.bind="disabledValue"
+      data-inputmask-regex="^-?\d{1,2}$"
+      inputmask
+    ></input>
+    ${inputmaskValue}
+    <br /> You entered: ${textValue}
+    <br />
+    <button
+      md-button="flat: true;"
+      md-waves
+      class="accent-text"
+      click.delegate="setText()"
+    >set text to something</button>
+    <button
+      md-button="flat: true;"
+      md-waves
+      class="accent-text"
+      click.delegate="setDisabled()"
+    >Toggle Input Disabling</button>
+
+    <md-input
+      label="readonly - bound to the field above"
+      value.bind="textValue"
+      readonly.bind="true"
+    ></md-input>
+    <br />
+    This is an inline input field:
+    <md-input
+      label="put some text here"
+      value.bind="textValue"
+      disabled.bind="disabledValue"
+      inline="true"
+    ></md-input>
+  </div>
+</template>
