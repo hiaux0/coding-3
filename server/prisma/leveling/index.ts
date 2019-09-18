@@ -8,7 +8,7 @@ import { GraphQLServer } from 'graphql-yoga'
 const Query = prismaObjectType({
   name: 'Query',
   definition(t) {
-    t.prismaFields(['post'])
+    t.prismaFields(['post', 'todoItems'])
     t.list.field('feed', {
       type: 'Post',
       resolve: (_, args, ctx) =>
@@ -26,7 +26,11 @@ const Query = prismaObjectType({
 const Mutation = prismaObjectType({
   name: 'Mutation',
   definition(t) {
-    t.prismaFields(['createUser', 'deletePost'])
+    t.prismaFields([
+      'createUser',
+      'deletePost',
+      'createTodoItem',
+    ])
     t.field('createDraft', {
       type: 'Post',
       args: {
@@ -66,8 +70,15 @@ const schema = makePrismaSchema({
   },
 })
 
+
 const server = new GraphQLServer({
   schema,
   context: { prisma },
 })
+
+// server.express.use((req, res, next) => {
+//   res.header('Access-Control-Allow-Credentials', true)
+//   next()
+// })
+
 server.start(() => console.log('Server is running on http://localhost:4000'))

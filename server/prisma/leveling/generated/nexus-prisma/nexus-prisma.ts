@@ -24,6 +24,10 @@ export interface NexusPrismaTypes {
       PostConnection: PostConnectionObject
       PostEdge: PostEdgeObject
       AggregatePost: AggregatePostObject
+      TodoItem: TodoItemObject
+      TodoItemConnection: TodoItemConnectionObject
+      TodoItemEdge: TodoItemEdgeObject
+      AggregateTodoItem: AggregateTodoItemObject
       Mutation: MutationObject
       BatchPayload: BatchPayloadObject
       Subscription: SubscriptionObject
@@ -31,6 +35,8 @@ export interface NexusPrismaTypes {
       UserPreviousValues: UserPreviousValuesObject
       PostSubscriptionPayload: PostSubscriptionPayloadObject
       PostPreviousValues: PostPreviousValuesObject
+      TodoItemSubscriptionPayload: TodoItemSubscriptionPayloadObject
+      TodoItemPreviousValues: TodoItemPreviousValuesObject
     }
     fieldsDetails: {
       Query: QueryFieldDetails
@@ -43,6 +49,10 @@ export interface NexusPrismaTypes {
       PostConnection: PostConnectionFieldDetails
       PostEdge: PostEdgeFieldDetails
       AggregatePost: AggregatePostFieldDetails
+      TodoItem: TodoItemFieldDetails
+      TodoItemConnection: TodoItemConnectionFieldDetails
+      TodoItemEdge: TodoItemEdgeFieldDetails
+      AggregateTodoItem: AggregateTodoItemFieldDetails
       Mutation: MutationFieldDetails
       BatchPayload: BatchPayloadFieldDetails
       Subscription: SubscriptionFieldDetails
@@ -50,6 +60,8 @@ export interface NexusPrismaTypes {
       UserPreviousValues: UserPreviousValuesFieldDetails
       PostSubscriptionPayload: PostSubscriptionPayloadFieldDetails
       PostPreviousValues: PostPreviousValuesFieldDetails
+      TodoItemSubscriptionPayload: TodoItemSubscriptionPayloadFieldDetails
+      TodoItemPreviousValues: TodoItemPreviousValuesFieldDetails
     }
   }
   inputTypes: {
@@ -58,6 +70,8 @@ export interface NexusPrismaTypes {
       PostWhereInput: PostWhereInputInputObject
       UserWhereInput: UserWhereInputInputObject
       PostWhereUniqueInput: PostWhereUniqueInputInputObject
+      TodoItemWhereUniqueInput: TodoItemWhereUniqueInputInputObject
+      TodoItemWhereInput: TodoItemWhereInputInputObject
       UserCreateInput: UserCreateInputInputObject
       PostCreateManyWithoutAuthorInput: PostCreateManyWithoutAuthorInputInputObject
       PostCreateWithoutAuthorInput: PostCreateWithoutAuthorInputInputObject
@@ -78,13 +92,18 @@ export interface NexusPrismaTypes {
       UserUpdateWithoutPostsDataInput: UserUpdateWithoutPostsDataInputInputObject
       UserUpsertWithoutPostsInput: UserUpsertWithoutPostsInputInputObject
       PostUpdateManyMutationInput: PostUpdateManyMutationInputInputObject
+      TodoItemCreateInput: TodoItemCreateInputInputObject
+      TodoItemUpdateInput: TodoItemUpdateInputInputObject
+      TodoItemUpdateManyMutationInput: TodoItemUpdateManyMutationInputInputObject
       UserSubscriptionWhereInput: UserSubscriptionWhereInputInputObject
       PostSubscriptionWhereInput: PostSubscriptionWhereInputInputObject
+      TodoItemSubscriptionWhereInput: TodoItemSubscriptionWhereInputInputObject
     }
   }
   enumTypes: {
     PostOrderByInput: PostOrderByInputValues,
     UserOrderByInput: UserOrderByInputValues,
+    TodoItemOrderByInput: TodoItemOrderByInputValues,
     MutationType: MutationTypeValues,
   }
 }
@@ -99,6 +118,9 @@ type QueryObject =
   | { name: 'post', args?: QueryPostArgs[] | false, alias?: string  } 
   | { name: 'posts', args?: QueryPostsArgs[] | false, alias?: string  } 
   | { name: 'postsConnection', args?: QueryPostsConnectionArgs[] | false, alias?: string  } 
+  | { name: 'todoItem', args?: QueryTodoItemArgs[] | false, alias?: string  } 
+  | { name: 'todoItems', args?: QueryTodoItemsArgs[] | false, alias?: string  } 
+  | { name: 'todoItemsConnection', args?: QueryTodoItemsConnectionArgs[] | false, alias?: string  } 
 
 type QueryFields =
   | 'user'
@@ -107,6 +129,9 @@ type QueryFields =
   | 'post'
   | 'posts'
   | 'postsConnection'
+  | 'todoItem'
+  | 'todoItems'
+  | 'todoItemsConnection'
 
 
 type QueryUserArgs =
@@ -138,6 +163,24 @@ type QueryPostsArgs =
   | 'first'
   | 'last'
 type QueryPostsConnectionArgs =
+  | 'where'
+  | 'orderBy'
+  | 'skip'
+  | 'after'
+  | 'before'
+  | 'first'
+  | 'last'
+type QueryTodoItemArgs =
+  | 'where'
+type QueryTodoItemsArgs =
+  | 'where'
+  | 'orderBy'
+  | 'skip'
+  | 'after'
+  | 'before'
+  | 'first'
+  | 'last'
+type QueryTodoItemsConnectionArgs =
   | 'where'
   | 'orderBy'
   | 'skip'
@@ -225,6 +268,45 @@ export interface QueryFieldDetails {
       context: core.GetGen<"context">,
       info?: GraphQLResolveInfo
     ) => Promise<prisma.PostConnection> | prisma.PostConnection
+  }
+  todoItem: {
+    type: 'TodoItem'
+    args: Record<QueryTodoItemArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"Query">,
+      args: { where: TodoItemWhereUniqueInput }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.TodoItem | null> | prisma.TodoItem | null
+  }
+  todoItems: {
+    type: 'TodoItem'
+    args: Record<QueryTodoItemsArgs, core.NexusArgDef<string>>
+    description: string
+    list: true
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Query">,
+      args: { where?: TodoItemWhereInput | null, orderBy?: prisma.TodoItemOrderByInput | null, skip?: number | null, after?: string | null, before?: string | null, first?: number | null, last?: number | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.TodoItem[]> | prisma.TodoItem[]
+  }
+  todoItemsConnection: {
+    type: 'TodoItemConnection'
+    args: Record<QueryTodoItemsConnectionArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Query">,
+      args: { where?: TodoItemWhereInput | null, orderBy?: prisma.TodoItemOrderByInput | null, skip?: number | null, after?: string | null, before?: string | null, first?: number | null, last?: number | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.TodoItemConnection> | prisma.TodoItemConnection
   }
 }
   
@@ -661,6 +743,166 @@ export interface AggregatePostFieldDetails {
 }
   
 
+// Types for TodoItem
+
+type TodoItemObject =
+  | TodoItemFields
+  | { name: 'id', args?: [] | false, alias?: string  } 
+  | { name: 'text', args?: [] | false, alias?: string  } 
+
+type TodoItemFields =
+  | 'id'
+  | 'text'
+
+
+
+  
+
+export interface TodoItemFieldDetails {
+  id: {
+    type: 'ID'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  text: {
+    type: 'String'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+}
+  
+
+// Types for TodoItemConnection
+
+type TodoItemConnectionObject =
+  | TodoItemConnectionFields
+  | { name: 'pageInfo', args?: [] | false, alias?: string  } 
+  | { name: 'edges', args?: [] | false, alias?: string  } 
+  | { name: 'aggregate', args?: [] | false, alias?: string  } 
+
+type TodoItemConnectionFields =
+  | 'pageInfo'
+  | 'edges'
+  | 'aggregate'
+
+
+
+  
+
+export interface TodoItemConnectionFieldDetails {
+  pageInfo: {
+    type: 'PageInfo'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"TodoItemConnection">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.PageInfo> | prisma.PageInfo
+  }
+  edges: {
+    type: 'TodoItemEdge'
+    args: {}
+    description: string
+    list: true
+    nullable: false
+    resolve: (
+      root: core.RootValue<"TodoItemConnection">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.TodoItemEdge[]> | prisma.TodoItemEdge[]
+  }
+  aggregate: {
+    type: 'AggregateTodoItem'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"TodoItemConnection">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.AggregateTodoItem> | prisma.AggregateTodoItem
+  }
+}
+  
+
+// Types for TodoItemEdge
+
+type TodoItemEdgeObject =
+  | TodoItemEdgeFields
+  | { name: 'node', args?: [] | false, alias?: string  } 
+  | { name: 'cursor', args?: [] | false, alias?: string  } 
+
+type TodoItemEdgeFields =
+  | 'node'
+  | 'cursor'
+
+
+
+  
+
+export interface TodoItemEdgeFieldDetails {
+  node: {
+    type: 'TodoItem'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"TodoItemEdge">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.TodoItem> | prisma.TodoItem
+  }
+  cursor: {
+    type: 'String'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+}
+  
+
+// Types for AggregateTodoItem
+
+type AggregateTodoItemObject =
+  | AggregateTodoItemFields
+  | { name: 'count', args?: [] | false, alias?: string  } 
+
+type AggregateTodoItemFields =
+  | 'count'
+
+
+
+  
+
+export interface AggregateTodoItemFieldDetails {
+  count: {
+    type: 'Int'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+}
+  
+
 // Types for Mutation
 
 type MutationObject =
@@ -677,6 +919,12 @@ type MutationObject =
   | { name: 'upsertPost', args?: MutationUpsertPostArgs[] | false, alias?: string  } 
   | { name: 'deletePost', args?: MutationDeletePostArgs[] | false, alias?: string  } 
   | { name: 'deleteManyPosts', args?: MutationDeleteManyPostsArgs[] | false, alias?: string  } 
+  | { name: 'createTodoItem', args?: MutationCreateTodoItemArgs[] | false, alias?: string  } 
+  | { name: 'updateTodoItem', args?: MutationUpdateTodoItemArgs[] | false, alias?: string  } 
+  | { name: 'updateManyTodoItems', args?: MutationUpdateManyTodoItemsArgs[] | false, alias?: string  } 
+  | { name: 'upsertTodoItem', args?: MutationUpsertTodoItemArgs[] | false, alias?: string  } 
+  | { name: 'deleteTodoItem', args?: MutationDeleteTodoItemArgs[] | false, alias?: string  } 
+  | { name: 'deleteManyTodoItems', args?: MutationDeleteManyTodoItemsArgs[] | false, alias?: string  } 
 
 type MutationFields =
   | 'createUser'
@@ -691,6 +939,12 @@ type MutationFields =
   | 'upsertPost'
   | 'deletePost'
   | 'deleteManyPosts'
+  | 'createTodoItem'
+  | 'updateTodoItem'
+  | 'updateManyTodoItems'
+  | 'upsertTodoItem'
+  | 'deleteTodoItem'
+  | 'deleteManyTodoItems'
 
 
 type MutationCreateUserArgs =
@@ -724,6 +978,22 @@ type MutationUpsertPostArgs =
 type MutationDeletePostArgs =
   | 'where'
 type MutationDeleteManyPostsArgs =
+  | 'where'
+type MutationCreateTodoItemArgs =
+  | 'data'
+type MutationUpdateTodoItemArgs =
+  | 'data'
+  | 'where'
+type MutationUpdateManyTodoItemsArgs =
+  | 'data'
+  | 'where'
+type MutationUpsertTodoItemArgs =
+  | 'where'
+  | 'create'
+  | 'update'
+type MutationDeleteTodoItemArgs =
+  | 'where'
+type MutationDeleteManyTodoItemsArgs =
   | 'where'
   
 
@@ -884,6 +1154,84 @@ export interface MutationFieldDetails {
       info?: GraphQLResolveInfo
     ) => Promise<prisma.BatchPayload> | prisma.BatchPayload
   }
+  createTodoItem: {
+    type: 'TodoItem'
+    args: Record<MutationCreateTodoItemArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { data: TodoItemCreateInput }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.TodoItem> | prisma.TodoItem
+  }
+  updateTodoItem: {
+    type: 'TodoItem'
+    args: Record<MutationUpdateTodoItemArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { data: TodoItemUpdateInput, where: TodoItemWhereUniqueInput }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.TodoItem | null> | prisma.TodoItem | null
+  }
+  updateManyTodoItems: {
+    type: 'BatchPayload'
+    args: Record<MutationUpdateManyTodoItemsArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { data: TodoItemUpdateManyMutationInput, where?: TodoItemWhereInput | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.BatchPayload> | prisma.BatchPayload
+  }
+  upsertTodoItem: {
+    type: 'TodoItem'
+    args: Record<MutationUpsertTodoItemArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { where: TodoItemWhereUniqueInput, create: TodoItemCreateInput, update: TodoItemUpdateInput }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.TodoItem> | prisma.TodoItem
+  }
+  deleteTodoItem: {
+    type: 'TodoItem'
+    args: Record<MutationDeleteTodoItemArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { where: TodoItemWhereUniqueInput }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.TodoItem | null> | prisma.TodoItem | null
+  }
+  deleteManyTodoItems: {
+    type: 'BatchPayload'
+    args: Record<MutationDeleteManyTodoItemsArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { where?: TodoItemWhereInput | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.BatchPayload> | prisma.BatchPayload
+  }
 }
   
 
@@ -918,15 +1266,19 @@ type SubscriptionObject =
   | SubscriptionFields
   | { name: 'user', args?: SubscriptionUserArgs[] | false, alias?: string  } 
   | { name: 'post', args?: SubscriptionPostArgs[] | false, alias?: string  } 
+  | { name: 'todoItem', args?: SubscriptionTodoItemArgs[] | false, alias?: string  } 
 
 type SubscriptionFields =
   | 'user'
   | 'post'
+  | 'todoItem'
 
 
 type SubscriptionUserArgs =
   | 'where'
 type SubscriptionPostArgs =
+  | 'where'
+type SubscriptionTodoItemArgs =
   | 'where'
   
 
@@ -956,6 +1308,19 @@ export interface SubscriptionFieldDetails {
       context: core.GetGen<"context">,
       info?: GraphQLResolveInfo
     ) => Promise<prisma.PostSubscriptionPayload | null> | prisma.PostSubscriptionPayload | null
+  }
+  todoItem: {
+    type: 'TodoItemSubscriptionPayload'
+    args: Record<SubscriptionTodoItemArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"Subscription">,
+      args: { where?: TodoItemSubscriptionWhereInput | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.TodoItemSubscriptionPayload | null> | prisma.TodoItemSubscriptionPayload | null
   }
 }
   
@@ -1190,6 +1555,111 @@ export interface PostPreviousValuesFieldDetails {
 }
   
 
+// Types for TodoItemSubscriptionPayload
+
+type TodoItemSubscriptionPayloadObject =
+  | TodoItemSubscriptionPayloadFields
+  | { name: 'mutation', args?: [] | false, alias?: string  } 
+  | { name: 'node', args?: [] | false, alias?: string  } 
+  | { name: 'updatedFields', args?: [] | false, alias?: string  } 
+  | { name: 'previousValues', args?: [] | false, alias?: string  } 
+
+type TodoItemSubscriptionPayloadFields =
+  | 'mutation'
+  | 'node'
+  | 'updatedFields'
+  | 'previousValues'
+
+
+
+  
+
+export interface TodoItemSubscriptionPayloadFieldDetails {
+  mutation: {
+    type: 'MutationType'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"TodoItemSubscriptionPayload">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.MutationType> | prisma.MutationType
+  }
+  node: {
+    type: 'TodoItem'
+    args: {}
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"TodoItemSubscriptionPayload">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.TodoItem | null> | prisma.TodoItem | null
+  }
+  updatedFields: {
+    type: 'String'
+    args: {}
+    description: string
+    list: true
+    nullable: false
+    resolve: undefined
+  }
+  previousValues: {
+    type: 'TodoItemPreviousValues'
+    args: {}
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"TodoItemSubscriptionPayload">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.TodoItemPreviousValues | null> | prisma.TodoItemPreviousValues | null
+  }
+}
+  
+
+// Types for TodoItemPreviousValues
+
+type TodoItemPreviousValuesObject =
+  | TodoItemPreviousValuesFields
+  | { name: 'id', args?: [] | false, alias?: string  } 
+  | { name: 'text', args?: [] | false, alias?: string  } 
+
+type TodoItemPreviousValuesFields =
+  | 'id'
+  | 'text'
+
+
+
+  
+
+export interface TodoItemPreviousValuesFieldDetails {
+  id: {
+    type: 'ID'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  text: {
+    type: 'String'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+}
+  
+
 
 export interface UserWhereUniqueInput {
   id?: string | null
@@ -1380,6 +1850,80 @@ export interface PostWhereUniqueInput {
 export type PostWhereUniqueInputInputObject =
   | Extract<keyof PostWhereUniqueInput, string>
   | { name: 'id', alias?: string  } 
+  
+export interface TodoItemWhereUniqueInput {
+  id?: string | null
+}
+export type TodoItemWhereUniqueInputInputObject =
+  | Extract<keyof TodoItemWhereUniqueInput, string>
+  | { name: 'id', alias?: string  } 
+  
+export interface TodoItemWhereInput {
+  id?: string | null
+  id_not?: string | null
+  id_in?: string[]
+  id_not_in?: string[]
+  id_lt?: string | null
+  id_lte?: string | null
+  id_gt?: string | null
+  id_gte?: string | null
+  id_contains?: string | null
+  id_not_contains?: string | null
+  id_starts_with?: string | null
+  id_not_starts_with?: string | null
+  id_ends_with?: string | null
+  id_not_ends_with?: string | null
+  text?: string | null
+  text_not?: string | null
+  text_in?: string[]
+  text_not_in?: string[]
+  text_lt?: string | null
+  text_lte?: string | null
+  text_gt?: string | null
+  text_gte?: string | null
+  text_contains?: string | null
+  text_not_contains?: string | null
+  text_starts_with?: string | null
+  text_not_starts_with?: string | null
+  text_ends_with?: string | null
+  text_not_ends_with?: string | null
+  AND?: TodoItemWhereInput[]
+  OR?: TodoItemWhereInput[]
+  NOT?: TodoItemWhereInput[]
+}
+export type TodoItemWhereInputInputObject =
+  | Extract<keyof TodoItemWhereInput, string>
+  | { name: 'id', alias?: string  } 
+  | { name: 'id_not', alias?: string  } 
+  | { name: 'id_in', alias?: string  } 
+  | { name: 'id_not_in', alias?: string  } 
+  | { name: 'id_lt', alias?: string  } 
+  | { name: 'id_lte', alias?: string  } 
+  | { name: 'id_gt', alias?: string  } 
+  | { name: 'id_gte', alias?: string  } 
+  | { name: 'id_contains', alias?: string  } 
+  | { name: 'id_not_contains', alias?: string  } 
+  | { name: 'id_starts_with', alias?: string  } 
+  | { name: 'id_not_starts_with', alias?: string  } 
+  | { name: 'id_ends_with', alias?: string  } 
+  | { name: 'id_not_ends_with', alias?: string  } 
+  | { name: 'text', alias?: string  } 
+  | { name: 'text_not', alias?: string  } 
+  | { name: 'text_in', alias?: string  } 
+  | { name: 'text_not_in', alias?: string  } 
+  | { name: 'text_lt', alias?: string  } 
+  | { name: 'text_lte', alias?: string  } 
+  | { name: 'text_gt', alias?: string  } 
+  | { name: 'text_gte', alias?: string  } 
+  | { name: 'text_contains', alias?: string  } 
+  | { name: 'text_not_contains', alias?: string  } 
+  | { name: 'text_starts_with', alias?: string  } 
+  | { name: 'text_not_starts_with', alias?: string  } 
+  | { name: 'text_ends_with', alias?: string  } 
+  | { name: 'text_not_ends_with', alias?: string  } 
+  | { name: 'AND', alias?: string  } 
+  | { name: 'OR', alias?: string  } 
+  | { name: 'NOT', alias?: string  } 
   
 export interface UserCreateInput {
   id?: string | null
@@ -1663,6 +2207,29 @@ export type PostUpdateManyMutationInputInputObject =
   | { name: 'title', alias?: string  } 
   | { name: 'published', alias?: string  } 
   
+export interface TodoItemCreateInput {
+  id?: string | null
+  text?: string
+}
+export type TodoItemCreateInputInputObject =
+  | Extract<keyof TodoItemCreateInput, string>
+  | { name: 'id', alias?: string  } 
+  | { name: 'text', alias?: string  } 
+  
+export interface TodoItemUpdateInput {
+  text?: string | null
+}
+export type TodoItemUpdateInputInputObject =
+  | Extract<keyof TodoItemUpdateInput, string>
+  | { name: 'text', alias?: string  } 
+  
+export interface TodoItemUpdateManyMutationInput {
+  text?: string | null
+}
+export type TodoItemUpdateManyMutationInputInputObject =
+  | Extract<keyof TodoItemUpdateManyMutationInput, string>
+  | { name: 'text', alias?: string  } 
+  
 export interface UserSubscriptionWhereInput {
   mutation_in?: prisma.MutationType[]
   updatedFields_contains?: string | null
@@ -1705,6 +2272,27 @@ export type PostSubscriptionWhereInputInputObject =
   | { name: 'OR', alias?: string  } 
   | { name: 'NOT', alias?: string  } 
   
+export interface TodoItemSubscriptionWhereInput {
+  mutation_in?: prisma.MutationType[]
+  updatedFields_contains?: string | null
+  updatedFields_contains_every?: string[]
+  updatedFields_contains_some?: string[]
+  node?: TodoItemWhereInput | null
+  AND?: TodoItemSubscriptionWhereInput[]
+  OR?: TodoItemSubscriptionWhereInput[]
+  NOT?: TodoItemSubscriptionWhereInput[]
+}
+export type TodoItemSubscriptionWhereInputInputObject =
+  | Extract<keyof TodoItemSubscriptionWhereInput, string>
+  | { name: 'mutation_in', alias?: string  } 
+  | { name: 'updatedFields_contains', alias?: string  } 
+  | { name: 'updatedFields_contains_every', alias?: string  } 
+  | { name: 'updatedFields_contains_some', alias?: string  } 
+  | { name: 'node', alias?: string  } 
+  | { name: 'AND', alias?: string  } 
+  | { name: 'OR', alias?: string  } 
+  | { name: 'NOT', alias?: string  } 
+  
 
 export type PostOrderByInputValues =
   | 'id_ASC'
@@ -1725,6 +2313,16 @@ export type UserOrderByInputValues =
   | 'email_DESC'
   | 'name_ASC'
   | 'name_DESC'
+  | 'createdAt_ASC'
+  | 'createdAt_DESC'
+  | 'updatedAt_ASC'
+  | 'updatedAt_DESC'
+  
+export type TodoItemOrderByInputValues =
+  | 'id_ASC'
+  | 'id_DESC'
+  | 'text_ASC'
+  | 'text_DESC'
   | 'createdAt_ASC'
   | 'createdAt_DESC'
   | 'updatedAt_ASC'
