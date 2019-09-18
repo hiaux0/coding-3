@@ -1,0 +1,115 @@
+<template>
+  <div>
+
+    <!-- Basic -->
+    <h2>Basic</h2>
+    <p>
+      <md-checkbox checked.bind="checked">A default checkbox</md-checkbox> with value: ${checked | stringify}
+    </p>
+    <p>
+      <md-checkbox
+        checked="false"
+        disabled="true"
+      >A disabled checkbox</md-checkbox>
+    </p>
+    <p>
+      <md-checkbox checked.bind="indeterminateChecked">An indeterminate checkbox</md-checkbox> with value:
+      ${indeterminateChecked | stringify}
+    </p>
+
+    <!-- Filled in -->
+    <h2>Filled in</h2>
+    <p>
+      <md-checkbox
+        checked.bind="checked"
+        filled-in="true"
+      >A filled-in checkbox</md-checkbox> with value: ${checked | stringify}
+    </p>
+    <p>
+      <md-checkbox
+        disabled="true"
+        filled-in="true"
+      >A disabled filled-in checkbox</md-checkbox>
+    </p>
+
+    <!-- Switch -->
+    <h2>Switch</h2>
+    <div style="margin-top: 10px;">
+      Default:
+      <md-switch checked.bind="checked"></md-switch>
+      With value: ${checked | stringify}
+    </div>
+    <div style="margin-top: 10px;">
+      Custom labels:
+      <md-switch
+        label-on="enabled"
+        label-off="disabled"
+        checked.bind="checked"
+      ></md-switch>
+      With value: ${checked | stringify}
+    </div>
+    <div style="margin-top: 10px;">
+      Disabled:
+      <md-switch disabled.bind="disabled"></md-switch>
+    </div>
+    <div style="margin-top: 10px;">
+      <button
+        md-button="flat: true;"
+        click.delegate="disabled = !disabled"
+      >toggle disabled</button>
+    </div>
+
+    <!-- Binding with objects -->
+    <h2>Binding with objects</h2>
+    <p repeat.for="product of products ">
+      <md-checkbox
+        model.bind="product"
+        checked.bind="selectedProducts "
+      >
+        ${product.name}
+      </md-checkbox>
+    </p>
+    <p>
+      Selected products:
+      <ul>
+        <li repeat.for="product of selectedProducts">${product.name}</li>
+      </ul>
+    </p>
+
+    <!-- Binding with matcher -->
+    <h2> Binding with matcher</h2>
+    <p>
+      <md-checkbox
+        model.bind="{ id: 0, name: 'Motherboard' }"
+        matcher.bind="productMatcher"
+        checked.bind="selectedProductsMatch"
+      >
+        Motherboard
+      </md-checkbox>
+    </p>
+    <p>
+      <md-checkbox
+        model.bind="{ id: 1, name: 'CPU' }"
+        matcher.bind="productMatcher"
+        checked.bind="selectedProductsMatch"
+      >
+        CPU
+      </md-checkbox>
+    </p>
+    <p>
+      <md-checkbox
+        model.bind="{ id: 2, name: 'Memory' }"
+        matcher.bind="productMatcher"
+        checked.bind="selectedProductsMatch"
+      >
+        Memory
+      </md-checkbox>
+    </p>
+    <p>
+      Selected products:
+      <ul>
+        <li repeat.for="product of selectedProductsMatch">${product.name}</li>
+      </ul>
+    </p>
+  </div>
+</template>
