@@ -15,4 +15,5 @@ type Post {
 type TodoItem {
   id: ID! @id
   text: String!
+  done: Boolean @default(value: false)
 }

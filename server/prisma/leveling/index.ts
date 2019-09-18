@@ -30,6 +30,7 @@ const Mutation = prismaObjectType({
       'createUser',
       'deletePost',
       'createTodoItem',
+      'deleteTodoItem',
     ])
     t.field('createDraft', {
       type: 'Post',

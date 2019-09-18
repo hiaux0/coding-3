@@ -7,6 +7,7 @@ type Mutation {
   createTodoItem(data: TodoItemCreateInput!): TodoItem!
   createUser(data: UserCreateInput!): User!
   deletePost(where: PostWhereUniqueInput!): Post
+  deleteTodoItem(where: TodoItemWhereUniqueInput!): TodoItem
   publish(id: ID): Post
 }
 
@@ -90,11 +91,13 @@ type Query {
 }
 
 type TodoItem {
+  done: Boolean
   id: ID!
   text: String!
 }
 
 input TodoItemCreateInput {
+  done: Boolean
   id: ID
   text: String!
 }
@@ -102,6 +105,8 @@ input TodoItemCreateInput {
 enum TodoItemOrderByInput {
   createdAt_ASC
   createdAt_DESC
+  done_ASC
+  done_DESC
   id_ASC
   id_DESC
   text_ASC
@@ -112,6 +117,8 @@ enum TodoItemOrderByInput {
 
 input TodoItemWhereInput {
   AND: [TodoItemWhereInput!]
+  done: Boolean
+  done_not: Boolean
   id: ID
   id_contains: ID
   id_ends_with: ID
@@ -142,6 +149,10 @@ input TodoItemWhereInput {
   text_not_in: [String!]
   text_not_starts_with: String
   text_starts_with: String
+}
+
+input TodoItemWhereUniqueInput {
+  id: ID
 }
 
 type User {

@@ -60,11 +60,14 @@ export interface NexusGenInputs {
     id?: string | null; // ID
   }
   TodoItemCreateInput: { // input type
+    done?: boolean | null; // Boolean
     id?: string | null; // ID
     text: string; // String!
   }
   TodoItemWhereInput: { // input type
     AND?: NexusGenInputs['TodoItemWhereInput'][] | null; // [TodoItemWhereInput!]
+    done?: boolean | null; // Boolean
+    done_not?: boolean | null; // Boolean
     id?: string | null; // ID
     id_contains?: string | null; // ID
     id_ends_with?: string | null; // ID
@@ -95,6 +98,9 @@ export interface NexusGenInputs {
     text_not_in?: string[] | null; // [String!]
     text_not_starts_with?: string | null; // String
     text_starts_with?: string | null; // String
+  }
+  TodoItemWhereUniqueInput: { // input type
+    id?: string | null; // ID
   }
   UserCreateInput: { // input type
     email?: string | null; // String
@@ -156,7 +162,7 @@ export interface NexusGenInputs {
 
 export interface NexusGenEnums {
   PostOrderByInput: "createdAt_ASC" | "createdAt_DESC" | "id_ASC" | "id_DESC" | "published_ASC" | "published_DESC" | "title_ASC" | "title_DESC" | "updatedAt_ASC" | "updatedAt_DESC"
-  TodoItemOrderByInput: "createdAt_ASC" | "createdAt_DESC" | "id_ASC" | "id_DESC" | "text_ASC" | "text_DESC" | "updatedAt_ASC" | "updatedAt_DESC"
+  TodoItemOrderByInput: "createdAt_ASC" | "createdAt_DESC" | "done_ASC" | "done_DESC" | "id_ASC" | "id_DESC" | "text_ASC" | "text_DESC" | "updatedAt_ASC" | "updatedAt_DESC"
 }
 
 export interface NexusGenRootTypes {
@@ -168,6 +174,7 @@ export interface NexusGenRootTypes {
   }
   Query: {};
   TodoItem: { // root type
+    done?: boolean | null; // Boolean
     id: string; // ID!
     text: string; // String!
   }
@@ -190,6 +197,7 @@ export interface NexusGenAllTypes extends NexusGenRootTypes {
   PostWhereUniqueInput: NexusGenInputs['PostWhereUniqueInput'];
   TodoItemCreateInput: NexusGenInputs['TodoItemCreateInput'];
   TodoItemWhereInput: NexusGenInputs['TodoItemWhereInput'];
+  TodoItemWhereUniqueInput: NexusGenInputs['TodoItemWhereUniqueInput'];
   UserCreateInput: NexusGenInputs['UserCreateInput'];
   UserWhereInput: NexusGenInputs['UserWhereInput'];
   PostOrderByInput: NexusGenEnums['PostOrderByInput'];
@@ -202,6 +210,7 @@ export interface NexusGenFieldTypes {
     createTodoItem: NexusGenRootTypes['TodoItem']; // TodoItem!
     createUser: NexusGenRootTypes['User']; // User!
     deletePost: NexusGenRootTypes['Post'] | null; // Post
+    deleteTodoItem: NexusGenRootTypes['TodoItem'] | null; // TodoItem
     publish: NexusGenRootTypes['Post'] | null; // Post
   }
   Post: { // field return type
@@ -217,6 +226,7 @@ export interface NexusGenFieldTypes {
     todoItems: NexusGenRootTypes['TodoItem'][]; // [TodoItem!]!
   }
   TodoItem: { // field return type
+    done: boolean | null; // Boolean
     id: string; // ID!
     text: string; // String!
   }
@@ -242,6 +252,9 @@ export interface NexusGenArgTypes {
     }
     deletePost: { // args
       where: NexusGenInputs['PostWhereUniqueInput']; // PostWhereUniqueInput!
+    }
+    deleteTodoItem: { // args
+      where: NexusGenInputs['TodoItemWhereUniqueInput']; // TodoItemWhereUniqueInput!
     }
     publish: { // args
       id?: string | null; // ID
@@ -284,7 +297,7 @@ export interface NexusGenInheritedFields {}
 
 export type NexusGenObjectNames = "Mutation" | "Post" | "Query" | "TodoItem" | "User";
 
-export type NexusGenInputNames = "PostCreateManyWithoutAuthorInput" | "PostCreateWithoutAuthorInput" | "PostWhereInput" | "PostWhereUniqueInput" | "TodoItemCreateInput" | "TodoItemWhereInput" | "UserCreateInput" | "UserWhereInput";
+export type NexusGenInputNames = "PostCreateManyWithoutAuthorInput" | "PostCreateWithoutAuthorInput" | "PostWhereInput" | "PostWhereUniqueInput" | "TodoItemCreateInput" | "TodoItemWhereInput" | "TodoItemWhereUniqueInput" | "UserCreateInput" | "UserWhereInput";
 
 export type NexusGenEnumNames = "PostOrderByInput" | "TodoItemOrderByInput";
 

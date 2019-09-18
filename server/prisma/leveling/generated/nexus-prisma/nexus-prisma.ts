@@ -749,10 +749,12 @@ type TodoItemObject =
   | TodoItemFields
   | { name: 'id', args?: [] | false, alias?: string  } 
   | { name: 'text', args?: [] | false, alias?: string  } 
+  | { name: 'done', args?: [] | false, alias?: string  } 
 
 type TodoItemFields =
   | 'id'
   | 'text'
+  | 'done'
 
 
 
@@ -773,6 +775,14 @@ export interface TodoItemFieldDetails {
     description: string
     list: undefined
     nullable: false
+    resolve: undefined
+  }
+  done: {
+    type: 'Boolean'
+    args: {}
+    description: string
+    list: undefined
+    nullable: true
     resolve: undefined
   }
 }
@@ -1631,10 +1641,12 @@ type TodoItemPreviousValuesObject =
   | TodoItemPreviousValuesFields
   | { name: 'id', args?: [] | false, alias?: string  } 
   | { name: 'text', args?: [] | false, alias?: string  } 
+  | { name: 'done', args?: [] | false, alias?: string  } 
 
 type TodoItemPreviousValuesFields =
   | 'id'
   | 'text'
+  | 'done'
 
 
 
@@ -1655,6 +1667,14 @@ export interface TodoItemPreviousValuesFieldDetails {
     description: string
     list: undefined
     nullable: false
+    resolve: undefined
+  }
+  done: {
+    type: 'Boolean'
+    args: {}
+    description: string
+    list: undefined
+    nullable: true
     resolve: undefined
   }
 }
@@ -1887,6 +1907,8 @@ export interface TodoItemWhereInput {
   text_not_starts_with?: string | null
   text_ends_with?: string | null
   text_not_ends_with?: string | null
+  done?: boolean | null
+  done_not?: boolean | null
   AND?: TodoItemWhereInput[]
   OR?: TodoItemWhereInput[]
   NOT?: TodoItemWhereInput[]
@@ -1921,6 +1943,8 @@ export type TodoItemWhereInputInputObject =
   | { name: 'text_not_starts_with', alias?: string  } 
   | { name: 'text_ends_with', alias?: string  } 
   | { name: 'text_not_ends_with', alias?: string  } 
+  | { name: 'done', alias?: string  } 
+  | { name: 'done_not', alias?: string  } 
   | { name: 'AND', alias?: string  } 
   | { name: 'OR', alias?: string  } 
   | { name: 'NOT', alias?: string  } 
@@ -2210,25 +2234,31 @@ export type PostUpdateManyMutationInputInputObject =
 export interface TodoItemCreateInput {
   id?: string | null
   text?: string
+  done?: boolean | null
 }
 export type TodoItemCreateInputInputObject =
   | Extract<keyof TodoItemCreateInput, string>
   | { name: 'id', alias?: string  } 
   | { name: 'text', alias?: string  } 
+  | { name: 'done', alias?: string  } 
   
 export interface TodoItemUpdateInput {
   text?: string | null
+  done?: boolean | null
 }
 export type TodoItemUpdateInputInputObject =
   | Extract<keyof TodoItemUpdateInput, string>
   | { name: 'text', alias?: string  } 
+  | { name: 'done', alias?: string  } 
   
 export interface TodoItemUpdateManyMutationInput {
   text?: string | null
+  done?: boolean | null
 }
 export type TodoItemUpdateManyMutationInputInputObject =
   | Extract<keyof TodoItemUpdateManyMutationInput, string>
   | { name: 'text', alias?: string  } 
+  | { name: 'done', alias?: string  } 
   
 export interface UserSubscriptionWhereInput {
   mutation_in?: prisma.MutationType[]
@@ -2323,6 +2353,8 @@ export type TodoItemOrderByInputValues =
   | 'id_DESC'
   | 'text_ASC'
   | 'text_DESC'
+  | 'done_ASC'
+  | 'done_DESC'
   | 'createdAt_ASC'
   | 'createdAt_DESC'
   | 'updatedAt_ASC'

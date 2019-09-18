@@ -191,7 +191,9 @@ export type TodoItemOrderByInput =
   | "id_ASC"
   | "id_DESC"
   | "text_ASC"
-  | "text_DESC";
+  | "text_DESC"
+  | "done_ASC"
+  | "done_DESC";
 
 export type UserOrderByInput =
   | "id_ASC"
@@ -266,6 +268,7 @@ export interface UserUpdateInput {
 
 export interface TodoItemUpdateInput {
   text?: Maybe<String>;
+  done?: Maybe<Boolean>;
 }
 
 export interface PostCreateWithoutAuthorInput {
@@ -296,6 +299,7 @@ export type TodoItemWhereUniqueInput = AtLeastOne<{
 export interface TodoItemCreateInput {
   id?: Maybe<ID_Input>;
   text: String;
+  done?: Maybe<Boolean>;
 }
 
 export interface PostCreateInput {
@@ -344,6 +348,8 @@ export interface TodoItemWhereInput {
   text_not_starts_with?: Maybe<String>;
   text_ends_with?: Maybe<String>;
   text_not_ends_with?: Maybe<String>;
+  done?: Maybe<Boolean>;
+  done_not?: Maybe<Boolean>;
   AND?: Maybe<TodoItemWhereInput[] | TodoItemWhereInput>;
   OR?: Maybe<TodoItemWhereInput[] | TodoItemWhereInput>;
   NOT?: Maybe<TodoItemWhereInput[] | TodoItemWhereInput>;
@@ -435,6 +441,7 @@ export interface PostUpdateManyDataInput {
 
 export interface TodoItemUpdateManyMutationInput {
   text?: Maybe<String>;
+  done?: Maybe<Boolean>;
 }
 
 export interface UserCreateInput {
@@ -592,11 +599,13 @@ export interface UserPreviousValuesSubscription
 export interface TodoItem {
   id: ID_Output;
   text: String;
+  done?: Boolean;
 }
 
 export interface TodoItemPromise extends Promise<TodoItem>, Fragmentable {
   id: () => Promise<ID_Output>;
   text: () => Promise<String>;
+  done: () => Promise<Boolean>;
 }
 
 export interface TodoItemSubscription
@@ -604,6 +613,7 @@ export interface TodoItemSubscription
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
   text: () => Promise<AsyncIterator<String>>;
+  done: () => Promise<AsyncIterator<Boolean>>;
 }
 
 export interface TodoItemNullablePromise
@@ -611,6 +621,7 @@ export interface TodoItemNullablePromise
     Fragmentable {
   id: () => Promise<ID_Output>;
   text: () => Promise<String>;
+  done: () => Promise<Boolean>;
 }
 
 export interface User {
@@ -671,6 +682,7 @@ export interface UserNullablePromise
 export interface TodoItemPreviousValues {
   id: ID_Output;
   text: String;
+  done?: Boolean;
 }
 
 export interface TodoItemPreviousValuesPromise
@@ -678,6 +690,7 @@ export interface TodoItemPreviousValuesPromise
     Fragmentable {
   id: () => Promise<ID_Output>;
   text: () => Promise<String>;
+  done: () => Promise<Boolean>;
 }
 
 export interface TodoItemPreviousValuesSubscription
@@ -685,6 +698,7 @@ export interface TodoItemPreviousValuesSubscription
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
   text: () => Promise<AsyncIterator<String>>;
+  done: () => Promise<AsyncIterator<Boolean>>;
 }
 
 export interface TodoItemSubscriptionPayload {

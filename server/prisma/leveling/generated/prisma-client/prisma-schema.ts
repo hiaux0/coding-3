@@ -275,6 +275,7 @@ type Subscription {
 type TodoItem {
   id: ID!
   text: String!
+  done: Boolean
 }
 
 type TodoItemConnection {
@@ -286,6 +287,7 @@ type TodoItemConnection {
 input TodoItemCreateInput {
   id: ID
   text: String!
+  done: Boolean
 }
 
 type TodoItemEdge {
@@ -298,11 +300,14 @@ enum TodoItemOrderByInput {
   id_DESC
   text_ASC
   text_DESC
+  done_ASC
+  done_DESC
 }
 
 type TodoItemPreviousValues {
   id: ID!
   text: String!
+  done: Boolean
 }
 
 type TodoItemSubscriptionPayload {
@@ -325,10 +330,12 @@ input TodoItemSubscriptionWhereInput {
 
 input TodoItemUpdateInput {
   text: String
+  done: Boolean
 }
 
 input TodoItemUpdateManyMutationInput {
   text: String
+  done: Boolean
 }
 
 input TodoItemWhereInput {
@@ -360,6 +367,8 @@ input TodoItemWhereInput {
   text_not_starts_with: String
   text_ends_with: String
   text_not_ends_with: String
+  done: Boolean
+  done_not: Boolean
   AND: [TodoItemWhereInput!]
   OR: [TodoItemWhereInput!]
   NOT: [TodoItemWhereInput!]
