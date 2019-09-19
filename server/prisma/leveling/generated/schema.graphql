@@ -9,6 +9,7 @@ type Mutation {
   deletePost(where: PostWhereUniqueInput!): Post
   deleteTodoItem(where: TodoItemWhereUniqueInput!): TodoItem
   publish(id: ID): Post
+  updateTodoItem(data: TodoItemUpdateInput!, where: TodoItemWhereUniqueInput!): TodoItem
 }
 
 type Post {
@@ -113,6 +114,11 @@ enum TodoItemOrderByInput {
   text_DESC
   updatedAt_ASC
   updatedAt_DESC
+}
+
+input TodoItemUpdateInput {
+  done: Boolean
+  text: String
 }
 
 input TodoItemWhereInput {

@@ -64,6 +64,10 @@ export interface NexusGenInputs {
     id?: string | null; // ID
     text: string; // String!
   }
+  TodoItemUpdateInput: { // input type
+    done?: boolean | null; // Boolean
+    text?: string | null; // String
+  }
   TodoItemWhereInput: { // input type
     AND?: NexusGenInputs['TodoItemWhereInput'][] | null; // [TodoItemWhereInput!]
     done?: boolean | null; // Boolean
@@ -196,6 +200,7 @@ export interface NexusGenAllTypes extends NexusGenRootTypes {
   PostWhereInput: NexusGenInputs['PostWhereInput'];
   PostWhereUniqueInput: NexusGenInputs['PostWhereUniqueInput'];
   TodoItemCreateInput: NexusGenInputs['TodoItemCreateInput'];
+  TodoItemUpdateInput: NexusGenInputs['TodoItemUpdateInput'];
   TodoItemWhereInput: NexusGenInputs['TodoItemWhereInput'];
   TodoItemWhereUniqueInput: NexusGenInputs['TodoItemWhereUniqueInput'];
   UserCreateInput: NexusGenInputs['UserCreateInput'];
@@ -212,6 +217,7 @@ export interface NexusGenFieldTypes {
     deletePost: NexusGenRootTypes['Post'] | null; // Post
     deleteTodoItem: NexusGenRootTypes['TodoItem'] | null; // TodoItem
     publish: NexusGenRootTypes['Post'] | null; // Post
+    updateTodoItem: NexusGenRootTypes['TodoItem'] | null; // TodoItem
   }
   Post: { // field return type
     author: NexusGenRootTypes['User'] | null; // User
@@ -259,6 +265,10 @@ export interface NexusGenArgTypes {
     publish: { // args
       id?: string | null; // ID
     }
+    updateTodoItem: { // args
+      data: NexusGenInputs['TodoItemUpdateInput']; // TodoItemUpdateInput!
+      where: NexusGenInputs['TodoItemWhereUniqueInput']; // TodoItemWhereUniqueInput!
+    }
   }
   Query: {
     post: { // args
@@ -297,7 +307,7 @@ export interface NexusGenInheritedFields {}
 
 export type NexusGenObjectNames = "Mutation" | "Post" | "Query" | "TodoItem" | "User";
 
-export type NexusGenInputNames = "PostCreateManyWithoutAuthorInput" | "PostCreateWithoutAuthorInput" | "PostWhereInput" | "PostWhereUniqueInput" | "TodoItemCreateInput" | "TodoItemWhereInput" | "TodoItemWhereUniqueInput" | "UserCreateInput" | "UserWhereInput";
+export type NexusGenInputNames = "PostCreateManyWithoutAuthorInput" | "PostCreateWithoutAuthorInput" | "PostWhereInput" | "PostWhereUniqueInput" | "TodoItemCreateInput" | "TodoItemUpdateInput" | "TodoItemWhereInput" | "TodoItemWhereUniqueInput" | "UserCreateInput" | "UserWhereInput";
 
 export type NexusGenEnumNames = "PostOrderByInput" | "TodoItemOrderByInput";
 
