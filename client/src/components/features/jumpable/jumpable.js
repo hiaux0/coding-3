@@ -127,7 +127,13 @@ const jumpableKeyCodesListener = (destroy) => {
 };
 
 function checkActiveItemBlackList() {
-  const activeTag = document.activeElement.tagName.toLocaleLowerCase();
+  const { activeElement } = document;
+
+  // Root source: list item with text div is contenteditable
+  const isContentEditable = activeElement.getAttribute('contenteditable');
+  if (isContentEditable) return true;
+
+  const activeTag = activeElement.tagName.toLocaleLowerCase();
   return blackList.includes(activeTag);
 }
 
