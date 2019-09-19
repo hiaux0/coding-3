@@ -15,4 +15,11 @@
   .btn.disabled, .btn-floating.disabled, .btn-large.disabled, .btn-small.disabled, .btn-flat.disabled, .btn:disabled, .btn-floating:disabled, .btn-large:disabled, .btn-small:disabled, .btn-flat:disabled, .btn[disabled], .btn-floating[disabled], .btn-large[disabled], .btn-small[disabled], .btn-flat[disabled] {
     color: @dark-text-color !important;
   }
+
+  // Checkbox
+  md-checkbox {
+    [type="checkbox"].filled-in:not(:checked) + span:not(.lever)::after {
+      top: 3px;
+    }
+  }
 }
