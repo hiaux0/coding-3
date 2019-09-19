@@ -1,5 +1,6 @@
 @import (reference) '~styles/colors.less';
 
+@matHeight: 36px;
 
 .todo-list {
   margin: 80px auto;
@@ -11,20 +12,38 @@
     }
   }
 
-  .todo-item {
+  .todo-list-item {
     display: flex;
     justify-content: space-between;
-    padding: 5px 10px;
+    height: @matHeight;
 
     &:hover {
       background: @primary-color-hover;
+
+      .todo-item-menu {
+        display: flex;
+      }
     }
 
-    .todo-item-text {
-      align-self: center;
+    .todo-list-item-group {
+      display: flex;
+      width: 100%;
 
-      &.todo-item-done {
-        text-decoration: line-through;
+      .todo-item-text {
+        align-self: center;
+        width: inherit;
+
+        &.todo-item-done {
+          text-decoration: line-through;
+        }
+      }
+    }
+
+    .todo-item-menu {
+      display: none;
+
+      .todo-item-remove {
+        cursor: pointer;
       }
     }
   }

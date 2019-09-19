@@ -4,27 +4,57 @@
 
     <!-- Input -->
     <div>
-        <md-input
-          type="text"
-          label="What needs to be done?"
-          class="todo-input"
-          value.bind="todoInputValue"
-          ref="todoInputRef"
-        ></md-input>
+      <md-input
+        type="text"
+        label="What needs to be done?"
+        class="todo-input"
+        value.bind="todoInputValue"
+        ref="todoInputRef"
+      ></md-input>
       <button
         class="btn add-todo-button"
         click.delegate="addTodo(todoInputValue)"
       >Add todo</button>
     <!-- List -->
     <ul>
-      <li repeat.for="todo of todoItems" class="todo-item">
-        <div class="
-          todo-item-text
-          ${todo.done ? 'todo-item-done' : ''}
-        ">
-          ${todo.text}
+      <li repeat.for="todo of todoItems" class="todo-list-item">
+        <!-- Todo item checkbox and text -->
+        <div class="todo-list-item-group">
+          <md-checkbox
+            checked.bind="todo.done"
+            filled-in="true"
+            change.delegate="toggleTodoItemDone(todo.id, todo.done)"
+          >
+          </md-checkbox>
+          <input type="text" class="
+            todo-item-text
+            ${todo.done ? 'todo-item-done' : ''}
+          "
+            contenteditable="true"
+            focus.trigger="updateTodoItemAfterShortcut(todo)"
+            blur.trigger="removeUpdateTodoItemShortcut()"
+            value.bind="todo.text"
+          />
         </div>
-        <button class="btn todo-item-remove" click.delegate="removeTodoItem(todo.id)">R</button>
+
+        <!-- Todo item menu -->
+        <div class="todo-item-menu">
+          <i
+            class="material-icons todo-item-remove"
+            role="button"
+            click.delegate="updateTodoItem(todo)"
+          >save</i>
+          <i
+            class="material-icons todo-item-remove"
+            role="button"
+            click.delegate="editTodoItem(todo.id)"
+          >edit</i>
+          <i
+            class="material-icons todo-item-remove"
+            role="button"
+            click.delegate="removeTodoItem(todo.id)"
+          > delete </i>
+        </div>
       </li>
     </ul>
 
