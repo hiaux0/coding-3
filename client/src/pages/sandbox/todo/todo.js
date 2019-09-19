@@ -47,7 +47,7 @@ export class Todo {
   }
 
   updateTodoItemAfterShortcut(todoItem) {
-    const previousScope = hotkeys.getScope();
+    this.previousScope = hotkeys.getScope();
     hotkeys.setScope(todoShortcutScope);
 
     hotkeys(acceptEditedTodoShortcut, todoShortcutScope, async() => {
@@ -55,7 +55,7 @@ export class Todo {
         attribute: 'text',
         value: todoItem.text,
       });
-      hotkeys.setScope(previousScope);
+      hotkeys.setScope(this.previousScope);
       // @ts-ignore
       document.activeElement.blur();
       hotkeys.unbind('ctrl+enter', todoShortcutScope);
@@ -64,5 +64,6 @@ export class Todo {
 
   removeUpdateTodoItemShortcut() {
     hotkeys.unbind('ctrl+enter', todoShortcutScope);
+    hotkeys.setScope(this.previousScope);
   }
 }
