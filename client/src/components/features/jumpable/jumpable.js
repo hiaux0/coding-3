@@ -25,7 +25,6 @@ const ABC_leftHandOnly = [
   't', 'h', 's', 'a', 'g', // home row
   'r', 'd', // upper
   'c', 'm', 'q', // lower
-  '1', '2', '3', '4', '5', '6', '7', '8', '9', '0' // numbers
   // "ff", "fj", "fd", "fk", "fs", "fl", "fa", "fg", "fh", // f + home row
 
 ];
@@ -89,7 +88,7 @@ const makeTagsJumpable = (tagNames = ['a', 'button', 'label']) => {
     let taggels = document.getElementsByTagName(tag);
     for (let taggel of taggels) {
       taggel.classList.add(JUMP_CLASS);
-      let value = uniqueJumpMark.next().value;
+      let value = uniqueJumpMark.next().value || '';
       taggel.setAttribute(DATA_JUMP_MARK_VALUE, value);
     }
 
@@ -111,6 +110,7 @@ function* getUniqueJumpMarkGenerator() {
  */
 const jumpableKeyCodesListener = (destroy) => {
   keyBinding(ABC_JOINED, JUMP_CLASS, (ev) => {
+    console.log('TCL: jumpableKeyCodesListener -> ev', ev);
     let pressedKey = ev.key;
     let jumppelIterable = document.getElementsByClassName(JUMP_CLASS);
     const activate = activateElement(destroy);
