@@ -4,8 +4,10 @@ import { refreshJumpable } from 'components/features/jumpable/jumpable.js';
 import { fetchListTodoItems, apiAddTodo, apiDeleteTodoItem, apiUpdateTodoItemDone, apiUpdateTodoItem } from './todo.gateway.js';
 import hotkeys from 'hotkeys-js';
 import { acceptEditedTodoShortcut, todoShortcutScope } from './todo-shortcuts';
+import { client } from './todo.gateway';
 
 import './todo.less';
+import gql from 'graphql-tag';
 
 
 export class Todo {
@@ -19,10 +21,28 @@ export class Todo {
   async bind() {
     const todoItems = await fetchListTodoItems();
     this.todoItems = todoItems;
+
+    this.watchTodoEdited();
   }
 
   attached() {
     refreshJumpable();
+  }
+
+  watchTodoEdited() {
+    const query = gql`
+      query {
+        todoItems {
+          id
+          text
+          done
+        }
+      }
+      `;
+
+    client.watchQuery({query}).subscribe(value => {
+      console.log('TCL: Todo -> watchTodoEdited -> value', value);
+    });
   }
 
   async addTodo(value) {
