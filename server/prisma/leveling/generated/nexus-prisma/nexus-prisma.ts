@@ -28,6 +28,18 @@ export interface NexusPrismaTypes {
       TodoItemConnection: TodoItemConnectionObject
       TodoItemEdge: TodoItemEdgeObject
       AggregateTodoItem: AggregateTodoItemObject
+      TarotArcana: TarotArcanaObject
+      TarotArcanaConnection: TarotArcanaConnectionObject
+      TarotArcanaEdge: TarotArcanaEdgeObject
+      AggregateTarotArcana: AggregateTarotArcanaObject
+      TarotExplanation: TarotExplanationObject
+      TarotCard: TarotCardObject
+      TarotExplanationConnection: TarotExplanationConnectionObject
+      TarotExplanationEdge: TarotExplanationEdgeObject
+      AggregateTarotExplanation: AggregateTarotExplanationObject
+      TarotCardConnection: TarotCardConnectionObject
+      TarotCardEdge: TarotCardEdgeObject
+      AggregateTarotCard: AggregateTarotCardObject
       Mutation: MutationObject
       BatchPayload: BatchPayloadObject
       Subscription: SubscriptionObject
@@ -37,6 +49,12 @@ export interface NexusPrismaTypes {
       PostPreviousValues: PostPreviousValuesObject
       TodoItemSubscriptionPayload: TodoItemSubscriptionPayloadObject
       TodoItemPreviousValues: TodoItemPreviousValuesObject
+      TarotArcanaSubscriptionPayload: TarotArcanaSubscriptionPayloadObject
+      TarotArcanaPreviousValues: TarotArcanaPreviousValuesObject
+      TarotExplanationSubscriptionPayload: TarotExplanationSubscriptionPayloadObject
+      TarotExplanationPreviousValues: TarotExplanationPreviousValuesObject
+      TarotCardSubscriptionPayload: TarotCardSubscriptionPayloadObject
+      TarotCardPreviousValues: TarotCardPreviousValuesObject
     }
     fieldsDetails: {
       Query: QueryFieldDetails
@@ -53,6 +71,18 @@ export interface NexusPrismaTypes {
       TodoItemConnection: TodoItemConnectionFieldDetails
       TodoItemEdge: TodoItemEdgeFieldDetails
       AggregateTodoItem: AggregateTodoItemFieldDetails
+      TarotArcana: TarotArcanaFieldDetails
+      TarotArcanaConnection: TarotArcanaConnectionFieldDetails
+      TarotArcanaEdge: TarotArcanaEdgeFieldDetails
+      AggregateTarotArcana: AggregateTarotArcanaFieldDetails
+      TarotExplanation: TarotExplanationFieldDetails
+      TarotCard: TarotCardFieldDetails
+      TarotExplanationConnection: TarotExplanationConnectionFieldDetails
+      TarotExplanationEdge: TarotExplanationEdgeFieldDetails
+      AggregateTarotExplanation: AggregateTarotExplanationFieldDetails
+      TarotCardConnection: TarotCardConnectionFieldDetails
+      TarotCardEdge: TarotCardEdgeFieldDetails
+      AggregateTarotCard: AggregateTarotCardFieldDetails
       Mutation: MutationFieldDetails
       BatchPayload: BatchPayloadFieldDetails
       Subscription: SubscriptionFieldDetails
@@ -62,6 +92,12 @@ export interface NexusPrismaTypes {
       PostPreviousValues: PostPreviousValuesFieldDetails
       TodoItemSubscriptionPayload: TodoItemSubscriptionPayloadFieldDetails
       TodoItemPreviousValues: TodoItemPreviousValuesFieldDetails
+      TarotArcanaSubscriptionPayload: TarotArcanaSubscriptionPayloadFieldDetails
+      TarotArcanaPreviousValues: TarotArcanaPreviousValuesFieldDetails
+      TarotExplanationSubscriptionPayload: TarotExplanationSubscriptionPayloadFieldDetails
+      TarotExplanationPreviousValues: TarotExplanationPreviousValuesFieldDetails
+      TarotCardSubscriptionPayload: TarotCardSubscriptionPayloadFieldDetails
+      TarotCardPreviousValues: TarotCardPreviousValuesFieldDetails
     }
   }
   inputTypes: {
@@ -72,6 +108,12 @@ export interface NexusPrismaTypes {
       PostWhereUniqueInput: PostWhereUniqueInputInputObject
       TodoItemWhereUniqueInput: TodoItemWhereUniqueInputInputObject
       TodoItemWhereInput: TodoItemWhereInputInputObject
+      TarotArcanaWhereUniqueInput: TarotArcanaWhereUniqueInputInputObject
+      TarotArcanaWhereInput: TarotArcanaWhereInputInputObject
+      TarotExplanationWhereUniqueInput: TarotExplanationWhereUniqueInputInputObject
+      TarotExplanationWhereInput: TarotExplanationWhereInputInputObject
+      TarotCardWhereInput: TarotCardWhereInputInputObject
+      TarotCardWhereUniqueInput: TarotCardWhereUniqueInputInputObject
       UserCreateInput: UserCreateInputInputObject
       PostCreateManyWithoutAuthorInput: PostCreateManyWithoutAuthorInputInputObject
       PostCreateWithoutAuthorInput: PostCreateWithoutAuthorInputInputObject
@@ -95,15 +137,50 @@ export interface NexusPrismaTypes {
       TodoItemCreateInput: TodoItemCreateInputInputObject
       TodoItemUpdateInput: TodoItemUpdateInputInputObject
       TodoItemUpdateManyMutationInput: TodoItemUpdateManyMutationInputInputObject
+      TarotArcanaCreateInput: TarotArcanaCreateInputInputObject
+      TarotArcanaUpdateInput: TarotArcanaUpdateInputInputObject
+      TarotArcanaUpdateManyMutationInput: TarotArcanaUpdateManyMutationInputInputObject
+      TarotExplanationCreateInput: TarotExplanationCreateInputInputObject
+      TarotCardCreateOneWithoutExplanationInput: TarotCardCreateOneWithoutExplanationInputInputObject
+      TarotCardCreateWithoutExplanationInput: TarotCardCreateWithoutExplanationInputInputObject
+      TarotArcanaCreateOneInput: TarotArcanaCreateOneInputInputObject
+      TarotCardCreatekeyWordsInput: TarotCardCreatekeyWordsInputInputObject
+      TarotExplanationUpdateInput: TarotExplanationUpdateInputInputObject
+      TarotCardUpdateOneWithoutExplanationInput: TarotCardUpdateOneWithoutExplanationInputInputObject
+      TarotCardUpdateWithoutExplanationDataInput: TarotCardUpdateWithoutExplanationDataInputInputObject
+      TarotArcanaUpdateOneInput: TarotArcanaUpdateOneInputInputObject
+      TarotArcanaUpdateDataInput: TarotArcanaUpdateDataInputInputObject
+      TarotArcanaUpsertNestedInput: TarotArcanaUpsertNestedInputInputObject
+      TarotCardUpdatekeyWordsInput: TarotCardUpdatekeyWordsInputInputObject
+      TarotCardUpsertWithoutExplanationInput: TarotCardUpsertWithoutExplanationInputInputObject
+      TarotExplanationUpdateManyMutationInput: TarotExplanationUpdateManyMutationInputInputObject
+      TarotCardCreateInput: TarotCardCreateInputInputObject
+      TarotExplanationCreateManyWithoutCardNameInput: TarotExplanationCreateManyWithoutCardNameInputInputObject
+      TarotExplanationCreateWithoutCardNameInput: TarotExplanationCreateWithoutCardNameInputInputObject
+      TarotCardUpdateInput: TarotCardUpdateInputInputObject
+      TarotExplanationUpdateManyWithoutCardNameInput: TarotExplanationUpdateManyWithoutCardNameInputInputObject
+      TarotExplanationUpdateWithWhereUniqueWithoutCardNameInput: TarotExplanationUpdateWithWhereUniqueWithoutCardNameInputInputObject
+      TarotExplanationUpdateWithoutCardNameDataInput: TarotExplanationUpdateWithoutCardNameDataInputInputObject
+      TarotExplanationUpsertWithWhereUniqueWithoutCardNameInput: TarotExplanationUpsertWithWhereUniqueWithoutCardNameInputInputObject
+      TarotExplanationScalarWhereInput: TarotExplanationScalarWhereInputInputObject
+      TarotExplanationUpdateManyWithWhereNestedInput: TarotExplanationUpdateManyWithWhereNestedInputInputObject
+      TarotExplanationUpdateManyDataInput: TarotExplanationUpdateManyDataInputInputObject
+      TarotCardUpdateManyMutationInput: TarotCardUpdateManyMutationInputInputObject
       UserSubscriptionWhereInput: UserSubscriptionWhereInputInputObject
       PostSubscriptionWhereInput: PostSubscriptionWhereInputInputObject
       TodoItemSubscriptionWhereInput: TodoItemSubscriptionWhereInputInputObject
+      TarotArcanaSubscriptionWhereInput: TarotArcanaSubscriptionWhereInputInputObject
+      TarotExplanationSubscriptionWhereInput: TarotExplanationSubscriptionWhereInputInputObject
+      TarotCardSubscriptionWhereInput: TarotCardSubscriptionWhereInputInputObject
     }
   }
   enumTypes: {
     PostOrderByInput: PostOrderByInputValues,
     UserOrderByInput: UserOrderByInputValues,
     TodoItemOrderByInput: TodoItemOrderByInputValues,
+    TarotArcanaOrderByInput: TarotArcanaOrderByInputValues,
+    TarotExplanationOrderByInput: TarotExplanationOrderByInputValues,
+    TarotCardOrderByInput: TarotCardOrderByInputValues,
     MutationType: MutationTypeValues,
   }
 }
@@ -121,6 +198,15 @@ type QueryObject =
   | { name: 'todoItem', args?: QueryTodoItemArgs[] | false, alias?: string  } 
   | { name: 'todoItems', args?: QueryTodoItemsArgs[] | false, alias?: string  } 
   | { name: 'todoItemsConnection', args?: QueryTodoItemsConnectionArgs[] | false, alias?: string  } 
+  | { name: 'tarotArcana', args?: QueryTarotArcanaArgs[] | false, alias?: string  } 
+  | { name: 'tarotArcanas', args?: QueryTarotArcanasArgs[] | false, alias?: string  } 
+  | { name: 'tarotArcanasConnection', args?: QueryTarotArcanasConnectionArgs[] | false, alias?: string  } 
+  | { name: 'tarotExplanation', args?: QueryTarotExplanationArgs[] | false, alias?: string  } 
+  | { name: 'tarotExplanations', args?: QueryTarotExplanationsArgs[] | false, alias?: string  } 
+  | { name: 'tarotExplanationsConnection', args?: QueryTarotExplanationsConnectionArgs[] | false, alias?: string  } 
+  | { name: 'tarotCard', args?: QueryTarotCardArgs[] | false, alias?: string  } 
+  | { name: 'tarotCards', args?: QueryTarotCardsArgs[] | false, alias?: string  } 
+  | { name: 'tarotCardsConnection', args?: QueryTarotCardsConnectionArgs[] | false, alias?: string  } 
 
 type QueryFields =
   | 'user'
@@ -132,6 +218,15 @@ type QueryFields =
   | 'todoItem'
   | 'todoItems'
   | 'todoItemsConnection'
+  | 'tarotArcana'
+  | 'tarotArcanas'
+  | 'tarotArcanasConnection'
+  | 'tarotExplanation'
+  | 'tarotExplanations'
+  | 'tarotExplanationsConnection'
+  | 'tarotCard'
+  | 'tarotCards'
+  | 'tarotCardsConnection'
 
 
 type QueryUserArgs =
@@ -181,6 +276,60 @@ type QueryTodoItemsArgs =
   | 'first'
   | 'last'
 type QueryTodoItemsConnectionArgs =
+  | 'where'
+  | 'orderBy'
+  | 'skip'
+  | 'after'
+  | 'before'
+  | 'first'
+  | 'last'
+type QueryTarotArcanaArgs =
+  | 'where'
+type QueryTarotArcanasArgs =
+  | 'where'
+  | 'orderBy'
+  | 'skip'
+  | 'after'
+  | 'before'
+  | 'first'
+  | 'last'
+type QueryTarotArcanasConnectionArgs =
+  | 'where'
+  | 'orderBy'
+  | 'skip'
+  | 'after'
+  | 'before'
+  | 'first'
+  | 'last'
+type QueryTarotExplanationArgs =
+  | 'where'
+type QueryTarotExplanationsArgs =
+  | 'where'
+  | 'orderBy'
+  | 'skip'
+  | 'after'
+  | 'before'
+  | 'first'
+  | 'last'
+type QueryTarotExplanationsConnectionArgs =
+  | 'where'
+  | 'orderBy'
+  | 'skip'
+  | 'after'
+  | 'before'
+  | 'first'
+  | 'last'
+type QueryTarotCardArgs =
+  | 'where'
+type QueryTarotCardsArgs =
+  | 'where'
+  | 'orderBy'
+  | 'skip'
+  | 'after'
+  | 'before'
+  | 'first'
+  | 'last'
+type QueryTarotCardsConnectionArgs =
   | 'where'
   | 'orderBy'
   | 'skip'
@@ -307,6 +456,123 @@ export interface QueryFieldDetails {
       context: core.GetGen<"context">,
       info?: GraphQLResolveInfo
     ) => Promise<prisma.TodoItemConnection> | prisma.TodoItemConnection
+  }
+  tarotArcana: {
+    type: 'TarotArcana'
+    args: Record<QueryTarotArcanaArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"Query">,
+      args: { where: TarotArcanaWhereUniqueInput }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.TarotArcana | null> | prisma.TarotArcana | null
+  }
+  tarotArcanas: {
+    type: 'TarotArcana'
+    args: Record<QueryTarotArcanasArgs, core.NexusArgDef<string>>
+    description: string
+    list: true
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Query">,
+      args: { where?: TarotArcanaWhereInput | null, orderBy?: prisma.TarotArcanaOrderByInput | null, skip?: number | null, after?: string | null, before?: string | null, first?: number | null, last?: number | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.TarotArcana[]> | prisma.TarotArcana[]
+  }
+  tarotArcanasConnection: {
+    type: 'TarotArcanaConnection'
+    args: Record<QueryTarotArcanasConnectionArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Query">,
+      args: { where?: TarotArcanaWhereInput | null, orderBy?: prisma.TarotArcanaOrderByInput | null, skip?: number | null, after?: string | null, before?: string | null, first?: number | null, last?: number | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.TarotArcanaConnection> | prisma.TarotArcanaConnection
+  }
+  tarotExplanation: {
+    type: 'TarotExplanation'
+    args: Record<QueryTarotExplanationArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"Query">,
+      args: { where: TarotExplanationWhereUniqueInput }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.TarotExplanation | null> | prisma.TarotExplanation | null
+  }
+  tarotExplanations: {
+    type: 'TarotExplanation'
+    args: Record<QueryTarotExplanationsArgs, core.NexusArgDef<string>>
+    description: string
+    list: true
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Query">,
+      args: { where?: TarotExplanationWhereInput | null, orderBy?: prisma.TarotExplanationOrderByInput | null, skip?: number | null, after?: string | null, before?: string | null, first?: number | null, last?: number | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.TarotExplanation[]> | prisma.TarotExplanation[]
+  }
+  tarotExplanationsConnection: {
+    type: 'TarotExplanationConnection'
+    args: Record<QueryTarotExplanationsConnectionArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Query">,
+      args: { where?: TarotExplanationWhereInput | null, orderBy?: prisma.TarotExplanationOrderByInput | null, skip?: number | null, after?: string | null, before?: string | null, first?: number | null, last?: number | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.TarotExplanationConnection> | prisma.TarotExplanationConnection
+  }
+  tarotCard: {
+    type: 'TarotCard'
+    args: Record<QueryTarotCardArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"Query">,
+      args: { where: TarotCardWhereUniqueInput }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.TarotCard | null> | prisma.TarotCard | null
+  }
+  tarotCards: {
+    type: 'TarotCard'
+    args: Record<QueryTarotCardsArgs, core.NexusArgDef<string>>
+    description: string
+    list: true
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Query">,
+      args: { where?: TarotCardWhereInput | null, orderBy?: prisma.TarotCardOrderByInput | null, skip?: number | null, after?: string | null, before?: string | null, first?: number | null, last?: number | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.TarotCard[]> | prisma.TarotCard[]
+  }
+  tarotCardsConnection: {
+    type: 'TarotCardConnection'
+    args: Record<QueryTarotCardsConnectionArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Query">,
+      args: { where?: TarotCardWhereInput | null, orderBy?: prisma.TarotCardOrderByInput | null, skip?: number | null, after?: string | null, before?: string | null, first?: number | null, last?: number | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.TarotCardConnection> | prisma.TarotCardConnection
   }
 }
   
@@ -913,6 +1179,568 @@ export interface AggregateTodoItemFieldDetails {
 }
   
 
+// Types for TarotArcana
+
+type TarotArcanaObject =
+  | TarotArcanaFields
+  | { name: 'id', args?: [] | false, alias?: string  } 
+  | { name: 'family', args?: [] | false, alias?: string  } 
+  | { name: 'number', args?: [] | false, alias?: string  } 
+
+type TarotArcanaFields =
+  | 'id'
+  | 'family'
+  | 'number'
+
+
+
+  
+
+export interface TarotArcanaFieldDetails {
+  id: {
+    type: 'ID'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  family: {
+    type: 'String'
+    args: {}
+    description: string
+    list: undefined
+    nullable: true
+    resolve: undefined
+  }
+  number: {
+    type: 'Int'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+}
+  
+
+// Types for TarotArcanaConnection
+
+type TarotArcanaConnectionObject =
+  | TarotArcanaConnectionFields
+  | { name: 'pageInfo', args?: [] | false, alias?: string  } 
+  | { name: 'edges', args?: [] | false, alias?: string  } 
+  | { name: 'aggregate', args?: [] | false, alias?: string  } 
+
+type TarotArcanaConnectionFields =
+  | 'pageInfo'
+  | 'edges'
+  | 'aggregate'
+
+
+
+  
+
+export interface TarotArcanaConnectionFieldDetails {
+  pageInfo: {
+    type: 'PageInfo'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"TarotArcanaConnection">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.PageInfo> | prisma.PageInfo
+  }
+  edges: {
+    type: 'TarotArcanaEdge'
+    args: {}
+    description: string
+    list: true
+    nullable: false
+    resolve: (
+      root: core.RootValue<"TarotArcanaConnection">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.TarotArcanaEdge[]> | prisma.TarotArcanaEdge[]
+  }
+  aggregate: {
+    type: 'AggregateTarotArcana'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"TarotArcanaConnection">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.AggregateTarotArcana> | prisma.AggregateTarotArcana
+  }
+}
+  
+
+// Types for TarotArcanaEdge
+
+type TarotArcanaEdgeObject =
+  | TarotArcanaEdgeFields
+  | { name: 'node', args?: [] | false, alias?: string  } 
+  | { name: 'cursor', args?: [] | false, alias?: string  } 
+
+type TarotArcanaEdgeFields =
+  | 'node'
+  | 'cursor'
+
+
+
+  
+
+export interface TarotArcanaEdgeFieldDetails {
+  node: {
+    type: 'TarotArcana'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"TarotArcanaEdge">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.TarotArcana> | prisma.TarotArcana
+  }
+  cursor: {
+    type: 'String'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+}
+  
+
+// Types for AggregateTarotArcana
+
+type AggregateTarotArcanaObject =
+  | AggregateTarotArcanaFields
+  | { name: 'count', args?: [] | false, alias?: string  } 
+
+type AggregateTarotArcanaFields =
+  | 'count'
+
+
+
+  
+
+export interface AggregateTarotArcanaFieldDetails {
+  count: {
+    type: 'Int'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+}
+  
+
+// Types for TarotExplanation
+
+type TarotExplanationObject =
+  | TarotExplanationFields
+  | { name: 'id', args?: [] | false, alias?: string  } 
+  | { name: 'content', args?: [] | false, alias?: string  } 
+  | { name: 'source', args?: [] | false, alias?: string  } 
+  | { name: 'cardName', args?: [] | false, alias?: string  } 
+
+type TarotExplanationFields =
+  | 'id'
+  | 'content'
+  | 'source'
+  | 'cardName'
+
+
+
+  
+
+export interface TarotExplanationFieldDetails {
+  id: {
+    type: 'ID'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  content: {
+    type: 'String'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  source: {
+    type: 'String'
+    args: {}
+    description: string
+    list: undefined
+    nullable: true
+    resolve: undefined
+  }
+  cardName: {
+    type: 'TarotCard'
+    args: {}
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"TarotExplanation">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.TarotCard | null> | prisma.TarotCard | null
+  }
+}
+  
+
+// Types for TarotCard
+
+type TarotCardObject =
+  | TarotCardFields
+  | { name: 'id', args?: [] | false, alias?: string  } 
+  | { name: 'arcana', args?: [] | false, alias?: string  } 
+  | { name: 'name', args?: [] | false, alias?: string  } 
+  | { name: 'keyWords', args?: [] | false, alias?: string  } 
+  | { name: 'explanation', args?: TarotCardExplanationArgs[] | false, alias?: string  } 
+
+type TarotCardFields =
+  | 'id'
+  | 'arcana'
+  | 'name'
+  | 'keyWords'
+  | 'explanation'
+
+
+type TarotCardExplanationArgs =
+  | 'where'
+  | 'orderBy'
+  | 'skip'
+  | 'after'
+  | 'before'
+  | 'first'
+  | 'last'
+  
+
+export interface TarotCardFieldDetails {
+  id: {
+    type: 'ID'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  arcana: {
+    type: 'TarotArcana'
+    args: {}
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"TarotCard">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.TarotArcana | null> | prisma.TarotArcana | null
+  }
+  name: {
+    type: 'String'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  keyWords: {
+    type: 'String'
+    args: {}
+    description: string
+    list: true
+    nullable: false
+    resolve: undefined
+  }
+  explanation: {
+    type: 'TarotExplanation'
+    args: Record<TarotCardExplanationArgs, core.NexusArgDef<string>>
+    description: string
+    list: true
+    nullable: false
+    resolve: (
+      root: core.RootValue<"TarotCard">,
+      args: { where?: TarotExplanationWhereInput | null, orderBy?: prisma.TarotExplanationOrderByInput | null, skip?: number | null, after?: string | null, before?: string | null, first?: number | null, last?: number | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.TarotExplanation[]> | prisma.TarotExplanation[]
+  }
+}
+  
+
+// Types for TarotExplanationConnection
+
+type TarotExplanationConnectionObject =
+  | TarotExplanationConnectionFields
+  | { name: 'pageInfo', args?: [] | false, alias?: string  } 
+  | { name: 'edges', args?: [] | false, alias?: string  } 
+  | { name: 'aggregate', args?: [] | false, alias?: string  } 
+
+type TarotExplanationConnectionFields =
+  | 'pageInfo'
+  | 'edges'
+  | 'aggregate'
+
+
+
+  
+
+export interface TarotExplanationConnectionFieldDetails {
+  pageInfo: {
+    type: 'PageInfo'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"TarotExplanationConnection">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.PageInfo> | prisma.PageInfo
+  }
+  edges: {
+    type: 'TarotExplanationEdge'
+    args: {}
+    description: string
+    list: true
+    nullable: false
+    resolve: (
+      root: core.RootValue<"TarotExplanationConnection">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.TarotExplanationEdge[]> | prisma.TarotExplanationEdge[]
+  }
+  aggregate: {
+    type: 'AggregateTarotExplanation'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"TarotExplanationConnection">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.AggregateTarotExplanation> | prisma.AggregateTarotExplanation
+  }
+}
+  
+
+// Types for TarotExplanationEdge
+
+type TarotExplanationEdgeObject =
+  | TarotExplanationEdgeFields
+  | { name: 'node', args?: [] | false, alias?: string  } 
+  | { name: 'cursor', args?: [] | false, alias?: string  } 
+
+type TarotExplanationEdgeFields =
+  | 'node'
+  | 'cursor'
+
+
+
+  
+
+export interface TarotExplanationEdgeFieldDetails {
+  node: {
+    type: 'TarotExplanation'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"TarotExplanationEdge">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.TarotExplanation> | prisma.TarotExplanation
+  }
+  cursor: {
+    type: 'String'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+}
+  
+
+// Types for AggregateTarotExplanation
+
+type AggregateTarotExplanationObject =
+  | AggregateTarotExplanationFields
+  | { name: 'count', args?: [] | false, alias?: string  } 
+
+type AggregateTarotExplanationFields =
+  | 'count'
+
+
+
+  
+
+export interface AggregateTarotExplanationFieldDetails {
+  count: {
+    type: 'Int'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+}
+  
+
+// Types for TarotCardConnection
+
+type TarotCardConnectionObject =
+  | TarotCardConnectionFields
+  | { name: 'pageInfo', args?: [] | false, alias?: string  } 
+  | { name: 'edges', args?: [] | false, alias?: string  } 
+  | { name: 'aggregate', args?: [] | false, alias?: string  } 
+
+type TarotCardConnectionFields =
+  | 'pageInfo'
+  | 'edges'
+  | 'aggregate'
+
+
+
+  
+
+export interface TarotCardConnectionFieldDetails {
+  pageInfo: {
+    type: 'PageInfo'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"TarotCardConnection">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.PageInfo> | prisma.PageInfo
+  }
+  edges: {
+    type: 'TarotCardEdge'
+    args: {}
+    description: string
+    list: true
+    nullable: false
+    resolve: (
+      root: core.RootValue<"TarotCardConnection">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.TarotCardEdge[]> | prisma.TarotCardEdge[]
+  }
+  aggregate: {
+    type: 'AggregateTarotCard'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"TarotCardConnection">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.AggregateTarotCard> | prisma.AggregateTarotCard
+  }
+}
+  
+
+// Types for TarotCardEdge
+
+type TarotCardEdgeObject =
+  | TarotCardEdgeFields
+  | { name: 'node', args?: [] | false, alias?: string  } 
+  | { name: 'cursor', args?: [] | false, alias?: string  } 
+
+type TarotCardEdgeFields =
+  | 'node'
+  | 'cursor'
+
+
+
+  
+
+export interface TarotCardEdgeFieldDetails {
+  node: {
+    type: 'TarotCard'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"TarotCardEdge">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.TarotCard> | prisma.TarotCard
+  }
+  cursor: {
+    type: 'String'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+}
+  
+
+// Types for AggregateTarotCard
+
+type AggregateTarotCardObject =
+  | AggregateTarotCardFields
+  | { name: 'count', args?: [] | false, alias?: string  } 
+
+type AggregateTarotCardFields =
+  | 'count'
+
+
+
+  
+
+export interface AggregateTarotCardFieldDetails {
+  count: {
+    type: 'Int'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+}
+  
+
 // Types for Mutation
 
 type MutationObject =
@@ -935,6 +1763,24 @@ type MutationObject =
   | { name: 'upsertTodoItem', args?: MutationUpsertTodoItemArgs[] | false, alias?: string  } 
   | { name: 'deleteTodoItem', args?: MutationDeleteTodoItemArgs[] | false, alias?: string  } 
   | { name: 'deleteManyTodoItems', args?: MutationDeleteManyTodoItemsArgs[] | false, alias?: string  } 
+  | { name: 'createTarotArcana', args?: MutationCreateTarotArcanaArgs[] | false, alias?: string  } 
+  | { name: 'updateTarotArcana', args?: MutationUpdateTarotArcanaArgs[] | false, alias?: string  } 
+  | { name: 'updateManyTarotArcanas', args?: MutationUpdateManyTarotArcanasArgs[] | false, alias?: string  } 
+  | { name: 'upsertTarotArcana', args?: MutationUpsertTarotArcanaArgs[] | false, alias?: string  } 
+  | { name: 'deleteTarotArcana', args?: MutationDeleteTarotArcanaArgs[] | false, alias?: string  } 
+  | { name: 'deleteManyTarotArcanas', args?: MutationDeleteManyTarotArcanasArgs[] | false, alias?: string  } 
+  | { name: 'createTarotExplanation', args?: MutationCreateTarotExplanationArgs[] | false, alias?: string  } 
+  | { name: 'updateTarotExplanation', args?: MutationUpdateTarotExplanationArgs[] | false, alias?: string  } 
+  | { name: 'updateManyTarotExplanations', args?: MutationUpdateManyTarotExplanationsArgs[] | false, alias?: string  } 
+  | { name: 'upsertTarotExplanation', args?: MutationUpsertTarotExplanationArgs[] | false, alias?: string  } 
+  | { name: 'deleteTarotExplanation', args?: MutationDeleteTarotExplanationArgs[] | false, alias?: string  } 
+  | { name: 'deleteManyTarotExplanations', args?: MutationDeleteManyTarotExplanationsArgs[] | false, alias?: string  } 
+  | { name: 'createTarotCard', args?: MutationCreateTarotCardArgs[] | false, alias?: string  } 
+  | { name: 'updateTarotCard', args?: MutationUpdateTarotCardArgs[] | false, alias?: string  } 
+  | { name: 'updateManyTarotCards', args?: MutationUpdateManyTarotCardsArgs[] | false, alias?: string  } 
+  | { name: 'upsertTarotCard', args?: MutationUpsertTarotCardArgs[] | false, alias?: string  } 
+  | { name: 'deleteTarotCard', args?: MutationDeleteTarotCardArgs[] | false, alias?: string  } 
+  | { name: 'deleteManyTarotCards', args?: MutationDeleteManyTarotCardsArgs[] | false, alias?: string  } 
 
 type MutationFields =
   | 'createUser'
@@ -955,6 +1801,24 @@ type MutationFields =
   | 'upsertTodoItem'
   | 'deleteTodoItem'
   | 'deleteManyTodoItems'
+  | 'createTarotArcana'
+  | 'updateTarotArcana'
+  | 'updateManyTarotArcanas'
+  | 'upsertTarotArcana'
+  | 'deleteTarotArcana'
+  | 'deleteManyTarotArcanas'
+  | 'createTarotExplanation'
+  | 'updateTarotExplanation'
+  | 'updateManyTarotExplanations'
+  | 'upsertTarotExplanation'
+  | 'deleteTarotExplanation'
+  | 'deleteManyTarotExplanations'
+  | 'createTarotCard'
+  | 'updateTarotCard'
+  | 'updateManyTarotCards'
+  | 'upsertTarotCard'
+  | 'deleteTarotCard'
+  | 'deleteManyTarotCards'
 
 
 type MutationCreateUserArgs =
@@ -1004,6 +1868,54 @@ type MutationUpsertTodoItemArgs =
 type MutationDeleteTodoItemArgs =
   | 'where'
 type MutationDeleteManyTodoItemsArgs =
+  | 'where'
+type MutationCreateTarotArcanaArgs =
+  | 'data'
+type MutationUpdateTarotArcanaArgs =
+  | 'data'
+  | 'where'
+type MutationUpdateManyTarotArcanasArgs =
+  | 'data'
+  | 'where'
+type MutationUpsertTarotArcanaArgs =
+  | 'where'
+  | 'create'
+  | 'update'
+type MutationDeleteTarotArcanaArgs =
+  | 'where'
+type MutationDeleteManyTarotArcanasArgs =
+  | 'where'
+type MutationCreateTarotExplanationArgs =
+  | 'data'
+type MutationUpdateTarotExplanationArgs =
+  | 'data'
+  | 'where'
+type MutationUpdateManyTarotExplanationsArgs =
+  | 'data'
+  | 'where'
+type MutationUpsertTarotExplanationArgs =
+  | 'where'
+  | 'create'
+  | 'update'
+type MutationDeleteTarotExplanationArgs =
+  | 'where'
+type MutationDeleteManyTarotExplanationsArgs =
+  | 'where'
+type MutationCreateTarotCardArgs =
+  | 'data'
+type MutationUpdateTarotCardArgs =
+  | 'data'
+  | 'where'
+type MutationUpdateManyTarotCardsArgs =
+  | 'data'
+  | 'where'
+type MutationUpsertTarotCardArgs =
+  | 'where'
+  | 'create'
+  | 'update'
+type MutationDeleteTarotCardArgs =
+  | 'where'
+type MutationDeleteManyTarotCardsArgs =
   | 'where'
   
 
@@ -1242,6 +2154,240 @@ export interface MutationFieldDetails {
       info?: GraphQLResolveInfo
     ) => Promise<prisma.BatchPayload> | prisma.BatchPayload
   }
+  createTarotArcana: {
+    type: 'TarotArcana'
+    args: Record<MutationCreateTarotArcanaArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { data: TarotArcanaCreateInput }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.TarotArcana> | prisma.TarotArcana
+  }
+  updateTarotArcana: {
+    type: 'TarotArcana'
+    args: Record<MutationUpdateTarotArcanaArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { data: TarotArcanaUpdateInput, where: TarotArcanaWhereUniqueInput }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.TarotArcana | null> | prisma.TarotArcana | null
+  }
+  updateManyTarotArcanas: {
+    type: 'BatchPayload'
+    args: Record<MutationUpdateManyTarotArcanasArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { data: TarotArcanaUpdateManyMutationInput, where?: TarotArcanaWhereInput | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.BatchPayload> | prisma.BatchPayload
+  }
+  upsertTarotArcana: {
+    type: 'TarotArcana'
+    args: Record<MutationUpsertTarotArcanaArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { where: TarotArcanaWhereUniqueInput, create: TarotArcanaCreateInput, update: TarotArcanaUpdateInput }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.TarotArcana> | prisma.TarotArcana
+  }
+  deleteTarotArcana: {
+    type: 'TarotArcana'
+    args: Record<MutationDeleteTarotArcanaArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { where: TarotArcanaWhereUniqueInput }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.TarotArcana | null> | prisma.TarotArcana | null
+  }
+  deleteManyTarotArcanas: {
+    type: 'BatchPayload'
+    args: Record<MutationDeleteManyTarotArcanasArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { where?: TarotArcanaWhereInput | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.BatchPayload> | prisma.BatchPayload
+  }
+  createTarotExplanation: {
+    type: 'TarotExplanation'
+    args: Record<MutationCreateTarotExplanationArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { data: TarotExplanationCreateInput }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.TarotExplanation> | prisma.TarotExplanation
+  }
+  updateTarotExplanation: {
+    type: 'TarotExplanation'
+    args: Record<MutationUpdateTarotExplanationArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { data: TarotExplanationUpdateInput, where: TarotExplanationWhereUniqueInput }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.TarotExplanation | null> | prisma.TarotExplanation | null
+  }
+  updateManyTarotExplanations: {
+    type: 'BatchPayload'
+    args: Record<MutationUpdateManyTarotExplanationsArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { data: TarotExplanationUpdateManyMutationInput, where?: TarotExplanationWhereInput | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.BatchPayload> | prisma.BatchPayload
+  }
+  upsertTarotExplanation: {
+    type: 'TarotExplanation'
+    args: Record<MutationUpsertTarotExplanationArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { where: TarotExplanationWhereUniqueInput, create: TarotExplanationCreateInput, update: TarotExplanationUpdateInput }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.TarotExplanation> | prisma.TarotExplanation
+  }
+  deleteTarotExplanation: {
+    type: 'TarotExplanation'
+    args: Record<MutationDeleteTarotExplanationArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { where: TarotExplanationWhereUniqueInput }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.TarotExplanation | null> | prisma.TarotExplanation | null
+  }
+  deleteManyTarotExplanations: {
+    type: 'BatchPayload'
+    args: Record<MutationDeleteManyTarotExplanationsArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { where?: TarotExplanationWhereInput | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.BatchPayload> | prisma.BatchPayload
+  }
+  createTarotCard: {
+    type: 'TarotCard'
+    args: Record<MutationCreateTarotCardArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { data: TarotCardCreateInput }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.TarotCard> | prisma.TarotCard
+  }
+  updateTarotCard: {
+    type: 'TarotCard'
+    args: Record<MutationUpdateTarotCardArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { data: TarotCardUpdateInput, where: TarotCardWhereUniqueInput }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.TarotCard | null> | prisma.TarotCard | null
+  }
+  updateManyTarotCards: {
+    type: 'BatchPayload'
+    args: Record<MutationUpdateManyTarotCardsArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { data: TarotCardUpdateManyMutationInput, where?: TarotCardWhereInput | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.BatchPayload> | prisma.BatchPayload
+  }
+  upsertTarotCard: {
+    type: 'TarotCard'
+    args: Record<MutationUpsertTarotCardArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { where: TarotCardWhereUniqueInput, create: TarotCardCreateInput, update: TarotCardUpdateInput }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.TarotCard> | prisma.TarotCard
+  }
+  deleteTarotCard: {
+    type: 'TarotCard'
+    args: Record<MutationDeleteTarotCardArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { where: TarotCardWhereUniqueInput }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.TarotCard | null> | prisma.TarotCard | null
+  }
+  deleteManyTarotCards: {
+    type: 'BatchPayload'
+    args: Record<MutationDeleteManyTarotCardsArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { where?: TarotCardWhereInput | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.BatchPayload> | prisma.BatchPayload
+  }
 }
   
 
@@ -1277,11 +2423,17 @@ type SubscriptionObject =
   | { name: 'user', args?: SubscriptionUserArgs[] | false, alias?: string  } 
   | { name: 'post', args?: SubscriptionPostArgs[] | false, alias?: string  } 
   | { name: 'todoItem', args?: SubscriptionTodoItemArgs[] | false, alias?: string  } 
+  | { name: 'tarotArcana', args?: SubscriptionTarotArcanaArgs[] | false, alias?: string  } 
+  | { name: 'tarotExplanation', args?: SubscriptionTarotExplanationArgs[] | false, alias?: string  } 
+  | { name: 'tarotCard', args?: SubscriptionTarotCardArgs[] | false, alias?: string  } 
 
 type SubscriptionFields =
   | 'user'
   | 'post'
   | 'todoItem'
+  | 'tarotArcana'
+  | 'tarotExplanation'
+  | 'tarotCard'
 
 
 type SubscriptionUserArgs =
@@ -1289,6 +2441,12 @@ type SubscriptionUserArgs =
 type SubscriptionPostArgs =
   | 'where'
 type SubscriptionTodoItemArgs =
+  | 'where'
+type SubscriptionTarotArcanaArgs =
+  | 'where'
+type SubscriptionTarotExplanationArgs =
+  | 'where'
+type SubscriptionTarotCardArgs =
   | 'where'
   
 
@@ -1331,6 +2489,45 @@ export interface SubscriptionFieldDetails {
       context: core.GetGen<"context">,
       info?: GraphQLResolveInfo
     ) => Promise<prisma.TodoItemSubscriptionPayload | null> | prisma.TodoItemSubscriptionPayload | null
+  }
+  tarotArcana: {
+    type: 'TarotArcanaSubscriptionPayload'
+    args: Record<SubscriptionTarotArcanaArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"Subscription">,
+      args: { where?: TarotArcanaSubscriptionWhereInput | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.TarotArcanaSubscriptionPayload | null> | prisma.TarotArcanaSubscriptionPayload | null
+  }
+  tarotExplanation: {
+    type: 'TarotExplanationSubscriptionPayload'
+    args: Record<SubscriptionTarotExplanationArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"Subscription">,
+      args: { where?: TarotExplanationSubscriptionWhereInput | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.TarotExplanationSubscriptionPayload | null> | prisma.TarotExplanationSubscriptionPayload | null
+  }
+  tarotCard: {
+    type: 'TarotCardSubscriptionPayload'
+    args: Record<SubscriptionTarotCardArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"Subscription">,
+      args: { where?: TarotCardSubscriptionWhereInput | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.TarotCardSubscriptionPayload | null> | prisma.TarotCardSubscriptionPayload | null
   }
 }
   
@@ -1680,6 +2877,351 @@ export interface TodoItemPreviousValuesFieldDetails {
 }
   
 
+// Types for TarotArcanaSubscriptionPayload
+
+type TarotArcanaSubscriptionPayloadObject =
+  | TarotArcanaSubscriptionPayloadFields
+  | { name: 'mutation', args?: [] | false, alias?: string  } 
+  | { name: 'node', args?: [] | false, alias?: string  } 
+  | { name: 'updatedFields', args?: [] | false, alias?: string  } 
+  | { name: 'previousValues', args?: [] | false, alias?: string  } 
+
+type TarotArcanaSubscriptionPayloadFields =
+  | 'mutation'
+  | 'node'
+  | 'updatedFields'
+  | 'previousValues'
+
+
+
+  
+
+export interface TarotArcanaSubscriptionPayloadFieldDetails {
+  mutation: {
+    type: 'MutationType'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"TarotArcanaSubscriptionPayload">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.MutationType> | prisma.MutationType
+  }
+  node: {
+    type: 'TarotArcana'
+    args: {}
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"TarotArcanaSubscriptionPayload">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.TarotArcana | null> | prisma.TarotArcana | null
+  }
+  updatedFields: {
+    type: 'String'
+    args: {}
+    description: string
+    list: true
+    nullable: false
+    resolve: undefined
+  }
+  previousValues: {
+    type: 'TarotArcanaPreviousValues'
+    args: {}
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"TarotArcanaSubscriptionPayload">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.TarotArcanaPreviousValues | null> | prisma.TarotArcanaPreviousValues | null
+  }
+}
+  
+
+// Types for TarotArcanaPreviousValues
+
+type TarotArcanaPreviousValuesObject =
+  | TarotArcanaPreviousValuesFields
+  | { name: 'id', args?: [] | false, alias?: string  } 
+  | { name: 'family', args?: [] | false, alias?: string  } 
+  | { name: 'number', args?: [] | false, alias?: string  } 
+
+type TarotArcanaPreviousValuesFields =
+  | 'id'
+  | 'family'
+  | 'number'
+
+
+
+  
+
+export interface TarotArcanaPreviousValuesFieldDetails {
+  id: {
+    type: 'ID'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  family: {
+    type: 'String'
+    args: {}
+    description: string
+    list: undefined
+    nullable: true
+    resolve: undefined
+  }
+  number: {
+    type: 'Int'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+}
+  
+
+// Types for TarotExplanationSubscriptionPayload
+
+type TarotExplanationSubscriptionPayloadObject =
+  | TarotExplanationSubscriptionPayloadFields
+  | { name: 'mutation', args?: [] | false, alias?: string  } 
+  | { name: 'node', args?: [] | false, alias?: string  } 
+  | { name: 'updatedFields', args?: [] | false, alias?: string  } 
+  | { name: 'previousValues', args?: [] | false, alias?: string  } 
+
+type TarotExplanationSubscriptionPayloadFields =
+  | 'mutation'
+  | 'node'
+  | 'updatedFields'
+  | 'previousValues'
+
+
+
+  
+
+export interface TarotExplanationSubscriptionPayloadFieldDetails {
+  mutation: {
+    type: 'MutationType'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"TarotExplanationSubscriptionPayload">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.MutationType> | prisma.MutationType
+  }
+  node: {
+    type: 'TarotExplanation'
+    args: {}
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"TarotExplanationSubscriptionPayload">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.TarotExplanation | null> | prisma.TarotExplanation | null
+  }
+  updatedFields: {
+    type: 'String'
+    args: {}
+    description: string
+    list: true
+    nullable: false
+    resolve: undefined
+  }
+  previousValues: {
+    type: 'TarotExplanationPreviousValues'
+    args: {}
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"TarotExplanationSubscriptionPayload">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.TarotExplanationPreviousValues | null> | prisma.TarotExplanationPreviousValues | null
+  }
+}
+  
+
+// Types for TarotExplanationPreviousValues
+
+type TarotExplanationPreviousValuesObject =
+  | TarotExplanationPreviousValuesFields
+  | { name: 'id', args?: [] | false, alias?: string  } 
+  | { name: 'content', args?: [] | false, alias?: string  } 
+  | { name: 'source', args?: [] | false, alias?: string  } 
+
+type TarotExplanationPreviousValuesFields =
+  | 'id'
+  | 'content'
+  | 'source'
+
+
+
+  
+
+export interface TarotExplanationPreviousValuesFieldDetails {
+  id: {
+    type: 'ID'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  content: {
+    type: 'String'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  source: {
+    type: 'String'
+    args: {}
+    description: string
+    list: undefined
+    nullable: true
+    resolve: undefined
+  }
+}
+  
+
+// Types for TarotCardSubscriptionPayload
+
+type TarotCardSubscriptionPayloadObject =
+  | TarotCardSubscriptionPayloadFields
+  | { name: 'mutation', args?: [] | false, alias?: string  } 
+  | { name: 'node', args?: [] | false, alias?: string  } 
+  | { name: 'updatedFields', args?: [] | false, alias?: string  } 
+  | { name: 'previousValues', args?: [] | false, alias?: string  } 
+
+type TarotCardSubscriptionPayloadFields =
+  | 'mutation'
+  | 'node'
+  | 'updatedFields'
+  | 'previousValues'
+
+
+
+  
+
+export interface TarotCardSubscriptionPayloadFieldDetails {
+  mutation: {
+    type: 'MutationType'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"TarotCardSubscriptionPayload">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.MutationType> | prisma.MutationType
+  }
+  node: {
+    type: 'TarotCard'
+    args: {}
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"TarotCardSubscriptionPayload">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.TarotCard | null> | prisma.TarotCard | null
+  }
+  updatedFields: {
+    type: 'String'
+    args: {}
+    description: string
+    list: true
+    nullable: false
+    resolve: undefined
+  }
+  previousValues: {
+    type: 'TarotCardPreviousValues'
+    args: {}
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"TarotCardSubscriptionPayload">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.TarotCardPreviousValues | null> | prisma.TarotCardPreviousValues | null
+  }
+}
+  
+
+// Types for TarotCardPreviousValues
+
+type TarotCardPreviousValuesObject =
+  | TarotCardPreviousValuesFields
+  | { name: 'id', args?: [] | false, alias?: string  } 
+  | { name: 'name', args?: [] | false, alias?: string  } 
+  | { name: 'keyWords', args?: [] | false, alias?: string  } 
+
+type TarotCardPreviousValuesFields =
+  | 'id'
+  | 'name'
+  | 'keyWords'
+
+
+
+  
+
+export interface TarotCardPreviousValuesFieldDetails {
+  id: {
+    type: 'ID'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  name: {
+    type: 'String'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  keyWords: {
+    type: 'String'
+    args: {}
+    description: string
+    list: true
+    nullable: false
+    resolve: undefined
+  }
+}
+  
+
 
 export interface UserWhereUniqueInput {
   id?: string | null
@@ -1948,6 +3490,282 @@ export type TodoItemWhereInputInputObject =
   | { name: 'AND', alias?: string  } 
   | { name: 'OR', alias?: string  } 
   | { name: 'NOT', alias?: string  } 
+  
+export interface TarotArcanaWhereUniqueInput {
+  id?: string | null
+}
+export type TarotArcanaWhereUniqueInputInputObject =
+  | Extract<keyof TarotArcanaWhereUniqueInput, string>
+  | { name: 'id', alias?: string  } 
+  
+export interface TarotArcanaWhereInput {
+  id?: string | null
+  id_not?: string | null
+  id_in?: string[]
+  id_not_in?: string[]
+  id_lt?: string | null
+  id_lte?: string | null
+  id_gt?: string | null
+  id_gte?: string | null
+  id_contains?: string | null
+  id_not_contains?: string | null
+  id_starts_with?: string | null
+  id_not_starts_with?: string | null
+  id_ends_with?: string | null
+  id_not_ends_with?: string | null
+  family?: string | null
+  family_not?: string | null
+  family_in?: string[]
+  family_not_in?: string[]
+  family_lt?: string | null
+  family_lte?: string | null
+  family_gt?: string | null
+  family_gte?: string | null
+  family_contains?: string | null
+  family_not_contains?: string | null
+  family_starts_with?: string | null
+  family_not_starts_with?: string | null
+  family_ends_with?: string | null
+  family_not_ends_with?: string | null
+  number?: number | null
+  number_not?: number | null
+  number_in?: number[]
+  number_not_in?: number[]
+  number_lt?: number | null
+  number_lte?: number | null
+  number_gt?: number | null
+  number_gte?: number | null
+  AND?: TarotArcanaWhereInput[]
+  OR?: TarotArcanaWhereInput[]
+  NOT?: TarotArcanaWhereInput[]
+}
+export type TarotArcanaWhereInputInputObject =
+  | Extract<keyof TarotArcanaWhereInput, string>
+  | { name: 'id', alias?: string  } 
+  | { name: 'id_not', alias?: string  } 
+  | { name: 'id_in', alias?: string  } 
+  | { name: 'id_not_in', alias?: string  } 
+  | { name: 'id_lt', alias?: string  } 
+  | { name: 'id_lte', alias?: string  } 
+  | { name: 'id_gt', alias?: string  } 
+  | { name: 'id_gte', alias?: string  } 
+  | { name: 'id_contains', alias?: string  } 
+  | { name: 'id_not_contains', alias?: string  } 
+  | { name: 'id_starts_with', alias?: string  } 
+  | { name: 'id_not_starts_with', alias?: string  } 
+  | { name: 'id_ends_with', alias?: string  } 
+  | { name: 'id_not_ends_with', alias?: string  } 
+  | { name: 'family', alias?: string  } 
+  | { name: 'family_not', alias?: string  } 
+  | { name: 'family_in', alias?: string  } 
+  | { name: 'family_not_in', alias?: string  } 
+  | { name: 'family_lt', alias?: string  } 
+  | { name: 'family_lte', alias?: string  } 
+  | { name: 'family_gt', alias?: string  } 
+  | { name: 'family_gte', alias?: string  } 
+  | { name: 'family_contains', alias?: string  } 
+  | { name: 'family_not_contains', alias?: string  } 
+  | { name: 'family_starts_with', alias?: string  } 
+  | { name: 'family_not_starts_with', alias?: string  } 
+  | { name: 'family_ends_with', alias?: string  } 
+  | { name: 'family_not_ends_with', alias?: string  } 
+  | { name: 'number', alias?: string  } 
+  | { name: 'number_not', alias?: string  } 
+  | { name: 'number_in', alias?: string  } 
+  | { name: 'number_not_in', alias?: string  } 
+  | { name: 'number_lt', alias?: string  } 
+  | { name: 'number_lte', alias?: string  } 
+  | { name: 'number_gt', alias?: string  } 
+  | { name: 'number_gte', alias?: string  } 
+  | { name: 'AND', alias?: string  } 
+  | { name: 'OR', alias?: string  } 
+  | { name: 'NOT', alias?: string  } 
+  
+export interface TarotExplanationWhereUniqueInput {
+  id?: string | null
+}
+export type TarotExplanationWhereUniqueInputInputObject =
+  | Extract<keyof TarotExplanationWhereUniqueInput, string>
+  | { name: 'id', alias?: string  } 
+  
+export interface TarotExplanationWhereInput {
+  id?: string | null
+  id_not?: string | null
+  id_in?: string[]
+  id_not_in?: string[]
+  id_lt?: string | null
+  id_lte?: string | null
+  id_gt?: string | null
+  id_gte?: string | null
+  id_contains?: string | null
+  id_not_contains?: string | null
+  id_starts_with?: string | null
+  id_not_starts_with?: string | null
+  id_ends_with?: string | null
+  id_not_ends_with?: string | null
+  content?: string | null
+  content_not?: string | null
+  content_in?: string[]
+  content_not_in?: string[]
+  content_lt?: string | null
+  content_lte?: string | null
+  content_gt?: string | null
+  content_gte?: string | null
+  content_contains?: string | null
+  content_not_contains?: string | null
+  content_starts_with?: string | null
+  content_not_starts_with?: string | null
+  content_ends_with?: string | null
+  content_not_ends_with?: string | null
+  source?: string | null
+  source_not?: string | null
+  source_in?: string[]
+  source_not_in?: string[]
+  source_lt?: string | null
+  source_lte?: string | null
+  source_gt?: string | null
+  source_gte?: string | null
+  source_contains?: string | null
+  source_not_contains?: string | null
+  source_starts_with?: string | null
+  source_not_starts_with?: string | null
+  source_ends_with?: string | null
+  source_not_ends_with?: string | null
+  cardName?: TarotCardWhereInput | null
+  AND?: TarotExplanationWhereInput[]
+  OR?: TarotExplanationWhereInput[]
+  NOT?: TarotExplanationWhereInput[]
+}
+export type TarotExplanationWhereInputInputObject =
+  | Extract<keyof TarotExplanationWhereInput, string>
+  | { name: 'id', alias?: string  } 
+  | { name: 'id_not', alias?: string  } 
+  | { name: 'id_in', alias?: string  } 
+  | { name: 'id_not_in', alias?: string  } 
+  | { name: 'id_lt', alias?: string  } 
+  | { name: 'id_lte', alias?: string  } 
+  | { name: 'id_gt', alias?: string  } 
+  | { name: 'id_gte', alias?: string  } 
+  | { name: 'id_contains', alias?: string  } 
+  | { name: 'id_not_contains', alias?: string  } 
+  | { name: 'id_starts_with', alias?: string  } 
+  | { name: 'id_not_starts_with', alias?: string  } 
+  | { name: 'id_ends_with', alias?: string  } 
+  | { name: 'id_not_ends_with', alias?: string  } 
+  | { name: 'content', alias?: string  } 
+  | { name: 'content_not', alias?: string  } 
+  | { name: 'content_in', alias?: string  } 
+  | { name: 'content_not_in', alias?: string  } 
+  | { name: 'content_lt', alias?: string  } 
+  | { name: 'content_lte', alias?: string  } 
+  | { name: 'content_gt', alias?: string  } 
+  | { name: 'content_gte', alias?: string  } 
+  | { name: 'content_contains', alias?: string  } 
+  | { name: 'content_not_contains', alias?: string  } 
+  | { name: 'content_starts_with', alias?: string  } 
+  | { name: 'content_not_starts_with', alias?: string  } 
+  | { name: 'content_ends_with', alias?: string  } 
+  | { name: 'content_not_ends_with', alias?: string  } 
+  | { name: 'source', alias?: string  } 
+  | { name: 'source_not', alias?: string  } 
+  | { name: 'source_in', alias?: string  } 
+  | { name: 'source_not_in', alias?: string  } 
+  | { name: 'source_lt', alias?: string  } 
+  | { name: 'source_lte', alias?: string  } 
+  | { name: 'source_gt', alias?: string  } 
+  | { name: 'source_gte', alias?: string  } 
+  | { name: 'source_contains', alias?: string  } 
+  | { name: 'source_not_contains', alias?: string  } 
+  | { name: 'source_starts_with', alias?: string  } 
+  | { name: 'source_not_starts_with', alias?: string  } 
+  | { name: 'source_ends_with', alias?: string  } 
+  | { name: 'source_not_ends_with', alias?: string  } 
+  | { name: 'cardName', alias?: string  } 
+  | { name: 'AND', alias?: string  } 
+  | { name: 'OR', alias?: string  } 
+  | { name: 'NOT', alias?: string  } 
+  
+export interface TarotCardWhereInput {
+  id?: string | null
+  id_not?: string | null
+  id_in?: string[]
+  id_not_in?: string[]
+  id_lt?: string | null
+  id_lte?: string | null
+  id_gt?: string | null
+  id_gte?: string | null
+  id_contains?: string | null
+  id_not_contains?: string | null
+  id_starts_with?: string | null
+  id_not_starts_with?: string | null
+  id_ends_with?: string | null
+  id_not_ends_with?: string | null
+  arcana?: TarotArcanaWhereInput | null
+  name?: string | null
+  name_not?: string | null
+  name_in?: string[]
+  name_not_in?: string[]
+  name_lt?: string | null
+  name_lte?: string | null
+  name_gt?: string | null
+  name_gte?: string | null
+  name_contains?: string | null
+  name_not_contains?: string | null
+  name_starts_with?: string | null
+  name_not_starts_with?: string | null
+  name_ends_with?: string | null
+  name_not_ends_with?: string | null
+  explanation_every?: TarotExplanationWhereInput | null
+  explanation_some?: TarotExplanationWhereInput | null
+  explanation_none?: TarotExplanationWhereInput | null
+  AND?: TarotCardWhereInput[]
+  OR?: TarotCardWhereInput[]
+  NOT?: TarotCardWhereInput[]
+}
+export type TarotCardWhereInputInputObject =
+  | Extract<keyof TarotCardWhereInput, string>
+  | { name: 'id', alias?: string  } 
+  | { name: 'id_not', alias?: string  } 
+  | { name: 'id_in', alias?: string  } 
+  | { name: 'id_not_in', alias?: string  } 
+  | { name: 'id_lt', alias?: string  } 
+  | { name: 'id_lte', alias?: string  } 
+  | { name: 'id_gt', alias?: string  } 
+  | { name: 'id_gte', alias?: string  } 
+  | { name: 'id_contains', alias?: string  } 
+  | { name: 'id_not_contains', alias?: string  } 
+  | { name: 'id_starts_with', alias?: string  } 
+  | { name: 'id_not_starts_with', alias?: string  } 
+  | { name: 'id_ends_with', alias?: string  } 
+  | { name: 'id_not_ends_with', alias?: string  } 
+  | { name: 'arcana', alias?: string  } 
+  | { name: 'name', alias?: string  } 
+  | { name: 'name_not', alias?: string  } 
+  | { name: 'name_in', alias?: string  } 
+  | { name: 'name_not_in', alias?: string  } 
+  | { name: 'name_lt', alias?: string  } 
+  | { name: 'name_lte', alias?: string  } 
+  | { name: 'name_gt', alias?: string  } 
+  | { name: 'name_gte', alias?: string  } 
+  | { name: 'name_contains', alias?: string  } 
+  | { name: 'name_not_contains', alias?: string  } 
+  | { name: 'name_starts_with', alias?: string  } 
+  | { name: 'name_not_starts_with', alias?: string  } 
+  | { name: 'name_ends_with', alias?: string  } 
+  | { name: 'name_not_ends_with', alias?: string  } 
+  | { name: 'explanation_every', alias?: string  } 
+  | { name: 'explanation_some', alias?: string  } 
+  | { name: 'explanation_none', alias?: string  } 
+  | { name: 'AND', alias?: string  } 
+  | { name: 'OR', alias?: string  } 
+  | { name: 'NOT', alias?: string  } 
+  
+export interface TarotCardWhereUniqueInput {
+  id?: string | null
+}
+export type TarotCardWhereUniqueInputInputObject =
+  | Extract<keyof TarotCardWhereUniqueInput, string>
+  | { name: 'id', alias?: string  } 
   
 export interface UserCreateInput {
   id?: string | null
@@ -2260,6 +4078,407 @@ export type TodoItemUpdateManyMutationInputInputObject =
   | { name: 'text', alias?: string  } 
   | { name: 'done', alias?: string  } 
   
+export interface TarotArcanaCreateInput {
+  id?: string | null
+  family?: string | null
+  number?: number
+}
+export type TarotArcanaCreateInputInputObject =
+  | Extract<keyof TarotArcanaCreateInput, string>
+  | { name: 'id', alias?: string  } 
+  | { name: 'family', alias?: string  } 
+  | { name: 'number', alias?: string  } 
+  
+export interface TarotArcanaUpdateInput {
+  family?: string | null
+  number?: number | null
+}
+export type TarotArcanaUpdateInputInputObject =
+  | Extract<keyof TarotArcanaUpdateInput, string>
+  | { name: 'family', alias?: string  } 
+  | { name: 'number', alias?: string  } 
+  
+export interface TarotArcanaUpdateManyMutationInput {
+  family?: string | null
+  number?: number | null
+}
+export type TarotArcanaUpdateManyMutationInputInputObject =
+  | Extract<keyof TarotArcanaUpdateManyMutationInput, string>
+  | { name: 'family', alias?: string  } 
+  | { name: 'number', alias?: string  } 
+  
+export interface TarotExplanationCreateInput {
+  id?: string | null
+  content?: string
+  source?: string | null
+  cardName?: TarotCardCreateOneWithoutExplanationInput | null
+}
+export type TarotExplanationCreateInputInputObject =
+  | Extract<keyof TarotExplanationCreateInput, string>
+  | { name: 'id', alias?: string  } 
+  | { name: 'content', alias?: string  } 
+  | { name: 'source', alias?: string  } 
+  | { name: 'cardName', alias?: string  } 
+  
+export interface TarotCardCreateOneWithoutExplanationInput {
+  create?: TarotCardCreateWithoutExplanationInput | null
+  connect?: TarotCardWhereUniqueInput | null
+}
+export type TarotCardCreateOneWithoutExplanationInputInputObject =
+  | Extract<keyof TarotCardCreateOneWithoutExplanationInput, string>
+  | { name: 'create', alias?: string  } 
+  | { name: 'connect', alias?: string  } 
+  
+export interface TarotCardCreateWithoutExplanationInput {
+  id?: string | null
+  arcana?: TarotArcanaCreateOneInput | null
+  name?: string
+  keyWords?: TarotCardCreatekeyWordsInput | null
+}
+export type TarotCardCreateWithoutExplanationInputInputObject =
+  | Extract<keyof TarotCardCreateWithoutExplanationInput, string>
+  | { name: 'id', alias?: string  } 
+  | { name: 'arcana', alias?: string  } 
+  | { name: 'name', alias?: string  } 
+  | { name: 'keyWords', alias?: string  } 
+  
+export interface TarotArcanaCreateOneInput {
+  create?: TarotArcanaCreateInput | null
+  connect?: TarotArcanaWhereUniqueInput | null
+}
+export type TarotArcanaCreateOneInputInputObject =
+  | Extract<keyof TarotArcanaCreateOneInput, string>
+  | { name: 'create', alias?: string  } 
+  | { name: 'connect', alias?: string  } 
+  
+export interface TarotCardCreatekeyWordsInput {
+  set?: string[]
+}
+export type TarotCardCreatekeyWordsInputInputObject =
+  | Extract<keyof TarotCardCreatekeyWordsInput, string>
+  | { name: 'set', alias?: string  } 
+  
+export interface TarotExplanationUpdateInput {
+  content?: string | null
+  source?: string | null
+  cardName?: TarotCardUpdateOneWithoutExplanationInput | null
+}
+export type TarotExplanationUpdateInputInputObject =
+  | Extract<keyof TarotExplanationUpdateInput, string>
+  | { name: 'content', alias?: string  } 
+  | { name: 'source', alias?: string  } 
+  | { name: 'cardName', alias?: string  } 
+  
+export interface TarotCardUpdateOneWithoutExplanationInput {
+  create?: TarotCardCreateWithoutExplanationInput | null
+  update?: TarotCardUpdateWithoutExplanationDataInput | null
+  upsert?: TarotCardUpsertWithoutExplanationInput | null
+  delete?: boolean | null
+  disconnect?: boolean | null
+  connect?: TarotCardWhereUniqueInput | null
+}
+export type TarotCardUpdateOneWithoutExplanationInputInputObject =
+  | Extract<keyof TarotCardUpdateOneWithoutExplanationInput, string>
+  | { name: 'create', alias?: string  } 
+  | { name: 'update', alias?: string  } 
+  | { name: 'upsert', alias?: string  } 
+  | { name: 'delete', alias?: string  } 
+  | { name: 'disconnect', alias?: string  } 
+  | { name: 'connect', alias?: string  } 
+  
+export interface TarotCardUpdateWithoutExplanationDataInput {
+  arcana?: TarotArcanaUpdateOneInput | null
+  name?: string | null
+  keyWords?: TarotCardUpdatekeyWordsInput | null
+}
+export type TarotCardUpdateWithoutExplanationDataInputInputObject =
+  | Extract<keyof TarotCardUpdateWithoutExplanationDataInput, string>
+  | { name: 'arcana', alias?: string  } 
+  | { name: 'name', alias?: string  } 
+  | { name: 'keyWords', alias?: string  } 
+  
+export interface TarotArcanaUpdateOneInput {
+  create?: TarotArcanaCreateInput | null
+  update?: TarotArcanaUpdateDataInput | null
+  upsert?: TarotArcanaUpsertNestedInput | null
+  delete?: boolean | null
+  disconnect?: boolean | null
+  connect?: TarotArcanaWhereUniqueInput | null
+}
+export type TarotArcanaUpdateOneInputInputObject =
+  | Extract<keyof TarotArcanaUpdateOneInput, string>
+  | { name: 'create', alias?: string  } 
+  | { name: 'update', alias?: string  } 
+  | { name: 'upsert', alias?: string  } 
+  | { name: 'delete', alias?: string  } 
+  | { name: 'disconnect', alias?: string  } 
+  | { name: 'connect', alias?: string  } 
+  
+export interface TarotArcanaUpdateDataInput {
+  family?: string | null
+  number?: number | null
+}
+export type TarotArcanaUpdateDataInputInputObject =
+  | Extract<keyof TarotArcanaUpdateDataInput, string>
+  | { name: 'family', alias?: string  } 
+  | { name: 'number', alias?: string  } 
+  
+export interface TarotArcanaUpsertNestedInput {
+  update?: TarotArcanaUpdateDataInput
+  create?: TarotArcanaCreateInput
+}
+export type TarotArcanaUpsertNestedInputInputObject =
+  | Extract<keyof TarotArcanaUpsertNestedInput, string>
+  | { name: 'update', alias?: string  } 
+  | { name: 'create', alias?: string  } 
+  
+export interface TarotCardUpdatekeyWordsInput {
+  set?: string[]
+}
+export type TarotCardUpdatekeyWordsInputInputObject =
+  | Extract<keyof TarotCardUpdatekeyWordsInput, string>
+  | { name: 'set', alias?: string  } 
+  
+export interface TarotCardUpsertWithoutExplanationInput {
+  update?: TarotCardUpdateWithoutExplanationDataInput
+  create?: TarotCardCreateWithoutExplanationInput
+}
+export type TarotCardUpsertWithoutExplanationInputInputObject =
+  | Extract<keyof TarotCardUpsertWithoutExplanationInput, string>
+  | { name: 'update', alias?: string  } 
+  | { name: 'create', alias?: string  } 
+  
+export interface TarotExplanationUpdateManyMutationInput {
+  content?: string | null
+  source?: string | null
+}
+export type TarotExplanationUpdateManyMutationInputInputObject =
+  | Extract<keyof TarotExplanationUpdateManyMutationInput, string>
+  | { name: 'content', alias?: string  } 
+  | { name: 'source', alias?: string  } 
+  
+export interface TarotCardCreateInput {
+  id?: string | null
+  arcana?: TarotArcanaCreateOneInput | null
+  name?: string
+  keyWords?: TarotCardCreatekeyWordsInput | null
+  explanation?: TarotExplanationCreateManyWithoutCardNameInput | null
+}
+export type TarotCardCreateInputInputObject =
+  | Extract<keyof TarotCardCreateInput, string>
+  | { name: 'id', alias?: string  } 
+  | { name: 'arcana', alias?: string  } 
+  | { name: 'name', alias?: string  } 
+  | { name: 'keyWords', alias?: string  } 
+  | { name: 'explanation', alias?: string  } 
+  
+export interface TarotExplanationCreateManyWithoutCardNameInput {
+  create?: TarotExplanationCreateWithoutCardNameInput[]
+  connect?: TarotExplanationWhereUniqueInput[]
+}
+export type TarotExplanationCreateManyWithoutCardNameInputInputObject =
+  | Extract<keyof TarotExplanationCreateManyWithoutCardNameInput, string>
+  | { name: 'create', alias?: string  } 
+  | { name: 'connect', alias?: string  } 
+  
+export interface TarotExplanationCreateWithoutCardNameInput {
+  id?: string | null
+  content?: string
+  source?: string | null
+}
+export type TarotExplanationCreateWithoutCardNameInputInputObject =
+  | Extract<keyof TarotExplanationCreateWithoutCardNameInput, string>
+  | { name: 'id', alias?: string  } 
+  | { name: 'content', alias?: string  } 
+  | { name: 'source', alias?: string  } 
+  
+export interface TarotCardUpdateInput {
+  arcana?: TarotArcanaUpdateOneInput | null
+  name?: string | null
+  keyWords?: TarotCardUpdatekeyWordsInput | null
+  explanation?: TarotExplanationUpdateManyWithoutCardNameInput | null
+}
+export type TarotCardUpdateInputInputObject =
+  | Extract<keyof TarotCardUpdateInput, string>
+  | { name: 'arcana', alias?: string  } 
+  | { name: 'name', alias?: string  } 
+  | { name: 'keyWords', alias?: string  } 
+  | { name: 'explanation', alias?: string  } 
+  
+export interface TarotExplanationUpdateManyWithoutCardNameInput {
+  create?: TarotExplanationCreateWithoutCardNameInput[]
+  delete?: TarotExplanationWhereUniqueInput[]
+  connect?: TarotExplanationWhereUniqueInput[]
+  set?: TarotExplanationWhereUniqueInput[]
+  disconnect?: TarotExplanationWhereUniqueInput[]
+  update?: TarotExplanationUpdateWithWhereUniqueWithoutCardNameInput[]
+  upsert?: TarotExplanationUpsertWithWhereUniqueWithoutCardNameInput[]
+  deleteMany?: TarotExplanationScalarWhereInput[]
+  updateMany?: TarotExplanationUpdateManyWithWhereNestedInput[]
+}
+export type TarotExplanationUpdateManyWithoutCardNameInputInputObject =
+  | Extract<keyof TarotExplanationUpdateManyWithoutCardNameInput, string>
+  | { name: 'create', alias?: string  } 
+  | { name: 'delete', alias?: string  } 
+  | { name: 'connect', alias?: string  } 
+  | { name: 'set', alias?: string  } 
+  | { name: 'disconnect', alias?: string  } 
+  | { name: 'update', alias?: string  } 
+  | { name: 'upsert', alias?: string  } 
+  | { name: 'deleteMany', alias?: string  } 
+  | { name: 'updateMany', alias?: string  } 
+  
+export interface TarotExplanationUpdateWithWhereUniqueWithoutCardNameInput {
+  where?: TarotExplanationWhereUniqueInput
+  data?: TarotExplanationUpdateWithoutCardNameDataInput
+}
+export type TarotExplanationUpdateWithWhereUniqueWithoutCardNameInputInputObject =
+  | Extract<keyof TarotExplanationUpdateWithWhereUniqueWithoutCardNameInput, string>
+  | { name: 'where', alias?: string  } 
+  | { name: 'data', alias?: string  } 
+  
+export interface TarotExplanationUpdateWithoutCardNameDataInput {
+  content?: string | null
+  source?: string | null
+}
+export type TarotExplanationUpdateWithoutCardNameDataInputInputObject =
+  | Extract<keyof TarotExplanationUpdateWithoutCardNameDataInput, string>
+  | { name: 'content', alias?: string  } 
+  | { name: 'source', alias?: string  } 
+  
+export interface TarotExplanationUpsertWithWhereUniqueWithoutCardNameInput {
+  where?: TarotExplanationWhereUniqueInput
+  update?: TarotExplanationUpdateWithoutCardNameDataInput
+  create?: TarotExplanationCreateWithoutCardNameInput
+}
+export type TarotExplanationUpsertWithWhereUniqueWithoutCardNameInputInputObject =
+  | Extract<keyof TarotExplanationUpsertWithWhereUniqueWithoutCardNameInput, string>
+  | { name: 'where', alias?: string  } 
+  | { name: 'update', alias?: string  } 
+  | { name: 'create', alias?: string  } 
+  
+export interface TarotExplanationScalarWhereInput {
+  id?: string | null
+  id_not?: string | null
+  id_in?: string[]
+  id_not_in?: string[]
+  id_lt?: string | null
+  id_lte?: string | null
+  id_gt?: string | null
+  id_gte?: string | null
+  id_contains?: string | null
+  id_not_contains?: string | null
+  id_starts_with?: string | null
+  id_not_starts_with?: string | null
+  id_ends_with?: string | null
+  id_not_ends_with?: string | null
+  content?: string | null
+  content_not?: string | null
+  content_in?: string[]
+  content_not_in?: string[]
+  content_lt?: string | null
+  content_lte?: string | null
+  content_gt?: string | null
+  content_gte?: string | null
+  content_contains?: string | null
+  content_not_contains?: string | null
+  content_starts_with?: string | null
+  content_not_starts_with?: string | null
+  content_ends_with?: string | null
+  content_not_ends_with?: string | null
+  source?: string | null
+  source_not?: string | null
+  source_in?: string[]
+  source_not_in?: string[]
+  source_lt?: string | null
+  source_lte?: string | null
+  source_gt?: string | null
+  source_gte?: string | null
+  source_contains?: string | null
+  source_not_contains?: string | null
+  source_starts_with?: string | null
+  source_not_starts_with?: string | null
+  source_ends_with?: string | null
+  source_not_ends_with?: string | null
+  AND?: TarotExplanationScalarWhereInput[]
+  OR?: TarotExplanationScalarWhereInput[]
+  NOT?: TarotExplanationScalarWhereInput[]
+}
+export type TarotExplanationScalarWhereInputInputObject =
+  | Extract<keyof TarotExplanationScalarWhereInput, string>
+  | { name: 'id', alias?: string  } 
+  | { name: 'id_not', alias?: string  } 
+  | { name: 'id_in', alias?: string  } 
+  | { name: 'id_not_in', alias?: string  } 
+  | { name: 'id_lt', alias?: string  } 
+  | { name: 'id_lte', alias?: string  } 
+  | { name: 'id_gt', alias?: string  } 
+  | { name: 'id_gte', alias?: string  } 
+  | { name: 'id_contains', alias?: string  } 
+  | { name: 'id_not_contains', alias?: string  } 
+  | { name: 'id_starts_with', alias?: string  } 
+  | { name: 'id_not_starts_with', alias?: string  } 
+  | { name: 'id_ends_with', alias?: string  } 
+  | { name: 'id_not_ends_with', alias?: string  } 
+  | { name: 'content', alias?: string  } 
+  | { name: 'content_not', alias?: string  } 
+  | { name: 'content_in', alias?: string  } 
+  | { name: 'content_not_in', alias?: string  } 
+  | { name: 'content_lt', alias?: string  } 
+  | { name: 'content_lte', alias?: string  } 
+  | { name: 'content_gt', alias?: string  } 
+  | { name: 'content_gte', alias?: string  } 
+  | { name: 'content_contains', alias?: string  } 
+  | { name: 'content_not_contains', alias?: string  } 
+  | { name: 'content_starts_with', alias?: string  } 
+  | { name: 'content_not_starts_with', alias?: string  } 
+  | { name: 'content_ends_with', alias?: string  } 
+  | { name: 'content_not_ends_with', alias?: string  } 
+  | { name: 'source', alias?: string  } 
+  | { name: 'source_not', alias?: string  } 
+  | { name: 'source_in', alias?: string  } 
+  | { name: 'source_not_in', alias?: string  } 
+  | { name: 'source_lt', alias?: string  } 
+  | { name: 'source_lte', alias?: string  } 
+  | { name: 'source_gt', alias?: string  } 
+  | { name: 'source_gte', alias?: string  } 
+  | { name: 'source_contains', alias?: string  } 
+  | { name: 'source_not_contains', alias?: string  } 
+  | { name: 'source_starts_with', alias?: string  } 
+  | { name: 'source_not_starts_with', alias?: string  } 
+  | { name: 'source_ends_with', alias?: string  } 
+  | { name: 'source_not_ends_with', alias?: string  } 
+  | { name: 'AND', alias?: string  } 
+  | { name: 'OR', alias?: string  } 
+  | { name: 'NOT', alias?: string  } 
+  
+export interface TarotExplanationUpdateManyWithWhereNestedInput {
+  where?: TarotExplanationScalarWhereInput
+  data?: TarotExplanationUpdateManyDataInput
+}
+export type TarotExplanationUpdateManyWithWhereNestedInputInputObject =
+  | Extract<keyof TarotExplanationUpdateManyWithWhereNestedInput, string>
+  | { name: 'where', alias?: string  } 
+  | { name: 'data', alias?: string  } 
+  
+export interface TarotExplanationUpdateManyDataInput {
+  content?: string | null
+  source?: string | null
+}
+export type TarotExplanationUpdateManyDataInputInputObject =
+  | Extract<keyof TarotExplanationUpdateManyDataInput, string>
+  | { name: 'content', alias?: string  } 
+  | { name: 'source', alias?: string  } 
+  
+export interface TarotCardUpdateManyMutationInput {
+  name?: string | null
+  keyWords?: TarotCardUpdatekeyWordsInput | null
+}
+export type TarotCardUpdateManyMutationInputInputObject =
+  | Extract<keyof TarotCardUpdateManyMutationInput, string>
+  | { name: 'name', alias?: string  } 
+  | { name: 'keyWords', alias?: string  } 
+  
 export interface UserSubscriptionWhereInput {
   mutation_in?: prisma.MutationType[]
   updatedFields_contains?: string | null
@@ -2323,6 +4542,69 @@ export type TodoItemSubscriptionWhereInputInputObject =
   | { name: 'OR', alias?: string  } 
   | { name: 'NOT', alias?: string  } 
   
+export interface TarotArcanaSubscriptionWhereInput {
+  mutation_in?: prisma.MutationType[]
+  updatedFields_contains?: string | null
+  updatedFields_contains_every?: string[]
+  updatedFields_contains_some?: string[]
+  node?: TarotArcanaWhereInput | null
+  AND?: TarotArcanaSubscriptionWhereInput[]
+  OR?: TarotArcanaSubscriptionWhereInput[]
+  NOT?: TarotArcanaSubscriptionWhereInput[]
+}
+export type TarotArcanaSubscriptionWhereInputInputObject =
+  | Extract<keyof TarotArcanaSubscriptionWhereInput, string>
+  | { name: 'mutation_in', alias?: string  } 
+  | { name: 'updatedFields_contains', alias?: string  } 
+  | { name: 'updatedFields_contains_every', alias?: string  } 
+  | { name: 'updatedFields_contains_some', alias?: string  } 
+  | { name: 'node', alias?: string  } 
+  | { name: 'AND', alias?: string  } 
+  | { name: 'OR', alias?: string  } 
+  | { name: 'NOT', alias?: string  } 
+  
+export interface TarotExplanationSubscriptionWhereInput {
+  mutation_in?: prisma.MutationType[]
+  updatedFields_contains?: string | null
+  updatedFields_contains_every?: string[]
+  updatedFields_contains_some?: string[]
+  node?: TarotExplanationWhereInput | null
+  AND?: TarotExplanationSubscriptionWhereInput[]
+  OR?: TarotExplanationSubscriptionWhereInput[]
+  NOT?: TarotExplanationSubscriptionWhereInput[]
+}
+export type TarotExplanationSubscriptionWhereInputInputObject =
+  | Extract<keyof TarotExplanationSubscriptionWhereInput, string>
+  | { name: 'mutation_in', alias?: string  } 
+  | { name: 'updatedFields_contains', alias?: string  } 
+  | { name: 'updatedFields_contains_every', alias?: string  } 
+  | { name: 'updatedFields_contains_some', alias?: string  } 
+  | { name: 'node', alias?: string  } 
+  | { name: 'AND', alias?: string  } 
+  | { name: 'OR', alias?: string  } 
+  | { name: 'NOT', alias?: string  } 
+  
+export interface TarotCardSubscriptionWhereInput {
+  mutation_in?: prisma.MutationType[]
+  updatedFields_contains?: string | null
+  updatedFields_contains_every?: string[]
+  updatedFields_contains_some?: string[]
+  node?: TarotCardWhereInput | null
+  AND?: TarotCardSubscriptionWhereInput[]
+  OR?: TarotCardSubscriptionWhereInput[]
+  NOT?: TarotCardSubscriptionWhereInput[]
+}
+export type TarotCardSubscriptionWhereInputInputObject =
+  | Extract<keyof TarotCardSubscriptionWhereInput, string>
+  | { name: 'mutation_in', alias?: string  } 
+  | { name: 'updatedFields_contains', alias?: string  } 
+  | { name: 'updatedFields_contains_every', alias?: string  } 
+  | { name: 'updatedFields_contains_some', alias?: string  } 
+  | { name: 'node', alias?: string  } 
+  | { name: 'AND', alias?: string  } 
+  | { name: 'OR', alias?: string  } 
+  | { name: 'NOT', alias?: string  } 
+  
 
 export type PostOrderByInputValues =
   | 'id_ASC'
@@ -2355,6 +4637,40 @@ export type TodoItemOrderByInputValues =
   | 'text_DESC'
   | 'done_ASC'
   | 'done_DESC'
+  | 'createdAt_ASC'
+  | 'createdAt_DESC'
+  | 'updatedAt_ASC'
+  | 'updatedAt_DESC'
+  
+export type TarotArcanaOrderByInputValues =
+  | 'id_ASC'
+  | 'id_DESC'
+  | 'family_ASC'
+  | 'family_DESC'
+  | 'number_ASC'
+  | 'number_DESC'
+  | 'createdAt_ASC'
+  | 'createdAt_DESC'
+  | 'updatedAt_ASC'
+  | 'updatedAt_DESC'
+  
+export type TarotExplanationOrderByInputValues =
+  | 'id_ASC'
+  | 'id_DESC'
+  | 'content_ASC'
+  | 'content_DESC'
+  | 'source_ASC'
+  | 'source_DESC'
+  | 'createdAt_ASC'
+  | 'createdAt_DESC'
+  | 'updatedAt_ASC'
+  | 'updatedAt_DESC'
+  
+export type TarotCardOrderByInputValues =
+  | 'id_ASC'
+  | 'id_DESC'
+  | 'name_ASC'
+  | 'name_DESC'
   | 'createdAt_ASC'
   | 'createdAt_DESC'
   | 'updatedAt_ASC'

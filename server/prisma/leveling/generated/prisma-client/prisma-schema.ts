@@ -6,6 +6,18 @@ export const typeDefs = /* GraphQL */ `type AggregatePost {
   count: Int!
 }
 
+type AggregateTarotArcana {
+  count: Int!
+}
+
+type AggregateTarotCard {
+  count: Int!
+}
+
+type AggregateTarotExplanation {
+  count: Int!
+}
+
 type AggregateTodoItem {
   count: Int!
 }
@@ -27,6 +39,24 @@ type Mutation {
   upsertPost(where: PostWhereUniqueInput!, create: PostCreateInput!, update: PostUpdateInput!): Post!
   deletePost(where: PostWhereUniqueInput!): Post
   deleteManyPosts(where: PostWhereInput): BatchPayload!
+  createTarotArcana(data: TarotArcanaCreateInput!): TarotArcana!
+  updateTarotArcana(data: TarotArcanaUpdateInput!, where: TarotArcanaWhereUniqueInput!): TarotArcana
+  updateManyTarotArcanas(data: TarotArcanaUpdateManyMutationInput!, where: TarotArcanaWhereInput): BatchPayload!
+  upsertTarotArcana(where: TarotArcanaWhereUniqueInput!, create: TarotArcanaCreateInput!, update: TarotArcanaUpdateInput!): TarotArcana!
+  deleteTarotArcana(where: TarotArcanaWhereUniqueInput!): TarotArcana
+  deleteManyTarotArcanas(where: TarotArcanaWhereInput): BatchPayload!
+  createTarotCard(data: TarotCardCreateInput!): TarotCard!
+  updateTarotCard(data: TarotCardUpdateInput!, where: TarotCardWhereUniqueInput!): TarotCard
+  updateManyTarotCards(data: TarotCardUpdateManyMutationInput!, where: TarotCardWhereInput): BatchPayload!
+  upsertTarotCard(where: TarotCardWhereUniqueInput!, create: TarotCardCreateInput!, update: TarotCardUpdateInput!): TarotCard!
+  deleteTarotCard(where: TarotCardWhereUniqueInput!): TarotCard
+  deleteManyTarotCards(where: TarotCardWhereInput): BatchPayload!
+  createTarotExplanation(data: TarotExplanationCreateInput!): TarotExplanation!
+  updateTarotExplanation(data: TarotExplanationUpdateInput!, where: TarotExplanationWhereUniqueInput!): TarotExplanation
+  updateManyTarotExplanations(data: TarotExplanationUpdateManyMutationInput!, where: TarotExplanationWhereInput): BatchPayload!
+  upsertTarotExplanation(where: TarotExplanationWhereUniqueInput!, create: TarotExplanationCreateInput!, update: TarotExplanationUpdateInput!): TarotExplanation!
+  deleteTarotExplanation(where: TarotExplanationWhereUniqueInput!): TarotExplanation
+  deleteManyTarotExplanations(where: TarotExplanationWhereInput): BatchPayload!
   createTodoItem(data: TodoItemCreateInput!): TodoItem!
   updateTodoItem(data: TodoItemUpdateInput!, where: TodoItemWhereUniqueInput!): TodoItem
   updateManyTodoItems(data: TodoItemUpdateManyMutationInput!, where: TodoItemWhereInput): BatchPayload!
@@ -257,6 +287,15 @@ type Query {
   post(where: PostWhereUniqueInput!): Post
   posts(where: PostWhereInput, orderBy: PostOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Post]!
   postsConnection(where: PostWhereInput, orderBy: PostOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): PostConnection!
+  tarotArcana(where: TarotArcanaWhereUniqueInput!): TarotArcana
+  tarotArcanas(where: TarotArcanaWhereInput, orderBy: TarotArcanaOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [TarotArcana]!
+  tarotArcanasConnection(where: TarotArcanaWhereInput, orderBy: TarotArcanaOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): TarotArcanaConnection!
+  tarotCard(where: TarotCardWhereUniqueInput!): TarotCard
+  tarotCards(where: TarotCardWhereInput, orderBy: TarotCardOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [TarotCard]!
+  tarotCardsConnection(where: TarotCardWhereInput, orderBy: TarotCardOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): TarotCardConnection!
+  tarotExplanation(where: TarotExplanationWhereUniqueInput!): TarotExplanation
+  tarotExplanations(where: TarotExplanationWhereInput, orderBy: TarotExplanationOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [TarotExplanation]!
+  tarotExplanationsConnection(where: TarotExplanationWhereInput, orderBy: TarotExplanationOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): TarotExplanationConnection!
   todoItem(where: TodoItemWhereUniqueInput!): TodoItem
   todoItems(where: TodoItemWhereInput, orderBy: TodoItemOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [TodoItem]!
   todoItemsConnection(where: TodoItemWhereInput, orderBy: TodoItemOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): TodoItemConnection!
@@ -268,8 +307,518 @@ type Query {
 
 type Subscription {
   post(where: PostSubscriptionWhereInput): PostSubscriptionPayload
+  tarotArcana(where: TarotArcanaSubscriptionWhereInput): TarotArcanaSubscriptionPayload
+  tarotCard(where: TarotCardSubscriptionWhereInput): TarotCardSubscriptionPayload
+  tarotExplanation(where: TarotExplanationSubscriptionWhereInput): TarotExplanationSubscriptionPayload
   todoItem(where: TodoItemSubscriptionWhereInput): TodoItemSubscriptionPayload
   user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
+}
+
+type TarotArcana {
+  id: ID!
+  family: String
+  number: Int!
+}
+
+type TarotArcanaConnection {
+  pageInfo: PageInfo!
+  edges: [TarotArcanaEdge]!
+  aggregate: AggregateTarotArcana!
+}
+
+input TarotArcanaCreateInput {
+  id: ID
+  family: String
+  number: Int!
+}
+
+input TarotArcanaCreateOneInput {
+  create: TarotArcanaCreateInput
+  connect: TarotArcanaWhereUniqueInput
+}
+
+type TarotArcanaEdge {
+  node: TarotArcana!
+  cursor: String!
+}
+
+enum TarotArcanaOrderByInput {
+  id_ASC
+  id_DESC
+  family_ASC
+  family_DESC
+  number_ASC
+  number_DESC
+}
+
+type TarotArcanaPreviousValues {
+  id: ID!
+  family: String
+  number: Int!
+}
+
+type TarotArcanaSubscriptionPayload {
+  mutation: MutationType!
+  node: TarotArcana
+  updatedFields: [String!]
+  previousValues: TarotArcanaPreviousValues
+}
+
+input TarotArcanaSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: TarotArcanaWhereInput
+  AND: [TarotArcanaSubscriptionWhereInput!]
+  OR: [TarotArcanaSubscriptionWhereInput!]
+  NOT: [TarotArcanaSubscriptionWhereInput!]
+}
+
+input TarotArcanaUpdateDataInput {
+  family: String
+  number: Int
+}
+
+input TarotArcanaUpdateInput {
+  family: String
+  number: Int
+}
+
+input TarotArcanaUpdateManyMutationInput {
+  family: String
+  number: Int
+}
+
+input TarotArcanaUpdateOneInput {
+  create: TarotArcanaCreateInput
+  update: TarotArcanaUpdateDataInput
+  upsert: TarotArcanaUpsertNestedInput
+  delete: Boolean
+  disconnect: Boolean
+  connect: TarotArcanaWhereUniqueInput
+}
+
+input TarotArcanaUpsertNestedInput {
+  update: TarotArcanaUpdateDataInput!
+  create: TarotArcanaCreateInput!
+}
+
+input TarotArcanaWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  family: String
+  family_not: String
+  family_in: [String!]
+  family_not_in: [String!]
+  family_lt: String
+  family_lte: String
+  family_gt: String
+  family_gte: String
+  family_contains: String
+  family_not_contains: String
+  family_starts_with: String
+  family_not_starts_with: String
+  family_ends_with: String
+  family_not_ends_with: String
+  number: Int
+  number_not: Int
+  number_in: [Int!]
+  number_not_in: [Int!]
+  number_lt: Int
+  number_lte: Int
+  number_gt: Int
+  number_gte: Int
+  AND: [TarotArcanaWhereInput!]
+  OR: [TarotArcanaWhereInput!]
+  NOT: [TarotArcanaWhereInput!]
+}
+
+input TarotArcanaWhereUniqueInput {
+  id: ID
+}
+
+type TarotCard {
+  id: ID!
+  arcana: TarotArcana
+  name: String!
+  keyWords: [String!]!
+  explanation(where: TarotExplanationWhereInput, orderBy: TarotExplanationOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [TarotExplanation!]
+}
+
+type TarotCardConnection {
+  pageInfo: PageInfo!
+  edges: [TarotCardEdge]!
+  aggregate: AggregateTarotCard!
+}
+
+input TarotCardCreateInput {
+  id: ID
+  arcana: TarotArcanaCreateOneInput
+  name: String!
+  keyWords: TarotCardCreatekeyWordsInput
+  explanation: TarotExplanationCreateManyWithoutCardNameInput
+}
+
+input TarotCardCreatekeyWordsInput {
+  set: [String!]
+}
+
+input TarotCardCreateOneWithoutExplanationInput {
+  create: TarotCardCreateWithoutExplanationInput
+  connect: TarotCardWhereUniqueInput
+}
+
+input TarotCardCreateWithoutExplanationInput {
+  id: ID
+  arcana: TarotArcanaCreateOneInput
+  name: String!
+  keyWords: TarotCardCreatekeyWordsInput
+}
+
+type TarotCardEdge {
+  node: TarotCard!
+  cursor: String!
+}
+
+enum TarotCardOrderByInput {
+  id_ASC
+  id_DESC
+  name_ASC
+  name_DESC
+}
+
+type TarotCardPreviousValues {
+  id: ID!
+  name: String!
+  keyWords: [String!]!
+}
+
+type TarotCardSubscriptionPayload {
+  mutation: MutationType!
+  node: TarotCard
+  updatedFields: [String!]
+  previousValues: TarotCardPreviousValues
+}
+
+input TarotCardSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: TarotCardWhereInput
+  AND: [TarotCardSubscriptionWhereInput!]
+  OR: [TarotCardSubscriptionWhereInput!]
+  NOT: [TarotCardSubscriptionWhereInput!]
+}
+
+input TarotCardUpdateInput {
+  arcana: TarotArcanaUpdateOneInput
+  name: String
+  keyWords: TarotCardUpdatekeyWordsInput
+  explanation: TarotExplanationUpdateManyWithoutCardNameInput
+}
+
+input TarotCardUpdatekeyWordsInput {
+  set: [String!]
+}
+
+input TarotCardUpdateManyMutationInput {
+  name: String
+  keyWords: TarotCardUpdatekeyWordsInput
+}
+
+input TarotCardUpdateOneWithoutExplanationInput {
+  create: TarotCardCreateWithoutExplanationInput
+  update: TarotCardUpdateWithoutExplanationDataInput
+  upsert: TarotCardUpsertWithoutExplanationInput
+  delete: Boolean
+  disconnect: Boolean
+  connect: TarotCardWhereUniqueInput
+}
+
+input TarotCardUpdateWithoutExplanationDataInput {
+  arcana: TarotArcanaUpdateOneInput
+  name: String
+  keyWords: TarotCardUpdatekeyWordsInput
+}
+
+input TarotCardUpsertWithoutExplanationInput {
+  update: TarotCardUpdateWithoutExplanationDataInput!
+  create: TarotCardCreateWithoutExplanationInput!
+}
+
+input TarotCardWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  arcana: TarotArcanaWhereInput
+  name: String
+  name_not: String
+  name_in: [String!]
+  name_not_in: [String!]
+  name_lt: String
+  name_lte: String
+  name_gt: String
+  name_gte: String
+  name_contains: String
+  name_not_contains: String
+  name_starts_with: String
+  name_not_starts_with: String
+  name_ends_with: String
+  name_not_ends_with: String
+  explanation_every: TarotExplanationWhereInput
+  explanation_some: TarotExplanationWhereInput
+  explanation_none: TarotExplanationWhereInput
+  AND: [TarotCardWhereInput!]
+  OR: [TarotCardWhereInput!]
+  NOT: [TarotCardWhereInput!]
+}
+
+input TarotCardWhereUniqueInput {
+  id: ID
+}
+
+type TarotExplanation {
+  id: ID!
+  content: String!
+  source: String
+  cardName: TarotCard
+}
+
+type TarotExplanationConnection {
+  pageInfo: PageInfo!
+  edges: [TarotExplanationEdge]!
+  aggregate: AggregateTarotExplanation!
+}
+
+input TarotExplanationCreateInput {
+  id: ID
+  content: String!
+  source: String
+  cardName: TarotCardCreateOneWithoutExplanationInput
+}
+
+input TarotExplanationCreateManyWithoutCardNameInput {
+  create: [TarotExplanationCreateWithoutCardNameInput!]
+  connect: [TarotExplanationWhereUniqueInput!]
+}
+
+input TarotExplanationCreateWithoutCardNameInput {
+  id: ID
+  content: String!
+  source: String
+}
+
+type TarotExplanationEdge {
+  node: TarotExplanation!
+  cursor: String!
+}
+
+enum TarotExplanationOrderByInput {
+  id_ASC
+  id_DESC
+  content_ASC
+  content_DESC
+  source_ASC
+  source_DESC
+}
+
+type TarotExplanationPreviousValues {
+  id: ID!
+  content: String!
+  source: String
+}
+
+input TarotExplanationScalarWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  content: String
+  content_not: String
+  content_in: [String!]
+  content_not_in: [String!]
+  content_lt: String
+  content_lte: String
+  content_gt: String
+  content_gte: String
+  content_contains: String
+  content_not_contains: String
+  content_starts_with: String
+  content_not_starts_with: String
+  content_ends_with: String
+  content_not_ends_with: String
+  source: String
+  source_not: String
+  source_in: [String!]
+  source_not_in: [String!]
+  source_lt: String
+  source_lte: String
+  source_gt: String
+  source_gte: String
+  source_contains: String
+  source_not_contains: String
+  source_starts_with: String
+  source_not_starts_with: String
+  source_ends_with: String
+  source_not_ends_with: String
+  AND: [TarotExplanationScalarWhereInput!]
+  OR: [TarotExplanationScalarWhereInput!]
+  NOT: [TarotExplanationScalarWhereInput!]
+}
+
+type TarotExplanationSubscriptionPayload {
+  mutation: MutationType!
+  node: TarotExplanation
+  updatedFields: [String!]
+  previousValues: TarotExplanationPreviousValues
+}
+
+input TarotExplanationSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: TarotExplanationWhereInput
+  AND: [TarotExplanationSubscriptionWhereInput!]
+  OR: [TarotExplanationSubscriptionWhereInput!]
+  NOT: [TarotExplanationSubscriptionWhereInput!]
+}
+
+input TarotExplanationUpdateInput {
+  content: String
+  source: String
+  cardName: TarotCardUpdateOneWithoutExplanationInput
+}
+
+input TarotExplanationUpdateManyDataInput {
+  content: String
+  source: String
+}
+
+input TarotExplanationUpdateManyMutationInput {
+  content: String
+  source: String
+}
+
+input TarotExplanationUpdateManyWithoutCardNameInput {
+  create: [TarotExplanationCreateWithoutCardNameInput!]
+  delete: [TarotExplanationWhereUniqueInput!]
+  connect: [TarotExplanationWhereUniqueInput!]
+  set: [TarotExplanationWhereUniqueInput!]
+  disconnect: [TarotExplanationWhereUniqueInput!]
+  update: [TarotExplanationUpdateWithWhereUniqueWithoutCardNameInput!]
+  upsert: [TarotExplanationUpsertWithWhereUniqueWithoutCardNameInput!]
+  deleteMany: [TarotExplanationScalarWhereInput!]
+  updateMany: [TarotExplanationUpdateManyWithWhereNestedInput!]
+}
+
+input TarotExplanationUpdateManyWithWhereNestedInput {
+  where: TarotExplanationScalarWhereInput!
+  data: TarotExplanationUpdateManyDataInput!
+}
+
+input TarotExplanationUpdateWithoutCardNameDataInput {
+  content: String
+  source: String
+}
+
+input TarotExplanationUpdateWithWhereUniqueWithoutCardNameInput {
+  where: TarotExplanationWhereUniqueInput!
+  data: TarotExplanationUpdateWithoutCardNameDataInput!
+}
+
+input TarotExplanationUpsertWithWhereUniqueWithoutCardNameInput {
+  where: TarotExplanationWhereUniqueInput!
+  update: TarotExplanationUpdateWithoutCardNameDataInput!
+  create: TarotExplanationCreateWithoutCardNameInput!
+}
+
+input TarotExplanationWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  content: String
+  content_not: String
+  content_in: [String!]
+  content_not_in: [String!]
+  content_lt: String
+  content_lte: String
+  content_gt: String
+  content_gte: String
+  content_contains: String
+  content_not_contains: String
+  content_starts_with: String
+  content_not_starts_with: String
+  content_ends_with: String
+  content_not_ends_with: String
+  source: String
+  source_not: String
+  source_in: [String!]
+  source_not_in: [String!]
+  source_lt: String
+  source_lte: String
+  source_gt: String
+  source_gte: String
+  source_contains: String
+  source_not_contains: String
+  source_starts_with: String
+  source_not_starts_with: String
+  source_ends_with: String
+  source_not_ends_with: String
+  cardName: TarotCardWhereInput
+  AND: [TarotExplanationWhereInput!]
+  OR: [TarotExplanationWhereInput!]
+  NOT: [TarotExplanationWhereInput!]
+}
+
+input TarotExplanationWhereUniqueInput {
+  id: ID
 }
 
 type TodoItem {
