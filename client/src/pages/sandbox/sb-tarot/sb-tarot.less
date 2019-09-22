@@ -1,0 +1,46 @@
+@import (reference) '~styles/colors.less';
+
+@tarotCardListWidth: 200px;
+
+.tarot-learning {
+  display: flex;
+
+  .tarot-card-list-label {
+
+  }
+
+  .tarot-card-list {
+    margin: 0 0; // top and bottom added from somewhere unknown
+    width: @tarotCardListWidth;
+
+    .tarot-card {
+      padding: 0.5em;
+
+      &.active {
+        background: @primary-color;
+      }
+
+    }
+  }
+
+  .tarot-explanation {
+    width: 70%;
+
+    .tarot-explanation-source-container {
+      display: flex;
+      .tarot-explanation-source {
+        padding: 0.5em;
+
+        &.active {
+          background: @primary-color;
+        }
+      }
+    }
+
+  }
+
+  & * {
+    border: 1px solid black;
+  }
+
+}

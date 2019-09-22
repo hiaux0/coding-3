@@ -1,0 +1,38 @@
+<template>
+  <div class="tarot-learning">
+    <ul class="tarot-card-list">
+      <h5 class="tarot-card-list-label">Card List</h5>
+      <li
+        class="
+          tarot-card
+          ${selectedCard === tarotCard ? 'active' : ''}
+        "
+        repeat.for="tarotCard of tarotCards"
+        click.delegate="selectCard(tarotCard)"
+      >
+        ${tarotCard.name}
+      </li>
+    </ul>
+
+    <!-- Explanation -->
+    <div class="tarot-explanation">
+      <h5 class="tarot-explanation-label">Explanation</h5>
+
+      <div class="tarot-explanation-source-container">
+        <!-- Explanation source -->
+        <div
+          class="
+            tarot-explanation-source
+            ${selectedExplanation === explanation ? 'active' : ''}
+          "
+          repeat.for="explanation of selectedCard.explanation"
+          click.delegate="selectExplanation(explanation)"
+        >
+          ${explanation.source}
+        </div>
+      </div>
+
+      ${selectedExplanation.content}
+    </div>
+  </div>
+</template>
