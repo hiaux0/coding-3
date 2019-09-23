@@ -33,19 +33,21 @@
 
     <!-- Explanation -->
     <div class="tarot-explanation">
-      <h5 class="tarot-explanation-label">Explanation</h5>
+      <div class="tarot-explanation-header">
+        <h5 class="tarot-explanation-label">Explanation</h5>
 
-      <div class="tarot-explanation-source-container">
-        <!-- Explanation source -->
-        <div
-          class="
-            tarot-explanation-source
-            ${selectedExplanation === explanation ? 'active' : ''}
-          "
-          repeat.for="explanation of selectedCard.explanation"
-          click.delegate="selectExplanation(explanation)"
-        >
-          ${explanation.source}
+        <div class="tarot-explanation-source-container">
+          <!-- Explanation source -->
+          <div
+            class="
+              tarot-explanation-source
+              ${selectedExplanation === explanation ? 'active' : ''}
+            "
+            repeat.for="explanation of selectedCard.explanation"
+            click.delegate="selectExplanation(explanation)"
+          >
+            ${explanation.source}
+          </div>
         </div>
       </div>
 

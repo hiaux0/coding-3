@@ -26,16 +26,25 @@
   .tarot-explanation {
     width: 70%;
 
-    .tarot-explanation-source-container {
-      display: flex;
-      .tarot-explanation-source {
-        padding: 0.5em;
+    .tarot-explanation-header {
+      height: 20%;
 
-        &.active {
-          background: @primary-color;
+      .tarot-explanation-source-container {
+        display: flex;
+        .tarot-explanation-source {
+          padding: 0.5em;
+
+          &.active {
+            background: @primary-color;
+          }
         }
       }
     }
+
+    textarea {
+      height: 80%;
+    }
+
 
   }
 
