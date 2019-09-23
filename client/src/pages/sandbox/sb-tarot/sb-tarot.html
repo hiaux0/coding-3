@@ -1,7 +1,24 @@
 <template>
   <div class="tarot-learning">
     <ul class="tarot-card-list">
+      <!-- Card List -->
       <h5 class="tarot-card-list-label">Card List</h5>
+
+      <md-input
+        type="text"
+        label="Add tarot card"
+        class="todo-input"
+        value.bind="addTarotCardInputValue"
+      ></md-input>
+
+      <a
+        md-button="floating: true; pulse.bind: pulse;"
+        md-waves="color: light; circle: true;"
+        click.delegate="addTarotCard(addTarotCardInputValue)"
+      >
+        <i class="material-icons add-tarot-card">add</i>
+      </a>
+
       <li
         class="
           tarot-card
@@ -32,7 +49,12 @@
         </div>
       </div>
 
-      ${selectedExplanation.content}
+      <textarea
+        value.bind="selectedExplanation.content"
+        focus.trigger="updateTarotCardExplanationAfterShortcut(selectedExplanation)"
+        blur.trigger="removeUpdateCardExplanationShortcut()"
+      >
+      </textarea>
     </div>
   </div>
 </template>

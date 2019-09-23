@@ -48,21 +48,22 @@ query {
   return result.data.tarotCards;
 }
 
-export async function apiAddTodo(value) {
+/**
+ *
+ * @param {object} TarotCardCreateInput
+ */
+export async function apiAddTarotCard(TarotCardCreateInput) {
   let mutation = gql`
-mutation createTodoItem($text: String!){
-  createTodoItem(data: { text: $text }) {
+mutation createTarotCard($name: String!){
+  createTarotCard(data: { name: $name }) {
     id
-    text
   }
 }
     `;
 
   const result = await client.mutate({
     mutation,
-    variables: {
-      text: value,
-    }
+    variables: TarotCardCreateInput
   }).catch(console.error);
   return result.data.createTodoItem;
 }
@@ -97,6 +98,37 @@ mutation updateTodoItem($id: ID, $data: TodoItemUpdateInput!){
     id
     text
     done
+  }
+}
+  `;
+
+  await client.mutate({
+    mutation,
+    variables: {
+      id,
+      data: {
+        [attribute]: value,
+      },
+    }
+  }).catch(console.error);
+}
+
+/**
+ *
+ * @param {string} id
+ * @param {object} TarotExplanationUpdateInput
+ */
+export async function apiUpdateTarotExplanation(id, { attribute, value }) {
+  let mutation = gql`
+mutation updateTarotExplanation($id: ID, $data: TarotExplanationUpdateInput!){
+  updateTarotExplanation(
+    where: {
+      id: $id
+    }
+    data: $data
+  ) {
+    id
+    content
   }
 }
   `;

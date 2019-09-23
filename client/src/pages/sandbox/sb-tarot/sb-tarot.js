@@ -1,8 +1,11 @@
 //@ts-check
 
 import { bindable } from 'aurelia-framework';
-import { fetchListTarotCards } from './tarot.gateway';
-// import { apiAddTodo, apiDeleteTodoItem, apiUpdateTodoItemDone, apiUpdateTodoItem } from './todo.gateway.js';
+import {
+  fetchListTarotCards,
+  apiAddTarotCard,
+  apiUpdateTarotExplanation,
+} from './tarot.gateway';
 import { refreshJumpable } from 'components/features/jumpable/jumpable.js';
 import hotkeys from 'hotkeys-js';
 import { acceptEditedTarotShortcut, tarotShortcutScope } from './tarot-shortcuts';
@@ -45,9 +48,11 @@ export class SbTarot {
 
   // API
 
-  async addTodo(value) {
-    const newTodoItem = await apiAddTodo(value);
-    this.todoItems.push(newTodoItem);
+  async addTarotCard(tarotCardName) {
+    const newTarotCard = await apiAddTarotCard({
+      name: tarotCardName,
+    });
+    this.tarotCards.push(newTarotCard);
   }
 
   async removeTodoItem(todoId) {
@@ -66,14 +71,14 @@ export class SbTarot {
     });
   }
 
-  updateTodoItemAfterShortcut(todoItem) {
+  updateTarotCardExplanationAfterShortcut(selectedExplanation) {
     this.previousScope = hotkeys.getScope();
     hotkeys.setScope(tarotShortcutScope);
 
     hotkeys(acceptEditedTarotShortcut, tarotShortcutScope, async() => {
-      await apiUpdateTodoItem(todoItem.id, {
-        attribute: 'text',
-        value: todoItem.text,
+      await apiUpdateTarotExplanation(selectedExplanation.id, {
+        attribute: 'content',
+        value: selectedExplanation.content,
       });
       hotkeys.setScope(this.previousScope);
       // @ts-ignore
@@ -82,7 +87,7 @@ export class SbTarot {
     });
   }
 
-  removeUpdateTodoItemShortcut() {
+  removeUpdateCardExplanationShortcut() {
     hotkeys.unbind('ctrl+enter', tarotShortcutScope);
     hotkeys.setScope(this.previousScope);
   }
