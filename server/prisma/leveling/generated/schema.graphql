@@ -11,6 +11,7 @@ type Mutation {
   deleteTodoItem(where: TodoItemWhereUniqueInput!): TodoItem
   publish(id: ID): Post
   updateTarotCard(data: TarotCardUpdateInput!, where: TarotCardWhereUniqueInput!): TarotCard
+  updateTarotExplanation(data: TarotExplanationUpdateInput!, where: TarotExplanationWhereUniqueInput!): TarotExplanation
   updateTodoItem(data: TodoItemUpdateInput!, where: TodoItemWhereUniqueInput!): TodoItem
 }
 
@@ -196,6 +197,13 @@ input TarotCardCreatekeyWordsInput {
   set: [String!]
 }
 
+input TarotCardCreateWithoutExplanationInput {
+  arcana: TarotArcanaCreateOneInput
+  id: ID
+  keyWords: TarotCardCreatekeyWordsInput
+  name: String!
+}
+
 enum TarotCardOrderByInput {
   createdAt_ASC
   createdAt_DESC
@@ -216,6 +224,26 @@ input TarotCardUpdateInput {
 
 input TarotCardUpdatekeyWordsInput {
   set: [String!]
+}
+
+input TarotCardUpdateOneWithoutExplanationInput {
+  connect: TarotCardWhereUniqueInput
+  create: TarotCardCreateWithoutExplanationInput
+  delete: Boolean
+  disconnect: Boolean
+  update: TarotCardUpdateWithoutExplanationDataInput
+  upsert: TarotCardUpsertWithoutExplanationInput
+}
+
+input TarotCardUpdateWithoutExplanationDataInput {
+  arcana: TarotArcanaUpdateOneInput
+  keyWords: TarotCardUpdatekeyWordsInput
+  name: String
+}
+
+input TarotCardUpsertWithoutExplanationInput {
+  create: TarotCardCreateWithoutExplanationInput!
+  update: TarotCardUpdateWithoutExplanationDataInput!
 }
 
 input TarotCardWhereInput {
@@ -337,6 +365,12 @@ input TarotExplanationScalarWhereInput {
   source_not_in: [String!]
   source_not_starts_with: String
   source_starts_with: String
+}
+
+input TarotExplanationUpdateInput {
+  cardName: TarotCardUpdateOneWithoutExplanationInput
+  content: String
+  source: String
 }
 
 input TarotExplanationUpdateManyDataInput {
