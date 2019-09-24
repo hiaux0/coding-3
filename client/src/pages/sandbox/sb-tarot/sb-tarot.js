@@ -5,6 +5,7 @@ import {
   fetchListTarotCards,
   apiAddTarotCard,
   apiUpdateTarotExplanation,
+  apiAddTarotCardExplanation,
 } from './tarot.gateway';
 import { refreshJumpable } from 'components/features/jumpable/jumpable.js';
 import hotkeys from 'hotkeys-js';
@@ -55,6 +56,11 @@ export class SbTarot {
     this.tarotCards.push(newTarotCard);
   }
 
+  async addTarotExplanation() {
+    const result = await apiAddTarotCardExplanation('foo', this.selectedCard.id);
+    console.log('TCL: SbTarot -> addTarotExplanation -> result', result);
+  }
+
   async removeTodoItem(todoId) {
     await apiDeleteTodoItem(todoId);
     this.todoItems = this.todoItems.filter(item => item.id !== todoId);
@@ -71,14 +77,15 @@ export class SbTarot {
     });
   }
 
-  updateTarotCardExplanationAfterShortcut(selectedExplanation) {
+  updateTarotCardExplanationAfterShortcut(selectedExplanation, attribute) {
     this.previousScope = hotkeys.getScope();
     hotkeys.setScope(tarotShortcutScope);
 
     hotkeys(acceptEditedTarotShortcut, tarotShortcutScope, async() => {
-      await apiUpdateTarotExplanation(selectedExplanation.id, {
-        attribute: 'content',
-        value: selectedExplanation.content,
+      console.log('TCL: SbTarot -> updateTarotCardExplanationAfterShortcut -> this.selectedExplanation[attribute]', this.selectedExplanation[attribute]);
+      await apiUpdateTarotExplanation(this.selectedExplanation.id, {
+        attribute,
+        value: this.selectedExplanation[attribute],
       });
       hotkeys.setScope(this.previousScope);
       // @ts-ignore

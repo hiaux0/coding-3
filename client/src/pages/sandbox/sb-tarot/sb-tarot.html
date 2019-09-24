@@ -46,14 +46,28 @@
             repeat.for="explanation of selectedCard.explanation"
             click.delegate="selectExplanation(explanation)"
           >
-            ${explanation.source}
+            <input
+              class="inline-input"
+              type="text"
+              value.bind="explanation.source"
+              focus.trigger="updateTarotCardExplanationAfterShortcut(selectedExplanation, 'source')"
+              blur.trigger="removeUpdateCardExplanationShortcut()"
+            />
           </div>
         </div>
+        <!-- Explanation source Add button -->
+        <a
+          md-button="floating: true; pulse.bind: pulse;"
+          md-waves="color: light; circle: true;"
+          click.delegate="addTarotExplanation(addTarotExplanationInputValue)"
+        >
+          <i class="material-icons add-tarot-card">add</i>
+        </a>
       </div>
 
       <textarea
         value.bind="selectedExplanation.content"
-        focus.trigger="updateTarotCardExplanationAfterShortcut(selectedExplanation)"
+        focus.trigger="updateTarotCardExplanationAfterShortcut(selectedExplanation, 'content')"
         blur.trigger="removeUpdateCardExplanationShortcut()"
       >
       </textarea>

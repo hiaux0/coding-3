@@ -68,6 +68,29 @@ mutation createTarotCard($name: String!){
   return result.data.createTodoItem;
 }
 
+export async function apiAddTarotCardExplanation(source, tarorCardId) {
+  const mutation = gql`
+mutation createTarotExplanation($source: String!, $cardName: TarotCardCreateOneWithoutExplanationInput!){
+  createTarotExplanation(data: { source: $source, cardName: $cardName }) {
+    id
+  }
+}
+  `;
+
+  const result = await client.mutate({
+    mutation,
+    variables: {
+      source,
+      cardName: {
+        connect: {
+          id: tarorCardId
+        }
+      }
+    }
+  }).catch(console.error);
+  return result.data.createTarotExplanation;
+}
+
 export async function apiDeleteTodoItem(id) {
   let mutation = gql`
 mutation deleteTodoItem($id: ID){
