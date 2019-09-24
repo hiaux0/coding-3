@@ -135,6 +135,10 @@ export interface NexusGenInputs {
     keyWords?: NexusGenInputs['TarotCardCreatekeyWordsInput'] | null; // TarotCardCreatekeyWordsInput
     name: string; // String!
   }
+  TarotCardCreateOneWithoutExplanationInput: { // input type
+    connect?: NexusGenInputs['TarotCardWhereUniqueInput'] | null; // TarotCardWhereUniqueInput
+    create?: NexusGenInputs['TarotCardCreateWithoutExplanationInput'] | null; // TarotCardCreateWithoutExplanationInput
+  }
   TarotCardCreateWithoutExplanationInput: { // input type
     arcana?: NexusGenInputs['TarotArcanaCreateOneInput'] | null; // TarotArcanaCreateOneInput
     id?: string | null; // ID
@@ -210,14 +214,20 @@ export interface NexusGenInputs {
   TarotCardWhereUniqueInput: { // input type
     id?: string | null; // ID
   }
+  TarotExplanationCreateInput: { // input type
+    cardName?: NexusGenInputs['TarotCardCreateOneWithoutExplanationInput'] | null; // TarotCardCreateOneWithoutExplanationInput
+    content?: string | null; // String
+    id?: string | null; // ID
+    source: string; // String!
+  }
   TarotExplanationCreateManyWithoutCardNameInput: { // input type
     connect?: NexusGenInputs['TarotExplanationWhereUniqueInput'][] | null; // [TarotExplanationWhereUniqueInput!]
     create?: NexusGenInputs['TarotExplanationCreateWithoutCardNameInput'][] | null; // [TarotExplanationCreateWithoutCardNameInput!]
   }
   TarotExplanationCreateWithoutCardNameInput: { // input type
-    content: string; // String!
+    content?: string | null; // String
     id?: string | null; // ID
-    source?: string | null; // String
+    source: string; // String!
   }
   TarotExplanationScalarWhereInput: { // input type
     AND?: NexusGenInputs['TarotExplanationScalarWhereInput'][] | null; // [TarotExplanationScalarWhereInput!]
@@ -485,9 +495,9 @@ export interface NexusGenRootTypes {
     name: string; // String!
   }
   TarotExplanation: { // root type
-    content: string; // String!
+    content?: string | null; // String
     id: string; // ID!
-    source?: string | null; // String
+    source: string; // String!
   }
   TodoItem: { // root type
     done?: boolean | null; // Boolean
@@ -519,6 +529,7 @@ export interface NexusGenAllTypes extends NexusGenRootTypes {
   TarotArcanaWhereInput: NexusGenInputs['TarotArcanaWhereInput'];
   TarotArcanaWhereUniqueInput: NexusGenInputs['TarotArcanaWhereUniqueInput'];
   TarotCardCreateInput: NexusGenInputs['TarotCardCreateInput'];
+  TarotCardCreateOneWithoutExplanationInput: NexusGenInputs['TarotCardCreateOneWithoutExplanationInput'];
   TarotCardCreateWithoutExplanationInput: NexusGenInputs['TarotCardCreateWithoutExplanationInput'];
   TarotCardCreatekeyWordsInput: NexusGenInputs['TarotCardCreatekeyWordsInput'];
   TarotCardUpdateInput: NexusGenInputs['TarotCardUpdateInput'];
@@ -528,6 +539,7 @@ export interface NexusGenAllTypes extends NexusGenRootTypes {
   TarotCardUpsertWithoutExplanationInput: NexusGenInputs['TarotCardUpsertWithoutExplanationInput'];
   TarotCardWhereInput: NexusGenInputs['TarotCardWhereInput'];
   TarotCardWhereUniqueInput: NexusGenInputs['TarotCardWhereUniqueInput'];
+  TarotExplanationCreateInput: NexusGenInputs['TarotExplanationCreateInput'];
   TarotExplanationCreateManyWithoutCardNameInput: NexusGenInputs['TarotExplanationCreateManyWithoutCardNameInput'];
   TarotExplanationCreateWithoutCardNameInput: NexusGenInputs['TarotExplanationCreateWithoutCardNameInput'];
   TarotExplanationScalarWhereInput: NexusGenInputs['TarotExplanationScalarWhereInput'];
@@ -556,6 +568,7 @@ export interface NexusGenFieldTypes {
   Mutation: { // field return type
     createDraft: NexusGenRootTypes['Post']; // Post!
     createTarotCard: NexusGenRootTypes['TarotCard']; // TarotCard!
+    createTarotExplanation: NexusGenRootTypes['TarotExplanation']; // TarotExplanation!
     createTodoItem: NexusGenRootTypes['TodoItem']; // TodoItem!
     createUser: NexusGenRootTypes['User']; // User!
     deletePost: NexusGenRootTypes['Post'] | null; // Post
@@ -592,9 +605,9 @@ export interface NexusGenFieldTypes {
   }
   TarotExplanation: { // field return type
     cardName: NexusGenRootTypes['TarotCard'] | null; // TarotCard
-    content: string; // String!
+    content: string | null; // String
     id: string; // ID!
-    source: string | null; // String
+    source: string; // String!
   }
   TodoItem: { // field return type
     done: boolean | null; // Boolean
@@ -617,6 +630,9 @@ export interface NexusGenArgTypes {
     }
     createTarotCard: { // args
       data: NexusGenInputs['TarotCardCreateInput']; // TarotCardCreateInput!
+    }
+    createTarotExplanation: { // args
+      data: NexusGenInputs['TarotExplanationCreateInput']; // TarotExplanationCreateInput!
     }
     createTodoItem: { // args
       data: NexusGenInputs['TodoItemCreateInput']; // TodoItemCreateInput!
@@ -703,7 +719,7 @@ export interface NexusGenInheritedFields {}
 
 export type NexusGenObjectNames = "Mutation" | "Post" | "Query" | "TarotArcana" | "TarotCard" | "TarotExplanation" | "TodoItem" | "User";
 
-export type NexusGenInputNames = "PostCreateManyWithoutAuthorInput" | "PostCreateWithoutAuthorInput" | "PostWhereInput" | "PostWhereUniqueInput" | "TarotArcanaCreateInput" | "TarotArcanaCreateOneInput" | "TarotArcanaUpdateDataInput" | "TarotArcanaUpdateOneInput" | "TarotArcanaUpsertNestedInput" | "TarotArcanaWhereInput" | "TarotArcanaWhereUniqueInput" | "TarotCardCreateInput" | "TarotCardCreateWithoutExplanationInput" | "TarotCardCreatekeyWordsInput" | "TarotCardUpdateInput" | "TarotCardUpdateOneWithoutExplanationInput" | "TarotCardUpdateWithoutExplanationDataInput" | "TarotCardUpdatekeyWordsInput" | "TarotCardUpsertWithoutExplanationInput" | "TarotCardWhereInput" | "TarotCardWhereUniqueInput" | "TarotExplanationCreateManyWithoutCardNameInput" | "TarotExplanationCreateWithoutCardNameInput" | "TarotExplanationScalarWhereInput" | "TarotExplanationUpdateInput" | "TarotExplanationUpdateManyDataInput" | "TarotExplanationUpdateManyWithWhereNestedInput" | "TarotExplanationUpdateManyWithoutCardNameInput" | "TarotExplanationUpdateWithWhereUniqueWithoutCardNameInput" | "TarotExplanationUpdateWithoutCardNameDataInput" | "TarotExplanationUpsertWithWhereUniqueWithoutCardNameInput" | "TarotExplanationWhereInput" | "TarotExplanationWhereUniqueInput" | "TodoItemCreateInput" | "TodoItemUpdateInput" | "TodoItemWhereInput" | "TodoItemWhereUniqueInput" | "UserCreateInput" | "UserWhereInput";
+export type NexusGenInputNames = "PostCreateManyWithoutAuthorInput" | "PostCreateWithoutAuthorInput" | "PostWhereInput" | "PostWhereUniqueInput" | "TarotArcanaCreateInput" | "TarotArcanaCreateOneInput" | "TarotArcanaUpdateDataInput" | "TarotArcanaUpdateOneInput" | "TarotArcanaUpsertNestedInput" | "TarotArcanaWhereInput" | "TarotArcanaWhereUniqueInput" | "TarotCardCreateInput" | "TarotCardCreateOneWithoutExplanationInput" | "TarotCardCreateWithoutExplanationInput" | "TarotCardCreatekeyWordsInput" | "TarotCardUpdateInput" | "TarotCardUpdateOneWithoutExplanationInput" | "TarotCardUpdateWithoutExplanationDataInput" | "TarotCardUpdatekeyWordsInput" | "TarotCardUpsertWithoutExplanationInput" | "TarotCardWhereInput" | "TarotCardWhereUniqueInput" | "TarotExplanationCreateInput" | "TarotExplanationCreateManyWithoutCardNameInput" | "TarotExplanationCreateWithoutCardNameInput" | "TarotExplanationScalarWhereInput" | "TarotExplanationUpdateInput" | "TarotExplanationUpdateManyDataInput" | "TarotExplanationUpdateManyWithWhereNestedInput" | "TarotExplanationUpdateManyWithoutCardNameInput" | "TarotExplanationUpdateWithWhereUniqueWithoutCardNameInput" | "TarotExplanationUpdateWithoutCardNameDataInput" | "TarotExplanationUpsertWithWhereUniqueWithoutCardNameInput" | "TarotExplanationWhereInput" | "TarotExplanationWhereUniqueInput" | "TodoItemCreateInput" | "TodoItemUpdateInput" | "TodoItemWhereInput" | "TodoItemWhereUniqueInput" | "UserCreateInput" | "UserWhereInput";
 
 export type NexusGenEnumNames = "PostOrderByInput" | "TarotCardOrderByInput" | "TarotExplanationOrderByInput" | "TodoItemOrderByInput";
 

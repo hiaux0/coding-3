@@ -1382,7 +1382,7 @@ export interface TarotExplanationFieldDetails {
     args: {}
     description: string
     list: undefined
-    nullable: false
+    nullable: true
     resolve: undefined
   }
   source: {
@@ -1390,7 +1390,7 @@ export interface TarotExplanationFieldDetails {
     args: {}
     description: string
     list: undefined
-    nullable: true
+    nullable: false
     resolve: undefined
   }
   cardName: {
@@ -3093,7 +3093,7 @@ export interface TarotExplanationPreviousValuesFieldDetails {
     args: {}
     description: string
     list: undefined
-    nullable: false
+    nullable: true
     resolve: undefined
   }
   source: {
@@ -3101,7 +3101,7 @@ export interface TarotExplanationPreviousValuesFieldDetails {
     args: {}
     description: string
     list: undefined
-    nullable: true
+    nullable: false
     resolve: undefined
   }
 }
@@ -4109,8 +4109,8 @@ export type TarotArcanaUpdateManyMutationInputInputObject =
   
 export interface TarotExplanationCreateInput {
   id?: string | null
-  content?: string
-  source?: string | null
+  content?: string | null
+  source?: string
   cardName?: TarotCardCreateOneWithoutExplanationInput | null
 }
 export type TarotExplanationCreateInputInputObject =
@@ -4283,8 +4283,8 @@ export type TarotExplanationCreateManyWithoutCardNameInputInputObject =
   
 export interface TarotExplanationCreateWithoutCardNameInput {
   id?: string | null
-  content?: string
-  source?: string | null
+  content?: string | null
+  source?: string
 }
 export type TarotExplanationCreateWithoutCardNameInputInputObject =
   | Extract<keyof TarotExplanationCreateWithoutCardNameInput, string>

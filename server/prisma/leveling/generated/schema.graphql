@@ -5,6 +5,7 @@
 type Mutation {
   createDraft(authorId: ID, title: String): Post!
   createTarotCard(data: TarotCardCreateInput!): TarotCard!
+  createTarotExplanation(data: TarotExplanationCreateInput!): TarotExplanation!
   createTodoItem(data: TodoItemCreateInput!): TodoItem!
   createUser(data: UserCreateInput!): User!
   deletePost(where: PostWhereUniqueInput!): Post
@@ -197,6 +198,11 @@ input TarotCardCreatekeyWordsInput {
   set: [String!]
 }
 
+input TarotCardCreateOneWithoutExplanationInput {
+  connect: TarotCardWhereUniqueInput
+  create: TarotCardCreateWithoutExplanationInput
+}
+
 input TarotCardCreateWithoutExplanationInput {
   arcana: TarotArcanaCreateOneInput
   id: ID
@@ -290,9 +296,16 @@ input TarotCardWhereUniqueInput {
 
 type TarotExplanation {
   cardName: TarotCard
-  content: String!
+  content: String
   id: ID!
-  source: String
+  source: String!
+}
+
+input TarotExplanationCreateInput {
+  cardName: TarotCardCreateOneWithoutExplanationInput
+  content: String
+  id: ID
+  source: String!
 }
 
 input TarotExplanationCreateManyWithoutCardNameInput {
@@ -301,9 +314,9 @@ input TarotExplanationCreateManyWithoutCardNameInput {
 }
 
 input TarotExplanationCreateWithoutCardNameInput {
-  content: String!
+  content: String
   id: ID
-  source: String
+  source: String!
 }
 
 enum TarotExplanationOrderByInput {

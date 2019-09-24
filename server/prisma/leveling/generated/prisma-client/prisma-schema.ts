@@ -604,8 +604,8 @@ input TarotCardWhereUniqueInput {
 
 type TarotExplanation {
   id: ID!
-  content: String!
-  source: String
+  content: String
+  source: String!
   cardName: TarotCard
 }
 
@@ -617,8 +617,8 @@ type TarotExplanationConnection {
 
 input TarotExplanationCreateInput {
   id: ID
-  content: String!
-  source: String
+  content: String
+  source: String!
   cardName: TarotCardCreateOneWithoutExplanationInput
 }
 
@@ -629,8 +629,8 @@ input TarotExplanationCreateManyWithoutCardNameInput {
 
 input TarotExplanationCreateWithoutCardNameInput {
   id: ID
-  content: String!
-  source: String
+  content: String
+  source: String!
 }
 
 type TarotExplanationEdge {
@@ -649,8 +649,8 @@ enum TarotExplanationOrderByInput {
 
 type TarotExplanationPreviousValues {
   id: ID!
-  content: String!
-  source: String
+  content: String
+  source: String!
 }
 
 input TarotExplanationScalarWhereInput {

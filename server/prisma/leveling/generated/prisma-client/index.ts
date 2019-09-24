@@ -383,8 +383,8 @@ export interface TarotCardUpdateWithoutExplanationDataInput {
 
 export interface TarotExplanationCreateWithoutCardNameInput {
   id?: Maybe<ID_Input>;
-  content: String;
-  source?: Maybe<String>;
+  content?: Maybe<String>;
+  source: String;
 }
 
 export interface TarotCardUpdateOneWithoutExplanationInput {
@@ -780,8 +780,8 @@ export interface TarotExplanationWhereInput {
 
 export interface TarotExplanationCreateInput {
   id?: Maybe<ID_Input>;
-  content: String;
-  source?: Maybe<String>;
+  content?: Maybe<String>;
+  source: String;
   cardName?: Maybe<TarotCardCreateOneWithoutExplanationInput>;
 }
 
@@ -1257,8 +1257,8 @@ export interface PostConnectionSubscription
 
 export interface TarotExplanation {
   id: ID_Output;
-  content: String;
-  source?: String;
+  content?: String;
+  source: String;
 }
 
 export interface TarotExplanationPromise
@@ -1903,8 +1903,8 @@ export interface PostEdgeSubscription
 
 export interface TarotExplanationPreviousValues {
   id: ID_Output;
-  content: String;
-  source?: String;
+  content?: String;
+  source: String;
 }
 
 export interface TarotExplanationPreviousValuesPromise
