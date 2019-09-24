@@ -9,6 +9,7 @@ type Mutation {
   createTodoItem(data: TodoItemCreateInput!): TodoItem!
   createUser(data: UserCreateInput!): User!
   deletePost(where: PostWhereUniqueInput!): Post
+  deleteTarotCard(where: TarotCardWhereUniqueInput!): TarotCard
   deleteTodoItem(where: TodoItemWhereUniqueInput!): TodoItem
   publish(id: ID): Post
   updateTarotCard(data: TarotCardUpdateInput!, where: TarotCardWhereUniqueInput!): TarotCard

@@ -572,6 +572,7 @@ export interface NexusGenFieldTypes {
     createTodoItem: NexusGenRootTypes['TodoItem']; // TodoItem!
     createUser: NexusGenRootTypes['User']; // User!
     deletePost: NexusGenRootTypes['Post'] | null; // Post
+    deleteTarotCard: NexusGenRootTypes['TarotCard'] | null; // TarotCard
     deleteTodoItem: NexusGenRootTypes['TodoItem'] | null; // TodoItem
     publish: NexusGenRootTypes['Post'] | null; // Post
     updateTarotCard: NexusGenRootTypes['TarotCard'] | null; // TarotCard
@@ -642,6 +643,9 @@ export interface NexusGenArgTypes {
     }
     deletePost: { // args
       where: NexusGenInputs['PostWhereUniqueInput']; // PostWhereUniqueInput!
+    }
+    deleteTarotCard: { // args
+      where: NexusGenInputs['TarotCardWhereUniqueInput']; // TarotCardWhereUniqueInput!
     }
     deleteTodoItem: { // args
       where: NexusGenInputs['TodoItemWhereUniqueInput']; // TodoItemWhereUniqueInput!

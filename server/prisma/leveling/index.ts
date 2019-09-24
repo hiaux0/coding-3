@@ -39,6 +39,7 @@ const Mutation = prismaObjectType({
       // Tarot
       'createTarotCard',
       'updateTarotCard',
+      'deleteTarotCard',
       'createTarotExplanation',
       'updateTarotExplanation',
     ])
