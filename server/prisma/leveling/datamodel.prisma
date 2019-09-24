@@ -26,8 +26,8 @@ type TarotArcana {
 
 type TarotExplanation {
   id: ID! @id
-  content: String!
-  source: String
+  content: String
+  source: String!
   cardName: TarotCard @relation(link: INLINE)
 }
 
