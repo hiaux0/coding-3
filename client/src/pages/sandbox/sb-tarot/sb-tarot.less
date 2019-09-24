@@ -14,10 +14,22 @@
     width: @tarotCardListWidth;
 
     .tarot-card {
+      display: flex;
+      justify-content: space-between;
       padding: 0.5em;
 
       &.active {
         background: @primary-color;
+      }
+
+      &:hover {
+        .remove-tarot-card {
+          display: block;
+        }
+      }
+
+      .remove-tarot-card {
+        display: none;
       }
 
     }

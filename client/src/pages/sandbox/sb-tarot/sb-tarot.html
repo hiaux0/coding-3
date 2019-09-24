@@ -4,6 +4,7 @@
       <!-- Card List -->
       <h5 class="tarot-card-list-label">Card List</h5>
 
+      <!-- Add card -->
       <md-input
         type="text"
         label="Add tarot card"
@@ -11,6 +12,7 @@
         value.bind="addTarotCardInputValue"
       ></md-input>
 
+      <!-- Add card button -->
       <a
         md-button="floating: true; pulse.bind: pulse;"
         md-waves="color: light; circle: true;"
@@ -19,6 +21,7 @@
         <i class="material-icons add-tarot-card">add</i>
       </a>
 
+      <!-- Card list card -->
       <li
         class="
           tarot-card
@@ -28,6 +31,10 @@
         click.delegate="selectCard(tarotCard)"
       >
         ${tarotCard.name}
+        <i
+          class="material-icons remove-tarot-card"
+          click.delegate="removeTarotCard(tarotCard.id)"
+        >delete</i>
       </li>
     </ul>
 

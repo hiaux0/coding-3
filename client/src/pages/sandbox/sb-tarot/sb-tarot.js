@@ -6,6 +6,7 @@ import {
   apiAddTarotCard,
   apiUpdateTarotExplanation,
   apiAddTarotCardExplanation,
+  apiDeleteTarotCard,
 } from './tarot.gateway';
 import { refreshJumpable } from 'components/features/jumpable/jumpable.js';
 import hotkeys from 'hotkeys-js';
@@ -61,9 +62,9 @@ export class SbTarot {
     console.log('TCL: SbTarot -> addTarotExplanation -> result', result);
   }
 
-  async removeTodoItem(todoId) {
-    await apiDeleteTodoItem(todoId);
-    this.todoItems = this.todoItems.filter(item => item.id !== todoId);
+  async removeTarotCard(todoId) {
+    await apiDeleteTarotCard(todoId);
+    this.tarotCards = this.tarotCards.filter(item => item.id !== todoId);
   }
 
   async toggleTodoItemDone(todoId, checked) {

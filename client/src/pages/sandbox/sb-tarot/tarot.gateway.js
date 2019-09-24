@@ -5,10 +5,19 @@ import { InMemoryCache } from 'apollo-cache-inmemory';
 import { HttpLink } from 'apollo-link-http';
 import gql from 'graphql-tag';
 
+const DEBUG = true;
+
 // Instantiate required constructor fields
 const cache = new InMemoryCache();
 const link = new HttpLink({
   uri: 'http://localhost:4000/',
+  fetch: (...pl) => {
+    if (!DEBUG) return fetch(...pl);
+    const [_, options] = pl;
+    const body = JSON.parse(options.body);
+    console.log(`📡${body.operationName || ''}\n${body.query}`, body.variables);
+    return fetch(...pl);
+  }
 });
 
 export const client = new ApolloClient({
@@ -91,12 +100,11 @@ mutation createTarotExplanation($source: String!, $cardName: TarotCardCreateOneW
   return result.data.createTarotExplanation;
 }
 
-export async function apiDeleteTodoItem(id) {
+export async function apiDeleteTarotCard(id) {
   let mutation = gql`
-mutation deleteTodoItem($id: ID){
-  deleteTodoItem(where: {id: $id}) {
+mutation deleteTarotCard($id: ID){
+  deleteTarotCard(where: {id: $id}) {
     id
-    text
   }
 }
   `;
