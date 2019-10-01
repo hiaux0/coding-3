@@ -4,16 +4,17 @@
 
 .tarot-learning {
   display: flex;
+  min-height: 80vh;
 
-  .tarot-card-list-label {
+  .tarotCardList__label {
 
   }
 
-  .tarot-card-list {
+  .tarotCardList {
     margin: 0 0; // top and bottom added from somewhere unknown
     width: @tarotCardListWidth;
 
-    .tarot-card {
+    .tarotCard {
       display: flex;
       justify-content: space-between;
       padding: 0.5em;
@@ -23,34 +24,49 @@
       }
 
       &:hover {
-        .remove-tarot-card {
+        .tarotCard--remove {
           display: block;
         }
       }
 
-      .remove-tarot-card {
+      .tarotCard--remove {
         display: none;
       }
 
     }
   }
 
-  .tarot-explanation {
+  .tarotExplanation {
     width: 70%;
 
-    .tarot-explanation-header {
+    .tarotExplanation__header {
       height: 20%;
+      display: grid;
+      grid-template-columns: 90% 10%;
+      grid-template-rows: 60px 1fr;
+      grid-template-areas:
+        "tarotSourceHeader tarotSourceHeader"
+        "tarotSource tarotSourceAddButton";
 
-      .tarot-explanation-source-container {
+      .tarotExplanation__label {
+        grid-area: tarotSourceHeader
+      }
+
+      .tarotExplanation__sourceContainer {
+        grid-area: tarotSource;
         display: flex;
-        height: 50%;
+        height: 100%;
 
-        .tarot-explanation-source {
+        .tarotExplanation__source {
           padding: 0.5em;
 
           &.active {
             background: @primary-color;
           }
+        }
+
+        a {
+          grid-area: tarotSourceAddButton;
         }
       }
     }

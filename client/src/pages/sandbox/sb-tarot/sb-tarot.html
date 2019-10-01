@@ -1,8 +1,8 @@
 <template>
   <div class="tarot-learning">
-    <ul class="tarot-card-list">
+    <ul class="tarotCardList">
       <!-- Card List -->
-      <h5 class="tarot-card-list-label">Card List</h5>
+      <h5 class="tarotCardList__label">Card List</h5>
 
       <!-- Add card -->
       <md-input
@@ -18,13 +18,13 @@
         md-waves="color: light; circle: true;"
         click.delegate="addTarotCard(addTarotCardInputValue)"
       >
-        <i class="material-icons add-tarot-card">add</i>
+        <i class="material-icons tarotCard--add">add</i>
       </a>
 
       <!-- Card list card -->
       <li
         class="
-          tarot-card
+          tarotCard
           ${selectedCard === tarotCard ? 'active' : ''}
         "
         repeat.for="tarotCard of tarotCards"
@@ -32,22 +32,22 @@
       >
         ${tarotCard.name}
         <i
-          class="material-icons remove-tarot-card"
+          class="material-icons tarotCard--remove"
           click.delegate="removeTarotCard(tarotCard.id)"
         >delete</i>
       </li>
     </ul>
 
     <!-- Explanation -->
-    <div class="tarot-explanation">
-      <div class="tarot-explanation-header">
-        <h5 class="tarot-explanation-label">Explanation</h5>
+    <div class="tarotExplanation">
+      <div class="tarotExplanation__header">
+        <h5 class="tarotExplanation__label">Explanation</h5>
 
-        <div class="tarot-explanation-source-container">
+        <div class="tarotExplanation__sourceContainer">
           <!-- Explanation source -->
           <div
             class="
-              tarot-explanation-source
+              tarotExplanation__source
               ${selectedExplanation === explanation ? 'active' : ''}
             "
             repeat.for="explanation of selectedCard.explanation"
@@ -68,7 +68,7 @@
           md-waves="color: light; circle: true;"
           click.delegate="addTarotExplanation(addTarotExplanationInputValue)"
         >
-          <i class="material-icons add-tarot-card">add</i>
+          <i class="material-icons tarotCard--add">add</i>
         </a>
       </div>
 
