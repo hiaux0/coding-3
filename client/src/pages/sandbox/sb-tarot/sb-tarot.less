@@ -1,16 +1,20 @@
 @import (reference) '~styles/colors.less';
 
 @tarotCardListWidth: 200px;
+@sidebarHeader: 60px;
+@sidebarInput: 70px;
 
 .tarot-learning {
   display: flex;
   min-height: 80vh;
+  height: 85vh;
 
   .tarotSidebar {
+    height: 100%;
     .tarotSidebar__header {
       display: grid;
       grid-template-columns: 85% 15%;
-      grid-template-rows: 60px 70px;
+      grid-template-rows: @sidebarHeader @sidebarInput;
       grid-template-areas:
       "tarotSidebarHeader tarotSidebarHeader"
       "tarotCardInput tarotCardInputAddButton";
@@ -33,6 +37,8 @@
   .tarotCardList {
     margin: 0 0; // top and bottom added from somewhere unknown
     width: @tarotCardListWidth;
+    height: calc(100% - (@sidebarInput + @sidebarHeader));
+    overflow: auto;
 
     .tarotCard {
       display: flex;
@@ -91,7 +97,7 @@
     }
 
     textarea {
-      height: 80%;
+      height: calc(100% - (@sidebarInput + @sidebarHeader));
     }
 
 
