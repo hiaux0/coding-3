@@ -6,8 +6,28 @@
   display: flex;
   min-height: 80vh;
 
-  .tarotCardList__label {
+  .tarotSidebar {
+    .tarotSidebar__header {
+      display: grid;
+      grid-template-columns: 85% 15%;
+      grid-template-rows: 60px 70px;
+      grid-template-areas:
+      "tarotSidebarHeader tarotSidebarHeader"
+      "tarotCardInput tarotCardInputAddButton";
 
+      h5 {
+        grid-area: tarotSidebarHeader;
+      }
+
+      md-input {
+        grid-area: tarotCardInput;
+      }
+
+      a {
+        grid-area: tarotCardInputAddButton;
+        align-self: center;
+      }
+    }
   }
 
   .tarotCardList {
@@ -40,10 +60,9 @@
     width: 70%;
 
     .tarotExplanation__header {
-      height: 20%;
       display: grid;
       grid-template-columns: 90% 10%;
-      grid-template-rows: 60px 1fr;
+      grid-template-rows: 60px 70px;
       grid-template-areas:
         "tarotSourceHeader tarotSourceHeader"
         "tarotSource tarotSourceAddButton";

@@ -1,42 +1,48 @@
 <template>
   <div class="tarot-learning">
-    <ul class="tarotCardList">
+    <!-- Tarot Sidebar -->
+    <aside class="tarotSidebar">
+      <!-- Card List Header -->
+      <div class="tarotSidebar__header">
+        <h5 class="tarotCardList__label">Card List</h5>
+
+        <!-- Add card -->
+        <md-input
+          type="text"
+          label="Add tarot card"
+          class="todo-input"
+          value.bind="addTarotCardInputValue"
+        ></md-input>
+
+        <!-- Add card button -->
+        <a
+          md-button="floating: true; pulse.bind: pulse;"
+          md-waves="color: light; circle: true;"
+          click.delegate="addTarotCard(addTarotCardInputValue)"
+        >
+          <i class="material-icons tarotCard--add">add</i>
+        </a>
+      </div>
+
       <!-- Card List -->
-      <h5 class="tarotCardList__label">Card List</h5>
-
-      <!-- Add card -->
-      <md-input
-        type="text"
-        label="Add tarot card"
-        class="todo-input"
-        value.bind="addTarotCardInputValue"
-      ></md-input>
-
-      <!-- Add card button -->
-      <a
-        md-button="floating: true; pulse.bind: pulse;"
-        md-waves="color: light; circle: true;"
-        click.delegate="addTarotCard(addTarotCardInputValue)"
-      >
-        <i class="material-icons tarotCard--add">add</i>
-      </a>
-
-      <!-- Card list card -->
-      <li
-        class="
-          tarotCard
-          ${selectedCard === tarotCard ? 'active' : ''}
-        "
-        repeat.for="tarotCard of tarotCards"
-        click.delegate="selectCard(tarotCard)"
-      >
-        ${tarotCard.name}
-        <i
-          class="material-icons tarotCard--remove"
-          click.delegate="removeTarotCard(tarotCard.id)"
-        >delete</i>
-      </li>
-    </ul>
+      <ul class="tarotCardList">
+        <!-- Card list card -->
+        <li
+          class="
+            tarotCard
+            ${selectedCard === tarotCard ? 'active' : ''}
+          "
+          repeat.for="tarotCard of tarotCards"
+          click.delegate="selectCard(tarotCard)"
+        >
+          ${tarotCard.name}
+          <i
+            class="material-icons tarotCard--remove"
+            click.delegate="removeTarotCard(tarotCard.id)"
+          >delete</i>
+        </li>
+      </ul>
+    </aside>
 
     <!-- Explanation -->
     <div class="tarotExplanation">
