@@ -38,6 +38,7 @@ export class SbTarot {
   // View
   selectCard(tarotCard) {
     this.selectedCard = tarotCard;
+    this.selectedExplanation = this.selectedCard.explanation[0];
   }
 
   selectExplanation(tarotCardExplanation) {
@@ -58,7 +59,7 @@ export class SbTarot {
   }
 
   async addTarotExplanation() {
-    const newExplanation = await apiAddTarotCardExplanation('foo', this.selectedCard.id);
+    const newExplanation = await apiAddTarotCardExplanation('Book', this.selectedCard.id);
     this.selectedCard.explanation.push(newExplanation);
   }
 
