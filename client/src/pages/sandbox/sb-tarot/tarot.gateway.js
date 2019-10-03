@@ -66,6 +66,7 @@ export async function apiAddTarotCard(TarotCardCreateInput) {
 mutation createTarotCard($name: String!){
   createTarotCard(data: { name: $name }) {
     id
+    name
   }
 }
     `;
@@ -74,7 +75,7 @@ mutation createTarotCard($name: String!){
     mutation,
     variables: TarotCardCreateInput
   }).catch(console.error);
-  return result.data.createTodoItem;
+  return result.data.createTarotCard;
 }
 
 export async function apiAddTarotCardExplanation(source, tarorCardId) {
@@ -82,6 +83,7 @@ export async function apiAddTarotCardExplanation(source, tarorCardId) {
 mutation createTarotExplanation($source: String!, $cardName: TarotCardCreateOneWithoutExplanationInput!){
   createTarotExplanation(data: { source: $source, cardName: $cardName }) {
     id
+    source
   }
 }
   `;

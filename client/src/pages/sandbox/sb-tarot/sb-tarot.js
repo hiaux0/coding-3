@@ -26,9 +26,8 @@ export class SbTarot {
 
   async bind() {
     const tarotCards = await fetchListTarotCards();
-    console.log('TCL: SbTarot -> bind -> tarotCards', tarotCards);
     this.tarotCards = tarotCards;
-    this.selectedCard = tarotCards[3];
+    this.selectedCard = tarotCards[4];
     this.selectedExplanation = this.selectedCard.explanation[0];
   }
 
@@ -39,11 +38,9 @@ export class SbTarot {
   // View
   selectCard(tarotCard) {
     this.selectedCard = tarotCard;
-    console.log('TCL: SbTarot -> selectCard -> tarotCard', tarotCard);
   }
 
   selectExplanation(tarotCardExplanation) {
-    console.log('TCL: SbTarot -> selectExplanation -> tarotCardExplanation', tarotCardExplanation);
     this.selectedExplanation = tarotCardExplanation;
   }
 
@@ -51,15 +48,18 @@ export class SbTarot {
   // API
 
   async addTarotCard(tarotCardName) {
+    if (!tarotCardName) return console.error('No empty input.');
     const newTarotCard = await apiAddTarotCard({
       name: tarotCardName,
     });
     this.tarotCards.push(newTarotCard);
+    // Reset input field
+    this.tarotCardName = '';
   }
 
   async addTarotExplanation() {
-    const result = await apiAddTarotCardExplanation('foo', this.selectedCard.id);
-    console.log('TCL: SbTarot -> addTarotExplanation -> result', result);
+    const newExplanation = await apiAddTarotCardExplanation('foo', this.selectedCard.id);
+    this.selectedCard.explanation.push(newExplanation);
   }
 
   async removeTarotCard(todoId) {
@@ -83,7 +83,6 @@ export class SbTarot {
     hotkeys.setScope(tarotShortcutScope);
 
     hotkeys(acceptEditedTarotShortcut, tarotShortcutScope, async() => {
-      console.log('TCL: SbTarot -> updateTarotCardExplanationAfterShortcut -> this.selectedExplanation[attribute]', this.selectedExplanation[attribute]);
       await apiUpdateTarotExplanation(this.selectedExplanation.id, {
         attribute,
         value: this.selectedExplanation[attribute],

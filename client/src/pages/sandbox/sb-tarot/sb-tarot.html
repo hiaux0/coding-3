@@ -11,14 +11,14 @@
           type="text"
           label="Add tarot card"
           class="todo-input"
-          value.bind="addTarotCardInputValue"
+          value.bind="tarotCardName"
         ></md-input>
 
         <!-- Add card button -->
         <a
           md-button="floating: true; pulse.bind: pulse;"
           md-waves="color: light; circle: true;"
-          click.delegate="addTarotCard(addTarotCardInputValue)"
+          click.delegate="addTarotCard(tarotCardName)"
         >
           <i class="material-icons tarotCard--add">add</i>
         </a>
