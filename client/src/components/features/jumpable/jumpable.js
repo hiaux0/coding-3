@@ -110,7 +110,6 @@ function* getUniqueJumpMarkGenerator() {
  */
 const jumpableKeyCodesListener = (destroy) => {
   keyBinding(ABC_JOINED, JUMP_CLASS, (ev) => {
-    console.log('TCL: jumpableKeyCodesListener -> ev', ev);
     let pressedKey = ev.key;
     let jumppelIterable = document.getElementsByClassName(JUMP_CLASS);
     const activate = activateElement(destroy);
