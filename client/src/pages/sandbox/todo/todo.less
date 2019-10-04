@@ -1,31 +1,50 @@
 @import (reference) '~styles/colors.less';
 
+@matHeight: 36px;
 
 .todo-list {
-  margin: 150px auto;
+  margin: 80px auto;
   width: 70vw;
-
-  transform: scale(2);
-  // Othewise zoom will shift to the left
-  transform-origin: top left;
 
   .todo-input {
     &:focus {
       border-color: orange;
     }
+  }
 
-    &:before {
-      content: 'Hello';
+  .todo-list-item {
+    display: flex;
+    justify-content: space-between;
+    height: @matHeight;
 
-      background: @sec-sup-color;
-      border-radius: 3px;
-      border: 1px solid black;
-      color: @coal;
-      font: 18px Arial;
+    &:hover {
+      background: @primary-color-hover;
 
-      padding: 0 5px;
-      transform: translate(0%, 120%);
-      position: absolute;
+      .todo-item-menu {
+        display: flex;
+      }
+    }
+
+    .todo-list-item-group {
+      display: flex;
+      width: 100%;
+
+      .todo-item-text {
+        align-self: center;
+        width: inherit;
+
+        &.todo-item-done {
+          text-decoration: line-through;
+        }
+      }
+    }
+
+    .todo-item-menu {
+      display: none;
+
+      .todo-item-remove {
+        cursor: pointer;
+      }
     }
   }
 }

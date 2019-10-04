@@ -1,0 +1,117 @@
+@import (reference) '~styles/colors.less';
+
+@tarotCardListWidth: 200px;
+@sidebarHeader: 60px;
+@sidebarInput: 70px;
+
+.tarot-learning {
+  display: flex;
+  min-height: 80vh;
+  height: 85vh;
+
+  .tarotSidebar {
+    height: 100%;
+    .tarotSidebar__header {
+      display: grid;
+      grid-template-columns: 85% 15%;
+      grid-template-rows: @sidebarHeader @sidebarInput;
+      grid-template-areas:
+      "tarotSidebarHeader tarotSidebarHeader"
+      "tarotCardInput tarotCardInputAddButton";
+
+      h5 {
+        grid-area: tarotSidebarHeader;
+      }
+
+      md-input {
+        grid-area: tarotCardInput;
+      }
+
+      a {
+        grid-area: tarotCardInputAddButton;
+        align-self: center;
+      }
+    }
+  }
+
+  .tarotCardList {
+    margin: 0 0; // top and bottom added from somewhere unknown
+    width: @tarotCardListWidth;
+    height: calc(100% - (@sidebarInput + @sidebarHeader));
+    overflow: auto;
+
+    .tarotCard {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.5em;
+
+      &.active {
+        background: @primary-color;
+      }
+
+      &:hover {
+        .tarotCard--remove {
+          display: block;
+        }
+      }
+
+      .tarotCard--remove {
+        display: none;
+      }
+
+    }
+  }
+
+  .tarotExplanation {
+    width: 100%;
+
+    .tarotExplanation__header {
+      display: grid;
+      grid-template-columns: 90% 10%;
+      grid-template-rows: 60px 70px;
+      grid-template-areas:
+        "tarotSourceHeader tarotSourceHeader"
+        "tarotSource tarotSourceAddButton";
+
+      .tarotExplanation__label {
+        grid-area: tarotSourceHeader
+      }
+
+      .tarotExplanation__sourceContainer {
+        grid-area: tarotSource;
+        display: flex;
+        height: 100%;
+
+        .tarotExplanation__source {
+          padding: 0.5em;
+
+          &.active {
+            background: @primary-color;
+          }
+        }
+
+        a {
+          grid-area: tarotSourceAddButton;
+        }
+      }
+    }
+
+    textarea {
+      height: calc(100% - (@sidebarInput + @sidebarHeader));
+    }
+
+
+  }
+
+  & * {
+    border: 1px solid black;
+  }
+
+}
+
+input[type="text"].inline-input:not(.browser-default) {
+  height: inherit;
+  border: none;
+  margin: 0;
+
+}

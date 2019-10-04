@@ -1,0 +1,89 @@
+<template>
+  <div class="tarot-learning">
+    <!-- Tarot Sidebar -->
+    <aside class="tarotSidebar">
+      <!-- Card List Header -->
+      <div class="tarotSidebar__header">
+        <h5 class="tarotCardList__label">Card List</h5>
+
+        <!-- Add card -->
+        <md-input
+          type="text"
+          label="Add tarot card"
+          class="todo-input"
+          value.bind="tarotCardName"
+        ></md-input>
+
+        <!-- Add card button -->
+        <a
+          md-button="floating: true; pulse.bind: pulse;"
+          md-waves="color: light; circle: true;"
+          click.delegate="addTarotCard(tarotCardName)"
+        >
+          <i class="material-icons tarotCard--add">add</i>
+        </a>
+      </div>
+
+      <!-- Card List -->
+      <ul class="tarotCardList">
+        <!-- Card list card -->
+        <li
+          class="
+            tarotCard
+            ${selectedCard === tarotCard ? 'active' : ''}
+          "
+          repeat.for="tarotCard of tarotCards"
+          click.delegate="selectCard(tarotCard)"
+        >
+          ${tarotCard.name}
+          <i
+            class="material-icons tarotCard--remove"
+            click.delegate="removeTarotCard(tarotCard.id)"
+          >delete</i>
+        </li>
+      </ul>
+    </aside>
+
+    <!-- Explanation -->
+    <div class="tarotExplanation">
+      <div class="tarotExplanation__header">
+        <h5 class="tarotExplanation__label">Explanation</h5>
+
+        <div class="tarotExplanation__sourceContainer">
+          <!-- Explanation source -->
+          <div
+            class="
+              tarotExplanation__source
+              ${selectedExplanation === explanation ? 'active' : ''}
+            "
+            repeat.for="explanation of selectedCard.explanation"
+            click.delegate="selectExplanation(explanation)"
+          >
+            <input
+              class="inline-input"
+              type="text"
+              value.bind="explanation.source"
+              focus.trigger="updateTarotCardExplanationAfterShortcut(selectedExplanation, 'source')"
+              blur.trigger="removeUpdateCardExplanationShortcut()"
+            />
+          </div>
+        </div>
+        <!-- Explanation source Add button -->
+        <a
+          md-button="floating: true; pulse.bind: pulse;"
+          md-waves="color: light; circle: true;"
+          click.delegate="addTarotExplanation(addTarotExplanationInputValue)"
+        >
+          <i class="material-icons tarotCard--add">add</i>
+        </a>
+      </div>
+
+      <textarea
+        value.bind="selectedExplanation.content"
+        focus.trigger="updateTarotCardExplanationAfterShortcut(selectedExplanation, 'content')"
+        blur.trigger="removeUpdateCardExplanationShortcut()"
+      >
+      </textarea>
+    </div>
+  </div>
+</template>

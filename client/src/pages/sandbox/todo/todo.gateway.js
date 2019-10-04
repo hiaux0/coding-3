@@ -33,6 +33,7 @@ query {
   todoItems {
     id
     text
+    done
   }
 }
   `;
@@ -59,4 +60,77 @@ mutation createTodoItem($text: String!){
     }
   }).catch(console.error);
   return result.data.createTodoItem;
+}
+
+export async function apiDeleteTodoItem(id) {
+  let mutation = gql`
+mutation deleteTodoItem($id: ID){
+  deleteTodoItem(where: {id: $id}) {
+    id
+    text
+  }
+}
+  `;
+
+  await client.mutate({
+    mutation,
+    variables: {
+      id,
+    }
+  }).catch(console.error);
+}
+
+export async function apiUpdateTodoItem(id, { attribute, value }) {
+  let mutation = gql`
+mutation updateTodoItem($id: ID, $data: TodoItemUpdateInput!){
+  updateTodoItem(
+    where: {
+      id: $id
+    }
+    data: $data
+  ) {
+    id
+    text
+    done
+  }
+}
+  `;
+
+  await client.mutate({
+    mutation,
+    variables: {
+      id,
+      data: {
+        [attribute]: value,
+      },
+    }
+  }).catch(console.error);
+}
+
+
+export async function apiUpdateTodoItemDone(id, doneStatus) {
+  let mutation = gql`
+mutation updateTodoItem($id: ID, $doneStatus: Boolean!){
+  updateTodoItem(
+    where: {
+      id: $id
+    }
+    data: {
+      done: $doneStatus
+    }
+  ) {
+    id
+    text
+    done
+  }
+}
+  `;
+
+  await client.mutate({
+    mutation,
+    variables: {
+      id,
+      doneStatus
+    }
+  }).catch(console.error);
 }

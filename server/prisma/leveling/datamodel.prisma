@@ -15,4 +15,26 @@ type Post {
 type TodoItem {
   id: ID! @id
   text: String!
+  done: Boolean @default(value: false)
+}
+
+type TarotArcana {
+  id: ID! @id
+  family: String
+  number: Int!
+}
+
+type TarotExplanation {
+  id: ID! @id
+  content: String
+  source: String!
+  cardName: TarotCard @relation(link: INLINE)
+}
+
+type TarotCard {
+  id: ID! @id
+  arcana: TarotArcana
+  name: String!
+  keyWords: [String!] @scalarList(strategy: RELATION)
+  explanation: [TarotExplanation]
 }

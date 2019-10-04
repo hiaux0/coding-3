@@ -1,5 +1,8 @@
 @import (reference) '~styles/colors.less';
 
+@jumpMarkBackground: #3C434A;
+@jumpMarkColor: #775a5a;
+
 .jumpable {
   &:before {
     .jump-mark();
@@ -9,13 +12,14 @@
 .jump-mark() {
   content: attr(data-jump-mark-value);
 
-  background: @sec-sup-color;
+  background: @jumpMarkBackground;
   border-radius: 3px;
-  border: 1px solid black;
-  color: @coal;
+  color: @jumpMarkColor;
   font: 18px Arial;
 
   padding: 0 5px;
-  transform: translate(0%, 120%);
+  transform: translate(-20%, 100%);
   position: absolute;
+  opacity: 0.8;
+  text-transform: lowercase; // hotkeys don't work with uppercase
 }

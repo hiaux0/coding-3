@@ -25,7 +25,6 @@ const ABC_leftHandOnly = [
   't', 'h', 's', 'a', 'g', // home row
   'r', 'd', // upper
   'c', 'm', 'q', // lower
-  '1', '2', '3', '4', '5', '6', '7', '8', '9', '0' // numbers
   // "ff", "fj", "fd", "fk", "fs", "fl", "fa", "fg", "fh", // f + home row
 
 ];
@@ -89,7 +88,7 @@ const makeTagsJumpable = (tagNames = ['a', 'button', 'label']) => {
     let taggels = document.getElementsByTagName(tag);
     for (let taggel of taggels) {
       taggel.classList.add(JUMP_CLASS);
-      let value = uniqueJumpMark.next().value;
+      let value = uniqueJumpMark.next().value || '';
       taggel.setAttribute(DATA_JUMP_MARK_VALUE, value);
     }
 
@@ -127,7 +126,13 @@ const jumpableKeyCodesListener = (destroy) => {
 };
 
 function checkActiveItemBlackList() {
-  const activeTag = document.activeElement.tagName.toLocaleLowerCase();
+  const { activeElement } = document;
+
+  // Root source: list item with text div is contenteditable
+  const isContentEditable = activeElement.getAttribute('contenteditable');
+  if (isContentEditable) return true;
+
+  const activeTag = activeElement.tagName.toLocaleLowerCase();
   return blackList.includes(activeTag);
 }
 

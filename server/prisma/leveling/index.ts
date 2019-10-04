@@ -8,7 +8,11 @@ import { GraphQLServer } from 'graphql-yoga'
 const Query = prismaObjectType({
   name: 'Query',
   definition(t) {
-    t.prismaFields(['post', 'todoItems'])
+    t.prismaFields([
+      'post',
+      'todoItems',
+      'tarotCards',
+    ])
     t.list.field('feed', {
       type: 'Post',
       resolve: (_, args, ctx) =>
@@ -30,6 +34,14 @@ const Mutation = prismaObjectType({
       'createUser',
       'deletePost',
       'createTodoItem',
+      'updateTodoItem',
+      'deleteTodoItem',
+      // Tarot
+      'createTarotCard',
+      'updateTarotCard',
+      'deleteTarotCard',
+      'createTarotExplanation',
+      'updateTarotExplanation',
     ])
     t.field('createDraft', {
       type: 'Post',
