@@ -79,6 +79,13 @@ export class SbTarot {
     });
   }
 
+  updateTarotCardExplanation = async(explanationSourceValue) => {
+    return await apiUpdateTarotExplanation(this.selectedExplanation.id, {
+      attribute: 'source',
+      value: explanationSourceValue,
+    });
+  }
+
   updateTarotCardExplanationAfterShortcut(selectedExplanation, attribute) {
     this.previousScope = hotkeys.getScope();
     hotkeys.setScope(tarotShortcutScope);

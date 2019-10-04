@@ -1,4 +1,6 @@
 <template>
+  <require from='components/forms/inline-input/inline-input'></require>
+
   <div class="tarot-learning">
     <!-- Tarot Sidebar -->
     <aside class="tarotSidebar">
@@ -51,6 +53,14 @@
 
         <div class="tarotExplanation__sourceContainer">
           <!-- Explanation source -->
+          <div repeat.for="explanation of selectedCard.explanation">
+            <inline-input
+              class-list="tarotExplanation__source ${selectedExplanation === explanation ? 'active' : ''}"
+              update-value.bind="updateTarotCardExplanation"
+              value.one-time="explanation.source"
+            ></inline-input>
+          </div>
+
           <div
             class="
               tarotExplanation__source
