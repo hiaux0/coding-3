@@ -7,6 +7,9 @@ import { inlineInputShortcutScope, acceptEditedInlineInputShortcut, cancelInline
 
 @containerless
 export class InlineInput {
+  /** @type {string} */
+  @bindable classList;
+
   @bindable isInlineInputMode = false;
 
   /** @type {string} */

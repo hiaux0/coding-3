@@ -3,7 +3,7 @@
     <!-- Normal content -->
     <li
       show.bind="!isInlineInputMode"
-      class="inlineInput__base"
+      class="inlineInput__base ${classList}"
       dblclick.trigger="activateInlineInputMode()"
     >
       ${value}
