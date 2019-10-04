@@ -1,0 +1,22 @@
+<template>
+  <div class="inline-input">
+    <!-- Normal content -->
+    <li
+      show.bind="!isInlineInputMode"
+      class="inlineInput__base"
+      dblclick.trigger="activateInlineInputMode()"
+    >
+      ${value}
+    </li>
+
+    <!-- Inline Input -->
+    <input
+      show.bind="isInlineInputMode"
+      placeholder.bind="placeholder"
+      focus.trigger="updateInlineInputAfterShortcut()"
+      blur.trigger="onBluInlineInput()"
+      value.bind="value"
+      ref="inlineInputRef"
+    />
+  </div>
+</template>

@@ -1,0 +1,14 @@
+<template>
+  <require from='components/forms/inline-input/inline-input'></require>
+
+  <div class="sb-inline-input">
+    <ul>
+      <inline-input
+        repeat.for="arcanaName of majorArcana"
+        update-value.bind="updateValue"
+        value.one-time="arcanaName"
+      ></inline-input>
+    </ul>
+
+  </div>
+</template>
