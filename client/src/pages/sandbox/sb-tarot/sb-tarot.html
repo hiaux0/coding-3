@@ -53,7 +53,10 @@
 
         <div class="tarotExplanation__sourceContainer">
           <!-- Explanation source -->
-          <div repeat.for="explanation of selectedCard.explanation">
+          <div
+            repeat.for="explanation of selectedCard.explanation"
+            click.delegate="selectExplanation(explanation)"
+          >
             <inline-input
               class-list="tarotExplanation__source ${selectedExplanation === explanation ? 'active' : ''}"
               update-value.bind="updateTarotCardExplanation"
@@ -61,22 +64,6 @@
             ></inline-input>
           </div>
 
-          <div
-            class="
-              tarotExplanation__source
-              ${selectedExplanation === explanation ? 'active' : ''}
-            "
-            repeat.for="explanation of selectedCard.explanation"
-            click.delegate="selectExplanation(explanation)"
-          >
-            <input
-              class="inline-input"
-              type="text"
-              value.bind="explanation.source"
-              focus.trigger="updateTarotCardExplanationAfterShortcut(selectedExplanation, 'source')"
-              blur.trigger="removeUpdateCardExplanationShortcut()"
-            />
-          </div>
         </div>
         <!-- Explanation source Add button -->
         <a
