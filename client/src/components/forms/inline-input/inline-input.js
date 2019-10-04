@@ -35,6 +35,13 @@ export class InlineInput {
   previousScope;
 
   attached() {
+    if (this.isInlineInputMode) {
+      // Timeout else, the input does not focus, rather the content will get selected.
+      window.setTimeout(() => {
+        this.inlineInputRef.focus();
+      }, 0);
+    }
+
     this.oldValue = this.value;
   }
 
@@ -81,6 +88,8 @@ export class InlineInput {
   }
 
   onBluInlineInput() {
+    if (this.value === '') return console.error('No empty input.');
+
     this.value = this.oldValue;
     this.isInlineInputMode = false;
 
