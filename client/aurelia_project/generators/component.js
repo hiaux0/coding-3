@@ -47,7 +47,7 @@ export class ${className} {
   generateHTMLSource(fileName, subFolders) {
     return `<template>
   <require from='../${fileName}/${fileName}'></require>
-  <a role="button" class="button" href="#${subFolders}/${fileName}">${fileName}</a>
+  <a md-button role="button" class="button navigationButton" href="#${subFolders}/${fileName}">${fileName}</a>
 
   <h1>\${value}</h1>
 </template>`;
@@ -55,7 +55,7 @@ export class ${className} {
 
   generateCSSSource(fileName) {
     return `
-${fileName} {
+.${fileName} {
 
 }`;
   }
