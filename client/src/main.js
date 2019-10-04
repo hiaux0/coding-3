@@ -11,7 +11,10 @@ export function configure(aurelia) {
   aurelia.use
     .standardConfiguration()
     .feature(PLATFORM.moduleName('resources/index'))
-    .plugin(PLATFORM.moduleName('aurelia-materialize-bridge'), b => b.useAll());
+    .plugin(PLATFORM.moduleName('aurelia-materialize-bridge'), b => {
+      b.useAll()
+        .useAutoButtonWaves(false);
+    });
 
   // Uncomment the line below to enable animation.
   // aurelia.use.plugin(PLATFORM.moduleName('aurelia-animator-css'));
