@@ -94,3 +94,10 @@ export const minorArcanaPentacles = [
   'Queen of Pentacles',
   'King of Pentacles',
 ];
+
+export const tarotCardCategories = {
+  arcana: ['Minor', 'Major'],
+  suits: ['Swords', 'Cups', 'Wands', 'Pentacles'],
+  numbers: ['Ace', 'One', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 'Nine', 'Ten'],
+  persons: ['Page', 'Knight', 'Queen', 'King'],
+};
