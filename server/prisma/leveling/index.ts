@@ -12,6 +12,7 @@ const Query = prismaObjectType({
       'post',
       'todoItems',
       'tarotCards',
+      'tarotPages',
     ])
     t.list.field('feed', {
       type: 'Post',

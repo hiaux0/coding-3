@@ -38,3 +38,8 @@ type TarotCard {
   keyWords: [String!] @scalarList(strategy: RELATION)
   explanation: [TarotExplanation]
 }
+
+type TarotPage {
+  id: ID! @id
+  tarotFilterKeyWords: [String] @scalarList(strategy: RELATION)
+}

@@ -18,6 +18,10 @@ type AggregateTarotExplanation {
   count: Int!
 }
 
+type AggregateTarotPage {
+  count: Int!
+}
+
 type AggregateTodoItem {
   count: Int!
 }
@@ -57,6 +61,12 @@ type Mutation {
   upsertTarotExplanation(where: TarotExplanationWhereUniqueInput!, create: TarotExplanationCreateInput!, update: TarotExplanationUpdateInput!): TarotExplanation!
   deleteTarotExplanation(where: TarotExplanationWhereUniqueInput!): TarotExplanation
   deleteManyTarotExplanations(where: TarotExplanationWhereInput): BatchPayload!
+  createTarotPage(data: TarotPageCreateInput!): TarotPage!
+  updateTarotPage(data: TarotPageUpdateInput!, where: TarotPageWhereUniqueInput!): TarotPage
+  updateManyTarotPages(data: TarotPageUpdateManyMutationInput!, where: TarotPageWhereInput): BatchPayload!
+  upsertTarotPage(where: TarotPageWhereUniqueInput!, create: TarotPageCreateInput!, update: TarotPageUpdateInput!): TarotPage!
+  deleteTarotPage(where: TarotPageWhereUniqueInput!): TarotPage
+  deleteManyTarotPages(where: TarotPageWhereInput): BatchPayload!
   createTodoItem(data: TodoItemCreateInput!): TodoItem!
   updateTodoItem(data: TodoItemUpdateInput!, where: TodoItemWhereUniqueInput!): TodoItem
   updateManyTodoItems(data: TodoItemUpdateManyMutationInput!, where: TodoItemWhereInput): BatchPayload!
@@ -296,6 +306,9 @@ type Query {
   tarotExplanation(where: TarotExplanationWhereUniqueInput!): TarotExplanation
   tarotExplanations(where: TarotExplanationWhereInput, orderBy: TarotExplanationOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [TarotExplanation]!
   tarotExplanationsConnection(where: TarotExplanationWhereInput, orderBy: TarotExplanationOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): TarotExplanationConnection!
+  tarotPage(where: TarotPageWhereUniqueInput!): TarotPage
+  tarotPages(where: TarotPageWhereInput, orderBy: TarotPageOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [TarotPage]!
+  tarotPagesConnection(where: TarotPageWhereInput, orderBy: TarotPageOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): TarotPageConnection!
   todoItem(where: TodoItemWhereUniqueInput!): TodoItem
   todoItems(where: TodoItemWhereInput, orderBy: TodoItemOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [TodoItem]!
   todoItemsConnection(where: TodoItemWhereInput, orderBy: TodoItemOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): TodoItemConnection!
@@ -310,6 +323,7 @@ type Subscription {
   tarotArcana(where: TarotArcanaSubscriptionWhereInput): TarotArcanaSubscriptionPayload
   tarotCard(where: TarotCardSubscriptionWhereInput): TarotCardSubscriptionPayload
   tarotExplanation(where: TarotExplanationSubscriptionWhereInput): TarotExplanationSubscriptionPayload
+  tarotPage(where: TarotPageSubscriptionWhereInput): TarotPageSubscriptionPayload
   todoItem(where: TodoItemSubscriptionWhereInput): TodoItemSubscriptionPayload
   user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
 }
@@ -818,6 +832,95 @@ input TarotExplanationWhereInput {
 }
 
 input TarotExplanationWhereUniqueInput {
+  id: ID
+}
+
+type TarotPage {
+  id: ID!
+  tarotFilterKeyWords: [String!]!
+}
+
+type TarotPageConnection {
+  pageInfo: PageInfo!
+  edges: [TarotPageEdge]!
+  aggregate: AggregateTarotPage!
+}
+
+input TarotPageCreateInput {
+  id: ID
+  tarotFilterKeyWords: TarotPageCreatetarotFilterKeyWordsInput
+}
+
+input TarotPageCreatetarotFilterKeyWordsInput {
+  set: [String!]
+}
+
+type TarotPageEdge {
+  node: TarotPage!
+  cursor: String!
+}
+
+enum TarotPageOrderByInput {
+  id_ASC
+  id_DESC
+}
+
+type TarotPagePreviousValues {
+  id: ID!
+  tarotFilterKeyWords: [String!]!
+}
+
+type TarotPageSubscriptionPayload {
+  mutation: MutationType!
+  node: TarotPage
+  updatedFields: [String!]
+  previousValues: TarotPagePreviousValues
+}
+
+input TarotPageSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: TarotPageWhereInput
+  AND: [TarotPageSubscriptionWhereInput!]
+  OR: [TarotPageSubscriptionWhereInput!]
+  NOT: [TarotPageSubscriptionWhereInput!]
+}
+
+input TarotPageUpdateInput {
+  tarotFilterKeyWords: TarotPageUpdatetarotFilterKeyWordsInput
+}
+
+input TarotPageUpdateManyMutationInput {
+  tarotFilterKeyWords: TarotPageUpdatetarotFilterKeyWordsInput
+}
+
+input TarotPageUpdatetarotFilterKeyWordsInput {
+  set: [String!]
+}
+
+input TarotPageWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  AND: [TarotPageWhereInput!]
+  OR: [TarotPageWhereInput!]
+  NOT: [TarotPageWhereInput!]
+}
+
+input TarotPageWhereUniqueInput {
   id: ID
 }
 

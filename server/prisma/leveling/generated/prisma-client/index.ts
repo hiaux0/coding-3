@@ -20,6 +20,7 @@ export interface Exists {
   tarotArcana: (where?: TarotArcanaWhereInput) => Promise<boolean>;
   tarotCard: (where?: TarotCardWhereInput) => Promise<boolean>;
   tarotExplanation: (where?: TarotExplanationWhereInput) => Promise<boolean>;
+  tarotPage: (where?: TarotPageWhereInput) => Promise<boolean>;
   todoItem: (where?: TodoItemWhereInput) => Promise<boolean>;
   user: (where?: UserWhereInput) => Promise<boolean>;
 }
@@ -123,6 +124,25 @@ export interface Prisma {
     first?: Int;
     last?: Int;
   }) => TarotExplanationConnectionPromise;
+  tarotPage: (where: TarotPageWhereUniqueInput) => TarotPageNullablePromise;
+  tarotPages: (args?: {
+    where?: TarotPageWhereInput;
+    orderBy?: TarotPageOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => FragmentableArray<TarotPage>;
+  tarotPagesConnection: (args?: {
+    where?: TarotPageWhereInput;
+    orderBy?: TarotPageOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => TarotPageConnectionPromise;
   todoItem: (where: TodoItemWhereUniqueInput) => TodoItemNullablePromise;
   todoItems: (args?: {
     where?: TodoItemWhereInput;
@@ -239,6 +259,22 @@ export interface Prisma {
   deleteManyTarotExplanations: (
     where?: TarotExplanationWhereInput
   ) => BatchPayloadPromise;
+  createTarotPage: (data: TarotPageCreateInput) => TarotPagePromise;
+  updateTarotPage: (args: {
+    data: TarotPageUpdateInput;
+    where: TarotPageWhereUniqueInput;
+  }) => TarotPagePromise;
+  updateManyTarotPages: (args: {
+    data: TarotPageUpdateManyMutationInput;
+    where?: TarotPageWhereInput;
+  }) => BatchPayloadPromise;
+  upsertTarotPage: (args: {
+    where: TarotPageWhereUniqueInput;
+    create: TarotPageCreateInput;
+    update: TarotPageUpdateInput;
+  }) => TarotPagePromise;
+  deleteTarotPage: (where: TarotPageWhereUniqueInput) => TarotPagePromise;
+  deleteManyTarotPages: (where?: TarotPageWhereInput) => BatchPayloadPromise;
   createTodoItem: (data: TodoItemCreateInput) => TodoItemPromise;
   updateTodoItem: (args: {
     data: TodoItemUpdateInput;
@@ -292,6 +328,9 @@ export interface Subscription {
   tarotExplanation: (
     where?: TarotExplanationSubscriptionWhereInput
   ) => TarotExplanationSubscriptionPayloadSubscription;
+  tarotPage: (
+    where?: TarotPageSubscriptionWhereInput
+  ) => TarotPageSubscriptionPayloadSubscription;
   todoItem: (
     where?: TodoItemSubscriptionWhereInput
   ) => TodoItemSubscriptionPayloadSubscription;
@@ -308,14 +347,6 @@ export interface ClientConstructor<T> {
  * Types
  */
 
-export type PostOrderByInput =
-  | "id_ASC"
-  | "id_DESC"
-  | "title_ASC"
-  | "title_DESC"
-  | "published_ASC"
-  | "published_DESC";
-
 export type TarotArcanaOrderByInput =
   | "id_ASC"
   | "id_DESC"
@@ -323,6 +354,14 @@ export type TarotArcanaOrderByInput =
   | "family_DESC"
   | "number_ASC"
   | "number_DESC";
+
+export type PostOrderByInput =
+  | "id_ASC"
+  | "id_DESC"
+  | "title_ASC"
+  | "title_DESC"
+  | "published_ASC"
+  | "published_DESC";
 
 export type TarotExplanationOrderByInput =
   | "id_ASC"
@@ -337,6 +376,8 @@ export type TarotCardOrderByInput =
   | "id_DESC"
   | "name_ASC"
   | "name_DESC";
+
+export type TarotPageOrderByInput = "id_ASC" | "id_DESC";
 
 export type TodoItemOrderByInput =
   | "id_ASC"
@@ -356,44 +397,42 @@ export type UserOrderByInput =
 
 export type MutationType = "CREATED" | "UPDATED" | "DELETED";
 
-export interface TarotArcanaUpdateManyMutationInput {
-  family?: Maybe<String>;
-  number?: Maybe<Int>;
+export interface TarotCardCreateInput {
+  id?: Maybe<ID_Input>;
+  arcana?: Maybe<TarotArcanaCreateOneInput>;
+  name: String;
+  keyWords?: Maybe<TarotCardCreatekeyWordsInput>;
+  explanation?: Maybe<TarotExplanationCreateManyWithoutCardNameInput>;
 }
 
 export type PostWhereUniqueInput = AtLeastOne<{
   id: Maybe<ID_Input>;
 }>;
 
-export interface TarotCardUpsertWithoutExplanationInput {
-  update: TarotCardUpdateWithoutExplanationDataInput;
-  create: TarotCardCreateWithoutExplanationInput;
+export type UserWhereUniqueInput = AtLeastOne<{
+  id: Maybe<ID_Input>;
+  email?: Maybe<String>;
+}>;
+
+export interface TarotCardCreateOneWithoutExplanationInput {
+  create?: Maybe<TarotCardCreateWithoutExplanationInput>;
+  connect?: Maybe<TarotCardWhereUniqueInput>;
 }
 
-export interface TarotCardUpdateManyMutationInput {
-  name?: Maybe<String>;
-  keyWords?: Maybe<TarotCardUpdatekeyWordsInput>;
+export interface TarotPageCreatetarotFilterKeyWordsInput {
+  set?: Maybe<String[] | String>;
 }
 
-export interface TarotCardUpdateWithoutExplanationDataInput {
+export interface TarotCardUpdateInput {
   arcana?: Maybe<TarotArcanaUpdateOneInput>;
   name?: Maybe<String>;
   keyWords?: Maybe<TarotCardUpdatekeyWordsInput>;
+  explanation?: Maybe<TarotExplanationUpdateManyWithoutCardNameInput>;
 }
 
-export interface TarotExplanationCreateWithoutCardNameInput {
+export interface TarotPageCreateInput {
   id?: Maybe<ID_Input>;
-  content?: Maybe<String>;
-  source: String;
-}
-
-export interface TarotCardUpdateOneWithoutExplanationInput {
-  create?: Maybe<TarotCardCreateWithoutExplanationInput>;
-  update?: Maybe<TarotCardUpdateWithoutExplanationDataInput>;
-  upsert?: Maybe<TarotCardUpsertWithoutExplanationInput>;
-  delete?: Maybe<Boolean>;
-  disconnect?: Maybe<Boolean>;
-  connect?: Maybe<TarotCardWhereUniqueInput>;
+  tarotFilterKeyWords?: Maybe<TarotPageCreatetarotFilterKeyWordsInput>;
 }
 
 export interface TodoItemSubscriptionWhereInput {
@@ -411,57 +450,51 @@ export interface TodoItemSubscriptionWhereInput {
   >;
 }
 
-export type TarotArcanaWhereUniqueInput = AtLeastOne<{
-  id: Maybe<ID_Input>;
-}>;
-
-export interface TarotArcanaWhereInput {
-  id?: Maybe<ID_Input>;
-  id_not?: Maybe<ID_Input>;
-  id_in?: Maybe<ID_Input[] | ID_Input>;
-  id_not_in?: Maybe<ID_Input[] | ID_Input>;
-  id_lt?: Maybe<ID_Input>;
-  id_lte?: Maybe<ID_Input>;
-  id_gt?: Maybe<ID_Input>;
-  id_gte?: Maybe<ID_Input>;
-  id_contains?: Maybe<ID_Input>;
-  id_not_contains?: Maybe<ID_Input>;
-  id_starts_with?: Maybe<ID_Input>;
-  id_not_starts_with?: Maybe<ID_Input>;
-  id_ends_with?: Maybe<ID_Input>;
-  id_not_ends_with?: Maybe<ID_Input>;
-  family?: Maybe<String>;
-  family_not?: Maybe<String>;
-  family_in?: Maybe<String[] | String>;
-  family_not_in?: Maybe<String[] | String>;
-  family_lt?: Maybe<String>;
-  family_lte?: Maybe<String>;
-  family_gt?: Maybe<String>;
-  family_gte?: Maybe<String>;
-  family_contains?: Maybe<String>;
-  family_not_contains?: Maybe<String>;
-  family_starts_with?: Maybe<String>;
-  family_not_starts_with?: Maybe<String>;
-  family_ends_with?: Maybe<String>;
-  family_not_ends_with?: Maybe<String>;
-  number?: Maybe<Int>;
-  number_not?: Maybe<Int>;
-  number_in?: Maybe<Int[] | Int>;
-  number_not_in?: Maybe<Int[] | Int>;
-  number_lt?: Maybe<Int>;
-  number_lte?: Maybe<Int>;
-  number_gt?: Maybe<Int>;
-  number_gte?: Maybe<Int>;
-  AND?: Maybe<TarotArcanaWhereInput[] | TarotArcanaWhereInput>;
-  OR?: Maybe<TarotArcanaWhereInput[] | TarotArcanaWhereInput>;
-  NOT?: Maybe<TarotArcanaWhereInput[] | TarotArcanaWhereInput>;
+export interface TarotExplanationUpdateManyMutationInput {
+  content?: Maybe<String>;
+  source?: Maybe<String>;
 }
 
-export interface PostCreateInput {
-  id?: Maybe<ID_Input>;
-  title: String;
-  published?: Maybe<Boolean>;
-  author?: Maybe<UserCreateOneWithoutPostsInput>;
+export interface TarotPageSubscriptionWhereInput {
+  mutation_in?: Maybe<MutationType[] | MutationType>;
+  updatedFields_contains?: Maybe<String>;
+  updatedFields_contains_every?: Maybe<String[] | String>;
+  updatedFields_contains_some?: Maybe<String[] | String>;
+  node?: Maybe<TarotPageWhereInput>;
+  AND?: Maybe<
+    TarotPageSubscriptionWhereInput[] | TarotPageSubscriptionWhereInput
+  >;
+  OR?: Maybe<
+    TarotPageSubscriptionWhereInput[] | TarotPageSubscriptionWhereInput
+  >;
+  NOT?: Maybe<
+    TarotPageSubscriptionWhereInput[] | TarotPageSubscriptionWhereInput
+  >;
+}
+
+export interface TarotCardUpsertWithoutExplanationInput {
+  update: TarotCardUpdateWithoutExplanationDataInput;
+  create: TarotCardCreateWithoutExplanationInput;
+}
+
+export interface TarotExplanationSubscriptionWhereInput {
+  mutation_in?: Maybe<MutationType[] | MutationType>;
+  updatedFields_contains?: Maybe<String>;
+  updatedFields_contains_every?: Maybe<String[] | String>;
+  updatedFields_contains_some?: Maybe<String[] | String>;
+  node?: Maybe<TarotExplanationWhereInput>;
+  AND?: Maybe<
+    | TarotExplanationSubscriptionWhereInput[]
+    | TarotExplanationSubscriptionWhereInput
+  >;
+  OR?: Maybe<
+    | TarotExplanationSubscriptionWhereInput[]
+    | TarotExplanationSubscriptionWhereInput
+  >;
+  NOT?: Maybe<
+    | TarotExplanationSubscriptionWhereInput[]
+    | TarotExplanationSubscriptionWhereInput
+  >;
 }
 
 export interface TarotArcanaSubscriptionWhereInput {
@@ -481,252 +514,15 @@ export interface TarotArcanaSubscriptionWhereInput {
   >;
 }
 
-export interface UserCreateOneWithoutPostsInput {
-  create?: Maybe<UserCreateWithoutPostsInput>;
-  connect?: Maybe<UserWhereUniqueInput>;
-}
+export type TarotCardWhereUniqueInput = AtLeastOne<{
+  id: Maybe<ID_Input>;
+}>;
 
-export interface UserUpdateManyMutationInput {
-  email?: Maybe<String>;
-  name?: Maybe<String>;
-}
-
-export interface UserCreateWithoutPostsInput {
-  id?: Maybe<ID_Input>;
-  email?: Maybe<String>;
-  name: String;
-}
-
-export interface PostUpdateManyDataInput {
-  title?: Maybe<String>;
-  published?: Maybe<Boolean>;
-}
-
-export interface PostUpdateInput {
-  title?: Maybe<String>;
-  published?: Maybe<Boolean>;
-  author?: Maybe<UserUpdateOneWithoutPostsInput>;
-}
-
-export interface TarotCardWhereInput {
-  id?: Maybe<ID_Input>;
-  id_not?: Maybe<ID_Input>;
-  id_in?: Maybe<ID_Input[] | ID_Input>;
-  id_not_in?: Maybe<ID_Input[] | ID_Input>;
-  id_lt?: Maybe<ID_Input>;
-  id_lte?: Maybe<ID_Input>;
-  id_gt?: Maybe<ID_Input>;
-  id_gte?: Maybe<ID_Input>;
-  id_contains?: Maybe<ID_Input>;
-  id_not_contains?: Maybe<ID_Input>;
-  id_starts_with?: Maybe<ID_Input>;
-  id_not_starts_with?: Maybe<ID_Input>;
-  id_ends_with?: Maybe<ID_Input>;
-  id_not_ends_with?: Maybe<ID_Input>;
-  arcana?: Maybe<TarotArcanaWhereInput>;
-  name?: Maybe<String>;
-  name_not?: Maybe<String>;
-  name_in?: Maybe<String[] | String>;
-  name_not_in?: Maybe<String[] | String>;
-  name_lt?: Maybe<String>;
-  name_lte?: Maybe<String>;
-  name_gt?: Maybe<String>;
-  name_gte?: Maybe<String>;
-  name_contains?: Maybe<String>;
-  name_not_contains?: Maybe<String>;
-  name_starts_with?: Maybe<String>;
-  name_not_starts_with?: Maybe<String>;
-  name_ends_with?: Maybe<String>;
-  name_not_ends_with?: Maybe<String>;
-  explanation_every?: Maybe<TarotExplanationWhereInput>;
-  explanation_some?: Maybe<TarotExplanationWhereInput>;
-  explanation_none?: Maybe<TarotExplanationWhereInput>;
-  AND?: Maybe<TarotCardWhereInput[] | TarotCardWhereInput>;
-  OR?: Maybe<TarotCardWhereInput[] | TarotCardWhereInput>;
-  NOT?: Maybe<TarotCardWhereInput[] | TarotCardWhereInput>;
-}
-
-export interface UserUpdateOneWithoutPostsInput {
-  create?: Maybe<UserCreateWithoutPostsInput>;
-  update?: Maybe<UserUpdateWithoutPostsDataInput>;
-  upsert?: Maybe<UserUpsertWithoutPostsInput>;
-  delete?: Maybe<Boolean>;
-  disconnect?: Maybe<Boolean>;
-  connect?: Maybe<UserWhereUniqueInput>;
-}
-
-export interface PostUpdateManyWithWhereNestedInput {
-  where: PostScalarWhereInput;
-  data: PostUpdateManyDataInput;
-}
-
-export interface UserUpdateWithoutPostsDataInput {
-  email?: Maybe<String>;
-  name?: Maybe<String>;
-}
-
-export interface PostUpsertWithWhereUniqueWithoutAuthorInput {
-  where: PostWhereUniqueInput;
-  update: PostUpdateWithoutAuthorDataInput;
-  create: PostCreateWithoutAuthorInput;
-}
-
-export interface UserUpsertWithoutPostsInput {
-  update: UserUpdateWithoutPostsDataInput;
-  create: UserCreateWithoutPostsInput;
-}
-
-export interface PostUpdateWithWhereUniqueWithoutAuthorInput {
-  where: PostWhereUniqueInput;
-  data: PostUpdateWithoutAuthorDataInput;
-}
-
-export interface PostUpdateManyMutationInput {
-  title?: Maybe<String>;
-  published?: Maybe<Boolean>;
-}
-
-export interface PostUpdateManyWithoutAuthorInput {
-  create?: Maybe<PostCreateWithoutAuthorInput[] | PostCreateWithoutAuthorInput>;
-  delete?: Maybe<PostWhereUniqueInput[] | PostWhereUniqueInput>;
-  connect?: Maybe<PostWhereUniqueInput[] | PostWhereUniqueInput>;
-  set?: Maybe<PostWhereUniqueInput[] | PostWhereUniqueInput>;
-  disconnect?: Maybe<PostWhereUniqueInput[] | PostWhereUniqueInput>;
-  update?: Maybe<
-    | PostUpdateWithWhereUniqueWithoutAuthorInput[]
-    | PostUpdateWithWhereUniqueWithoutAuthorInput
-  >;
-  upsert?: Maybe<
-    | PostUpsertWithWhereUniqueWithoutAuthorInput[]
-    | PostUpsertWithWhereUniqueWithoutAuthorInput
-  >;
-  deleteMany?: Maybe<PostScalarWhereInput[] | PostScalarWhereInput>;
-  updateMany?: Maybe<
-    PostUpdateManyWithWhereNestedInput[] | PostUpdateManyWithWhereNestedInput
-  >;
-}
-
-export interface TarotExplanationUpdateInput {
-  content?: Maybe<String>;
-  source?: Maybe<String>;
-  cardName?: Maybe<TarotCardUpdateOneWithoutExplanationInput>;
-}
-
-export interface PostCreateWithoutAuthorInput {
+export interface PostCreateInput {
   id?: Maybe<ID_Input>;
   title: String;
   published?: Maybe<Boolean>;
-}
-
-export interface TarotCardCreateWithoutExplanationInput {
-  id?: Maybe<ID_Input>;
-  arcana?: Maybe<TarotArcanaCreateOneInput>;
-  name: String;
-  keyWords?: Maybe<TarotCardCreatekeyWordsInput>;
-}
-
-export interface PostCreateManyWithoutAuthorInput {
-  create?: Maybe<PostCreateWithoutAuthorInput[] | PostCreateWithoutAuthorInput>;
-  connect?: Maybe<PostWhereUniqueInput[] | PostWhereUniqueInput>;
-}
-
-export interface TarotArcanaCreateInput {
-  id?: Maybe<ID_Input>;
-  family?: Maybe<String>;
-  number: Int;
-}
-
-export interface UserCreateInput {
-  id?: Maybe<ID_Input>;
-  email?: Maybe<String>;
-  name: String;
-  posts?: Maybe<PostCreateManyWithoutAuthorInput>;
-}
-
-export interface TarotArcanaUpdateInput {
-  family?: Maybe<String>;
-  number?: Maybe<Int>;
-}
-
-export interface TodoItemUpdateInput {
-  text?: Maybe<String>;
-  done?: Maybe<Boolean>;
-}
-
-export interface TarotCardCreateOneWithoutExplanationInput {
-  create?: Maybe<TarotCardCreateWithoutExplanationInput>;
-  connect?: Maybe<TarotCardWhereUniqueInput>;
-}
-
-export type UserWhereUniqueInput = AtLeastOne<{
-  id: Maybe<ID_Input>;
-  email?: Maybe<String>;
-}>;
-
-export interface TarotCardCreateInput {
-  id?: Maybe<ID_Input>;
-  arcana?: Maybe<TarotArcanaCreateOneInput>;
-  name: String;
-  keyWords?: Maybe<TarotCardCreatekeyWordsInput>;
-  explanation?: Maybe<TarotExplanationCreateManyWithoutCardNameInput>;
-}
-
-export interface UserSubscriptionWhereInput {
-  mutation_in?: Maybe<MutationType[] | MutationType>;
-  updatedFields_contains?: Maybe<String>;
-  updatedFields_contains_every?: Maybe<String[] | String>;
-  updatedFields_contains_some?: Maybe<String[] | String>;
-  node?: Maybe<UserWhereInput>;
-  AND?: Maybe<UserSubscriptionWhereInput[] | UserSubscriptionWhereInput>;
-  OR?: Maybe<UserSubscriptionWhereInput[] | UserSubscriptionWhereInput>;
-  NOT?: Maybe<UserSubscriptionWhereInput[] | UserSubscriptionWhereInput>;
-}
-
-export interface TarotArcanaCreateOneInput {
-  create?: Maybe<TarotArcanaCreateInput>;
-  connect?: Maybe<TarotArcanaWhereUniqueInput>;
-}
-
-export interface TarotCardSubscriptionWhereInput {
-  mutation_in?: Maybe<MutationType[] | MutationType>;
-  updatedFields_contains?: Maybe<String>;
-  updatedFields_contains_every?: Maybe<String[] | String>;
-  updatedFields_contains_some?: Maybe<String[] | String>;
-  node?: Maybe<TarotCardWhereInput>;
-  AND?: Maybe<
-    TarotCardSubscriptionWhereInput[] | TarotCardSubscriptionWhereInput
-  >;
-  OR?: Maybe<
-    TarotCardSubscriptionWhereInput[] | TarotCardSubscriptionWhereInput
-  >;
-  NOT?: Maybe<
-    TarotCardSubscriptionWhereInput[] | TarotCardSubscriptionWhereInput
-  >;
-}
-
-export interface TarotCardCreatekeyWordsInput {
-  set?: Maybe<String[] | String>;
-}
-
-export interface PostSubscriptionWhereInput {
-  mutation_in?: Maybe<MutationType[] | MutationType>;
-  updatedFields_contains?: Maybe<String>;
-  updatedFields_contains_every?: Maybe<String[] | String>;
-  updatedFields_contains_some?: Maybe<String[] | String>;
-  node?: Maybe<PostWhereInput>;
-  AND?: Maybe<PostSubscriptionWhereInput[] | PostSubscriptionWhereInput>;
-  OR?: Maybe<PostSubscriptionWhereInput[] | PostSubscriptionWhereInput>;
-  NOT?: Maybe<PostSubscriptionWhereInput[] | PostSubscriptionWhereInput>;
-}
-
-export interface TarotExplanationCreateManyWithoutCardNameInput {
-  create?: Maybe<
-    | TarotExplanationCreateWithoutCardNameInput[]
-    | TarotExplanationCreateWithoutCardNameInput
-  >;
-  connect?: Maybe<
-    TarotExplanationWhereUniqueInput[] | TarotExplanationWhereUniqueInput
-  >;
+  author?: Maybe<UserCreateOneWithoutPostsInput>;
 }
 
 export interface TarotExplanationWhereInput {
@@ -778,95 +574,9 @@ export interface TarotExplanationWhereInput {
   NOT?: Maybe<TarotExplanationWhereInput[] | TarotExplanationWhereInput>;
 }
 
-export interface TarotExplanationCreateInput {
-  id?: Maybe<ID_Input>;
-  content?: Maybe<String>;
-  source: String;
-  cardName?: Maybe<TarotCardCreateOneWithoutExplanationInput>;
-}
-
-export interface PostScalarWhereInput {
-  id?: Maybe<ID_Input>;
-  id_not?: Maybe<ID_Input>;
-  id_in?: Maybe<ID_Input[] | ID_Input>;
-  id_not_in?: Maybe<ID_Input[] | ID_Input>;
-  id_lt?: Maybe<ID_Input>;
-  id_lte?: Maybe<ID_Input>;
-  id_gt?: Maybe<ID_Input>;
-  id_gte?: Maybe<ID_Input>;
-  id_contains?: Maybe<ID_Input>;
-  id_not_contains?: Maybe<ID_Input>;
-  id_starts_with?: Maybe<ID_Input>;
-  id_not_starts_with?: Maybe<ID_Input>;
-  id_ends_with?: Maybe<ID_Input>;
-  id_not_ends_with?: Maybe<ID_Input>;
-  title?: Maybe<String>;
-  title_not?: Maybe<String>;
-  title_in?: Maybe<String[] | String>;
-  title_not_in?: Maybe<String[] | String>;
-  title_lt?: Maybe<String>;
-  title_lte?: Maybe<String>;
-  title_gt?: Maybe<String>;
-  title_gte?: Maybe<String>;
-  title_contains?: Maybe<String>;
-  title_not_contains?: Maybe<String>;
-  title_starts_with?: Maybe<String>;
-  title_not_starts_with?: Maybe<String>;
-  title_ends_with?: Maybe<String>;
-  title_not_ends_with?: Maybe<String>;
-  published?: Maybe<Boolean>;
-  published_not?: Maybe<Boolean>;
-  AND?: Maybe<PostScalarWhereInput[] | PostScalarWhereInput>;
-  OR?: Maybe<PostScalarWhereInput[] | PostScalarWhereInput>;
-  NOT?: Maybe<PostScalarWhereInput[] | PostScalarWhereInput>;
-}
-
-export interface TarotCardUpdateInput {
-  arcana?: Maybe<TarotArcanaUpdateOneInput>;
-  name?: Maybe<String>;
-  keyWords?: Maybe<TarotCardUpdatekeyWordsInput>;
-  explanation?: Maybe<TarotExplanationUpdateManyWithoutCardNameInput>;
-}
-
-export type TarotExplanationWhereUniqueInput = AtLeastOne<{
-  id: Maybe<ID_Input>;
-}>;
-
-export interface TarotArcanaUpdateOneInput {
-  create?: Maybe<TarotArcanaCreateInput>;
-  update?: Maybe<TarotArcanaUpdateDataInput>;
-  upsert?: Maybe<TarotArcanaUpsertNestedInput>;
-  delete?: Maybe<Boolean>;
-  disconnect?: Maybe<Boolean>;
-  connect?: Maybe<TarotArcanaWhereUniqueInput>;
-}
-
-export type TodoItemWhereUniqueInput = AtLeastOne<{
-  id: Maybe<ID_Input>;
-}>;
-
-export interface TarotArcanaUpdateDataInput {
-  family?: Maybe<String>;
-  number?: Maybe<Int>;
-}
-
-export interface TodoItemUpdateManyMutationInput {
-  text?: Maybe<String>;
-  done?: Maybe<Boolean>;
-}
-
-export interface TarotArcanaUpsertNestedInput {
-  update: TarotArcanaUpdateDataInput;
-  create: TarotArcanaCreateInput;
-}
-
-export interface TarotExplanationUpdateManyMutationInput {
-  content?: Maybe<String>;
-  source?: Maybe<String>;
-}
-
-export interface TarotCardUpdatekeyWordsInput {
-  set?: Maybe<String[] | String>;
+export interface UserCreateOneWithoutPostsInput {
+  create?: Maybe<UserCreateWithoutPostsInput>;
+  connect?: Maybe<UserWhereUniqueInput>;
 }
 
 export interface UserWhereInput {
@@ -920,38 +630,10 @@ export interface UserWhereInput {
   NOT?: Maybe<UserWhereInput[] | UserWhereInput>;
 }
 
-export interface TarotExplanationUpdateManyWithoutCardNameInput {
-  create?: Maybe<
-    | TarotExplanationCreateWithoutCardNameInput[]
-    | TarotExplanationCreateWithoutCardNameInput
-  >;
-  delete?: Maybe<
-    TarotExplanationWhereUniqueInput[] | TarotExplanationWhereUniqueInput
-  >;
-  connect?: Maybe<
-    TarotExplanationWhereUniqueInput[] | TarotExplanationWhereUniqueInput
-  >;
-  set?: Maybe<
-    TarotExplanationWhereUniqueInput[] | TarotExplanationWhereUniqueInput
-  >;
-  disconnect?: Maybe<
-    TarotExplanationWhereUniqueInput[] | TarotExplanationWhereUniqueInput
-  >;
-  update?: Maybe<
-    | TarotExplanationUpdateWithWhereUniqueWithoutCardNameInput[]
-    | TarotExplanationUpdateWithWhereUniqueWithoutCardNameInput
-  >;
-  upsert?: Maybe<
-    | TarotExplanationUpsertWithWhereUniqueWithoutCardNameInput[]
-    | TarotExplanationUpsertWithWhereUniqueWithoutCardNameInput
-  >;
-  deleteMany?: Maybe<
-    TarotExplanationScalarWhereInput[] | TarotExplanationScalarWhereInput
-  >;
-  updateMany?: Maybe<
-    | TarotExplanationUpdateManyWithWhereNestedInput[]
-    | TarotExplanationUpdateManyWithWhereNestedInput
-  >;
+export interface UserCreateWithoutPostsInput {
+  id?: Maybe<ID_Input>;
+  email?: Maybe<String>;
+  name: String;
 }
 
 export interface PostWhereInput {
@@ -991,20 +673,144 @@ export interface PostWhereInput {
   NOT?: Maybe<PostWhereInput[] | PostWhereInput>;
 }
 
-export interface TarotExplanationUpdateWithWhereUniqueWithoutCardNameInput {
-  where: TarotExplanationWhereUniqueInput;
-  data: TarotExplanationUpdateWithoutCardNameDataInput;
+export interface PostUpdateInput {
+  title?: Maybe<String>;
+  published?: Maybe<Boolean>;
+  author?: Maybe<UserUpdateOneWithoutPostsInput>;
 }
 
-export interface UserUpdateInput {
+export interface PostScalarWhereInput {
+  id?: Maybe<ID_Input>;
+  id_not?: Maybe<ID_Input>;
+  id_in?: Maybe<ID_Input[] | ID_Input>;
+  id_not_in?: Maybe<ID_Input[] | ID_Input>;
+  id_lt?: Maybe<ID_Input>;
+  id_lte?: Maybe<ID_Input>;
+  id_gt?: Maybe<ID_Input>;
+  id_gte?: Maybe<ID_Input>;
+  id_contains?: Maybe<ID_Input>;
+  id_not_contains?: Maybe<ID_Input>;
+  id_starts_with?: Maybe<ID_Input>;
+  id_not_starts_with?: Maybe<ID_Input>;
+  id_ends_with?: Maybe<ID_Input>;
+  id_not_ends_with?: Maybe<ID_Input>;
+  title?: Maybe<String>;
+  title_not?: Maybe<String>;
+  title_in?: Maybe<String[] | String>;
+  title_not_in?: Maybe<String[] | String>;
+  title_lt?: Maybe<String>;
+  title_lte?: Maybe<String>;
+  title_gt?: Maybe<String>;
+  title_gte?: Maybe<String>;
+  title_contains?: Maybe<String>;
+  title_not_contains?: Maybe<String>;
+  title_starts_with?: Maybe<String>;
+  title_not_starts_with?: Maybe<String>;
+  title_ends_with?: Maybe<String>;
+  title_not_ends_with?: Maybe<String>;
+  published?: Maybe<Boolean>;
+  published_not?: Maybe<Boolean>;
+  AND?: Maybe<PostScalarWhereInput[] | PostScalarWhereInput>;
+  OR?: Maybe<PostScalarWhereInput[] | PostScalarWhereInput>;
+  NOT?: Maybe<PostScalarWhereInput[] | PostScalarWhereInput>;
+}
+
+export interface UserUpdateOneWithoutPostsInput {
+  create?: Maybe<UserCreateWithoutPostsInput>;
+  update?: Maybe<UserUpdateWithoutPostsDataInput>;
+  upsert?: Maybe<UserUpsertWithoutPostsInput>;
+  delete?: Maybe<Boolean>;
+  disconnect?: Maybe<Boolean>;
+  connect?: Maybe<UserWhereUniqueInput>;
+}
+
+export type TarotExplanationWhereUniqueInput = AtLeastOne<{
+  id: Maybe<ID_Input>;
+}>;
+
+export interface UserUpdateWithoutPostsDataInput {
   email?: Maybe<String>;
   name?: Maybe<String>;
-  posts?: Maybe<PostUpdateManyWithoutAuthorInput>;
 }
 
-export interface TarotExplanationUpdateWithoutCardNameDataInput {
-  content?: Maybe<String>;
-  source?: Maybe<String>;
+export interface PostUpdateWithWhereUniqueWithoutAuthorInput {
+  where: PostWhereUniqueInput;
+  data: PostUpdateWithoutAuthorDataInput;
+}
+
+export interface UserUpsertWithoutPostsInput {
+  update: UserUpdateWithoutPostsDataInput;
+  create: UserCreateWithoutPostsInput;
+}
+
+export type TarotPageWhereUniqueInput = AtLeastOne<{
+  id: Maybe<ID_Input>;
+}>;
+
+export interface PostUpdateManyMutationInput {
+  title?: Maybe<String>;
+  published?: Maybe<Boolean>;
+}
+
+export interface TarotPageWhereInput {
+  id?: Maybe<ID_Input>;
+  id_not?: Maybe<ID_Input>;
+  id_in?: Maybe<ID_Input[] | ID_Input>;
+  id_not_in?: Maybe<ID_Input[] | ID_Input>;
+  id_lt?: Maybe<ID_Input>;
+  id_lte?: Maybe<ID_Input>;
+  id_gt?: Maybe<ID_Input>;
+  id_gte?: Maybe<ID_Input>;
+  id_contains?: Maybe<ID_Input>;
+  id_not_contains?: Maybe<ID_Input>;
+  id_starts_with?: Maybe<ID_Input>;
+  id_not_starts_with?: Maybe<ID_Input>;
+  id_ends_with?: Maybe<ID_Input>;
+  id_not_ends_with?: Maybe<ID_Input>;
+  AND?: Maybe<TarotPageWhereInput[] | TarotPageWhereInput>;
+  OR?: Maybe<TarotPageWhereInput[] | TarotPageWhereInput>;
+  NOT?: Maybe<TarotPageWhereInput[] | TarotPageWhereInput>;
+}
+
+export interface TarotCardUpdateWithoutExplanationDataInput {
+  arcana?: Maybe<TarotArcanaUpdateOneInput>;
+  name?: Maybe<String>;
+  keyWords?: Maybe<TarotCardUpdatekeyWordsInput>;
+}
+
+export interface PostCreateManyWithoutAuthorInput {
+  create?: Maybe<PostCreateWithoutAuthorInput[] | PostCreateWithoutAuthorInput>;
+  connect?: Maybe<PostWhereUniqueInput[] | PostWhereUniqueInput>;
+}
+
+export interface TarotCardUpdateOneWithoutExplanationInput {
+  create?: Maybe<TarotCardCreateWithoutExplanationInput>;
+  update?: Maybe<TarotCardUpdateWithoutExplanationDataInput>;
+  upsert?: Maybe<TarotCardUpsertWithoutExplanationInput>;
+  delete?: Maybe<Boolean>;
+  disconnect?: Maybe<Boolean>;
+  connect?: Maybe<TarotCardWhereUniqueInput>;
+}
+
+export interface TodoItemUpdateManyMutationInput {
+  text?: Maybe<String>;
+  done?: Maybe<Boolean>;
+}
+
+export interface TarotArcanaCreateInput {
+  id?: Maybe<ID_Input>;
+  family?: Maybe<String>;
+  number: Int;
+}
+
+export interface TodoItemUpdateInput {
+  text?: Maybe<String>;
+  done?: Maybe<Boolean>;
+}
+
+export interface TarotArcanaUpdateInput {
+  family?: Maybe<String>;
+  number?: Maybe<Int>;
 }
 
 export interface TodoItemCreateInput {
@@ -1013,15 +819,336 @@ export interface TodoItemCreateInput {
   done?: Maybe<Boolean>;
 }
 
-export interface TarotExplanationUpdateManyDataInput {
+export interface TarotArcanaUpdateManyMutationInput {
+  family?: Maybe<String>;
+  number?: Maybe<Int>;
+}
+
+export interface TarotPageUpdatetarotFilterKeyWordsInput {
+  set?: Maybe<String[] | String>;
+}
+
+export interface TarotExplanationUpdateInput {
+  content?: Maybe<String>;
+  source?: Maybe<String>;
+  cardName?: Maybe<TarotCardUpdateOneWithoutExplanationInput>;
+}
+
+export interface UserSubscriptionWhereInput {
+  mutation_in?: Maybe<MutationType[] | MutationType>;
+  updatedFields_contains?: Maybe<String>;
+  updatedFields_contains_every?: Maybe<String[] | String>;
+  updatedFields_contains_some?: Maybe<String[] | String>;
+  node?: Maybe<UserWhereInput>;
+  AND?: Maybe<UserSubscriptionWhereInput[] | UserSubscriptionWhereInput>;
+  OR?: Maybe<UserSubscriptionWhereInput[] | UserSubscriptionWhereInput>;
+  NOT?: Maybe<UserSubscriptionWhereInput[] | UserSubscriptionWhereInput>;
+}
+
+export interface TarotArcanaCreateOneInput {
+  create?: Maybe<TarotArcanaCreateInput>;
+  connect?: Maybe<TarotArcanaWhereUniqueInput>;
+}
+
+export interface TarotArcanaWhereInput {
+  id?: Maybe<ID_Input>;
+  id_not?: Maybe<ID_Input>;
+  id_in?: Maybe<ID_Input[] | ID_Input>;
+  id_not_in?: Maybe<ID_Input[] | ID_Input>;
+  id_lt?: Maybe<ID_Input>;
+  id_lte?: Maybe<ID_Input>;
+  id_gt?: Maybe<ID_Input>;
+  id_gte?: Maybe<ID_Input>;
+  id_contains?: Maybe<ID_Input>;
+  id_not_contains?: Maybe<ID_Input>;
+  id_starts_with?: Maybe<ID_Input>;
+  id_not_starts_with?: Maybe<ID_Input>;
+  id_ends_with?: Maybe<ID_Input>;
+  id_not_ends_with?: Maybe<ID_Input>;
+  family?: Maybe<String>;
+  family_not?: Maybe<String>;
+  family_in?: Maybe<String[] | String>;
+  family_not_in?: Maybe<String[] | String>;
+  family_lt?: Maybe<String>;
+  family_lte?: Maybe<String>;
+  family_gt?: Maybe<String>;
+  family_gte?: Maybe<String>;
+  family_contains?: Maybe<String>;
+  family_not_contains?: Maybe<String>;
+  family_starts_with?: Maybe<String>;
+  family_not_starts_with?: Maybe<String>;
+  family_ends_with?: Maybe<String>;
+  family_not_ends_with?: Maybe<String>;
+  number?: Maybe<Int>;
+  number_not?: Maybe<Int>;
+  number_in?: Maybe<Int[] | Int>;
+  number_not_in?: Maybe<Int[] | Int>;
+  number_lt?: Maybe<Int>;
+  number_lte?: Maybe<Int>;
+  number_gt?: Maybe<Int>;
+  number_gte?: Maybe<Int>;
+  AND?: Maybe<TarotArcanaWhereInput[] | TarotArcanaWhereInput>;
+  OR?: Maybe<TarotArcanaWhereInput[] | TarotArcanaWhereInput>;
+  NOT?: Maybe<TarotArcanaWhereInput[] | TarotArcanaWhereInput>;
+}
+
+export interface TarotCardCreatekeyWordsInput {
+  set?: Maybe<String[] | String>;
+}
+
+export interface PostSubscriptionWhereInput {
+  mutation_in?: Maybe<MutationType[] | MutationType>;
+  updatedFields_contains?: Maybe<String>;
+  updatedFields_contains_every?: Maybe<String[] | String>;
+  updatedFields_contains_some?: Maybe<String[] | String>;
+  node?: Maybe<PostWhereInput>;
+  AND?: Maybe<PostSubscriptionWhereInput[] | PostSubscriptionWhereInput>;
+  OR?: Maybe<PostSubscriptionWhereInput[] | PostSubscriptionWhereInput>;
+  NOT?: Maybe<PostSubscriptionWhereInput[] | PostSubscriptionWhereInput>;
+}
+
+export interface TarotExplanationCreateManyWithoutCardNameInput {
+  create?: Maybe<
+    | TarotExplanationCreateWithoutCardNameInput[]
+    | TarotExplanationCreateWithoutCardNameInput
+  >;
+  connect?: Maybe<
+    TarotExplanationWhereUniqueInput[] | TarotExplanationWhereUniqueInput
+  >;
+}
+
+export interface TarotCardWhereInput {
+  id?: Maybe<ID_Input>;
+  id_not?: Maybe<ID_Input>;
+  id_in?: Maybe<ID_Input[] | ID_Input>;
+  id_not_in?: Maybe<ID_Input[] | ID_Input>;
+  id_lt?: Maybe<ID_Input>;
+  id_lte?: Maybe<ID_Input>;
+  id_gt?: Maybe<ID_Input>;
+  id_gte?: Maybe<ID_Input>;
+  id_contains?: Maybe<ID_Input>;
+  id_not_contains?: Maybe<ID_Input>;
+  id_starts_with?: Maybe<ID_Input>;
+  id_not_starts_with?: Maybe<ID_Input>;
+  id_ends_with?: Maybe<ID_Input>;
+  id_not_ends_with?: Maybe<ID_Input>;
+  arcana?: Maybe<TarotArcanaWhereInput>;
+  name?: Maybe<String>;
+  name_not?: Maybe<String>;
+  name_in?: Maybe<String[] | String>;
+  name_not_in?: Maybe<String[] | String>;
+  name_lt?: Maybe<String>;
+  name_lte?: Maybe<String>;
+  name_gt?: Maybe<String>;
+  name_gte?: Maybe<String>;
+  name_contains?: Maybe<String>;
+  name_not_contains?: Maybe<String>;
+  name_starts_with?: Maybe<String>;
+  name_not_starts_with?: Maybe<String>;
+  name_ends_with?: Maybe<String>;
+  name_not_ends_with?: Maybe<String>;
+  explanation_every?: Maybe<TarotExplanationWhereInput>;
+  explanation_some?: Maybe<TarotExplanationWhereInput>;
+  explanation_none?: Maybe<TarotExplanationWhereInput>;
+  AND?: Maybe<TarotCardWhereInput[] | TarotCardWhereInput>;
+  OR?: Maybe<TarotCardWhereInput[] | TarotCardWhereInput>;
+  NOT?: Maybe<TarotCardWhereInput[] | TarotCardWhereInput>;
+}
+
+export interface TarotExplanationCreateWithoutCardNameInput {
+  id?: Maybe<ID_Input>;
+  content?: Maybe<String>;
+  source: String;
+}
+
+export interface PostUpdateManyWithWhereNestedInput {
+  where: PostScalarWhereInput;
+  data: PostUpdateManyDataInput;
+}
+
+export interface TarotCardCreateWithoutExplanationInput {
+  id?: Maybe<ID_Input>;
+  arcana?: Maybe<TarotArcanaCreateOneInput>;
+  name: String;
+  keyWords?: Maybe<TarotCardCreatekeyWordsInput>;
+}
+
+export interface PostUpdateWithoutAuthorDataInput {
+  title?: Maybe<String>;
+  published?: Maybe<Boolean>;
+}
+
+export interface TarotArcanaUpdateOneInput {
+  create?: Maybe<TarotArcanaCreateInput>;
+  update?: Maybe<TarotArcanaUpdateDataInput>;
+  upsert?: Maybe<TarotArcanaUpsertNestedInput>;
+  delete?: Maybe<Boolean>;
+  disconnect?: Maybe<Boolean>;
+  connect?: Maybe<TarotArcanaWhereUniqueInput>;
+}
+
+export interface UserUpdateInput {
+  email?: Maybe<String>;
+  name?: Maybe<String>;
+  posts?: Maybe<PostUpdateManyWithoutAuthorInput>;
+}
+
+export interface TarotArcanaUpdateDataInput {
+  family?: Maybe<String>;
+  number?: Maybe<Int>;
+}
+
+export interface UserCreateInput {
+  id?: Maybe<ID_Input>;
+  email?: Maybe<String>;
+  name: String;
+  posts?: Maybe<PostCreateManyWithoutAuthorInput>;
+}
+
+export interface TarotArcanaUpsertNestedInput {
+  update: TarotArcanaUpdateDataInput;
+  create: TarotArcanaCreateInput;
+}
+
+export interface TodoItemWhereInput {
+  id?: Maybe<ID_Input>;
+  id_not?: Maybe<ID_Input>;
+  id_in?: Maybe<ID_Input[] | ID_Input>;
+  id_not_in?: Maybe<ID_Input[] | ID_Input>;
+  id_lt?: Maybe<ID_Input>;
+  id_lte?: Maybe<ID_Input>;
+  id_gt?: Maybe<ID_Input>;
+  id_gte?: Maybe<ID_Input>;
+  id_contains?: Maybe<ID_Input>;
+  id_not_contains?: Maybe<ID_Input>;
+  id_starts_with?: Maybe<ID_Input>;
+  id_not_starts_with?: Maybe<ID_Input>;
+  id_ends_with?: Maybe<ID_Input>;
+  id_not_ends_with?: Maybe<ID_Input>;
+  text?: Maybe<String>;
+  text_not?: Maybe<String>;
+  text_in?: Maybe<String[] | String>;
+  text_not_in?: Maybe<String[] | String>;
+  text_lt?: Maybe<String>;
+  text_lte?: Maybe<String>;
+  text_gt?: Maybe<String>;
+  text_gte?: Maybe<String>;
+  text_contains?: Maybe<String>;
+  text_not_contains?: Maybe<String>;
+  text_starts_with?: Maybe<String>;
+  text_not_starts_with?: Maybe<String>;
+  text_ends_with?: Maybe<String>;
+  text_not_ends_with?: Maybe<String>;
+  done?: Maybe<Boolean>;
+  done_not?: Maybe<Boolean>;
+  AND?: Maybe<TodoItemWhereInput[] | TodoItemWhereInput>;
+  OR?: Maybe<TodoItemWhereInput[] | TodoItemWhereInput>;
+  NOT?: Maybe<TodoItemWhereInput[] | TodoItemWhereInput>;
+}
+
+export interface TarotCardUpdatekeyWordsInput {
+  set?: Maybe<String[] | String>;
+}
+
+export interface TarotPageUpdateInput {
+  tarotFilterKeyWords?: Maybe<TarotPageUpdatetarotFilterKeyWordsInput>;
+}
+
+export interface TarotExplanationUpdateManyWithoutCardNameInput {
+  create?: Maybe<
+    | TarotExplanationCreateWithoutCardNameInput[]
+    | TarotExplanationCreateWithoutCardNameInput
+  >;
+  delete?: Maybe<
+    TarotExplanationWhereUniqueInput[] | TarotExplanationWhereUniqueInput
+  >;
+  connect?: Maybe<
+    TarotExplanationWhereUniqueInput[] | TarotExplanationWhereUniqueInput
+  >;
+  set?: Maybe<
+    TarotExplanationWhereUniqueInput[] | TarotExplanationWhereUniqueInput
+  >;
+  disconnect?: Maybe<
+    TarotExplanationWhereUniqueInput[] | TarotExplanationWhereUniqueInput
+  >;
+  update?: Maybe<
+    | TarotExplanationUpdateWithWhereUniqueWithoutCardNameInput[]
+    | TarotExplanationUpdateWithWhereUniqueWithoutCardNameInput
+  >;
+  upsert?: Maybe<
+    | TarotExplanationUpsertWithWhereUniqueWithoutCardNameInput[]
+    | TarotExplanationUpsertWithWhereUniqueWithoutCardNameInput
+  >;
+  deleteMany?: Maybe<
+    TarotExplanationScalarWhereInput[] | TarotExplanationScalarWhereInput
+  >;
+  updateMany?: Maybe<
+    | TarotExplanationUpdateManyWithWhereNestedInput[]
+    | TarotExplanationUpdateManyWithWhereNestedInput
+  >;
+}
+
+export interface TarotCardSubscriptionWhereInput {
+  mutation_in?: Maybe<MutationType[] | MutationType>;
+  updatedFields_contains?: Maybe<String>;
+  updatedFields_contains_every?: Maybe<String[] | String>;
+  updatedFields_contains_some?: Maybe<String[] | String>;
+  node?: Maybe<TarotCardWhereInput>;
+  AND?: Maybe<
+    TarotCardSubscriptionWhereInput[] | TarotCardSubscriptionWhereInput
+  >;
+  OR?: Maybe<
+    TarotCardSubscriptionWhereInput[] | TarotCardSubscriptionWhereInput
+  >;
+  NOT?: Maybe<
+    TarotCardSubscriptionWhereInput[] | TarotCardSubscriptionWhereInput
+  >;
+}
+
+export interface TarotExplanationUpdateWithWhereUniqueWithoutCardNameInput {
+  where: TarotExplanationWhereUniqueInput;
+  data: TarotExplanationUpdateWithoutCardNameDataInput;
+}
+
+export interface PostUpdateManyDataInput {
+  title?: Maybe<String>;
+  published?: Maybe<Boolean>;
+}
+
+export interface TarotExplanationUpdateWithoutCardNameDataInput {
   content?: Maybe<String>;
   source?: Maybe<String>;
 }
 
-export interface TarotExplanationUpdateManyWithWhereNestedInput {
-  where: TarotExplanationScalarWhereInput;
-  data: TarotExplanationUpdateManyDataInput;
+export interface PostUpdateManyWithoutAuthorInput {
+  create?: Maybe<PostCreateWithoutAuthorInput[] | PostCreateWithoutAuthorInput>;
+  delete?: Maybe<PostWhereUniqueInput[] | PostWhereUniqueInput>;
+  connect?: Maybe<PostWhereUniqueInput[] | PostWhereUniqueInput>;
+  set?: Maybe<PostWhereUniqueInput[] | PostWhereUniqueInput>;
+  disconnect?: Maybe<PostWhereUniqueInput[] | PostWhereUniqueInput>;
+  update?: Maybe<
+    | PostUpdateWithWhereUniqueWithoutAuthorInput[]
+    | PostUpdateWithWhereUniqueWithoutAuthorInput
+  >;
+  upsert?: Maybe<
+    | PostUpsertWithWhereUniqueWithoutAuthorInput[]
+    | PostUpsertWithWhereUniqueWithoutAuthorInput
+  >;
+  deleteMany?: Maybe<PostScalarWhereInput[] | PostScalarWhereInput>;
+  updateMany?: Maybe<
+    PostUpdateManyWithWhereNestedInput[] | PostUpdateManyWithWhereNestedInput
+  >;
 }
+
+export interface TarotExplanationUpsertWithWhereUniqueWithoutCardNameInput {
+  where: TarotExplanationWhereUniqueInput;
+  update: TarotExplanationUpdateWithoutCardNameDataInput;
+  create: TarotExplanationCreateWithoutCardNameInput;
+}
+
+export type TodoItemWhereUniqueInput = AtLeastOne<{
+  id: Maybe<ID_Input>;
+}>;
 
 export interface TarotExplanationScalarWhereInput {
   id?: Maybe<ID_Input>;
@@ -1077,76 +1204,52 @@ export interface TarotExplanationScalarWhereInput {
   >;
 }
 
-export interface TarotExplanationUpsertWithWhereUniqueWithoutCardNameInput {
-  where: TarotExplanationWhereUniqueInput;
-  update: TarotExplanationUpdateWithoutCardNameDataInput;
-  create: TarotExplanationCreateWithoutCardNameInput;
-}
+export type TarotArcanaWhereUniqueInput = AtLeastOne<{
+  id: Maybe<ID_Input>;
+}>;
 
-export interface TarotExplanationSubscriptionWhereInput {
-  mutation_in?: Maybe<MutationType[] | MutationType>;
-  updatedFields_contains?: Maybe<String>;
-  updatedFields_contains_every?: Maybe<String[] | String>;
-  updatedFields_contains_some?: Maybe<String[] | String>;
-  node?: Maybe<TarotExplanationWhereInput>;
-  AND?: Maybe<
-    | TarotExplanationSubscriptionWhereInput[]
-    | TarotExplanationSubscriptionWhereInput
-  >;
-  OR?: Maybe<
-    | TarotExplanationSubscriptionWhereInput[]
-    | TarotExplanationSubscriptionWhereInput
-  >;
-  NOT?: Maybe<
-    | TarotExplanationSubscriptionWhereInput[]
-    | TarotExplanationSubscriptionWhereInput
-  >;
-}
-
-export interface TodoItemWhereInput {
+export interface TarotExplanationCreateInput {
   id?: Maybe<ID_Input>;
-  id_not?: Maybe<ID_Input>;
-  id_in?: Maybe<ID_Input[] | ID_Input>;
-  id_not_in?: Maybe<ID_Input[] | ID_Input>;
-  id_lt?: Maybe<ID_Input>;
-  id_lte?: Maybe<ID_Input>;
-  id_gt?: Maybe<ID_Input>;
-  id_gte?: Maybe<ID_Input>;
-  id_contains?: Maybe<ID_Input>;
-  id_not_contains?: Maybe<ID_Input>;
-  id_starts_with?: Maybe<ID_Input>;
-  id_not_starts_with?: Maybe<ID_Input>;
-  id_ends_with?: Maybe<ID_Input>;
-  id_not_ends_with?: Maybe<ID_Input>;
-  text?: Maybe<String>;
-  text_not?: Maybe<String>;
-  text_in?: Maybe<String[] | String>;
-  text_not_in?: Maybe<String[] | String>;
-  text_lt?: Maybe<String>;
-  text_lte?: Maybe<String>;
-  text_gt?: Maybe<String>;
-  text_gte?: Maybe<String>;
-  text_contains?: Maybe<String>;
-  text_not_contains?: Maybe<String>;
-  text_starts_with?: Maybe<String>;
-  text_not_starts_with?: Maybe<String>;
-  text_ends_with?: Maybe<String>;
-  text_not_ends_with?: Maybe<String>;
-  done?: Maybe<Boolean>;
-  done_not?: Maybe<Boolean>;
-  AND?: Maybe<TodoItemWhereInput[] | TodoItemWhereInput>;
-  OR?: Maybe<TodoItemWhereInput[] | TodoItemWhereInput>;
-  NOT?: Maybe<TodoItemWhereInput[] | TodoItemWhereInput>;
+  content?: Maybe<String>;
+  source: String;
+  cardName?: Maybe<TarotCardCreateOneWithoutExplanationInput>;
 }
 
-export interface PostUpdateWithoutAuthorDataInput {
-  title?: Maybe<String>;
+export interface TarotCardUpdateManyMutationInput {
+  name?: Maybe<String>;
+  keyWords?: Maybe<TarotCardUpdatekeyWordsInput>;
+}
+
+export interface TarotExplanationUpdateManyDataInput {
+  content?: Maybe<String>;
+  source?: Maybe<String>;
+}
+
+export interface TarotExplanationUpdateManyWithWhereNestedInput {
+  where: TarotExplanationScalarWhereInput;
+  data: TarotExplanationUpdateManyDataInput;
+}
+
+export interface UserUpdateManyMutationInput {
+  email?: Maybe<String>;
+  name?: Maybe<String>;
+}
+
+export interface TarotPageUpdateManyMutationInput {
+  tarotFilterKeyWords?: Maybe<TarotPageUpdatetarotFilterKeyWordsInput>;
+}
+
+export interface PostCreateWithoutAuthorInput {
+  id?: Maybe<ID_Input>;
+  title: String;
   published?: Maybe<Boolean>;
 }
 
-export type TarotCardWhereUniqueInput = AtLeastOne<{
-  id: Maybe<ID_Input>;
-}>;
+export interface PostUpsertWithWhereUniqueWithoutAuthorInput {
+  where: PostWhereUniqueInput;
+  update: PostUpdateWithoutAuthorDataInput;
+  create: PostCreateWithoutAuthorInput;
+}
 
 export interface NodeNode {
   id: ID_Output;
@@ -1172,6 +1275,60 @@ export interface UserPreviousValuesSubscription
   id: () => Promise<AsyncIterator<ID_Output>>;
   email: () => Promise<AsyncIterator<String>>;
   name: () => Promise<AsyncIterator<String>>;
+}
+
+export interface TarotExplanation {
+  id: ID_Output;
+  content?: String;
+  source: String;
+}
+
+export interface TarotExplanationPromise
+  extends Promise<TarotExplanation>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  content: () => Promise<String>;
+  source: () => Promise<String>;
+  cardName: <T = TarotCardPromise>() => T;
+}
+
+export interface TarotExplanationSubscription
+  extends Promise<AsyncIterator<TarotExplanation>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  content: () => Promise<AsyncIterator<String>>;
+  source: () => Promise<AsyncIterator<String>>;
+  cardName: <T = TarotCardSubscription>() => T;
+}
+
+export interface TarotExplanationNullablePromise
+  extends Promise<TarotExplanation | null>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  content: () => Promise<String>;
+  source: () => Promise<String>;
+  cardName: <T = TarotCardPromise>() => T;
+}
+
+export interface PostConnection {
+  pageInfo: PageInfo;
+  edges: PostEdge[];
+}
+
+export interface PostConnectionPromise
+  extends Promise<PostConnection>,
+    Fragmentable {
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<PostEdge>>() => T;
+  aggregate: <T = AggregatePostPromise>() => T;
+}
+
+export interface PostConnectionSubscription
+  extends Promise<AsyncIterator<PostConnection>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<PostEdgeSubscription>>>() => T;
+  aggregate: <T = AggregatePostSubscription>() => T;
 }
 
 export interface TarotCard {
@@ -1234,105 +1391,27 @@ export interface TarotCardNullablePromise
   }) => T;
 }
 
-export interface PostConnection {
-  pageInfo: PageInfo;
-  edges: PostEdge[];
+export interface PageInfo {
+  hasNextPage: Boolean;
+  hasPreviousPage: Boolean;
+  startCursor?: String;
+  endCursor?: String;
 }
 
-export interface PostConnectionPromise
-  extends Promise<PostConnection>,
+export interface PageInfoPromise extends Promise<PageInfo>, Fragmentable {
+  hasNextPage: () => Promise<Boolean>;
+  hasPreviousPage: () => Promise<Boolean>;
+  startCursor: () => Promise<String>;
+  endCursor: () => Promise<String>;
+}
+
+export interface PageInfoSubscription
+  extends Promise<AsyncIterator<PageInfo>>,
     Fragmentable {
-  pageInfo: <T = PageInfoPromise>() => T;
-  edges: <T = FragmentableArray<PostEdge>>() => T;
-  aggregate: <T = AggregatePostPromise>() => T;
-}
-
-export interface PostConnectionSubscription
-  extends Promise<AsyncIterator<PostConnection>>,
-    Fragmentable {
-  pageInfo: <T = PageInfoSubscription>() => T;
-  edges: <T = Promise<AsyncIterator<PostEdgeSubscription>>>() => T;
-  aggregate: <T = AggregatePostSubscription>() => T;
-}
-
-export interface TarotExplanation {
-  id: ID_Output;
-  content?: String;
-  source: String;
-}
-
-export interface TarotExplanationPromise
-  extends Promise<TarotExplanation>,
-    Fragmentable {
-  id: () => Promise<ID_Output>;
-  content: () => Promise<String>;
-  source: () => Promise<String>;
-  cardName: <T = TarotCardPromise>() => T;
-}
-
-export interface TarotExplanationSubscription
-  extends Promise<AsyncIterator<TarotExplanation>>,
-    Fragmentable {
-  id: () => Promise<AsyncIterator<ID_Output>>;
-  content: () => Promise<AsyncIterator<String>>;
-  source: () => Promise<AsyncIterator<String>>;
-  cardName: <T = TarotCardSubscription>() => T;
-}
-
-export interface TarotExplanationNullablePromise
-  extends Promise<TarotExplanation | null>,
-    Fragmentable {
-  id: () => Promise<ID_Output>;
-  content: () => Promise<String>;
-  source: () => Promise<String>;
-  cardName: <T = TarotCardPromise>() => T;
-}
-
-export interface TodoItemSubscriptionPayload {
-  mutation: MutationType;
-  node: TodoItem;
-  updatedFields: String[];
-  previousValues: TodoItemPreviousValues;
-}
-
-export interface TodoItemSubscriptionPayloadPromise
-  extends Promise<TodoItemSubscriptionPayload>,
-    Fragmentable {
-  mutation: () => Promise<MutationType>;
-  node: <T = TodoItemPromise>() => T;
-  updatedFields: () => Promise<String[]>;
-  previousValues: <T = TodoItemPreviousValuesPromise>() => T;
-}
-
-export interface TodoItemSubscriptionPayloadSubscription
-  extends Promise<AsyncIterator<TodoItemSubscriptionPayload>>,
-    Fragmentable {
-  mutation: () => Promise<AsyncIterator<MutationType>>;
-  node: <T = TodoItemSubscription>() => T;
-  updatedFields: () => Promise<AsyncIterator<String[]>>;
-  previousValues: <T = TodoItemPreviousValuesSubscription>() => T;
-}
-
-export interface TodoItemPreviousValues {
-  id: ID_Output;
-  text: String;
-  done?: Boolean;
-}
-
-export interface TodoItemPreviousValuesPromise
-  extends Promise<TodoItemPreviousValues>,
-    Fragmentable {
-  id: () => Promise<ID_Output>;
-  text: () => Promise<String>;
-  done: () => Promise<Boolean>;
-}
-
-export interface TodoItemPreviousValuesSubscription
-  extends Promise<AsyncIterator<TodoItemPreviousValues>>,
-    Fragmentable {
-  id: () => Promise<AsyncIterator<ID_Output>>;
-  text: () => Promise<AsyncIterator<String>>;
-  done: () => Promise<AsyncIterator<Boolean>>;
+  hasNextPage: () => Promise<AsyncIterator<Boolean>>;
+  hasPreviousPage: () => Promise<AsyncIterator<Boolean>>;
+  startCursor: () => Promise<AsyncIterator<String>>;
+  endCursor: () => Promise<AsyncIterator<String>>;
 }
 
 export interface AggregateTarotArcana {
@@ -1351,81 +1430,20 @@ export interface AggregateTarotArcanaSubscription
   count: () => Promise<AsyncIterator<Int>>;
 }
 
-export interface BatchPayload {
-  count: Long;
+export interface AggregateUser {
+  count: Int;
 }
 
-export interface BatchPayloadPromise
-  extends Promise<BatchPayload>,
+export interface AggregateUserPromise
+  extends Promise<AggregateUser>,
     Fragmentable {
-  count: () => Promise<Long>;
+  count: () => Promise<Int>;
 }
 
-export interface BatchPayloadSubscription
-  extends Promise<AsyncIterator<BatchPayload>>,
+export interface AggregateUserSubscription
+  extends Promise<AsyncIterator<AggregateUser>>,
     Fragmentable {
-  count: () => Promise<AsyncIterator<Long>>;
-}
-
-export interface UserEdge {
-  node: User;
-  cursor: String;
-}
-
-export interface UserEdgePromise extends Promise<UserEdge>, Fragmentable {
-  node: <T = UserPromise>() => T;
-  cursor: () => Promise<String>;
-}
-
-export interface UserEdgeSubscription
-  extends Promise<AsyncIterator<UserEdge>>,
-    Fragmentable {
-  node: <T = UserSubscription>() => T;
-  cursor: () => Promise<AsyncIterator<String>>;
-}
-
-export interface TarotArcanaEdge {
-  node: TarotArcana;
-  cursor: String;
-}
-
-export interface TarotArcanaEdgePromise
-  extends Promise<TarotArcanaEdge>,
-    Fragmentable {
-  node: <T = TarotArcanaPromise>() => T;
-  cursor: () => Promise<String>;
-}
-
-export interface TarotArcanaEdgeSubscription
-  extends Promise<AsyncIterator<TarotArcanaEdge>>,
-    Fragmentable {
-  node: <T = TarotArcanaSubscription>() => T;
-  cursor: () => Promise<AsyncIterator<String>>;
-}
-
-export interface UserSubscriptionPayload {
-  mutation: MutationType;
-  node: User;
-  updatedFields: String[];
-  previousValues: UserPreviousValues;
-}
-
-export interface UserSubscriptionPayloadPromise
-  extends Promise<UserSubscriptionPayload>,
-    Fragmentable {
-  mutation: () => Promise<MutationType>;
-  node: <T = UserPromise>() => T;
-  updatedFields: () => Promise<String[]>;
-  previousValues: <T = UserPreviousValuesPromise>() => T;
-}
-
-export interface UserSubscriptionPayloadSubscription
-  extends Promise<AsyncIterator<UserSubscriptionPayload>>,
-    Fragmentable {
-  mutation: () => Promise<AsyncIterator<MutationType>>;
-  node: <T = UserSubscription>() => T;
-  updatedFields: () => Promise<AsyncIterator<String[]>>;
-  previousValues: <T = UserPreviousValuesSubscription>() => T;
+  count: () => Promise<AsyncIterator<Int>>;
 }
 
 export interface Post {
@@ -1459,23 +1477,25 @@ export interface PostNullablePromise
   author: <T = UserPromise>() => T;
 }
 
-export interface TodoItemEdge {
-  node: TodoItem;
-  cursor: String;
+export interface UserConnection {
+  pageInfo: PageInfo;
+  edges: UserEdge[];
 }
 
-export interface TodoItemEdgePromise
-  extends Promise<TodoItemEdge>,
+export interface UserConnectionPromise
+  extends Promise<UserConnection>,
     Fragmentable {
-  node: <T = TodoItemPromise>() => T;
-  cursor: () => Promise<String>;
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<UserEdge>>() => T;
+  aggregate: <T = AggregateUserPromise>() => T;
 }
 
-export interface TodoItemEdgeSubscription
-  extends Promise<AsyncIterator<TodoItemEdge>>,
+export interface UserConnectionSubscription
+  extends Promise<AsyncIterator<UserConnection>>,
     Fragmentable {
-  node: <T = TodoItemSubscription>() => T;
-  cursor: () => Promise<AsyncIterator<String>>;
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<UserEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateUserSubscription>() => T;
 }
 
 export interface PostSubscriptionPayload {
@@ -1503,27 +1523,20 @@ export interface PostSubscriptionPayloadSubscription
   previousValues: <T = PostPreviousValuesSubscription>() => T;
 }
 
-export interface PageInfo {
-  hasNextPage: Boolean;
-  hasPreviousPage: Boolean;
-  startCursor?: String;
-  endCursor?: String;
+export interface AggregateTodoItem {
+  count: Int;
 }
 
-export interface PageInfoPromise extends Promise<PageInfo>, Fragmentable {
-  hasNextPage: () => Promise<Boolean>;
-  hasPreviousPage: () => Promise<Boolean>;
-  startCursor: () => Promise<String>;
-  endCursor: () => Promise<String>;
-}
-
-export interface PageInfoSubscription
-  extends Promise<AsyncIterator<PageInfo>>,
+export interface AggregateTodoItemPromise
+  extends Promise<AggregateTodoItem>,
     Fragmentable {
-  hasNextPage: () => Promise<AsyncIterator<Boolean>>;
-  hasPreviousPage: () => Promise<AsyncIterator<Boolean>>;
-  startCursor: () => Promise<AsyncIterator<String>>;
-  endCursor: () => Promise<AsyncIterator<String>>;
+  count: () => Promise<Int>;
+}
+
+export interface AggregateTodoItemSubscription
+  extends Promise<AsyncIterator<AggregateTodoItem>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Int>>;
 }
 
 export interface PostPreviousValues {
@@ -1548,62 +1561,72 @@ export interface PostPreviousValuesSubscription
   published: () => Promise<AsyncIterator<Boolean>>;
 }
 
-export interface AggregateTarotExplanation {
-  count: Int;
-}
-
-export interface AggregateTarotExplanationPromise
-  extends Promise<AggregateTarotExplanation>,
-    Fragmentable {
-  count: () => Promise<Int>;
-}
-
-export interface AggregateTarotExplanationSubscription
-  extends Promise<AsyncIterator<AggregateTarotExplanation>>,
-    Fragmentable {
-  count: () => Promise<AsyncIterator<Int>>;
-}
-
-export interface TarotArcanaConnection {
+export interface TodoItemConnection {
   pageInfo: PageInfo;
-  edges: TarotArcanaEdge[];
+  edges: TodoItemEdge[];
 }
 
-export interface TarotArcanaConnectionPromise
-  extends Promise<TarotArcanaConnection>,
+export interface TodoItemConnectionPromise
+  extends Promise<TodoItemConnection>,
     Fragmentable {
   pageInfo: <T = PageInfoPromise>() => T;
-  edges: <T = FragmentableArray<TarotArcanaEdge>>() => T;
-  aggregate: <T = AggregateTarotArcanaPromise>() => T;
+  edges: <T = FragmentableArray<TodoItemEdge>>() => T;
+  aggregate: <T = AggregateTodoItemPromise>() => T;
 }
 
-export interface TarotArcanaConnectionSubscription
-  extends Promise<AsyncIterator<TarotArcanaConnection>>,
+export interface TodoItemConnectionSubscription
+  extends Promise<AsyncIterator<TodoItemConnection>>,
     Fragmentable {
   pageInfo: <T = PageInfoSubscription>() => T;
-  edges: <T = Promise<AsyncIterator<TarotArcanaEdgeSubscription>>>() => T;
-  aggregate: <T = AggregateTarotArcanaSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<TodoItemEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateTodoItemSubscription>() => T;
 }
 
-export interface TarotExplanationConnection {
-  pageInfo: PageInfo;
-  edges: TarotExplanationEdge[];
+export interface TarotArcanaEdge {
+  node: TarotArcana;
+  cursor: String;
 }
 
-export interface TarotExplanationConnectionPromise
-  extends Promise<TarotExplanationConnection>,
+export interface TarotArcanaEdgePromise
+  extends Promise<TarotArcanaEdge>,
     Fragmentable {
-  pageInfo: <T = PageInfoPromise>() => T;
-  edges: <T = FragmentableArray<TarotExplanationEdge>>() => T;
-  aggregate: <T = AggregateTarotExplanationPromise>() => T;
+  node: <T = TarotArcanaPromise>() => T;
+  cursor: () => Promise<String>;
 }
 
-export interface TarotExplanationConnectionSubscription
-  extends Promise<AsyncIterator<TarotExplanationConnection>>,
+export interface TarotArcanaEdgeSubscription
+  extends Promise<AsyncIterator<TarotArcanaEdge>>,
     Fragmentable {
-  pageInfo: <T = PageInfoSubscription>() => T;
-  edges: <T = Promise<AsyncIterator<TarotExplanationEdgeSubscription>>>() => T;
-  aggregate: <T = AggregateTarotExplanationSubscription>() => T;
+  node: <T = TarotArcanaSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface TodoItem {
+  id: ID_Output;
+  text: String;
+  done?: Boolean;
+}
+
+export interface TodoItemPromise extends Promise<TodoItem>, Fragmentable {
+  id: () => Promise<ID_Output>;
+  text: () => Promise<String>;
+  done: () => Promise<Boolean>;
+}
+
+export interface TodoItemSubscription
+  extends Promise<AsyncIterator<TodoItem>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  text: () => Promise<AsyncIterator<String>>;
+  done: () => Promise<AsyncIterator<Boolean>>;
+}
+
+export interface TodoItemNullablePromise
+  extends Promise<TodoItem | null>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  text: () => Promise<String>;
+  done: () => Promise<Boolean>;
 }
 
 export interface TarotArcanaSubscriptionPayload {
@@ -1631,22 +1654,22 @@ export interface TarotArcanaSubscriptionPayloadSubscription
   previousValues: <T = TarotArcanaPreviousValuesSubscription>() => T;
 }
 
-export interface TarotCardEdge {
-  node: TarotCard;
+export interface TarotPageEdge {
+  node: TarotPage;
   cursor: String;
 }
 
-export interface TarotCardEdgePromise
-  extends Promise<TarotCardEdge>,
+export interface TarotPageEdgePromise
+  extends Promise<TarotPageEdge>,
     Fragmentable {
-  node: <T = TarotCardPromise>() => T;
+  node: <T = TarotPagePromise>() => T;
   cursor: () => Promise<String>;
 }
 
-export interface TarotCardEdgeSubscription
-  extends Promise<AsyncIterator<TarotCardEdge>>,
+export interface TarotPageEdgeSubscription
+  extends Promise<AsyncIterator<TarotPageEdge>>,
     Fragmentable {
-  node: <T = TarotCardSubscription>() => T;
+  node: <T = TarotPageSubscription>() => T;
   cursor: () => Promise<AsyncIterator<String>>;
 }
 
@@ -1727,53 +1750,41 @@ export interface UserNullablePromise
   }) => T;
 }
 
-export interface TarotArcana {
-  id: ID_Output;
-  family?: String;
-  number: Int;
-}
-
-export interface TarotArcanaPromise extends Promise<TarotArcana>, Fragmentable {
-  id: () => Promise<ID_Output>;
-  family: () => Promise<String>;
-  number: () => Promise<Int>;
-}
-
-export interface TarotArcanaSubscription
-  extends Promise<AsyncIterator<TarotArcana>>,
-    Fragmentable {
-  id: () => Promise<AsyncIterator<ID_Output>>;
-  family: () => Promise<AsyncIterator<String>>;
-  number: () => Promise<AsyncIterator<Int>>;
-}
-
-export interface TarotArcanaNullablePromise
-  extends Promise<TarotArcana | null>,
-    Fragmentable {
-  id: () => Promise<ID_Output>;
-  family: () => Promise<String>;
-  number: () => Promise<Int>;
-}
-
-export interface UserConnection {
+export interface TarotArcanaConnection {
   pageInfo: PageInfo;
-  edges: UserEdge[];
+  edges: TarotArcanaEdge[];
 }
 
-export interface UserConnectionPromise
-  extends Promise<UserConnection>,
+export interface TarotArcanaConnectionPromise
+  extends Promise<TarotArcanaConnection>,
     Fragmentable {
   pageInfo: <T = PageInfoPromise>() => T;
-  edges: <T = FragmentableArray<UserEdge>>() => T;
-  aggregate: <T = AggregateUserPromise>() => T;
+  edges: <T = FragmentableArray<TarotArcanaEdge>>() => T;
+  aggregate: <T = AggregateTarotArcanaPromise>() => T;
 }
 
-export interface UserConnectionSubscription
-  extends Promise<AsyncIterator<UserConnection>>,
+export interface TarotArcanaConnectionSubscription
+  extends Promise<AsyncIterator<TarotArcanaConnection>>,
     Fragmentable {
   pageInfo: <T = PageInfoSubscription>() => T;
-  edges: <T = Promise<AsyncIterator<UserEdgeSubscription>>>() => T;
-  aggregate: <T = AggregateUserSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<TarotArcanaEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateTarotArcanaSubscription>() => T;
+}
+
+export interface AggregateTarotExplanation {
+  count: Int;
+}
+
+export interface AggregateTarotExplanationPromise
+  extends Promise<AggregateTarotExplanation>,
+    Fragmentable {
+  count: () => Promise<Int>;
+}
+
+export interface AggregateTarotExplanationSubscription
+  extends Promise<AsyncIterator<AggregateTarotExplanation>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Int>>;
 }
 
 export interface TarotCardSubscriptionPayload {
@@ -1801,25 +1812,25 @@ export interface TarotCardSubscriptionPayloadSubscription
   previousValues: <T = TarotCardPreviousValuesSubscription>() => T;
 }
 
-export interface TodoItemConnection {
+export interface TarotExplanationConnection {
   pageInfo: PageInfo;
-  edges: TodoItemEdge[];
+  edges: TarotExplanationEdge[];
 }
 
-export interface TodoItemConnectionPromise
-  extends Promise<TodoItemConnection>,
+export interface TarotExplanationConnectionPromise
+  extends Promise<TarotExplanationConnection>,
     Fragmentable {
   pageInfo: <T = PageInfoPromise>() => T;
-  edges: <T = FragmentableArray<TodoItemEdge>>() => T;
-  aggregate: <T = AggregateTodoItemPromise>() => T;
+  edges: <T = FragmentableArray<TarotExplanationEdge>>() => T;
+  aggregate: <T = AggregateTarotExplanationPromise>() => T;
 }
 
-export interface TodoItemConnectionSubscription
-  extends Promise<AsyncIterator<TodoItemConnection>>,
+export interface TarotExplanationConnectionSubscription
+  extends Promise<AsyncIterator<TarotExplanationConnection>>,
     Fragmentable {
   pageInfo: <T = PageInfoSubscription>() => T;
-  edges: <T = Promise<AsyncIterator<TodoItemEdgeSubscription>>>() => T;
-  aggregate: <T = AggregateTodoItemSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<TarotExplanationEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateTarotExplanationSubscription>() => T;
 }
 
 export interface TarotCardPreviousValues {
@@ -1844,22 +1855,22 @@ export interface TarotCardPreviousValuesSubscription
   keyWords: () => Promise<AsyncIterator<String[]>>;
 }
 
-export interface TarotExplanationEdge {
-  node: TarotExplanation;
+export interface TarotCardEdge {
+  node: TarotCard;
   cursor: String;
 }
 
-export interface TarotExplanationEdgePromise
-  extends Promise<TarotExplanationEdge>,
+export interface TarotCardEdgePromise
+  extends Promise<TarotCardEdge>,
     Fragmentable {
-  node: <T = TarotExplanationPromise>() => T;
+  node: <T = TarotCardPromise>() => T;
   cursor: () => Promise<String>;
 }
 
-export interface TarotExplanationEdgeSubscription
-  extends Promise<AsyncIterator<TarotExplanationEdge>>,
+export interface TarotCardEdgeSubscription
+  extends Promise<AsyncIterator<TarotCardEdge>>,
     Fragmentable {
-  node: <T = TarotExplanationSubscription>() => T;
+  node: <T = TarotCardSubscription>() => T;
   cursor: () => Promise<AsyncIterator<String>>;
 }
 
@@ -1882,6 +1893,94 @@ export interface TarotCardConnectionSubscription
   pageInfo: <T = PageInfoSubscription>() => T;
   edges: <T = Promise<AsyncIterator<TarotCardEdgeSubscription>>>() => T;
   aggregate: <T = AggregateTarotCardSubscription>() => T;
+}
+
+export interface TodoItemPreviousValues {
+  id: ID_Output;
+  text: String;
+  done?: Boolean;
+}
+
+export interface TodoItemPreviousValuesPromise
+  extends Promise<TodoItemPreviousValues>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  text: () => Promise<String>;
+  done: () => Promise<Boolean>;
+}
+
+export interface TodoItemPreviousValuesSubscription
+  extends Promise<AsyncIterator<TodoItemPreviousValues>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  text: () => Promise<AsyncIterator<String>>;
+  done: () => Promise<AsyncIterator<Boolean>>;
+}
+
+export interface BatchPayload {
+  count: Long;
+}
+
+export interface BatchPayloadPromise
+  extends Promise<BatchPayload>,
+    Fragmentable {
+  count: () => Promise<Long>;
+}
+
+export interface BatchPayloadSubscription
+  extends Promise<AsyncIterator<BatchPayload>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Long>>;
+}
+
+export interface UserSubscriptionPayload {
+  mutation: MutationType;
+  node: User;
+  updatedFields: String[];
+  previousValues: UserPreviousValues;
+}
+
+export interface UserSubscriptionPayloadPromise
+  extends Promise<UserSubscriptionPayload>,
+    Fragmentable {
+  mutation: () => Promise<MutationType>;
+  node: <T = UserPromise>() => T;
+  updatedFields: () => Promise<String[]>;
+  previousValues: <T = UserPreviousValuesPromise>() => T;
+}
+
+export interface UserSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<UserSubscriptionPayload>>,
+    Fragmentable {
+  mutation: () => Promise<AsyncIterator<MutationType>>;
+  node: <T = UserSubscription>() => T;
+  updatedFields: () => Promise<AsyncIterator<String[]>>;
+  previousValues: <T = UserPreviousValuesSubscription>() => T;
+}
+
+export interface TarotExplanationSubscriptionPayload {
+  mutation: MutationType;
+  node: TarotExplanation;
+  updatedFields: String[];
+  previousValues: TarotExplanationPreviousValues;
+}
+
+export interface TarotExplanationSubscriptionPayloadPromise
+  extends Promise<TarotExplanationSubscriptionPayload>,
+    Fragmentable {
+  mutation: () => Promise<MutationType>;
+  node: <T = TarotExplanationPromise>() => T;
+  updatedFields: () => Promise<String[]>;
+  previousValues: <T = TarotExplanationPreviousValuesPromise>() => T;
+}
+
+export interface TarotExplanationSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<TarotExplanationSubscriptionPayload>>,
+    Fragmentable {
+  mutation: () => Promise<AsyncIterator<MutationType>>;
+  node: <T = TarotExplanationSubscription>() => T;
+  updatedFields: () => Promise<AsyncIterator<String[]>>;
+  previousValues: <T = TarotExplanationPreviousValuesSubscription>() => T;
 }
 
 export interface PostEdge {
@@ -1923,29 +2022,97 @@ export interface TarotExplanationPreviousValuesSubscription
   source: () => Promise<AsyncIterator<String>>;
 }
 
-export interface TarotExplanationSubscriptionPayload {
-  mutation: MutationType;
-  node: TarotExplanation;
-  updatedFields: String[];
-  previousValues: TarotExplanationPreviousValues;
+export interface TarotPageConnection {
+  pageInfo: PageInfo;
+  edges: TarotPageEdge[];
 }
 
-export interface TarotExplanationSubscriptionPayloadPromise
-  extends Promise<TarotExplanationSubscriptionPayload>,
+export interface TarotPageConnectionPromise
+  extends Promise<TarotPageConnection>,
+    Fragmentable {
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<TarotPageEdge>>() => T;
+  aggregate: <T = AggregateTarotPagePromise>() => T;
+}
+
+export interface TarotPageConnectionSubscription
+  extends Promise<AsyncIterator<TarotPageConnection>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<TarotPageEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateTarotPageSubscription>() => T;
+}
+
+export interface TarotArcana {
+  id: ID_Output;
+  family?: String;
+  number: Int;
+}
+
+export interface TarotArcanaPromise extends Promise<TarotArcana>, Fragmentable {
+  id: () => Promise<ID_Output>;
+  family: () => Promise<String>;
+  number: () => Promise<Int>;
+}
+
+export interface TarotArcanaSubscription
+  extends Promise<AsyncIterator<TarotArcana>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  family: () => Promise<AsyncIterator<String>>;
+  number: () => Promise<AsyncIterator<Int>>;
+}
+
+export interface TarotArcanaNullablePromise
+  extends Promise<TarotArcana | null>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  family: () => Promise<String>;
+  number: () => Promise<Int>;
+}
+
+export interface TarotExplanationEdge {
+  node: TarotExplanation;
+  cursor: String;
+}
+
+export interface TarotExplanationEdgePromise
+  extends Promise<TarotExplanationEdge>,
+    Fragmentable {
+  node: <T = TarotExplanationPromise>() => T;
+  cursor: () => Promise<String>;
+}
+
+export interface TarotExplanationEdgeSubscription
+  extends Promise<AsyncIterator<TarotExplanationEdge>>,
+    Fragmentable {
+  node: <T = TarotExplanationSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface TodoItemSubscriptionPayload {
+  mutation: MutationType;
+  node: TodoItem;
+  updatedFields: String[];
+  previousValues: TodoItemPreviousValues;
+}
+
+export interface TodoItemSubscriptionPayloadPromise
+  extends Promise<TodoItemSubscriptionPayload>,
     Fragmentable {
   mutation: () => Promise<MutationType>;
-  node: <T = TarotExplanationPromise>() => T;
+  node: <T = TodoItemPromise>() => T;
   updatedFields: () => Promise<String[]>;
-  previousValues: <T = TarotExplanationPreviousValuesPromise>() => T;
+  previousValues: <T = TodoItemPreviousValuesPromise>() => T;
 }
 
-export interface TarotExplanationSubscriptionPayloadSubscription
-  extends Promise<AsyncIterator<TarotExplanationSubscriptionPayload>>,
+export interface TodoItemSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<TodoItemSubscriptionPayload>>,
     Fragmentable {
   mutation: () => Promise<AsyncIterator<MutationType>>;
-  node: <T = TarotExplanationSubscription>() => T;
+  node: <T = TodoItemSubscription>() => T;
   updatedFields: () => Promise<AsyncIterator<String[]>>;
-  previousValues: <T = TarotExplanationPreviousValuesSubscription>() => T;
+  previousValues: <T = TodoItemPreviousValuesSubscription>() => T;
 }
 
 export interface AggregatePost {
@@ -1964,20 +2131,48 @@ export interface AggregatePostSubscription
   count: () => Promise<AsyncIterator<Int>>;
 }
 
-export interface AggregateUser {
-  count: Int;
+export interface TarotPagePreviousValues {
+  id: ID_Output;
+  tarotFilterKeyWords: String[];
 }
 
-export interface AggregateUserPromise
-  extends Promise<AggregateUser>,
+export interface TarotPagePreviousValuesPromise
+  extends Promise<TarotPagePreviousValues>,
     Fragmentable {
-  count: () => Promise<Int>;
+  id: () => Promise<ID_Output>;
+  tarotFilterKeyWords: () => Promise<String[]>;
 }
 
-export interface AggregateUserSubscription
-  extends Promise<AsyncIterator<AggregateUser>>,
+export interface TarotPagePreviousValuesSubscription
+  extends Promise<AsyncIterator<TarotPagePreviousValues>>,
     Fragmentable {
-  count: () => Promise<AsyncIterator<Int>>;
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  tarotFilterKeyWords: () => Promise<AsyncIterator<String[]>>;
+}
+
+export interface TarotPageSubscriptionPayload {
+  mutation: MutationType;
+  node: TarotPage;
+  updatedFields: String[];
+  previousValues: TarotPagePreviousValues;
+}
+
+export interface TarotPageSubscriptionPayloadPromise
+  extends Promise<TarotPageSubscriptionPayload>,
+    Fragmentable {
+  mutation: () => Promise<MutationType>;
+  node: <T = TarotPagePromise>() => T;
+  updatedFields: () => Promise<String[]>;
+  previousValues: <T = TarotPagePreviousValuesPromise>() => T;
+}
+
+export interface TarotPageSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<TarotPageSubscriptionPayload>>,
+    Fragmentable {
+  mutation: () => Promise<AsyncIterator<MutationType>>;
+  node: <T = TarotPageSubscription>() => T;
+  updatedFields: () => Promise<AsyncIterator<String[]>>;
+  previousValues: <T = TarotPagePreviousValuesSubscription>() => T;
 }
 
 export interface AggregateTarotCard {
@@ -1996,48 +2191,80 @@ export interface AggregateTarotCardSubscription
   count: () => Promise<AsyncIterator<Int>>;
 }
 
-export interface TodoItem {
+export interface TarotPage {
   id: ID_Output;
-  text: String;
-  done?: Boolean;
+  tarotFilterKeyWords: String[];
 }
 
-export interface TodoItemPromise extends Promise<TodoItem>, Fragmentable {
+export interface TarotPagePromise extends Promise<TarotPage>, Fragmentable {
   id: () => Promise<ID_Output>;
-  text: () => Promise<String>;
-  done: () => Promise<Boolean>;
+  tarotFilterKeyWords: () => Promise<String[]>;
 }
 
-export interface TodoItemSubscription
-  extends Promise<AsyncIterator<TodoItem>>,
+export interface TarotPageSubscription
+  extends Promise<AsyncIterator<TarotPage>>,
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
-  text: () => Promise<AsyncIterator<String>>;
-  done: () => Promise<AsyncIterator<Boolean>>;
+  tarotFilterKeyWords: () => Promise<AsyncIterator<String[]>>;
 }
 
-export interface TodoItemNullablePromise
-  extends Promise<TodoItem | null>,
+export interface TarotPageNullablePromise
+  extends Promise<TarotPage | null>,
     Fragmentable {
   id: () => Promise<ID_Output>;
-  text: () => Promise<String>;
-  done: () => Promise<Boolean>;
+  tarotFilterKeyWords: () => Promise<String[]>;
 }
 
-export interface AggregateTodoItem {
+export interface AggregateTarotPage {
   count: Int;
 }
 
-export interface AggregateTodoItemPromise
-  extends Promise<AggregateTodoItem>,
+export interface AggregateTarotPagePromise
+  extends Promise<AggregateTarotPage>,
     Fragmentable {
   count: () => Promise<Int>;
 }
 
-export interface AggregateTodoItemSubscription
-  extends Promise<AsyncIterator<AggregateTodoItem>>,
+export interface AggregateTarotPageSubscription
+  extends Promise<AsyncIterator<AggregateTarotPage>>,
     Fragmentable {
   count: () => Promise<AsyncIterator<Int>>;
+}
+
+export interface TodoItemEdge {
+  node: TodoItem;
+  cursor: String;
+}
+
+export interface TodoItemEdgePromise
+  extends Promise<TodoItemEdge>,
+    Fragmentable {
+  node: <T = TodoItemPromise>() => T;
+  cursor: () => Promise<String>;
+}
+
+export interface TodoItemEdgeSubscription
+  extends Promise<AsyncIterator<TodoItemEdge>>,
+    Fragmentable {
+  node: <T = TodoItemSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface UserEdge {
+  node: User;
+  cursor: String;
+}
+
+export interface UserEdgePromise extends Promise<UserEdge>, Fragmentable {
+  node: <T = UserPromise>() => T;
+  cursor: () => Promise<String>;
+}
+
+export interface UserEdgeSubscription
+  extends Promise<AsyncIterator<UserEdge>>,
+    Fragmentable {
+  node: <T = UserSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
 }
 
 /*
@@ -2048,6 +2275,12 @@ export type Int = number;
 export type Long = string;
 
 /*
+The `ID` scalar type represents a unique identifier, often used to refetch an object or as key for a cache. The ID type appears in a JSON response as a String; however, it is not intended to be human-readable. When expected as an input type, any string (such as `"4"`) or integer (such as `4`) input value will be accepted as an ID.
+*/
+export type ID_Input = string | number;
+export type ID_Output = string;
+
+/*
 The `String` scalar type represents textual data, represented as UTF-8 character sequences. The String type is most often used by GraphQL to represent free-form human-readable text.
 */
 export type String = string;
@@ -2056,12 +2289,6 @@ export type String = string;
 The `Boolean` scalar type represents `true` or `false`.
 */
 export type Boolean = boolean;
-
-/*
-The `ID` scalar type represents a unique identifier, often used to refetch an object or as key for a cache. The ID type appears in a JSON response as a String; however, it is not intended to be human-readable. When expected as an input type, any string (such as `"4"`) or integer (such as `4`) input value will be accepted as an ID.
-*/
-export type ID_Input = string | number;
-export type ID_Output = string;
 
 /**
  * Model Metadata
@@ -2090,6 +2317,10 @@ export const models: Model[] = [
   },
   {
     name: "TarotCard",
+    embedded: false
+  },
+  {
+    name: "TarotPage",
     embedded: false
   }
 ];

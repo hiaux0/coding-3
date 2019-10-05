@@ -40,6 +40,10 @@ export interface NexusPrismaTypes {
       TarotCardConnection: TarotCardConnectionObject
       TarotCardEdge: TarotCardEdgeObject
       AggregateTarotCard: AggregateTarotCardObject
+      TarotPage: TarotPageObject
+      TarotPageConnection: TarotPageConnectionObject
+      TarotPageEdge: TarotPageEdgeObject
+      AggregateTarotPage: AggregateTarotPageObject
       Mutation: MutationObject
       BatchPayload: BatchPayloadObject
       Subscription: SubscriptionObject
@@ -55,6 +59,8 @@ export interface NexusPrismaTypes {
       TarotExplanationPreviousValues: TarotExplanationPreviousValuesObject
       TarotCardSubscriptionPayload: TarotCardSubscriptionPayloadObject
       TarotCardPreviousValues: TarotCardPreviousValuesObject
+      TarotPageSubscriptionPayload: TarotPageSubscriptionPayloadObject
+      TarotPagePreviousValues: TarotPagePreviousValuesObject
     }
     fieldsDetails: {
       Query: QueryFieldDetails
@@ -83,6 +89,10 @@ export interface NexusPrismaTypes {
       TarotCardConnection: TarotCardConnectionFieldDetails
       TarotCardEdge: TarotCardEdgeFieldDetails
       AggregateTarotCard: AggregateTarotCardFieldDetails
+      TarotPage: TarotPageFieldDetails
+      TarotPageConnection: TarotPageConnectionFieldDetails
+      TarotPageEdge: TarotPageEdgeFieldDetails
+      AggregateTarotPage: AggregateTarotPageFieldDetails
       Mutation: MutationFieldDetails
       BatchPayload: BatchPayloadFieldDetails
       Subscription: SubscriptionFieldDetails
@@ -98,6 +108,8 @@ export interface NexusPrismaTypes {
       TarotExplanationPreviousValues: TarotExplanationPreviousValuesFieldDetails
       TarotCardSubscriptionPayload: TarotCardSubscriptionPayloadFieldDetails
       TarotCardPreviousValues: TarotCardPreviousValuesFieldDetails
+      TarotPageSubscriptionPayload: TarotPageSubscriptionPayloadFieldDetails
+      TarotPagePreviousValues: TarotPagePreviousValuesFieldDetails
     }
   }
   inputTypes: {
@@ -114,6 +126,8 @@ export interface NexusPrismaTypes {
       TarotExplanationWhereInput: TarotExplanationWhereInputInputObject
       TarotCardWhereInput: TarotCardWhereInputInputObject
       TarotCardWhereUniqueInput: TarotCardWhereUniqueInputInputObject
+      TarotPageWhereUniqueInput: TarotPageWhereUniqueInputInputObject
+      TarotPageWhereInput: TarotPageWhereInputInputObject
       UserCreateInput: UserCreateInputInputObject
       PostCreateManyWithoutAuthorInput: PostCreateManyWithoutAuthorInputInputObject
       PostCreateWithoutAuthorInput: PostCreateWithoutAuthorInputInputObject
@@ -166,12 +180,18 @@ export interface NexusPrismaTypes {
       TarotExplanationUpdateManyWithWhereNestedInput: TarotExplanationUpdateManyWithWhereNestedInputInputObject
       TarotExplanationUpdateManyDataInput: TarotExplanationUpdateManyDataInputInputObject
       TarotCardUpdateManyMutationInput: TarotCardUpdateManyMutationInputInputObject
+      TarotPageCreateInput: TarotPageCreateInputInputObject
+      TarotPageCreatetarotFilterKeyWordsInput: TarotPageCreatetarotFilterKeyWordsInputInputObject
+      TarotPageUpdateInput: TarotPageUpdateInputInputObject
+      TarotPageUpdatetarotFilterKeyWordsInput: TarotPageUpdatetarotFilterKeyWordsInputInputObject
+      TarotPageUpdateManyMutationInput: TarotPageUpdateManyMutationInputInputObject
       UserSubscriptionWhereInput: UserSubscriptionWhereInputInputObject
       PostSubscriptionWhereInput: PostSubscriptionWhereInputInputObject
       TodoItemSubscriptionWhereInput: TodoItemSubscriptionWhereInputInputObject
       TarotArcanaSubscriptionWhereInput: TarotArcanaSubscriptionWhereInputInputObject
       TarotExplanationSubscriptionWhereInput: TarotExplanationSubscriptionWhereInputInputObject
       TarotCardSubscriptionWhereInput: TarotCardSubscriptionWhereInputInputObject
+      TarotPageSubscriptionWhereInput: TarotPageSubscriptionWhereInputInputObject
     }
   }
   enumTypes: {
@@ -181,6 +201,7 @@ export interface NexusPrismaTypes {
     TarotArcanaOrderByInput: TarotArcanaOrderByInputValues,
     TarotExplanationOrderByInput: TarotExplanationOrderByInputValues,
     TarotCardOrderByInput: TarotCardOrderByInputValues,
+    TarotPageOrderByInput: TarotPageOrderByInputValues,
     MutationType: MutationTypeValues,
   }
 }
@@ -207,6 +228,9 @@ type QueryObject =
   | { name: 'tarotCard', args?: QueryTarotCardArgs[] | false, alias?: string  } 
   | { name: 'tarotCards', args?: QueryTarotCardsArgs[] | false, alias?: string  } 
   | { name: 'tarotCardsConnection', args?: QueryTarotCardsConnectionArgs[] | false, alias?: string  } 
+  | { name: 'tarotPage', args?: QueryTarotPageArgs[] | false, alias?: string  } 
+  | { name: 'tarotPages', args?: QueryTarotPagesArgs[] | false, alias?: string  } 
+  | { name: 'tarotPagesConnection', args?: QueryTarotPagesConnectionArgs[] | false, alias?: string  } 
 
 type QueryFields =
   | 'user'
@@ -227,6 +251,9 @@ type QueryFields =
   | 'tarotCard'
   | 'tarotCards'
   | 'tarotCardsConnection'
+  | 'tarotPage'
+  | 'tarotPages'
+  | 'tarotPagesConnection'
 
 
 type QueryUserArgs =
@@ -330,6 +357,24 @@ type QueryTarotCardsArgs =
   | 'first'
   | 'last'
 type QueryTarotCardsConnectionArgs =
+  | 'where'
+  | 'orderBy'
+  | 'skip'
+  | 'after'
+  | 'before'
+  | 'first'
+  | 'last'
+type QueryTarotPageArgs =
+  | 'where'
+type QueryTarotPagesArgs =
+  | 'where'
+  | 'orderBy'
+  | 'skip'
+  | 'after'
+  | 'before'
+  | 'first'
+  | 'last'
+type QueryTarotPagesConnectionArgs =
   | 'where'
   | 'orderBy'
   | 'skip'
@@ -573,6 +618,45 @@ export interface QueryFieldDetails {
       context: core.GetGen<"context">,
       info?: GraphQLResolveInfo
     ) => Promise<prisma.TarotCardConnection> | prisma.TarotCardConnection
+  }
+  tarotPage: {
+    type: 'TarotPage'
+    args: Record<QueryTarotPageArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"Query">,
+      args: { where: TarotPageWhereUniqueInput }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.TarotPage | null> | prisma.TarotPage | null
+  }
+  tarotPages: {
+    type: 'TarotPage'
+    args: Record<QueryTarotPagesArgs, core.NexusArgDef<string>>
+    description: string
+    list: true
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Query">,
+      args: { where?: TarotPageWhereInput | null, orderBy?: prisma.TarotPageOrderByInput | null, skip?: number | null, after?: string | null, before?: string | null, first?: number | null, last?: number | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.TarotPage[]> | prisma.TarotPage[]
+  }
+  tarotPagesConnection: {
+    type: 'TarotPageConnection'
+    args: Record<QueryTarotPagesConnectionArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Query">,
+      args: { where?: TarotPageWhereInput | null, orderBy?: prisma.TarotPageOrderByInput | null, skip?: number | null, after?: string | null, before?: string | null, first?: number | null, last?: number | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.TarotPageConnection> | prisma.TarotPageConnection
   }
 }
   
@@ -1741,6 +1825,166 @@ export interface AggregateTarotCardFieldDetails {
 }
   
 
+// Types for TarotPage
+
+type TarotPageObject =
+  | TarotPageFields
+  | { name: 'id', args?: [] | false, alias?: string  } 
+  | { name: 'tarotFilterKeyWords', args?: [] | false, alias?: string  } 
+
+type TarotPageFields =
+  | 'id'
+  | 'tarotFilterKeyWords'
+
+
+
+  
+
+export interface TarotPageFieldDetails {
+  id: {
+    type: 'ID'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  tarotFilterKeyWords: {
+    type: 'String'
+    args: {}
+    description: string
+    list: true
+    nullable: false
+    resolve: undefined
+  }
+}
+  
+
+// Types for TarotPageConnection
+
+type TarotPageConnectionObject =
+  | TarotPageConnectionFields
+  | { name: 'pageInfo', args?: [] | false, alias?: string  } 
+  | { name: 'edges', args?: [] | false, alias?: string  } 
+  | { name: 'aggregate', args?: [] | false, alias?: string  } 
+
+type TarotPageConnectionFields =
+  | 'pageInfo'
+  | 'edges'
+  | 'aggregate'
+
+
+
+  
+
+export interface TarotPageConnectionFieldDetails {
+  pageInfo: {
+    type: 'PageInfo'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"TarotPageConnection">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.PageInfo> | prisma.PageInfo
+  }
+  edges: {
+    type: 'TarotPageEdge'
+    args: {}
+    description: string
+    list: true
+    nullable: false
+    resolve: (
+      root: core.RootValue<"TarotPageConnection">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.TarotPageEdge[]> | prisma.TarotPageEdge[]
+  }
+  aggregate: {
+    type: 'AggregateTarotPage'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"TarotPageConnection">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.AggregateTarotPage> | prisma.AggregateTarotPage
+  }
+}
+  
+
+// Types for TarotPageEdge
+
+type TarotPageEdgeObject =
+  | TarotPageEdgeFields
+  | { name: 'node', args?: [] | false, alias?: string  } 
+  | { name: 'cursor', args?: [] | false, alias?: string  } 
+
+type TarotPageEdgeFields =
+  | 'node'
+  | 'cursor'
+
+
+
+  
+
+export interface TarotPageEdgeFieldDetails {
+  node: {
+    type: 'TarotPage'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"TarotPageEdge">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.TarotPage> | prisma.TarotPage
+  }
+  cursor: {
+    type: 'String'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+}
+  
+
+// Types for AggregateTarotPage
+
+type AggregateTarotPageObject =
+  | AggregateTarotPageFields
+  | { name: 'count', args?: [] | false, alias?: string  } 
+
+type AggregateTarotPageFields =
+  | 'count'
+
+
+
+  
+
+export interface AggregateTarotPageFieldDetails {
+  count: {
+    type: 'Int'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+}
+  
+
 // Types for Mutation
 
 type MutationObject =
@@ -1781,6 +2025,12 @@ type MutationObject =
   | { name: 'upsertTarotCard', args?: MutationUpsertTarotCardArgs[] | false, alias?: string  } 
   | { name: 'deleteTarotCard', args?: MutationDeleteTarotCardArgs[] | false, alias?: string  } 
   | { name: 'deleteManyTarotCards', args?: MutationDeleteManyTarotCardsArgs[] | false, alias?: string  } 
+  | { name: 'createTarotPage', args?: MutationCreateTarotPageArgs[] | false, alias?: string  } 
+  | { name: 'updateTarotPage', args?: MutationUpdateTarotPageArgs[] | false, alias?: string  } 
+  | { name: 'updateManyTarotPages', args?: MutationUpdateManyTarotPagesArgs[] | false, alias?: string  } 
+  | { name: 'upsertTarotPage', args?: MutationUpsertTarotPageArgs[] | false, alias?: string  } 
+  | { name: 'deleteTarotPage', args?: MutationDeleteTarotPageArgs[] | false, alias?: string  } 
+  | { name: 'deleteManyTarotPages', args?: MutationDeleteManyTarotPagesArgs[] | false, alias?: string  } 
 
 type MutationFields =
   | 'createUser'
@@ -1819,6 +2069,12 @@ type MutationFields =
   | 'upsertTarotCard'
   | 'deleteTarotCard'
   | 'deleteManyTarotCards'
+  | 'createTarotPage'
+  | 'updateTarotPage'
+  | 'updateManyTarotPages'
+  | 'upsertTarotPage'
+  | 'deleteTarotPage'
+  | 'deleteManyTarotPages'
 
 
 type MutationCreateUserArgs =
@@ -1916,6 +2172,22 @@ type MutationUpsertTarotCardArgs =
 type MutationDeleteTarotCardArgs =
   | 'where'
 type MutationDeleteManyTarotCardsArgs =
+  | 'where'
+type MutationCreateTarotPageArgs =
+  | 'data'
+type MutationUpdateTarotPageArgs =
+  | 'data'
+  | 'where'
+type MutationUpdateManyTarotPagesArgs =
+  | 'data'
+  | 'where'
+type MutationUpsertTarotPageArgs =
+  | 'where'
+  | 'create'
+  | 'update'
+type MutationDeleteTarotPageArgs =
+  | 'where'
+type MutationDeleteManyTarotPagesArgs =
   | 'where'
   
 
@@ -2388,6 +2660,84 @@ export interface MutationFieldDetails {
       info?: GraphQLResolveInfo
     ) => Promise<prisma.BatchPayload> | prisma.BatchPayload
   }
+  createTarotPage: {
+    type: 'TarotPage'
+    args: Record<MutationCreateTarotPageArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { data: TarotPageCreateInput }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.TarotPage> | prisma.TarotPage
+  }
+  updateTarotPage: {
+    type: 'TarotPage'
+    args: Record<MutationUpdateTarotPageArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { data: TarotPageUpdateInput, where: TarotPageWhereUniqueInput }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.TarotPage | null> | prisma.TarotPage | null
+  }
+  updateManyTarotPages: {
+    type: 'BatchPayload'
+    args: Record<MutationUpdateManyTarotPagesArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { data: TarotPageUpdateManyMutationInput, where?: TarotPageWhereInput | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.BatchPayload> | prisma.BatchPayload
+  }
+  upsertTarotPage: {
+    type: 'TarotPage'
+    args: Record<MutationUpsertTarotPageArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { where: TarotPageWhereUniqueInput, create: TarotPageCreateInput, update: TarotPageUpdateInput }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.TarotPage> | prisma.TarotPage
+  }
+  deleteTarotPage: {
+    type: 'TarotPage'
+    args: Record<MutationDeleteTarotPageArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { where: TarotPageWhereUniqueInput }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.TarotPage | null> | prisma.TarotPage | null
+  }
+  deleteManyTarotPages: {
+    type: 'BatchPayload'
+    args: Record<MutationDeleteManyTarotPagesArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { where?: TarotPageWhereInput | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.BatchPayload> | prisma.BatchPayload
+  }
 }
   
 
@@ -2426,6 +2776,7 @@ type SubscriptionObject =
   | { name: 'tarotArcana', args?: SubscriptionTarotArcanaArgs[] | false, alias?: string  } 
   | { name: 'tarotExplanation', args?: SubscriptionTarotExplanationArgs[] | false, alias?: string  } 
   | { name: 'tarotCard', args?: SubscriptionTarotCardArgs[] | false, alias?: string  } 
+  | { name: 'tarotPage', args?: SubscriptionTarotPageArgs[] | false, alias?: string  } 
 
 type SubscriptionFields =
   | 'user'
@@ -2434,6 +2785,7 @@ type SubscriptionFields =
   | 'tarotArcana'
   | 'tarotExplanation'
   | 'tarotCard'
+  | 'tarotPage'
 
 
 type SubscriptionUserArgs =
@@ -2447,6 +2799,8 @@ type SubscriptionTarotArcanaArgs =
 type SubscriptionTarotExplanationArgs =
   | 'where'
 type SubscriptionTarotCardArgs =
+  | 'where'
+type SubscriptionTarotPageArgs =
   | 'where'
   
 
@@ -2528,6 +2882,19 @@ export interface SubscriptionFieldDetails {
       context: core.GetGen<"context">,
       info?: GraphQLResolveInfo
     ) => Promise<prisma.TarotCardSubscriptionPayload | null> | prisma.TarotCardSubscriptionPayload | null
+  }
+  tarotPage: {
+    type: 'TarotPageSubscriptionPayload'
+    args: Record<SubscriptionTarotPageArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"Subscription">,
+      args: { where?: TarotPageSubscriptionWhereInput | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.TarotPageSubscriptionPayload | null> | prisma.TarotPageSubscriptionPayload | null
   }
 }
   
@@ -3222,6 +3589,111 @@ export interface TarotCardPreviousValuesFieldDetails {
 }
   
 
+// Types for TarotPageSubscriptionPayload
+
+type TarotPageSubscriptionPayloadObject =
+  | TarotPageSubscriptionPayloadFields
+  | { name: 'mutation', args?: [] | false, alias?: string  } 
+  | { name: 'node', args?: [] | false, alias?: string  } 
+  | { name: 'updatedFields', args?: [] | false, alias?: string  } 
+  | { name: 'previousValues', args?: [] | false, alias?: string  } 
+
+type TarotPageSubscriptionPayloadFields =
+  | 'mutation'
+  | 'node'
+  | 'updatedFields'
+  | 'previousValues'
+
+
+
+  
+
+export interface TarotPageSubscriptionPayloadFieldDetails {
+  mutation: {
+    type: 'MutationType'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"TarotPageSubscriptionPayload">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.MutationType> | prisma.MutationType
+  }
+  node: {
+    type: 'TarotPage'
+    args: {}
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"TarotPageSubscriptionPayload">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.TarotPage | null> | prisma.TarotPage | null
+  }
+  updatedFields: {
+    type: 'String'
+    args: {}
+    description: string
+    list: true
+    nullable: false
+    resolve: undefined
+  }
+  previousValues: {
+    type: 'TarotPagePreviousValues'
+    args: {}
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"TarotPageSubscriptionPayload">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.TarotPagePreviousValues | null> | prisma.TarotPagePreviousValues | null
+  }
+}
+  
+
+// Types for TarotPagePreviousValues
+
+type TarotPagePreviousValuesObject =
+  | TarotPagePreviousValuesFields
+  | { name: 'id', args?: [] | false, alias?: string  } 
+  | { name: 'tarotFilterKeyWords', args?: [] | false, alias?: string  } 
+
+type TarotPagePreviousValuesFields =
+  | 'id'
+  | 'tarotFilterKeyWords'
+
+
+
+  
+
+export interface TarotPagePreviousValuesFieldDetails {
+  id: {
+    type: 'ID'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  tarotFilterKeyWords: {
+    type: 'String'
+    args: {}
+    description: string
+    list: true
+    nullable: false
+    resolve: undefined
+  }
+}
+  
+
 
 export interface UserWhereUniqueInput {
   id?: string | null
@@ -3766,6 +4238,52 @@ export interface TarotCardWhereUniqueInput {
 export type TarotCardWhereUniqueInputInputObject =
   | Extract<keyof TarotCardWhereUniqueInput, string>
   | { name: 'id', alias?: string  } 
+  
+export interface TarotPageWhereUniqueInput {
+  id?: string | null
+}
+export type TarotPageWhereUniqueInputInputObject =
+  | Extract<keyof TarotPageWhereUniqueInput, string>
+  | { name: 'id', alias?: string  } 
+  
+export interface TarotPageWhereInput {
+  id?: string | null
+  id_not?: string | null
+  id_in?: string[]
+  id_not_in?: string[]
+  id_lt?: string | null
+  id_lte?: string | null
+  id_gt?: string | null
+  id_gte?: string | null
+  id_contains?: string | null
+  id_not_contains?: string | null
+  id_starts_with?: string | null
+  id_not_starts_with?: string | null
+  id_ends_with?: string | null
+  id_not_ends_with?: string | null
+  AND?: TarotPageWhereInput[]
+  OR?: TarotPageWhereInput[]
+  NOT?: TarotPageWhereInput[]
+}
+export type TarotPageWhereInputInputObject =
+  | Extract<keyof TarotPageWhereInput, string>
+  | { name: 'id', alias?: string  } 
+  | { name: 'id_not', alias?: string  } 
+  | { name: 'id_in', alias?: string  } 
+  | { name: 'id_not_in', alias?: string  } 
+  | { name: 'id_lt', alias?: string  } 
+  | { name: 'id_lte', alias?: string  } 
+  | { name: 'id_gt', alias?: string  } 
+  | { name: 'id_gte', alias?: string  } 
+  | { name: 'id_contains', alias?: string  } 
+  | { name: 'id_not_contains', alias?: string  } 
+  | { name: 'id_starts_with', alias?: string  } 
+  | { name: 'id_not_starts_with', alias?: string  } 
+  | { name: 'id_ends_with', alias?: string  } 
+  | { name: 'id_not_ends_with', alias?: string  } 
+  | { name: 'AND', alias?: string  } 
+  | { name: 'OR', alias?: string  } 
+  | { name: 'NOT', alias?: string  } 
   
 export interface UserCreateInput {
   id?: string | null
@@ -4479,6 +4997,43 @@ export type TarotCardUpdateManyMutationInputInputObject =
   | { name: 'name', alias?: string  } 
   | { name: 'keyWords', alias?: string  } 
   
+export interface TarotPageCreateInput {
+  id?: string | null
+  tarotFilterKeyWords?: TarotPageCreatetarotFilterKeyWordsInput | null
+}
+export type TarotPageCreateInputInputObject =
+  | Extract<keyof TarotPageCreateInput, string>
+  | { name: 'id', alias?: string  } 
+  | { name: 'tarotFilterKeyWords', alias?: string  } 
+  
+export interface TarotPageCreatetarotFilterKeyWordsInput {
+  set?: string[]
+}
+export type TarotPageCreatetarotFilterKeyWordsInputInputObject =
+  | Extract<keyof TarotPageCreatetarotFilterKeyWordsInput, string>
+  | { name: 'set', alias?: string  } 
+  
+export interface TarotPageUpdateInput {
+  tarotFilterKeyWords?: TarotPageUpdatetarotFilterKeyWordsInput | null
+}
+export type TarotPageUpdateInputInputObject =
+  | Extract<keyof TarotPageUpdateInput, string>
+  | { name: 'tarotFilterKeyWords', alias?: string  } 
+  
+export interface TarotPageUpdatetarotFilterKeyWordsInput {
+  set?: string[]
+}
+export type TarotPageUpdatetarotFilterKeyWordsInputInputObject =
+  | Extract<keyof TarotPageUpdatetarotFilterKeyWordsInput, string>
+  | { name: 'set', alias?: string  } 
+  
+export interface TarotPageUpdateManyMutationInput {
+  tarotFilterKeyWords?: TarotPageUpdatetarotFilterKeyWordsInput | null
+}
+export type TarotPageUpdateManyMutationInputInputObject =
+  | Extract<keyof TarotPageUpdateManyMutationInput, string>
+  | { name: 'tarotFilterKeyWords', alias?: string  } 
+  
 export interface UserSubscriptionWhereInput {
   mutation_in?: prisma.MutationType[]
   updatedFields_contains?: string | null
@@ -4605,6 +5160,27 @@ export type TarotCardSubscriptionWhereInputInputObject =
   | { name: 'OR', alias?: string  } 
   | { name: 'NOT', alias?: string  } 
   
+export interface TarotPageSubscriptionWhereInput {
+  mutation_in?: prisma.MutationType[]
+  updatedFields_contains?: string | null
+  updatedFields_contains_every?: string[]
+  updatedFields_contains_some?: string[]
+  node?: TarotPageWhereInput | null
+  AND?: TarotPageSubscriptionWhereInput[]
+  OR?: TarotPageSubscriptionWhereInput[]
+  NOT?: TarotPageSubscriptionWhereInput[]
+}
+export type TarotPageSubscriptionWhereInputInputObject =
+  | Extract<keyof TarotPageSubscriptionWhereInput, string>
+  | { name: 'mutation_in', alias?: string  } 
+  | { name: 'updatedFields_contains', alias?: string  } 
+  | { name: 'updatedFields_contains_every', alias?: string  } 
+  | { name: 'updatedFields_contains_some', alias?: string  } 
+  | { name: 'node', alias?: string  } 
+  | { name: 'AND', alias?: string  } 
+  | { name: 'OR', alias?: string  } 
+  | { name: 'NOT', alias?: string  } 
+  
 
 export type PostOrderByInputValues =
   | 'id_ASC'
@@ -4671,6 +5247,14 @@ export type TarotCardOrderByInputValues =
   | 'id_DESC'
   | 'name_ASC'
   | 'name_DESC'
+  | 'createdAt_ASC'
+  | 'createdAt_DESC'
+  | 'updatedAt_ASC'
+  | 'updatedAt_DESC'
+  
+export type TarotPageOrderByInputValues =
+  | 'id_ASC'
+  | 'id_DESC'
   | 'createdAt_ASC'
   | 'createdAt_DESC'
   | 'updatedAt_ASC'
