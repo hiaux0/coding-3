@@ -6,6 +6,7 @@ import {
   apiUpdateTarotExplanation,
   apiAddTarotCardExplanation,
   apiDeleteTarotCard,
+  fetchTarotPage,
 } from './tarot.gateway';
 import { refreshJumpable } from 'components/features/jumpable/jumpable.js';
 import hotkeys from 'hotkeys-js';
@@ -40,7 +41,11 @@ export class SbTarot {
   async bind() {
     const tarotCards = await fetchListTarotCards();
     this.tarotCards = tarotCards.reverse();
-    this.filterdTarotCards = this.tarotCards;
+
+    /** @type {gqlt.TarotPage} */
+    const tarotPageData = await fetchTarotPage();
+    this.tarotFilterKeyWords = tarotPageData[0].tarotFilterKeyWords;
+    this.filterTarotCards();
 
     this.selectedCard = tarotCards[4];
     this.selectedExplanation = this.selectedCard.explanation[0];

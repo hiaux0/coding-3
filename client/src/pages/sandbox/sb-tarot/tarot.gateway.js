@@ -60,6 +60,22 @@ query {
   return result.data.tarotCards;
 }
 
+export async function fetchTarotPage() {
+  let query = gql`
+    query {
+      tarotPages {
+        id
+        tarotFilterKeyWords
+      }
+    }
+  `;
+
+  const result = await client
+    .query({ query })
+    .catch(console.error);
+  return result.data.tarotPages;
+}
+
 /**
  * @param {gqlt.TarotCardCreateInput} tarotCardCreateInput
  */
