@@ -2,11 +2,11 @@ import { generateTypeScriptTypes } from 'graphql-schema-typescript';
 import { readFileSync, readFile } from 'fs';
 import { resolve } from 'path';
 
-const schema = readFileSync(resolve('../generated/schema.graphql'), 'utf8');
+const schema = readFileSync(resolve('./generated/schema.graphql'), 'utf8');
 
 generateTypeScriptTypes(
   schema,
-  './generated-graphql-schema-types.ts',
+  '../../../client/generated-types/generated-graphql-schema-types.d.ts',
   {
     typePrefix: '',
   },
