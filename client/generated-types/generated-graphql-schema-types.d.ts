@@ -17,6 +17,7 @@ export interface Query {
   post?: Post;
   postsByUser: Array<Post>;
   tarotCards: Array<TarotCard>;
+  tarotPages: Array<TarotPage>;
   todoItems: Array<TodoItem>;
 }
 
@@ -311,6 +312,40 @@ export interface TarotExplanation {
   content?: string;
   id: string;
   source: string;
+}
+
+export const enum TarotPageOrderByInput {
+  createdAt_ASC = 'createdAt_ASC',
+  createdAt_DESC = 'createdAt_DESC',
+  id_ASC = 'id_ASC',
+  id_DESC = 'id_DESC',
+  updatedAt_ASC = 'updatedAt_ASC',
+  updatedAt_DESC = 'updatedAt_DESC'
+}
+
+export interface TarotPageWhereInput {
+  AND?: Array<TarotPageWhereInput>;
+  id?: string;
+  id_contains?: string;
+  id_ends_with?: string;
+  id_gt?: string;
+  id_gte?: string;
+  id_in?: Array<string>;
+  id_lt?: string;
+  id_lte?: string;
+  id_not?: string;
+  id_not_contains?: string;
+  id_not_ends_with?: string;
+  id_not_in?: Array<string>;
+  id_not_starts_with?: string;
+  id_starts_with?: string;
+  NOT?: Array<TarotPageWhereInput>;
+  OR?: Array<TarotPageWhereInput>;
+}
+
+export interface TarotPage {
+  id: string;
+  tarotFilterKeyWords: Array<string>;
 }
 
 export const enum TodoItemOrderByInput {
@@ -640,6 +675,7 @@ export interface Resolver {
   TarotCard?: TarotCardTypeResolver;
   TarotArcana?: TarotArcanaTypeResolver;
   TarotExplanation?: TarotExplanationTypeResolver;
+  TarotPage?: TarotPageTypeResolver;
   TodoItem?: TodoItemTypeResolver;
   Mutation?: MutationTypeResolver;
 }
@@ -648,6 +684,7 @@ export interface QueryTypeResolver<TParent = any> {
   post?: QueryToPostResolver<TParent>;
   postsByUser?: QueryToPostsByUserResolver<TParent>;
   tarotCards?: QueryToTarotCardsResolver<TParent>;
+  tarotPages?: QueryToTarotPagesResolver<TParent>;
   todoItems?: QueryToTodoItemsResolver<TParent>;
 }
 
@@ -680,6 +717,19 @@ export interface QueryToTarotCardsArgs {
 }
 export interface QueryToTarotCardsResolver<TParent = any, TResult = any> {
   (parent: TParent, args: QueryToTarotCardsArgs, context: any, info: GraphQLResolveInfo): TResult;
+}
+
+export interface QueryToTarotPagesArgs {
+  after?: string;
+  before?: string;
+  first?: number;
+  last?: number;
+  orderBy?: TarotPageOrderByInput;
+  skip?: number;
+  where?: TarotPageWhereInput;
+}
+export interface QueryToTarotPagesResolver<TParent = any, TResult = any> {
+  (parent: TParent, args: QueryToTarotPagesArgs, context: any, info: GraphQLResolveInfo): TResult;
 }
 
 export interface QueryToTodoItemsArgs {
@@ -825,6 +875,19 @@ export interface TarotExplanationToIdResolver<TParent = any, TResult = any> {
 }
 
 export interface TarotExplanationToSourceResolver<TParent = any, TResult = any> {
+  (parent: TParent, args: {}, context: any, info: GraphQLResolveInfo): TResult;
+}
+
+export interface TarotPageTypeResolver<TParent = any> {
+  id?: TarotPageToIdResolver<TParent>;
+  tarotFilterKeyWords?: TarotPageToTarotFilterKeyWordsResolver<TParent>;
+}
+
+export interface TarotPageToIdResolver<TParent = any, TResult = any> {
+  (parent: TParent, args: {}, context: any, info: GraphQLResolveInfo): TResult;
+}
+
+export interface TarotPageToTarotFilterKeyWordsResolver<TParent = any, TResult = any> {
   (parent: TParent, args: {}, context: any, info: GraphQLResolveInfo): TResult;
 }
 
