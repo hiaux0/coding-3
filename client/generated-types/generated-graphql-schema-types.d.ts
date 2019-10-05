@@ -34,7 +34,7 @@ export interface User {
   posts?: Array<Post>;
 }
 
-export enum PostOrderByInput {
+export const enum PostOrderByInput {
   createdAt_ASC = 'createdAt_ASC',
   createdAt_DESC = 'createdAt_DESC',
   id_ASC = 'id_ASC',
@@ -139,7 +139,7 @@ export interface PostWhereUniqueInput {
   id?: string;
 }
 
-export enum TarotCardOrderByInput {
+export const enum TarotCardOrderByInput {
   createdAt_ASC = 'createdAt_ASC',
   createdAt_DESC = 'createdAt_DESC',
   id_ASC = 'id_ASC',
@@ -293,7 +293,7 @@ export interface TarotArcana {
   number: number;
 }
 
-export enum TarotExplanationOrderByInput {
+export const enum TarotExplanationOrderByInput {
   content_ASC = 'content_ASC',
   content_DESC = 'content_DESC',
   createdAt_ASC = 'createdAt_ASC',
@@ -313,7 +313,7 @@ export interface TarotExplanation {
   source: string;
 }
 
-export enum TodoItemOrderByInput {
+export const enum TodoItemOrderByInput {
   createdAt_ASC = 'createdAt_ASC',
   createdAt_DESC = 'createdAt_DESC',
   done_ASC = 'done_ASC',
