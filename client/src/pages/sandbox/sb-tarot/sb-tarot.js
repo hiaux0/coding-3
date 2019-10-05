@@ -3,7 +3,6 @@
 import { bindable } from 'aurelia-framework';
 import {
   fetchListTarotCards,
-  apiAddTarotCard,
   apiUpdateTarotExplanation,
   apiAddTarotCardExplanation,
   apiDeleteTarotCard,
@@ -12,12 +11,16 @@ import { refreshJumpable } from 'components/features/jumpable/jumpable.js';
 import hotkeys from 'hotkeys-js';
 import { acceptEditedTarotShortcut, tarotShortcutScope } from './tarot-shortcuts';
 import { tarotCardCategories } from './tarot-resources/arcana-definitions';
+import { without } from 'lodash';
 
 
 import './sb-tarot.less';
 
 export class SbTarot {
   @bindable value = 'SbTarot';
+
+  /** @type {gqlt.TarotCard[]} */
+  filteredTarotCards;
 
   /** @type {gqlt.TarotCard} */
   selectedCard;
@@ -29,7 +32,7 @@ export class SbTarot {
 
   tarotCardCategoriesKeys = Object.keys(tarotCardCategories);
 
-  // newTarotCard;
+  tarotFilterKeyWords = [];
 
   /** @type {gqlt.TarotCard[]} */
   tarotCards;
@@ -37,6 +40,8 @@ export class SbTarot {
   async bind() {
     const tarotCards = await fetchListTarotCards();
     this.tarotCards = tarotCards.reverse();
+    this.filterdTarotCards = this.tarotCards;
+
     this.selectedCard = tarotCards[4];
     this.selectedExplanation = this.selectedCard.explanation[0];
   }
@@ -59,6 +64,31 @@ export class SbTarot {
    */
   selectExplanation(tarotCardExplanation) {
     this.selectedExplanation = tarotCardExplanation;
+  }
+
+  /**
+   * Update `tarotFilterKeyWords` with current selected chips
+   * @param {string} filterKey
+   */
+  updateSelectedChips(filterKey) {
+    if (this.tarotFilterKeyWords.includes(filterKey)) {
+      this.tarotFilterKeyWords = without(this.tarotFilterKeyWords, filterKey);
+    } else {
+      this.tarotFilterKeyWords = [...this.tarotFilterKeyWords, filterKey];
+    }
+
+    this.filterTarotCards();
+  }
+
+  filterTarotCards() {
+    /**
+     * @param {gqlt.TarotCard} card
+     */
+    const cardIsInFilter = (card) => this.tarotFilterKeyWords.find(filterKeyWord => card.name.includes(filterKeyWord));
+    this.filterdTarotCards = this.tarotCards.filter(cardIsInFilter);
+    if (this.filterdTarotCards.length === 0) {
+      this.filterdTarotCards = this.tarotCards;
+    }
   }
 
 

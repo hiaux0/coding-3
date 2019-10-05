@@ -36,6 +36,9 @@ export const client = new ApolloClient({
   },
 });
 
+/**
+ * @returns {Promise<gqlt.TarotCard[]>}
+ */
 export async function fetchListTarotCards() {
   let query = gql`
 query {

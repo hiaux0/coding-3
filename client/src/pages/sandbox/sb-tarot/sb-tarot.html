@@ -8,8 +8,12 @@
       <div repeat.for="key of tarotCardCategoriesKeys">
         <strong>${key}</strong>:
         <md-chip
-          class="chip-outline"
+          class="
+            chip-outline
+            ${tarotFilterKeyWords.includes(arcanaText) ? 'active' : ''}
+          "
           repeat.for="arcanaText of tarotCardCategories[key]"
+          click.delegate="updateSelectedChips(arcanaText)"
         >${arcanaText}</md-chip>
       </div>
     </div>
@@ -37,7 +41,7 @@
             tarotCard
             ${selectedCard === tarotCard ? 'active' : ''}
           "
-          repeat.for="tarotCard of tarotCards"
+          repeat.for="tarotCard of filterdTarotCards"
           click.delegate="selectCard(tarotCard)"
         >
           <inline-input
