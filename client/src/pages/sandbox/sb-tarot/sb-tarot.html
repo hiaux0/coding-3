@@ -4,33 +4,13 @@
   <div class="tarot-learning">
     <!------------------------------------------------------------------------------------------------------------------Tarot Filter -->
     <div class="tarotFiltering">
-      <div>
-        <strong>Arcana</strong>:
+      <let></let>
+      <div repeat.for="key of tarotCardCategoriesKeys">
+        <strong>${key}</strong>:
         <md-chip
           class="chip-outline"
-          repeat.for="arcanaText of tarotCardCategories.arcana"
+          repeat.for="arcanaText of tarotCardCategories[key]"
         >${arcanaText}</md-chip>
-      </div>
-      <div>
-        <strong>Suits</strong>:
-        <md-chip
-          repeat.for="suitsText of tarotCardCategories.suits"
-          class="chip-outline"
-        >${suitsText}</md-chip>
-      </div>
-      <div>
-        <strong>Numbers</strong>:
-        <md-chip
-          repeat.for="numbersText of tarotCardCategories.numbers"
-          class="chip-outline"
-        >${numbersText}</md-chip>
-      </div>
-      <div>
-        <strong>Persons</strong>:
-        <md-chip
-          repeat.for="personsText of tarotCardCategories.persons"
-          class="chip-outline"
-        >${personsText}</md-chip>
       </div>
     </div>
 

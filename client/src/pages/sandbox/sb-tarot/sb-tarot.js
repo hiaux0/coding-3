@@ -27,6 +27,8 @@ export class SbTarot {
 
   tarotCardCategories = tarotCardCategories;
 
+  tarotCardCategoriesKeys = Object.keys(tarotCardCategories);
+
   // newTarotCard;
 
   /** @type {gqlt.TarotCard[]} */
@@ -94,7 +96,7 @@ export class SbTarot {
     });
   }
 
-  updateTarotCardExplanation = async(explanationSourceValue) => {
+  updateTarotCardExplanation = async (explanationSourceValue) => {
     return await apiUpdateTarotExplanation(this.selectedExplanation.id, {
       attribute: 'source',
       value: explanationSourceValue,
@@ -109,7 +111,7 @@ export class SbTarot {
     this.previousScope = hotkeys.getScope();
     hotkeys.setScope(tarotShortcutScope);
 
-    hotkeys(acceptEditedTarotShortcut, tarotShortcutScope, async() => {
+    hotkeys(acceptEditedTarotShortcut, tarotShortcutScope, async () => {
       await apiUpdateTarotExplanation(this.selectedExplanation.id, {
         attribute,
         value: this.selectedExplanation[attribute],
