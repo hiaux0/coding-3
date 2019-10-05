@@ -18,12 +18,15 @@ import './sb-tarot.less';
 export class SbTarot {
   @bindable value = 'SbTarot';
 
+  /** @type {gqlt.TarotCard} */
   selectedCard;
 
+  /** @type {gqlt.TarotExplanation} */
   selectedExplanation;
 
   // newTarotCard;
 
+  /** @type {gqlt.TarotCard[]} */
   tarotCards;
 
   async bind() {
@@ -38,11 +41,17 @@ export class SbTarot {
   }
 
   // View
+  /**
+   * @param {gqlt.TarotCard} tarotCard
+   */
   selectCard(tarotCard) {
     this.selectedCard = tarotCard;
     this.selectedExplanation = this.selectedCard.explanation[0];
   }
 
+  /**
+   * @param {gqlt.TarotExplanation} tarotCardExplanation
+   */
   selectExplanation(tarotCardExplanation) {
     this.selectedExplanation = tarotCardExplanation;
   }
@@ -89,6 +98,10 @@ export class SbTarot {
     });
   }
 
+  /**
+   * @param {gqlt.TarotExplanation} selectedExplanation
+   * @param {gqlt.TarotExplanation["content"] | gqlt.TarotExplanation["source"]} attribute
+   */
   updateTarotCardExplanationAfterShortcut(selectedExplanation, attribute) {
     this.previousScope = hotkeys.getScope();
     hotkeys.setScope(tarotShortcutScope);
