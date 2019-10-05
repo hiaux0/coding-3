@@ -11,6 +11,7 @@ import {
 import { refreshJumpable } from 'components/features/jumpable/jumpable.js';
 import hotkeys from 'hotkeys-js';
 import { acceptEditedTarotShortcut, tarotShortcutScope } from './tarot-shortcuts';
+import { tarotCardCategories } from './tarot-resources/arcana-definitions';
 
 
 import './sb-tarot.less';
@@ -23,6 +24,8 @@ export class SbTarot {
 
   /** @type {gqlt.TarotExplanation} */
   selectedExplanation;
+
+  tarotCardCategories = tarotCardCategories;
 
   // newTarotCard;
 

@@ -3,6 +3,37 @@
 
   <div class="tarot-learning">
     <!------------------------------------------------------------------------------------------------------------------Tarot Filter -->
+    <div class="tarotFiltering">
+      <div>
+        <strong>Arcana</strong>:
+        <md-chip
+          class="chip-outline"
+          repeat.for="arcanaText of tarotCardCategories.arcana"
+        >${arcanaText}</md-chip>
+      </div>
+      <div>
+        <strong>Suits</strong>:
+        <md-chip
+          repeat.for="suitsText of tarotCardCategories.suits"
+          class="chip-outline"
+        >${suitsText}</md-chip>
+      </div>
+      <div>
+        <strong>Numbers</strong>:
+        <md-chip
+          repeat.for="numbersText of tarotCardCategories.numbers"
+          class="chip-outline"
+        >${numbersText}</md-chip>
+      </div>
+      <div>
+        <strong>Persons</strong>:
+        <md-chip
+          repeat.for="personsText of tarotCardCategories.persons"
+          class="chip-outline"
+        >${personsText}</md-chip>
+      </div>
+    </div>
+
     <!------------------------------------------------------------------------------------------------------------------Tarot Sidebar -->
     <aside class="tarotSidebar">
       <!----------------------------------------------------------------------------------------------------------------____ Card List Header -->

@@ -5,12 +5,24 @@
 @sidebarInput: 70px;
 
 .tarot-learning {
-  display: flex;
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  grid-template-rows: 160px 1fr;
+  grid-template-areas:
+    "tarotFilters tarotFilters"
+    "tarotSidebar tarotExplanation";
+
   min-height: 80vh;
   height: 85vh;
 
+  .tarotFiltering {
+    grid-area: tarotFilters;
+  }
+
   .tarotSidebar {
     height: 100%;
+    grid-area: tarotSidebar;
+
     .tarotSidebar__header {
       display: grid;
       grid-template-columns: 85% 15%;
@@ -63,6 +75,7 @@
   }
 
   .tarotExplanation {
+    grid-area: tarotExplanation;
     width: 100%;
 
     .tarotExplanation__header {
