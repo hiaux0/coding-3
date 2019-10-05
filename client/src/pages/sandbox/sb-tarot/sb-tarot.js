@@ -7,6 +7,7 @@ import {
   apiAddTarotCardExplanation,
   apiDeleteTarotCard,
   fetchTarotPage,
+  apiUpdateTarotpage,
 } from './tarot.gateway';
 import { refreshJumpable } from 'components/features/jumpable/jumpable.js';
 import hotkeys from 'hotkeys-js';
@@ -33,7 +34,11 @@ export class SbTarot {
 
   tarotCardCategoriesKeys = Object.keys(tarotCardCategories);
 
+  /** @type {gqlt.TarotPage["tarotFilterKeyWords"]} */
   tarotFilterKeyWords = [];
+
+  /** @type {gqlt.TarotPage} */
+  tarotPageData;
 
   /** @type {gqlt.TarotCard[]} */
   tarotCards;
@@ -44,7 +49,8 @@ export class SbTarot {
 
     /** @type {gqlt.TarotPage} */
     const tarotPageData = await fetchTarotPage();
-    this.tarotFilterKeyWords = tarotPageData[0].tarotFilterKeyWords;
+    this.tarotPageData = tarotPageData[0];
+    this.tarotFilterKeyWords = this.tarotPageData.tarotFilterKeyWords;
     this.filterTarotCards();
 
     this.selectedCard = tarotCards[4];
@@ -72,15 +78,18 @@ export class SbTarot {
   }
 
   /**
-   * Update `tarotFilterKeyWords` with current selected chips
+   * Update `tarotFilterKeyWords` with current selected chips.
+   * Also persist filters to DB.
    * @param {string} filterKey
    */
-  updateSelectedChips(filterKey) {
+  async updateSelectedChips(filterKey) {
     if (this.tarotFilterKeyWords.includes(filterKey)) {
       this.tarotFilterKeyWords = without(this.tarotFilterKeyWords, filterKey);
     } else {
       this.tarotFilterKeyWords = [...this.tarotFilterKeyWords, filterKey];
     }
+
+    await apiUpdateTarotpage(this.tarotPageData.id, this.tarotFilterKeyWords);
 
     this.filterTarotCards();
   }

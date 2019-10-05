@@ -222,3 +222,31 @@ export async function apiUpdateTodoItemDone(id, doneStatus) {
     }
   }).catch(console.error);
 }
+
+export async function apiUpdateTarotpage(id, tarotFilterKeyWords) {
+  let mutation = gql`
+    mutation updateTarotPage($id: ID, $tarotFilterKeyWords: TarotPageUpdatetarotFilterKeyWordsInput){
+      updateTarotPage(
+        where: {
+          id: $id
+        }
+        data: {
+          tarotFilterKeyWords: $tarotFilterKeyWords
+        }
+      ) {
+        id
+        tarotFilterKeyWords
+      }
+    }
+  `;
+
+  await client.mutate({
+    mutation,
+    variables: {
+      id,
+      tarotFilterKeyWords: {
+        set: tarotFilterKeyWords,
+      },
+    }
+  }).catch(console.error);
+}
