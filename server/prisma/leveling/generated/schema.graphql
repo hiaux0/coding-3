@@ -14,6 +14,7 @@ type Mutation {
   publish(id: ID): Post
   updateTarotCard(data: TarotCardUpdateInput!, where: TarotCardWhereUniqueInput!): TarotCard
   updateTarotExplanation(data: TarotExplanationUpdateInput!, where: TarotExplanationWhereUniqueInput!): TarotExplanation
+  updateTarotPage(data: TarotPageUpdateInput!, where: TarotPageWhereUniqueInput!): TarotPage
   updateTodoItem(data: TodoItemUpdateInput!, where: TodoItemWhereUniqueInput!): TodoItem
 }
 
@@ -493,6 +494,14 @@ enum TarotPageOrderByInput {
   updatedAt_DESC
 }
 
+input TarotPageUpdateInput {
+  tarotFilterKeyWords: TarotPageUpdatetarotFilterKeyWordsInput
+}
+
+input TarotPageUpdatetarotFilterKeyWordsInput {
+  set: [String!]
+}
+
 input TarotPageWhereInput {
   AND: [TarotPageWhereInput!]
   id: ID
@@ -511,6 +520,10 @@ input TarotPageWhereInput {
   id_starts_with: ID
   NOT: [TarotPageWhereInput!]
   OR: [TarotPageWhereInput!]
+}
+
+input TarotPageWhereUniqueInput {
+  id: ID
 }
 
 type TodoItem {

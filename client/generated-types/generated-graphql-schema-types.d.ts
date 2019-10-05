@@ -415,6 +415,7 @@ export interface Mutation {
   publish?: Post;
   updateTarotCard?: TarotCard;
   updateTarotExplanation?: TarotExplanation;
+  updateTarotPage?: TarotPage;
   updateTodoItem?: TodoItem;
 }
 
@@ -651,6 +652,18 @@ export interface TarotCardUpdateWithoutExplanationDataInput {
 export interface TarotCardUpsertWithoutExplanationInput {
   create: TarotCardCreateWithoutExplanationInput;
   update: TarotCardUpdateWithoutExplanationDataInput;
+}
+
+export interface TarotPageUpdateInput {
+  tarotFilterKeyWords?: TarotPageUpdatetarotFilterKeyWordsInput;
+}
+
+export interface TarotPageUpdatetarotFilterKeyWordsInput {
+  set?: Array<string>;
+}
+
+export interface TarotPageWhereUniqueInput {
+  id?: string;
 }
 
 export interface TodoItemUpdateInput {
@@ -921,6 +934,7 @@ export interface MutationTypeResolver<TParent = any> {
   publish?: MutationToPublishResolver<TParent>;
   updateTarotCard?: MutationToUpdateTarotCardResolver<TParent>;
   updateTarotExplanation?: MutationToUpdateTarotExplanationResolver<TParent>;
+  updateTarotPage?: MutationToUpdateTarotPageResolver<TParent>;
   updateTodoItem?: MutationToUpdateTodoItemResolver<TParent>;
 }
 
@@ -1002,6 +1016,14 @@ export interface MutationToUpdateTarotExplanationArgs {
 }
 export interface MutationToUpdateTarotExplanationResolver<TParent = any, TResult = any> {
   (parent: TParent, args: MutationToUpdateTarotExplanationArgs, context: any, info: GraphQLResolveInfo): TResult;
+}
+
+export interface MutationToUpdateTarotPageArgs {
+  data: TarotPageUpdateInput;
+  where: TarotPageWhereUniqueInput;
+}
+export interface MutationToUpdateTarotPageResolver<TParent = any, TResult = any> {
+  (parent: TParent, args: MutationToUpdateTarotPageArgs, context: any, info: GraphQLResolveInfo): TResult;
 }
 
 export interface MutationToUpdateTodoItemArgs {
