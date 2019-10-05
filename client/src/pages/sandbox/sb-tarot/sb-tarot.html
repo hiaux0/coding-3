@@ -7,23 +7,14 @@
       <!-- Card List Header -->
       <div class="tarotSidebar__header">
         <h5 class="tarotCardList__label">Card List</h5>
-
-        <!-- Add card -->
-        <md-input
-          type="text"
-          label="Add tarot card"
-          class="todo-input"
-          value.bind="tarotCardName"
-        ></md-input>
-
         <!-- Add card button -->
-        <a
+        <!-- <a
           md-button="floating: true; pulse.bind: pulse;"
           md-waves="color: light; circle: true;"
           click.delegate="addTarotCard(tarotCardName)"
         >
           <i class="material-icons tarotCard--add">add</i>
-        </a>
+        </a> -->
       </div>
 
       <!-- Card List -->
@@ -37,11 +28,16 @@
           repeat.for="tarotCard of tarotCards"
           click.delegate="selectCard(tarotCard)"
         >
-          ${tarotCard.name}
-          <i
+          <inline-input
+            class-list="tarotExplanation__source ${selectedExplanation === explanation ? 'active' : ''}"
+            is-inline-input-mode="${newTarotCard === tarotCard ? true : ''}"
+            placeholder="${newTarotCard === tarotCard ? 'Add new card' : ''}"
+            value.one-time="tarotCard.name"
+          ></inline-input>
+          <!-- <i
             class="material-icons tarotCard--remove"
             click.delegate="removeTarotCard(tarotCard.id)"
-          >delete</i>
+          >delete</i> -->
         </li>
       </ul>
     </aside>

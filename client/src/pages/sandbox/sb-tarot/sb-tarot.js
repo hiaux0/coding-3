@@ -22,11 +22,13 @@ export class SbTarot {
 
   selectedExplanation;
 
+  // newTarotCard;
+
   tarotCards;
 
   async bind() {
     const tarotCards = await fetchListTarotCards();
-    this.tarotCards = tarotCards;
+    this.tarotCards = tarotCards.reverse();
     this.selectedCard = tarotCards[4];
     this.selectedExplanation = this.selectedCard.explanation[0];
   }
@@ -48,14 +50,15 @@ export class SbTarot {
 
   // API
 
-  async addTarotCard(tarotCardName) {
-    if (!tarotCardName) return console.error('No empty input.');
-    const newTarotCard = await apiAddTarotCard({
-      name: tarotCardName,
-    });
-    this.tarotCards.push(newTarotCard);
-    // Reset input field
-    this.tarotCardName = '';
+  async addTarotCard() {
+    // if (!tarotCardName) return console.error('No empty input.');
+
+    // const newCard = {
+    //   name: ''
+    // };
+    // this.newTarotCard = newCard;
+    // this.selectedCard = newCard;
+    // this.tarotCards = [newCard, ...this.tarotCards];
   }
 
   async addTarotExplanation() {
