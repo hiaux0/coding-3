@@ -58,10 +58,9 @@ query {
 }
 
 /**
- *
- * @param {object} TarotCardCreateInput
+ * @param {gqlt.TarotCardCreateInput} tarotCardCreateInput
  */
-export async function apiAddTarotCard(TarotCardCreateInput) {
+export async function apiAddTarotCard(tarotCardCreateInput) {
   let mutation = gql`
 mutation createTarotCard($name: String!){
   createTarotCard(data: { name: $name }) {
@@ -69,11 +68,11 @@ mutation createTarotCard($name: String!){
     name
   }
 }
-    `;
+  `;
 
   const result = await client.mutate({
     mutation,
-    variables: TarotCardCreateInput
+    variables: tarotCardCreateInput
   }).catch(console.error);
   return result.data.createTarotCard;
 }
