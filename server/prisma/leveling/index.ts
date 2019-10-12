@@ -12,6 +12,7 @@ const Query = prismaObjectType({
       'post',
       'todoItems',
       'tarotCards',
+      'tarotPages',
     ])
     t.list.field('feed', {
       type: 'Post',
@@ -42,6 +43,7 @@ const Mutation = prismaObjectType({
       'deleteTarotCard',
       'createTarotExplanation',
       'updateTarotExplanation',
+      'updateTarotPage',
     ])
     t.field('createDraft', {
       type: 'Post',

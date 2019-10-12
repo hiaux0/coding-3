@@ -36,20 +36,23 @@ export const client = new ApolloClient({
   },
 });
 
+/**
+ * @returns {Promise<gqlt.TarotCard[]>}
+ */
 export async function fetchListTarotCards() {
   let query = gql`
-query {
-  tarotCards {
-    id
-    name,
-    keyWords,
-    explanation {
-      id,
-      content,
-      source,
+    query {
+      tarotCards {
+        id
+        name,
+        keyWords,
+        explanation {
+          id,
+          content,
+          source,
+        }
+      }
     }
-  }
-}
   `;
   const result = await client
     .query({ query })
@@ -57,17 +60,33 @@ query {
   return result.data.tarotCards;
 }
 
+export async function fetchTarotPage() {
+  let query = gql`
+    query {
+      tarotPages {
+        id
+        tarotFilterKeyWords
+      }
+    }
+  `;
+
+  const result = await client
+    .query({ query })
+    .catch(console.error);
+  return result.data.tarotPages;
+}
+
 /**
  * @param {gqlt.TarotCardCreateInput} tarotCardCreateInput
  */
 export async function apiAddTarotCard(tarotCardCreateInput) {
   let mutation = gql`
-mutation createTarotCard($name: String!){
-  createTarotCard(data: { name: $name }) {
-    id
-    name
-  }
-}
+    mutation createTarotCard($name: String!){
+      createTarotCard(data: { name: $name }) {
+        id
+        name
+      }
+    }
   `;
 
   const result = await client.mutate({
@@ -79,12 +98,12 @@ mutation createTarotCard($name: String!){
 
 export async function apiAddTarotCardExplanation(source, tarorCardId) {
   const mutation = gql`
-mutation createTarotExplanation($source: String!, $cardName: TarotCardCreateOneWithoutExplanationInput!){
-  createTarotExplanation(data: { source: $source, cardName: $cardName }) {
-    id
-    source
-  }
-}
+    mutation createTarotExplanation($source: String!, $cardName: TarotCardCreateOneWithoutExplanationInput!){
+      createTarotExplanation(data: { source: $source, cardName: $cardName }) {
+        id
+        source
+      }
+    }
   `;
 
   const result = await client.mutate({
@@ -103,11 +122,11 @@ mutation createTarotExplanation($source: String!, $cardName: TarotCardCreateOneW
 
 export async function apiDeleteTarotCard(id) {
   let mutation = gql`
-mutation deleteTarotCard($id: ID){
-  deleteTarotCard(where: {id: $id}) {
-    id
-  }
-}
+    mutation deleteTarotCard($id: ID){
+      deleteTarotCard(where: {id: $id}) {
+        id
+      }
+    }
   `;
 
   await client.mutate({
@@ -120,18 +139,18 @@ mutation deleteTarotCard($id: ID){
 
 export async function apiUpdateTodoItem(id, { attribute, value }) {
   let mutation = gql`
-mutation updateTodoItem($id: ID, $data: TodoItemUpdateInput!){
-  updateTodoItem(
-    where: {
-      id: $id
+    mutation updateTodoItem($id: ID, $data: TodoItemUpdateInput!){
+      updateTodoItem(
+        where: {
+          id: $id
+        }
+        data: $data
+      ) {
+        id
+        text
+        done
+      }
     }
-    data: $data
-  ) {
-    id
-    text
-    done
-  }
-}
   `;
 
   await client.mutate({
@@ -152,17 +171,17 @@ mutation updateTodoItem($id: ID, $data: TodoItemUpdateInput!){
  */
 export async function apiUpdateTarotExplanation(id, { attribute, value }) {
   let mutation = gql`
-mutation updateTarotExplanation($id: ID, $data: TarotExplanationUpdateInput!){
-  updateTarotExplanation(
-    where: {
-      id: $id
+    mutation updateTarotExplanation($id: ID, $data: TarotExplanationUpdateInput!){
+      updateTarotExplanation(
+        where: {
+          id: $id
+        }
+        data: $data
+      ) {
+        id
+        content
+      }
     }
-    data: $data
-  ) {
-    id
-    content
-  }
-}
   `;
 
   await client.mutate({
@@ -179,20 +198,20 @@ mutation updateTarotExplanation($id: ID, $data: TarotExplanationUpdateInput!){
 
 export async function apiUpdateTodoItemDone(id, doneStatus) {
   let mutation = gql`
-mutation updateTodoItem($id: ID, $doneStatus: Boolean!){
-  updateTodoItem(
-    where: {
-      id: $id
+    mutation updateTodoItem($id: ID, $doneStatus: Boolean!){
+      updateTodoItem(
+        where: {
+          id: $id
+        }
+        data: {
+          done: $doneStatus
+        }
+      ) {
+        id
+        text
+        done
+      }
     }
-    data: {
-      done: $doneStatus
-    }
-  ) {
-    id
-    text
-    done
-  }
-}
   `;
 
   await client.mutate({
@@ -200,6 +219,34 @@ mutation updateTodoItem($id: ID, $doneStatus: Boolean!){
     variables: {
       id,
       doneStatus
+    }
+  }).catch(console.error);
+}
+
+export async function apiUpdateTarotpage(id, tarotFilterKeyWords) {
+  let mutation = gql`
+    mutation updateTarotPage($id: ID, $tarotFilterKeyWords: TarotPageUpdatetarotFilterKeyWordsInput){
+      updateTarotPage(
+        where: {
+          id: $id
+        }
+        data: {
+          tarotFilterKeyWords: $tarotFilterKeyWords
+        }
+      ) {
+        id
+        tarotFilterKeyWords
+      }
+    }
+  `;
+
+  await client.mutate({
+    mutation,
+    variables: {
+      id,
+      tarotFilterKeyWords: {
+        set: tarotFilterKeyWords,
+      },
     }
   }).catch(console.error);
 }

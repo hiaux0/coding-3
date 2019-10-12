@@ -2,9 +2,25 @@
   <require from='components/forms/inline-input/inline-input'></require>
 
   <div class="tarot-learning">
-    <!-- Tarot Sidebar -->
+    <!------------------------------------------------------------------------------------------------------------------Tarot Filter -->
+    <div class="tarotFiltering">
+      <let></let>
+      <div repeat.for="key of tarotCardCategoriesKeys">
+        <strong>${key}</strong>:
+        <md-chip
+          class="
+            chip-outline
+            ${tarotFilterKeyWords.includes(arcanaText) ? 'active' : ''}
+          "
+          repeat.for="arcanaText of tarotCardCategories[key]"
+          click.delegate="updateSelectedChips(arcanaText)"
+        >${arcanaText}</md-chip>
+      </div>
+    </div>
+
+    <!------------------------------------------------------------------------------------------------------------------Tarot Sidebar -->
     <aside class="tarotSidebar">
-      <!-- Card List Header -->
+      <!----------------------------------------------------------------------------------------------------------------____ Card List Header -->
       <div class="tarotSidebar__header">
         <h5 class="tarotCardList__label">Card List</h5>
         <!-- Add card button -->
@@ -17,15 +33,15 @@
         </a> -->
       </div>
 
-      <!-- Card List -->
+      <!----------------------------------------------------------------------------------------------------------------____ Card List -->
       <ul class="tarotCardList">
-        <!-- Card list card -->
+        <!--------------------------------------------------------------------------------------------------------------________ Card list cards -->
         <li
           class="
             tarotCard
             ${selectedCard === tarotCard ? 'active' : ''}
           "
-          repeat.for="tarotCard of tarotCards"
+          repeat.for="tarotCard of filterdTarotCards"
           click.delegate="selectCard(tarotCard)"
         >
           <inline-input
@@ -42,13 +58,13 @@
       </ul>
     </aside>
 
-    <!-- Explanation -->
+    <!------------------------------------------------------------------------------------------------------------------Explanation -->
     <div class="tarotExplanation">
       <div class="tarotExplanation__header">
         <h5 class="tarotExplanation__label">Explanation</h5>
 
         <div class="tarotExplanation__sourceContainer">
-          <!-- Explanation source -->
+          <!------------------------------------------------------------------------------------------------------------____ Explanation source -->
           <div
             repeat.for="explanation of selectedCard.explanation"
             click.delegate="selectExplanation(explanation)"
@@ -61,7 +77,7 @@
           </div>
 
         </div>
-        <!-- Explanation source Add button -->
+        <!--------------------------------------------------------------------------------------------------------------________ Explanation source Add button -->
         <a
           md-button="floating: true; pulse.bind: pulse;"
           md-waves="color: light; circle: true;"
@@ -71,6 +87,7 @@
         </a>
       </div>
 
+      <!----------------------------------------------------------------------------------------------------------------____ Explanation Textarea -->
       <textarea
         value.bind="selectedExplanation.content"
         focus.trigger="updateTarotCardExplanationAfterShortcut(selectedExplanation, 'content')"

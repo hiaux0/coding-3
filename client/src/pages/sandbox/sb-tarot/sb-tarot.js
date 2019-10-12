@@ -3,14 +3,17 @@
 import { bindable } from 'aurelia-framework';
 import {
   fetchListTarotCards,
-  apiAddTarotCard,
   apiUpdateTarotExplanation,
   apiAddTarotCardExplanation,
   apiDeleteTarotCard,
+  fetchTarotPage,
+  apiUpdateTarotpage,
 } from './tarot.gateway';
 import { refreshJumpable } from 'components/features/jumpable/jumpable.js';
 import hotkeys from 'hotkeys-js';
 import { acceptEditedTarotShortcut, tarotShortcutScope } from './tarot-shortcuts';
+import { tarotCardCategories } from './tarot-resources/arcana-definitions';
+import { without } from 'lodash';
 
 
 import './sb-tarot.less';
@@ -18,13 +21,24 @@ import './sb-tarot.less';
 export class SbTarot {
   @bindable value = 'SbTarot';
 
+  /** @type {gqlt.TarotCard[]} */
+  filteredTarotCards;
+
   /** @type {gqlt.TarotCard} */
   selectedCard;
 
   /** @type {gqlt.TarotExplanation} */
   selectedExplanation;
 
-  // newTarotCard;
+  tarotCardCategories = tarotCardCategories;
+
+  tarotCardCategoriesKeys = Object.keys(tarotCardCategories);
+
+  /** @type {gqlt.TarotPage["tarotFilterKeyWords"]} */
+  tarotFilterKeyWords = [];
+
+  /** @type {gqlt.TarotPage} */
+  tarotPageData;
 
   /** @type {gqlt.TarotCard[]} */
   tarotCards;
@@ -32,6 +46,13 @@ export class SbTarot {
   async bind() {
     const tarotCards = await fetchListTarotCards();
     this.tarotCards = tarotCards.reverse();
+
+    /** @type {gqlt.TarotPage} */
+    const tarotPageData = await fetchTarotPage();
+    this.tarotPageData = tarotPageData[0];
+    this.tarotFilterKeyWords = this.tarotPageData.tarotFilterKeyWords;
+    this.filterTarotCards();
+
     this.selectedCard = tarotCards[4];
     this.selectedExplanation = this.selectedCard.explanation[0];
   }
@@ -54,6 +75,34 @@ export class SbTarot {
    */
   selectExplanation(tarotCardExplanation) {
     this.selectedExplanation = tarotCardExplanation;
+  }
+
+  /**
+   * Update `tarotFilterKeyWords` with current selected chips.
+   * Also persist filters to DB.
+   * @param {string} filterKey
+   */
+  async updateSelectedChips(filterKey) {
+    if (this.tarotFilterKeyWords.includes(filterKey)) {
+      this.tarotFilterKeyWords = without(this.tarotFilterKeyWords, filterKey);
+    } else {
+      this.tarotFilterKeyWords = [...this.tarotFilterKeyWords, filterKey];
+    }
+
+    await apiUpdateTarotpage(this.tarotPageData.id, this.tarotFilterKeyWords);
+
+    this.filterTarotCards();
+  }
+
+  filterTarotCards() {
+    /**
+     * @param {gqlt.TarotCard} card
+     */
+    const cardIsInFilter = (card) => this.tarotFilterKeyWords.find(filterKeyWord => card.name.includes(filterKeyWord));
+    this.filterdTarotCards = this.tarotCards.filter(cardIsInFilter);
+    if (this.filterdTarotCards.length === 0) {
+      this.filterdTarotCards = this.tarotCards;
+    }
   }
 
 
@@ -91,7 +140,7 @@ export class SbTarot {
     });
   }
 
-  updateTarotCardExplanation = async(explanationSourceValue) => {
+  updateTarotCardExplanation = async (explanationSourceValue) => {
     return await apiUpdateTarotExplanation(this.selectedExplanation.id, {
       attribute: 'source',
       value: explanationSourceValue,
@@ -106,7 +155,7 @@ export class SbTarot {
     this.previousScope = hotkeys.getScope();
     hotkeys.setScope(tarotShortcutScope);
 
-    hotkeys(acceptEditedTarotShortcut, tarotShortcutScope, async() => {
+    hotkeys(acceptEditedTarotShortcut, tarotShortcutScope, async () => {
       await apiUpdateTarotExplanation(this.selectedExplanation.id, {
         attribute,
         value: this.selectedExplanation[attribute],
