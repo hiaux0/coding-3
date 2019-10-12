@@ -87,6 +87,9 @@ export class App {
         nav: true,
         title: 'uilib'
       },
+      {
+        route: 'uilib/*viewModelName', moduleId: PLATFORM.moduleName('./pages/uilib/uilib-welcome/uilib-welcome')
+      },
     ]);
     this.router = router;
   }

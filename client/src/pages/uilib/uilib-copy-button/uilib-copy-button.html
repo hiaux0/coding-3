@@ -1,0 +1,91 @@
+<template>
+  <require from='components/features/demo-mask/demo-mask'></require>
+  <require from='resources/attributes/copy-button'></require>
+  <require from='components/features/copy-to-clipboard/copy-to-clipboard'></require>
+
+
+  <h1>Custom Attribute</h1>
+
+  <demo-mask code-content='
+<span ref="exampleText">Hello placheholdr test here</span>
+<i
+  copy-button="text-wrapper.bind: exampleText"
+  role="button"
+  class="copyButton ${cloneIcon}"
+></i>
+  '>
+    <div slot="demo-item-name">Copy simple text to clipboard</div>
+    <div slot="demo-item-desc"></div>
+    <div slot="demo">
+      <section class="uilibCopyButton__text">
+        <span ref="exampleText">Hello placheholdr test here</span>
+        <i
+          copy-button="text-wrapper.bind: exampleText"
+          class="material-icons"
+        >file_copy</i>
+      </section>
+    </div>
+  </demo-mask>
+
+  <demo-mask code-content='
+<span ref="exampleHtml">
+  <button class="button">I am an example</button>
+</span>
+<i
+  copy-button="html-wrapper.bind: exampleHtml"
+  role="button"
+  class="copyButton ${cloneIcon}"
+></i>
+  '>
+    <div slot="demo-item-name">Copy HTML to clipboard</div>
+    <div slot="demo-item-desc">
+    </div>
+    <div slot="demo">
+      <span ref="exampleHtml">
+        <button class="button">I am an example</button>
+      </span>
+      <i
+        copy-button="html-wrapper.bind: exampleHtml"
+        class="material-icons"
+      >file_copy</i>
+    </div>
+  </demo-mask>
+
+  <h1>Custom Element</h1>
+
+  <demo-mask code-content='
+<copy-to-clipboard text-wrapper.bind="exampleText">
+  <span ref="exampleText">Hello placheholdr test here</span>
+</copy-to-clipboard>
+    '>
+    <div slot="demo-item-name">Copy simple text to clipboard</div>
+    <div slot="demo-item-desc">
+      <copy-to-clipboard text-wrapper.bind="exampleText">
+        <span ref="exampleText">Hello placheholdr test here</span>
+      </copy-to-clipboard>
+    </div>
+    <div slot="demo"></div>
+  </demo-mask>
+
+
+  <demo-mask code-content='
+<copy-to-clipboard html-wrapper.bind="exampleHtml">
+  <span ref="exampleHtml">
+    <button class="button">I am an example</button>
+  </span>
+</copy-to-clipboard>
+      '>
+    <div slot="demo-item-name">Copy HTML to clipboard</div>
+    <div slot="demo-item-desc">
+      <copy-to-clipboard html-wrapper.bind="exampleHtml">
+        <span ref="exampleHtml">
+          <button class="button">I am an example</button>
+        </span>
+      </copy-to-clipboard>
+    </div>
+    <div slot="demo">
+    </div>
+  </demo-mask>
+
+
+</template>

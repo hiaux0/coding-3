@@ -1,0 +1,49 @@
+<template>
+  <require from='components/features/joba-tooltip/joba-tooltip'></require>
+  <require from="components/features/demo-mask/demo-mask"></require>
+
+  <demo-mask code-content='
+<joba-tooltip position="right">
+  <i class="material-icons">${infoIcon}</i>
+</joba-tooltip>
+  '>
+    <div slot="demo-item-name">Tooltip Right</div>
+    <div slot="demo">
+      <joba-tooltip position="right">
+        <i class="material-icons">${infoIcon}</i>
+      </joba-tooltip>
+      <hr>
+      <div class="uilibTooltip__showTooltip">
+        <joba-tooltip position="right">
+          <i class="material-icons">${infoIcon}</i>
+        </joba-tooltip>
+      </div>
+    </div>
+  </demo-mask>
+
+  <demo-mask code-content='
+<joba-tooltip>
+  <i class="material-icons">${infoIcon}</i>
+</joba-tooltip>
+  '>
+    <div slot="demo-item-name">Tooltip Bottom</div>
+    <div
+      slot="demo"
+      class="uilib__tooltip"
+    >
+      <joba-tooltip>
+        <i class="material-icons">${infoIcon}</i>
+      </joba-tooltip>
+      <hr>
+      <div class="uilibTooltip__showTooltip">
+        <joba-tooltip>
+          <i class="material-icons">${infoIcon}</i>
+        </joba-tooltip>
+      </div>
+      <hr>
+      <joba-tooltip>
+        <i class="material-icons">${infoIcon}</i>
+      </joba-tooltip>
+    </div>
+  </demo-mask>
+</template>

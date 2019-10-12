@@ -1,0 +1,21 @@
+<template>
+  <div class="jobaTabs">
+    <div class="jobaTabs__tabs">
+      <div
+        class="
+          jobaTabs__tab
+          ${(activeTab === $index) ? 'is-active' : ''}
+        "
+        repeat.for="tab of tabs"
+        click.delegate="setActiveTab($index)"
+      >
+        <div class="jobaTabs__tabText">
+          ${tab.title}
+        </div>
+      </div>
+    </div>
+    <div class="jobaTabs__container">
+      <slot></slot>
+    </div>
+  </div>
+</template>

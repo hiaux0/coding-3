@@ -1,0 +1,36 @@
+<template>
+  <require from="components/features/demo-mask/demo-mask"></require>
+  <require from='components/features/joba-tabs/joba-tabs'></require>
+
+  <demo-mask code-content='
+<joba-tabs
+  tabs.bind="exampleTabsOne"
+  active-tab.two-way="activeTab"
+>
+  <div
+    class="exampleTabsOne__addLoop"
+    if.bind="activeTab === 0"
+  >Add Lopp</div>
+  <div
+    class="exampleTabsOne__editLoops"
+    if.bind="activeTab === 1"
+  >Edit Loops</div>
+</joba-tabs>
+  '>
+    <div slot="demo-item-name">Simple Tabs</div>
+    <div slot="demo">
+      <joba-tabs
+        tabs.bind="exampleTabsOne"
+        active-tab.two-way="activeTab"
+      >
+        <div
+          class="exampleTabsOne__addLoop"
+          if.bind="activeTab === 0"
+        >Add Lopp</div>
+        <div
+          class="exampleTabsOne__editLoops"
+          if.bind="activeTab === 1"
+        >Edit Loops</div>
+      </joba-tabs>
+    </div>
+</template>

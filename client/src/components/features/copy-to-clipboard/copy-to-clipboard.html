@@ -1,0 +1,14 @@
+<template>
+  <require from='components/features/joba-tooltip/joba-tooltip'></require>
+
+  <slot></slot>
+  <joba-tooltip
+    position="right"
+    text.bind="onSuccessMessage"
+  >
+    <i
+      class="copyButton material-icons ${fileCopy}"
+      click.delegate="copyToClipboard()"
+    >${fileCopy}</i>
+  </joba-tooltip>
+</template>
