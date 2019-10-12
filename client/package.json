@@ -22,9 +22,11 @@
     "bluebird": "^3.5.2",
     "graphql": "^14.5.6",
     "graphql-tag": "^2.10.1",
+    "highlight.js": "^9.15.10",
     "hotkeys-js": "^3.7.1",
     "interactjs": "^1.5.4",
     "lodash-decorators": "^6.0.1",
+    "markdown-it": "^10.0.0",
     "materialize-css": "^1.0.0-rc.2",
     "sortablejs": "^1.10.0-rc3",
     "tslib": "^1.10.0"
