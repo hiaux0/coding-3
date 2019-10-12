@@ -1,0 +1,69 @@
+<template>
+  <require from='attributes/sortable'></require>
+  <require from='attributes/enable-drag'></require>
+  <!-- <require from='highlight.js/styles/monokai-sublime.css'></require> -->
+  <!-- <require from='highlight.js/styles/solarized-dark.css'></require> -->
+  <!-- <require from='highlight.js/styles/atom-one-dark.css'></require> -->
+  <require from='highlight.js/styles/zenburn.css'></require>
+  <!-- <require from='highlight.js/styles/monokai.css'></require> -->
+  <require from='resources/attributes/copy-button'></require>
+  <require from='components/features/more-options-menu/more-options-menu'></require>
+
+  <div class="markdown-parser-container">
+    <div
+      class="markdown-parser-result-container"
+      enable-drag="allow-from.bind: DRAG_BUTTON_CLASS;
+                   scale-coords.bind: scaleCoords;
+                  "
+    >
+      <more-options-menu if.bind="showMoreOptionsMenu">
+        <i
+          copy-button="text.bind: content"
+          role="button"
+          class="copyButton material-icons ${fileCopy}"
+        >${fileCopy}</i>
+        <button
+          type="button"
+          click.delegate="toggleEditMode()"
+        >
+          <i class="material-icons ${editIcon}">${editIcon}</i>
+        </button>
+        <button
+          type="button"
+          class="${DRAG_BUTTON_CLASS}"
+        >
+          <i class="material-icons ${dragIndicatorIcon}">${dragIndicatorIcon}</i>
+        </button>
+      </more-options-menu>
+
+      <!-- Edit code here -->
+      <textarea
+        show.bind="isEditMode"
+        wrap="off"
+        class="markdown-parser"
+        focus.bind="autoFocus"
+        value.bind="inputValue"
+      ></textarea>
+
+      <!-- Code is being displayed -->
+      <div
+        ref="mardownParserResultRef"
+        show.bind="!isEditMode"
+        sortable="active.bind: activateSortable;
+                  draggable-name.bind: draggableName;
+                  sortable-context.bind:sortableContext;"
+        class="markdown-parser-result"
+      >
+        <!-- This is unfortunately an ugly way of writing code. -->
+        <!-- Reason is pre preserves white space. EVERY white space -->
+        <pre><code class="language-${codeLang}" ref="insertCodeRef"><div
+          repeat.for="line of splittedLines"
+          innerhtml.bind="line"
+          class="line-number"
+          dblclick.delegate="highlightLine($event)"
+        ></div></code></pre>
+      </div>
+
+    </div>
+  </div>
+</template>

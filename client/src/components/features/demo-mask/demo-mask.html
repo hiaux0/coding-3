@@ -1,0 +1,64 @@
+<template>
+  <require from='components/features/markdown-parser/markdown-parser'></require>
+  <require from='components/features/joba-tooltip/joba-tooltip'></require>
+
+  <div
+    class="demo-mask"
+    ref="demoMaskRef"
+  >
+    <div class="demo-container">
+      <!-- Header -->
+      <h3 class="demo-item-header">
+        <slot name="demo-item-name">DOCITEM 1</slot>
+        <joba-tooltip
+          position="right"
+          text="Show Code"
+        >
+          <i
+            class="material-icons ${codeIcon}"
+            role="button"
+            click.delegate="toggleDocCode()"
+          >${codeIcon}</i>
+        </joba-tooltip>
+      </h3>
+
+      <!-- Description -->
+      <div class="demo-item-desc">
+        <slot name="demo-item-desc"></slot>
+      </div>
+
+      <!-- Actual Demo -->
+      <div class="demo-item">
+        <!-- Demo -->
+        <div class="demo">
+          <slot name="demo">DEMO</slot>
+        </div>
+        <div
+          class="demo-doc"
+          if.bind="showCode"
+        >
+
+          <!-- Code of the Demo -->
+          <markdown-parser
+            content.bind="codeContent"
+            code-lang.bind="codeLang"
+          ></markdown-parser>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<!--
+How to use This component (copy paste)
+
+<require from='../demo-mask/demo-mask'></require>
+
+<demo-mask code-content='
+<span>WHAT</span>
+  '>
+  <div slot="demo-item-name">aaa</div>
+  <div slot="demo-item-desc">aaa</div>
+  <div slot="demo">aaa</div>
+</demo-mask>
+-->

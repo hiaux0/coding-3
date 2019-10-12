@@ -1,0 +1,59 @@
+@import (reference) '~styles/common.less';
+
+.jobaTooltip {
+  position: relative;
+
+  &:hover {
+    .jobaTooltip__text--right,
+    .jobaTooltip__text--bottom {
+      visibility: visible;
+      opacity: 1;
+      transition: opacity 0.3s ease-in;
+    }
+
+    .jobaTooltip__text--right {
+      // .leftTooltipArrow();
+    }
+
+    .jobaTooltip__text--bottom {
+      // .leftTooltipArrow();
+    }
+  }
+
+  .jobaTooltip__text--right,
+  .jobaTooltip__text--bottom {
+    position: absolute;
+    visibility: hidden;
+    opacity: 0;
+    width: max-content;
+    padding: 10px;
+    border: 1px solid black;
+    background: black;
+    font-size: 14px;
+    z-index: @tooltipZIndex;
+  }
+
+  .jobaTooltip__text--right {
+    top: -11px;
+    left: 27px;
+  }
+
+  .jobaTooltip__text--bottom {
+    top: 35px;
+    left: 100%;
+    transform: translate(-50%);
+  }
+}
+
+.leftTooltipArrow() {
+  &::after {
+    content: " ";
+    position: absolute;
+    top: 50%;
+    right: 100%; /* To the left of the tooltip */
+    margin-top: -8px;
+    border-width: 8px;
+    border-style: solid;
+    border-color: transparent black transparent transparent;
+  }
+}

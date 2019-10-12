@@ -1,0 +1,93 @@
+@import (reference) '~styles/colors.less';
+@import (reference) '~styles/common.less';
+
+
+@activeTabBackground: @main-text-color;
+@inactiveTabBackground: black;
+@activeTabTextColor: black;
+@inactiveTabTextColor: @main-text-color;
+
+// rounder tabs
+// https://css-tricks.com/the-shapes-of-css/
+.jobaTabs {
+  .jobaTabs__tabs {
+    display: flex;
+    .jobaTabs__tab {
+      flex-grow: 1;
+      border: 1px solid @inactiveTabBackground;
+      border-bottom: none;
+      border-top-right-radius: 5px;
+      border-top-left-radius: 5px;
+      background: @inactiveTabBackground;
+
+      &.is-active {
+        position: relative;
+        color: #8c3535;
+        border-color: @activeTabBackground;
+        background: @activeTabBackground;
+
+      //   &:last-child {
+      //     .jobaTabs__tabText {
+      //       &::after {
+      //         .circle(@main-color);
+      //         left: calc(100% + 1px);
+      //       }
+      //     }
+      //   }
+
+      //   &::before {
+      //     .square();
+      //     right: 100%;
+      //   }
+      //   &::after {
+      //     .square();
+      //     left: 100%;
+      //   }
+
+      //   .jobaTabs__tabText {
+      //     &::before {
+      //       .circle();
+      //       right: calc(100% + 1px);
+      //     }
+      //     &::after {
+      //       .circle();
+      //       left: calc(100% + 1px);
+      //     }
+      //   }
+      }
+
+      .jobaTabs__tabText {
+        padding: 2px 12px;
+      }
+    }
+  }
+
+  .jobaTabs__container {
+    border: 1px solid @activeTabBackground;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+    height: 200px;
+    width: 100%;
+    overflow: auto;
+  }
+}
+
+.square(@color: @activeTabBackground) {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  width: 7px;
+  height: 7px;
+  background: @color;
+}
+
+.circle(@color: @inactiveTabBackground) {
+  content: ' ';
+  position: absolute;
+  bottom: 0;
+  height: 15px;
+  width: 15px;
+  background: @color;
+  border-radius: 100%;
+  z-index: 1;
+}
