@@ -1,0 +1,19 @@
+<template>
+  <a href="#">Back to home</a>
+  <require from= '../uilib-tabs/uilib-tabs' ></require>
+  <require from= '../uilib-copy-button/uilib-copy-button' ></require>
+  <require from= '../uilib-tooltip/uilib-tooltip' ></require>
+
+  <a md-button role="button" class="button navigationButton" href="#/uilib/uilib-tooltip">uilib-tooltip</a>
+  <a md-button role="button" class="button navigationButton" href="#/uilib/uilib-copy-button">uilib-copy-button</a>
+  <a md-button role="button" class="button navigationButton" href="#/uilib/uilib-tabs">uilib-tabs</a>
+
+
+  <div class="uilibWelcome__compose">
+    <compose
+      if.bind="viewModel"
+      view-model.bind="viewModel"
+      class="${viewModelName}"
+    ></compose>
+  </div>
+</template>
