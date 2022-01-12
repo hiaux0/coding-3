@@ -26,7 +26,7 @@
     "hotkeys-js": "^3.7.1",
     "interactjs": "^1.5.4",
     "lodash-decorators": "^6.0.1",
-    "markdown-it": "^10.0.0",
+    "markdown-it": "^12.3.2",
     "materialize-css": "^1.0.0-rc.2",
     "sortablejs": "^1.10.0-rc3",
     "tslib": "^1.10.0"
